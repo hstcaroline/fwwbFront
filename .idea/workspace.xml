@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe41b225-869b-422b-b959-83d0300155cf" name="Default" comment="" />
+    <list default="true" id="fe41b225-869b-422b-b959-83d0300155cf" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/webProject/media/index.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webProject/.idea/workspace.xml" afterPath="$PROJECT_DIR$/webProject/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webProject/frame.html" afterPath="$PROJECT_DIR$/webProject/frame.html" />
+    </list>
     <ignored path="fwwbFront.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
