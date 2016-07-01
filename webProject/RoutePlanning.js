@@ -22,10 +22,10 @@ var driving =null;
 btn_1.onclick = function(){
     if(ifAddMarker==true){
         ifAddMarker=false;
-        btn_1.value = "启用添加标记";
+        btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
     }else{
         ifAddMarker=true;
-        btn_1.value = "禁用添加标记";
+        btn_1.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
     }
 };
 
@@ -60,7 +60,7 @@ function setMapEvent(){
     map.enableKeyboard();//启用键盘上下左右键移动地图
     map.addEventListener("click", function(e){
         var pos = e.point.lng + "|" + e.point.lat;
-        clickInfo.innerHTML = "点击信息： "+pos;
+        clickInfo.innerHTML = "<p>点击（删）： </p><p>"+pos+"</p>";
         if(ifAddMarker==true){//标注点数组
             var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}];
             addMarker(marker);
@@ -89,8 +89,7 @@ function addMarker(Arr){
         var marker = new BMap.Marker(point,{icon:iconImg});
         marker.enableDragging();
         marker.addEventListener('dragend',function(event){
-            dragInfo.innerHTML = "拖曳信息 "
-                +event.point.lng+"|"+event.point.lat;
+            dragInfo.innerHTML = "<p>拖曳（删）： </p><p>"+event.point.lng+"|"+event.point.latpos+"</p>";
         });
 
         var iw = createInfoWindow(Arr,i);
