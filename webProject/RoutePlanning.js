@@ -1,17 +1,16 @@
 /**
  * Created by zouwenyun on 2016/6/30.
  */
-
 var btn_1 = document.getElementById("addMarker");
 
 var clickInfo = document.getElementById("clickInfo");
 var dragInfo = document.getElementById("dragInfo");
 
-//±ê×¢µãÊı×é
-var markerArr = [{title:"¶«ºşÃæ¹İ",content:"µÚÎå²ÍÒû´óÂ¥",point:"121.447895|31.030189",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}},
-    {title:"ÊµÑéÊÒ",content:"Èí¼şÑ§Ôº",point:"121.449099|31.029295",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+//æ ‡æ³¨ç‚¹æ•°ç»„
+var markerArr = [{title:"ä¸œæ¹–é¢é¦†",content:"ç¬¬äº”é¤é¥®å¤§æ¥¼",point:"121.447895|31.030189",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}},
+    {title:"å®éªŒå®¤",content:"è½¯ä»¶å­¦é™¢",point:"121.449099|31.029295",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
 ];
-//±ê×¢ÏßÊı×é
+//æ ‡æ³¨çº¿æ•°ç»„
 var polylinePoints = [{style:"solid",weight:3,color:"#f00",opacity:0.6,points:["121.447899|31.030185","121.448789|31.029999","121.446552|31.029319","121.447154|31.027957","121.448205|31.028274","121.448205|31.028321","121.449247|31.028731","121.449076|31.029226"]}
 ];
 
@@ -23,63 +22,63 @@ var driving =null;
 btn_1.onclick = function(){
     if(ifAddMarker==true){
         ifAddMarker=false;
-        btn_1.value = "ÆôÓÃÌí¼Ó±ê¼Ç";
+        btn_1.value = "å¯ç”¨æ·»åŠ æ ‡è®°";
     }else{
         ifAddMarker=true;
-        btn_1.value = "½ûÓÃÌí¼Ó±ê¼Ç";
+        btn_1.value = "ç¦ç”¨æ·»åŠ æ ‡è®°";
     }
 };
 
-//´´½¨ºÍ³õÊ¼»¯µØÍ¼º¯Êı
+//åˆ›å»ºå’Œåˆå§‹åŒ–åœ°å›¾å‡½æ•°
 function initMap(){
-    createMap();//´´½¨µØÍ¼
-    setMapEvent();//ÉèÖÃµØÍ¼ÊÂ¼ş
-    addMapControl();//ÏòµØÍ¼Ìí¼Ó¿Ø¼ş
-    addMarker(markerArr);//ÏòµØÍ¼Ìí¼Ómarker
-    addPolyline(polylinePoints);//ÏòµØÍ¼Ìí¼ÓÏß
+    createMap();//åˆ›å»ºåœ°å›¾
+    setMapEvent();//è®¾ç½®åœ°å›¾äº‹ä»¶
+    addMapControl();//å‘åœ°å›¾æ·»åŠ æ§ä»¶
+    addMarker(markerArr);//å‘åœ°å›¾æ·»åŠ marker
+    addPolyline(polylinePoints);//å‘åœ°å›¾æ·»åŠ çº¿
 }
 
-//´´½¨µØÍ¼º¯Êı
+//åˆ›å»ºåœ°å›¾å‡½æ•°
 function createMap(){
-    var map = new BMap.Map("dituContent");//ÔÚ°Ù¶ÈµØÍ¼ÈİÆ÷ÖĞ´´½¨µØÍ¼
-    var point = new BMap.Point(121.448892,31.028955);//¶¨ÒåÒ»¸öÖĞĞÄµã×ø±ê
-    map.centerAndZoom(point,14);//Éè¶¨µØÍ¼µÄÖĞĞÄµãºÍ×ø±ê²¢½«µØÍ¼ÏÔÊ¾ÔÚµØÍ¼ÈİÆ÷ÖĞ
-    window.map = map;//½«map±äÁ¿´æ´¢ÔÚÈ«¾Ö
+    var map = new BMap.Map("dituContent");//åœ¨ç™¾åº¦åœ°å›¾å®¹å™¨ä¸­åˆ›å»ºåœ°å›¾
+    var point = new BMap.Point(121.448892,31.028955);//å®šä¹‰ä¸€ä¸ªä¸­å¿ƒç‚¹åæ ‡
+    map.centerAndZoom(point,14);//è®¾å®šåœ°å›¾çš„ä¸­å¿ƒç‚¹å’Œåæ ‡å¹¶å°†åœ°å›¾æ˜¾ç¤ºåœ¨åœ°å›¾å®¹å™¨ä¸­
+    window.map = map;//å°†mapå˜é‡å­˜å‚¨åœ¨å…¨å±€
     driving = new BMap.DrivingRoute(map, {
-        renderOptions: {//»æÖÆ½á¹û
+        renderOptions: {//ç»˜åˆ¶ç»“æœ
             map: map
         }
     });
     driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
 }
 
-//µØÍ¼ÊÂ¼şÉèÖÃº¯Êı£º
+//åœ°å›¾äº‹ä»¶è®¾ç½®å‡½æ•°ï¼š
 function setMapEvent(){
-    map.enableDragging();//ÆôÓÃµØÍ¼ÍÏ×§ÊÂ¼ş£¬Ä¬ÈÏÆôÓÃ(¿É²»Ğ´)
-    map.enableScrollWheelZoom();//ÆôÓÃµØÍ¼¹öÂÖ·Å´óËõĞ¡
-    map.enableDoubleClickZoom();//ÆôÓÃÊó±êË«»÷·Å´ó£¬Ä¬ÈÏÆôÓÃ(¿É²»Ğ´)
-    map.enableKeyboard();//ÆôÓÃ¼üÅÌÉÏÏÂ×óÓÒ¼üÒÆ¶¯µØÍ¼
+    map.enableDragging();//å¯ç”¨åœ°å›¾æ‹–æ‹½äº‹ä»¶ï¼Œé»˜è®¤å¯ç”¨(å¯ä¸å†™)
+    map.enableScrollWheelZoom();//å¯ç”¨åœ°å›¾æ»šè½®æ”¾å¤§ç¼©å°
+    map.enableDoubleClickZoom();//å¯ç”¨é¼ æ ‡åŒå‡»æ”¾å¤§ï¼Œé»˜è®¤å¯ç”¨(å¯ä¸å†™)
+    map.enableKeyboard();//å¯ç”¨é”®ç›˜ä¸Šä¸‹å·¦å³é”®ç§»åŠ¨åœ°å›¾
     map.addEventListener("click", function(e){
         var pos = e.point.lng + "|" + e.point.lat;
-        clickInfo.innerHTML = "µã»÷ĞÅÏ¢£º "+pos;
-        if(ifAddMarker==true){//±ê×¢µãÊı×é
-            var marker = [{title:"±ê¼Ç_"+markCount,content:"Í¨¹ıÔÚÒ³Ãæµã»÷Ìí¼Ó",point:pos,isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}];
+        clickInfo.innerHTML = "ç‚¹å‡»ä¿¡æ¯ï¼š "+pos;
+        if(ifAddMarker==true){//æ ‡æ³¨ç‚¹æ•°ç»„
+            var marker = [{title:"æ ‡è®°_"+markCount,content:"é€šè¿‡åœ¨é¡µé¢ç‚¹å‡»æ·»åŠ ",point:pos,isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}];
             addMarker(marker);
             markCount++;
         }
     });
 }
-//µØÍ¼¿Ø¼şÌí¼Óº¯Êı£º
+//åœ°å›¾æ§ä»¶æ·»åŠ å‡½æ•°ï¼š
 function addMapControl(){
-    //ÏòµØÍ¼ÖĞÌí¼ÓËõ·Å¿Ø¼ş
+    //å‘åœ°å›¾ä¸­æ·»åŠ ç¼©æ”¾æ§ä»¶
     var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
     map.addControl(ctrl_nav);
-    //ÏòµØÍ¼ÖĞÌí¼Ó±ÈÀı³ß¿Ø¼ş
+    //å‘åœ°å›¾ä¸­æ·»åŠ æ¯”ä¾‹å°ºæ§ä»¶
     var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
     map.addControl(ctrl_sca);
 }
 
-//´´½¨marker
+//åˆ›å»ºmarker
 function addMarker(Arr){
     for(var i=0;i<Arr.length;i++){
         var json = Arr[i];
@@ -90,7 +89,7 @@ function addMarker(Arr){
         var marker = new BMap.Marker(point,{icon:iconImg});
         marker.enableDragging();
         marker.addEventListener('dragend',function(event){
-            dragInfo.innerHTML = "ÍÏÒ·ĞÅÏ¢ "
+            dragInfo.innerHTML = "æ‹–æ›³ä¿¡æ¯ "
                 +event.point.lng+"|"+event.point.lat;
         });
 
@@ -127,19 +126,19 @@ function addMarker(Arr){
         })()
     }
 }
-//´´½¨InfoWindow
+//åˆ›å»ºInfoWindow
 function createInfoWindow(Arr,i){
     var json = Arr[i];
     var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
     return iw;
 }
-//´´½¨Ò»¸öIcon
+//åˆ›å»ºä¸€ä¸ªIcon
 function createIcon(json){
     var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
     return icon;
 }
 
-//ÏòµØÍ¼ÖĞÌí¼ÓÏßº¯Êı
+//å‘åœ°å›¾ä¸­æ·»åŠ çº¿å‡½æ•°
 function addPolyline(plPoints){
     for(var i=0;i<plPoints.length;i++){
         var json = plPoints[i];
@@ -159,4 +158,4 @@ function getRoute(pointStart,pointEnd) {
     driving.search(pointStart, pointEnd);
 }
 
-initMap();//´´½¨ºÍ³õÊ¼»¯µØÍ¼
+initMap();//åˆ›å»ºå’Œåˆå§‹åŒ–åœ°å›¾
