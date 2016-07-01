@@ -7,8 +7,8 @@ var clickInfo = document.getElementById("clickInfo");
 var dragInfo = document.getElementById("dragInfo");
 
 //标注点数组
-var markerArr = [{title:"东湖面馆",content:"第五餐饮大楼",point:"121.447895|31.030189",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}},
-    {title:"实验室",content:"软件学院",point:"121.449099|31.029295",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+var markerArr = [{title:"东湖面馆",content:"第五餐饮大楼",point:"121.447895|31.030189",isOpen:0,icon:{w:21,h:31,l:0,t:0,x:6,lb:5}},
+    {title:"实验室",content:"软件学院",point:"121.449072|31.029229",isOpen:0,icon:{w:21,h:31,l:0,t:0,x:6,lb:5}}
 ];
 //标注线数组
 var polylinePoints = [{style:"solid",weight:3,color:"#f00",opacity:0.6,points:["121.447899|31.030185","121.448789|31.029999","121.446552|31.029319","121.447154|31.027957","121.448205|31.028274","121.448205|31.028321","121.449247|31.028731","121.449076|31.029226"]}
@@ -62,7 +62,7 @@ function setMapEvent(){
         var pos = e.point.lng + "|" + e.point.lat;
         clickInfo.innerHTML = "<p>点击（删）： </p><p>"+pos+"</p>";
         if(ifAddMarker==true){//标注点数组
-            var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}];
+            var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:21,h:31,l:0,t:0,x:6,lb:5}}];
             addMarker(marker);
             markCount++;
         }
@@ -133,7 +133,7 @@ function createInfoWindow(Arr,i){
 }
 //创建一个Icon
 function createIcon(json){
-    var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+    var icon = new BMap.Icon("media/image/marker.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
     return icon;
 }
 
