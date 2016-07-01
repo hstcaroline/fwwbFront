@@ -1,6 +1,7 @@
 /**
  * Created by zouwenyun on 2016/6/30.
  */
+
 var btn_1 = document.getElementById("addMarker");
 
 var clickInfo = document.getElementById("clickInfo");
