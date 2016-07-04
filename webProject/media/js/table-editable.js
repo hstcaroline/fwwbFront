@@ -1,3 +1,4 @@
+var COLUMN = 10;
 var TableEditable = function () {
 
     return {
@@ -14,36 +15,45 @@ var TableEditable = function () {
 
                 oTable.fnDraw();
             }
-
+            
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[0] + '">';
+                for( var i=0;i<COLUMN;i++){
+                    jqTds[i].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[i] + '">';
+                }
+                /*jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[0] + '">';
                 jqTds[1].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[1] + '">';
                 jqTds[2].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<a class="edit" href="">Save</a>';
-                jqTds[5].innerHTML = '<a class="cancel" href="">Cancel</a>';
+                jqTds[3].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[3] + '">';*/
+                jqTds[COLUMN].innerHTML = '<a class="edit" href="">保存</a>';
+                jqTds[COLUMN+1].innerHTML = '<a class="cancel" href="">取消</a>';
             }
 
             function saveRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
-                oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
+                for( var i=0;i<COLUMN;i++){
+                    oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
+                }
+                /*oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
-                oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 5, false);
+                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);*/
+                oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, COLUMN, false);
+                oTable.fnUpdate('<a class="delete" href="">删除</a>', nRow, COLUMN+1, false);
                 oTable.fnDraw();
             }
 
             function cancelEditRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
-                oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
+                for( var i=0;i<COLUMN;i++){
+                    oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
+                }
+                /*oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
+                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);*/
+                oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, COLUMN, false);
                 oTable.fnDraw();
             }
 
@@ -80,9 +90,16 @@ var TableEditable = function () {
 
             $('#sample_editable_1_new').click(function (e) {
                 e.preventDefault();
-                var aiNew = oTable.fnAddData(['', '', '', '',
+                var content=[];
+                for(var i =0;i<COLUMN;i++){
+                    content.append('');
+                }
+                content.append('<a class="edit" href="">编辑</a>');
+                content.append('<a class="cancel" data-mode="new" href="">取消</a>');
+                var aiNew = oTable.fnAddData(content);
+                /*var aiNew = oTable.fnAddData(['', '', '', '',
                         '<a class="edit" href="">Edit</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
-                ]);
+                ]);*/
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
                 nEditing = nRow;
@@ -91,7 +108,7 @@ var TableEditable = function () {
             $('#sample_editable_1 a.delete').live('click', function (e) {
                 e.preventDefault();
 
-                if (confirm("Are you sure to delete this row ?") == false) {
+                if (confirm("确认删除?") == false) {
                     return;
                 }
 
@@ -122,7 +139,7 @@ var TableEditable = function () {
                     restoreRow(oTable, nEditing);
                     editRow(oTable, nRow);
                     nEditing = nRow;
-                } else if (nEditing == nRow && this.innerHTML == "Save") {
+                } else if (nEditing == nRow && this.innerHTML == "保存") {
                     /* Editing this row and want to save it */
                     saveRow(oTable, nEditing);
                     nEditing = null;
