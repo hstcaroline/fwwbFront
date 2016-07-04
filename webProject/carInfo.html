@@ -12,7 +12,7 @@
 
     <meta charset="utf-8" />
 
-    <title>路线规划 | 厂车管理系统</title>
+    <title>车辆信息 | 厂车管理系统</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -42,25 +42,14 @@
 
     <!-- BEGIN PAGE LEVEL STYLES -->
 
-    <link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
 
-    <link href="media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
-
-    <link href="media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-
-    <link href="media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-
-    <link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-
-    <link href="media/css/glyphicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
 
     <!-- END PAGE LEVEL STYLES -->
 
     <link rel="shortcut icon" href="media/image/favicon.ico" />
 
-    <!-- Page Level Javascript-->
-    <!--引用百度地图API-->
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
 </head>
 
 <!-- END HEAD -->
@@ -81,7 +70,7 @@
 
             <!-- BEGIN LOGO -->
 
-            <a class="brand" href="statisticTable.html">
+            <a class="brand" href="index.html">
 
                 <img src="media/image/logo.png" alt="logo"/>
 
@@ -404,7 +393,7 @@
 
             <li class="start active ">
 
-                <a href="statisticTable.html">
+                <a href="index.html">
 
                     <i class="icon-home"></i>
 
@@ -434,7 +423,7 @@
 
                         <a href="layout_horizontal_sidebar_menu.html">
 
-                            站点</a>
+                            点</a>
 
                     </li>
 
@@ -709,13 +698,8 @@
             <div class="modal-body">
 
                 <p>DONE:</p>
-                <p>页面的布局</p>
-                <p>通过点击添加站点</p>
-                <p>函数：通过两点坐标搜索路径</p>
                 <p>TODO:</p>
-                <p>站点信息编辑</p>
-                <p>切换到数据页面时禁掉两个右侧两个按钮</p>
-                <p>生成路线的响应</p>
+
             </div>
 
         </div>
@@ -826,7 +810,7 @@
 
                     <h3 class="page-title">
 
-                        站点
+                        车辆
 
                     </h3>
 
@@ -836,7 +820,7 @@
 
                             <i class="icon-home"></i>
 
-                            <a href="statisticTable.html">首页</a>
+                            <a href="index.html">首页</a>
 
                             <i class="icon-angle-right"></i>
 
@@ -850,7 +834,7 @@
 
                         </li>
 
-                        <li><a href="#">站点</a></li>
+                        <li><a href="#">车辆</a></li>
 
                     </ul>
 
@@ -864,14 +848,13 @@
             <div class="row-fluid">
 
                 <div class="span12">
-
-                    <!-- BEGIN INLINE TABS PORTLET-->
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
 
                     <div class="portlet box red">
 
                         <div class="portlet-title">
 
-                            <div class="caption"><i class="icon-globe"></i>地图</div>
+                            <div class="caption"><i class="icon-edit"></i>车辆信息</div>
 
                             <div class="tools">
 
@@ -885,321 +868,308 @@
 
                         <div class="portlet-body">
 
-                            <div class="row-fluid">
+                            <div class="clearfix">
 
-                                <div class="span12">
+                                <div class="btn-group">
 
-                                    <!--BEGIN TABS-->
+                                    <button id="sample_editable_1_new" class="btn green">
 
-                                    <div class="tabbable tabbable-custom tabs-right">
+                                        添加新厂车 <i class="icon-plus"></i>
 
-                                        <!-- Only required for left/right tabs -->
+                                    </button>
 
-                                        <ul class="nav nav-tabs tabs-right">
+                                    <button id="sample_editable_1_sync" class="btn green" style="margin:10px;">
 
-                                            <li class="active"><a href="#mapRoutePlanning" data-toggle="tab">
-                                                <i class="icon-picture"></i> 地图</a></li>
+                                        刷新数据 <i class="icon-refresh"></i>
 
-                                            <li><a href="#mapData" data-toggle="tab">
-                                                <i class="icon-dashboard"></i> 数据</a></li>
+                                    </button>
 
-                                            <li id="addMarker"><p><div class="btn red">
-                                                <i  class="icon-edit"></i> 添加站点</div></p></li>
+                                </div>
 
-                                            <li><div class="btn-group">
-                                                <a class="btn red" href="#" data-toggle="dropdown">
-                                                    &nbsp;<i  class="icon-edit"></i> 生成路线&nbsp;</a>
-                                                <ul class="dropdown-menu control-group hold-on-click pull-right">
-                                                    <div class="controls">
+                                <div class="btn-group pull-right">
 
-                                                        <label class="radio line">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">文件 <i class="icon-angle-down"></i>
 
-                                                            <input type="radio" name="optionsRadios1" value="option1" />
+                                    </button>
 
-                                                             时间最短
+                                    <ul class="dropdown-menu pull-right">
 
-                                                        </label>
+                                        <li><a href="#">打印</a></li>
 
-                                                        <label class="radio line">
+                                        <li><a href="#">保存为 PDF</a></li>
 
-                                                            <input type="radio" name="optionsRadios1" value="option2" checked />
+                                        <li><a href="#">导出到 Excel</a></li>
 
-                                                            成本最低
-
-                                                        </label>
-
-                                                        <label class="radio line">
-
-                                                            <input type="radio" name="optionsRadios1" value="option3" />
-
-                                                            乘坐率最高
-
-                                                        </label>
-
-                                                    </div>
-
-                                                </ul>
-                                            </div></li>
-
-                                            <li>
-                                                <div id="info">
-                                                    <div id="clickInfo">点击(删)</div>
-                                                    <div id="dragInfo">拖曳（删）</div>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-
-                                        <div class="tab-content">
-
-                                            <div class="tab-pane active" id="mapRoutePlanning">
-
-                                                    <!--百度地图容器-->
-                                                    <div id = "map">
-
-                                                        <div style="width:100%;height:480px;border:#ccc solid 0px;" id="dituContent"></div>
-
-                                                    </div>
-
-                                                    <script type="text/javascript" src="RoutePlanning.js"></script>
-
-                                            </div>
-
-                                            <div class="tab-pane flip-scroll" id="mapData">
-
-                                                <p><div class="glyphicons no-js bus"><i></i></div></p>
-
-                                                <table class="table table-striped table-hover table-condensed flip-content">
-
-                                                    <thead class="flip-content">
-
-                                                    <tr>
-
-                                                        <th>#</th>
-
-                                                        <th>班次</th>
-
-                                                        <th>厂车类型</th>
-
-                                                        <th >始发站</th>
-
-                                                        <th >终点站</th>
-
-                                                        <th>始发时间</th>
-
-                                                        <th>到达时间</th>
-
-                                                        <th class="numeric">预计载客数</th>
-
-                                                        <th class="numeric">最大载客数</th>
-
-                                                        <th class="numeric">司机工号</th>
-
-                                                        <th>状态</th>
-
-                                                    </tr>
-
-                                                    </thead>
-
-                                                    <tbody>
-
-                                                    <tr>
-
-                                                        <td>1</td>
-
-                                                        <td>0830沪B43265</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>建德花园站</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>08:30</td>
-
-                                                        <td>09:40</td>
-
-                                                        <td class="numeric">35</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12335</td>
-
-                                                        <td><span class="label label-success">运行中</span></td>
-
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>2</td>
-
-                                                        <td>0845沪B43873</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>人民广场</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>08:45</td>
-
-                                                        <td>10：05</td>
-
-                                                        <td class="numeric">52</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12352</td>
-
-                                                        <td><span class="label label-success">运行中</span></td>
-
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>3</td>
-
-                                                        <td>1415沪B43265</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>恒大华城站</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>14:15</td>
-
-                                                        <td>14:50</td>
-
-                                                        <td class="numeric">15</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12842</td>
-
-                                                        <td><span class="label label-danger">未运行</span></td>
-
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>4</td>
-
-                                                        <td>2005沪B43873</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>恒大华城站</td>
-
-                                                        <td>20:05</td>
-
-                                                        <td>20:40</td>
-
-                                                        <td class="numeric">15</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12842</td>
-
-                                                        <td><span class="label label-danger">未运行</span></td>
-
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>5</td>
-
-                                                        <td>1830沪B43265</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>建德花园站</td>
-
-                                                        <td>18:30</td>
-
-                                                        <td>19:40</td>
-
-                                                        <td class="numeric">33</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12212</td>
-
-                                                        <td><span class="label label-danger">未运行</span></td>
-
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>6</td>
-
-                                                        <td>1635沪B32765</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>宝山站</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>16:35</td>
-
-                                                        <td>18:00</td>
-
-                                                        <td class="numeric">47</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12352</td>
-
-                                                        <td><span class="label label-danger">未运行</span></td>
-
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>7</td>
-
-                                                        <td>1200沪B32765</td>
-
-                                                        <td>大巴</td>
-
-                                                        <td>武宁新村站</td>
-
-                                                        <td>宝山站</td>
-
-                                                        <td>12:00</td>
-
-                                                        <td>13:25</td>
-
-                                                        <td class="numeric">47</td>
-
-                                                        <td class="numeric">60</td>
-
-                                                        <td class="numeric">12352</td>
-
-                                                        <td><span class="label label-danger">未运行</span></td>
-
-                                                    </tr>
-
-                                                    </tbody>
-
-                                                </table>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <!--END TABS-->
+                                    </ul>
 
                                 </div>
 
                             </div>
 
+                            <input style="display: none" id="attri_value" value="10">
+
+                            <table class="table table-striped table-hover table-condensed" id="sample_editable_1" width="100%">
+
+                                <thead>
+
+                                <tr>
+
+                                    <th width="3%">ID</th>
+
+                                    <th width="8%">车牌</th>
+
+                                    <th width="10%">车辆类型</th>
+
+                                    <th width="10%">品牌型号</th>
+
+                                    <th width="8%">核定载客</th>
+
+                                    <th width="10%">注册时间</th>
+
+                                    <th width="10%">保险时间</th>
+
+                                    <th width="14%">驾驶证</th>
+
+                                    <th width="14%">行驶证</th>
+
+                                    <th width="6%">有效位</th>
+
+                                    <th>编辑</th>
+
+                                    <th>删除</th>
+
+                                </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+                                <tr class="">
+
+                                    <td>1</td>
+
+                                    <td>沪B84659</td>
+
+                                    <td>大型普通客车</td>
+
+                                    <td>金龙XML6757</td>
+
+                                    <td>60</th>
+
+                                    <td>2012-09-23</th>
+
+                                    <td>2012-10-03</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>422801197507232815</td>
+
+                                    <td>1</td>
+
+                                    <td><a class="edit" href="javascript:;">编辑</a></td>
+
+                                    <td><a class="delete" href="javascript:;">删除</a></td>
+
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+
                         </div>
 
                     </div>
 
-                    <!-- END INLINE TABS PORTLET-->
+                    <!-- END EXAMPLE TABLE PORTLET-->
 
                 </div>
 
@@ -1272,18 +1242,33 @@
 
 <!-- END CORE PLUGINS -->
 
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
 <script src="media/js/app.js"></script>
+
+<script src="media/js/table-editable.js"></script>
 
 <script>
 
     jQuery(document).ready(function() {
 
-        App.init(); // initlayout and core plugins
+        App.init();
+
+        TableEditable.init();
 
     });
 
 </script>
 
-<!-- END JAVASCRIPTS -->
 </body>
 </html>
