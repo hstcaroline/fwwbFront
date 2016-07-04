@@ -1,4 +1,5 @@
-var COLUMN = 10;
+var COLUMN = parseInt(document.getElementById("attri_value").value);
+
 var TableEditable = function () {
 
     return {
@@ -20,7 +21,7 @@ var TableEditable = function () {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
                 for( var i=0;i<COLUMN;i++){
-                    jqTds[i].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[i] + '">';
+                    jqTds[i].innerHTML = '<input type="text" style="width:96%;" value="' + aData[i] + '">';
                 }
                 /*jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[0] + '">';
                 jqTds[1].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[1] + '">';
@@ -67,10 +68,10 @@ var TableEditable = function () {
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
-                    "sLengthMenu": "_MENU_ records per page",
+                    "sLengthMenu": "_MENU_  条记录/页",
                     "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
+                        "sPrevious": "上一页",
+                        "sNext": "下一页"
                     }
                 },
                 "aoColumnDefs": [{
@@ -92,10 +93,10 @@ var TableEditable = function () {
                 e.preventDefault();
                 var content=[];
                 for(var i =0;i<COLUMN;i++){
-                    content.append('');
+                    content.push('');
                 }
-                content.append('<a class="edit" href="">编辑</a>');
-                content.append('<a class="cancel" data-mode="new" href="">取消</a>');
+                content.push('<a class="edit" href="">编辑</a>');
+                content.push('<a class="cancel" data-mode="new" href="">取消</a>');
                 var aiNew = oTable.fnAddData(content);
                 /*var aiNew = oTable.fnAddData(['', '', '', '',
                         '<a class="edit" href="">Edit</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
