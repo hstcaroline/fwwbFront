@@ -134,7 +134,7 @@
                     searchState = 4;
                 }
             });
-			var iw = createInfoWindow(Arr,i);
+
 			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
 			marker.setLabel(label);
             map.addOverlay(marker);
@@ -143,8 +143,8 @@
                         color:"#333",
                         cursor:"pointer"
             });
-			
-			(function(){
+
+			var iw = (function(){
 				var index = i;
 				var _iw = createInfoWindow(Arr,i);
 				var _marker = marker;
@@ -164,7 +164,9 @@
 					label.hide();
 					_marker.openInfoWindow(_iw);
 				}
-			})()
+                return _iw;
+			})();
+            RightClickHandler(marker,iw);
         }
     }
     //创建InfoWindow
@@ -210,6 +212,38 @@
             var waypoints = markers.slice(group*11,markers.length-1);//多出的一段单独进行search
             driving.search(markers[group*11],markers[markers.length-1],{waypoints:waypoints});
         }
+    }
+
+    //右键单击marker出现右键菜单事件
+    var ok_1 = document.getElementById("portlet-remove-ok");
+    var ok_2 = document.getElementById("portlet-update-ok");
+    var txt_title = document.getElementById("title");
+    var txt_content = document.getElementById("content");
+    function RightClickHandler(marker,iw){
+        var label = marker.getLabel();
+        var removeMarker = function(e,ee,marker){//右键删除站点
+            $("#portlet-remove").modal('show');
+            ok_1.onclick = function(){
+                map.removeOverlay(marker);
+                $("#portlet-remove").modal('hide');
+            };
+        };
+        var updateMarker = function(marker){//右键更新站名
+            txt_title.value=label.getContent();
+            txt_content.value="";
+            $("#portlet-update").modal('show');
+            ok_2.onclick = function(){
+                label.setContent(txt_title.value);
+                iw.setContent("<b class='iw_poi_title' title='" + txt_title.value + "'>" + txt_title.value
+                    + "</b><div class='iw_poi_content'>"+txt_content.value+"</div>");
+                iw.redraw();
+                $("#portlet-update").modal('hide');
+            };
+        };
+        var markerMenu=new BMap.ContextMenu();
+        markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
+        markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
+        marker.addContextMenu(markerMenu);//给标记添加右键菜单
     }
 
     initMap();//创建和初始化地图

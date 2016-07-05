@@ -694,20 +694,45 @@
 
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-            <div id="portlet-config" class="modal hide">
+            <div id="portlet-remove" class="modal fade hide">
 
                 <div class="modal-header">
 
                     <button data-dismiss="modal" class="close" type="button"></button>
 
-                    <h3>弹出窗口</h3>
+                    <h3>注意</h3>
 
                 </div>
 
                 <div class="modal-body">
 
-                    内容e
+                    <p><h4>  是否删除此站点？</h4></p>
 
+                    <div class="pull-right">
+                        <button id="portlet-remove-ok" type="button" >确定</button>
+                        <button data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </div>
+
+            </div>
+            <div id="portlet-update" class="modal fade hide">
+
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button"></button>
+                    <h3>修改</h3>
+                </div>
+
+                <div class="modal-body">
+
+                    <div id="portlet-content">
+                        <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                        <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                    </div>
+
+                    <div class="pull-right">
+                        <button id="portlet-update-ok" type="button" >确定</button>
+                        <button data-dismiss="modal" type="button">取消</button>
+                    </div>
                 </div>
 
             </div>
