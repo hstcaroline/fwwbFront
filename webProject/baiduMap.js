@@ -69,7 +69,7 @@
                     for(var i=0;i<num;i++){
                         var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
                         var polyline = new BMap.Polyline(pts,{strokeColor: "#FF0000", strokeWeight: 3, strokeOpacity: 0.5 });
-                        polyline.enableEditing();
+                        //polyline.enableEditing();
                         map.addOverlay(polyline);
                     }
                     driving.cleanResults();
