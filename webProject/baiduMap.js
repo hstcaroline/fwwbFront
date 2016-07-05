@@ -69,8 +69,8 @@
                     for(var i=0;i<num;i++){
                         var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
                         var polyline = new BMap.Polyline(pts,{strokeColor: "#FF0000", strokeWeight: 3, strokeOpacity: 0.5 });
-                        //polyline.enableEditing();
                         map.addOverlay(polyline);
+                        PolylineRightClickHandler(polyline);
                     }
                     driving.cleanResults();
                 }
@@ -166,7 +166,7 @@
 				}
                 return _iw;
 			})();
-            RightClickHandler(marker,iw);
+            MarkerRightClickHandler(marker,iw);
         }
     }
     //创建InfoWindow
@@ -219,7 +219,7 @@
     var ok_2 = document.getElementById("portlet-update-ok");
     var txt_title = document.getElementById("title");
     var txt_content = document.getElementById("content");
-    function RightClickHandler(marker,iw){
+    function MarkerRightClickHandler(marker,iw){
         var label = marker.getLabel();
         var removeMarker = function(e,ee,marker){//右键删除站点
             $("#portlet-remove").modal('show');
@@ -244,6 +244,34 @@
         markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
         markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
         marker.addContextMenu(markerMenu);//给标记添加右键菜单
+    }
+    function PolylineRightClickHandler(polyline){
+        var removePolyline = function(e,ee,polyline){//右键删除站点
+            $("#portlet-remove").modal('show');
+            ok_1.onclick = function(){
+                map.removeOverlay(polyline);
+                $("#portlet-remove").modal('hide');
+            };
+        };
+        var editPolyline = function(){//右键更新站名
+            polyline.enableEditing();
+            menuItem_edit.disable();
+            menuItem_save.enable();
+        };
+        var savePolyline = function(){//右键更新站名
+            polyline.disableEditing();
+            menuItem_save.disable();
+            menuItem_edit.enable();
+        };
+        var polylineMenu=new BMap.ContextMenu();
+        var menuItem_remove = new BMap.MenuItem('删除路线',removePolyline.bind(polyline));
+        var menuItem_edit = new BMap.MenuItem('编辑',editPolyline.bind(polyline));
+        var menuItem_save = new BMap.MenuItem('保存修改',savePolyline.bind(polyline));
+        polylineMenu.addItem(menuItem_remove);
+        polylineMenu.addItem(menuItem_edit);
+        polylineMenu.addItem(menuItem_save);
+        menuItem_save.disable();
+        polyline.addContextMenu(polylineMenu);//给标记添加右键菜单
     }
 
     initMap();//创建和初始化地图
