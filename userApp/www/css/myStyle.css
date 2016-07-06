@@ -5,6 +5,18 @@
     bottom: 0px;
     left: 0px;
     border-top:1px solid #b4cef8;
+    background-color: white;
+}
+.header{
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    border-top:1px solid #b4cef8;
+    background-color: #3498db;
+    text-align:center;
+    vertical-align:middle;
 }
 .footer-li{
     width: 30%;
@@ -34,4 +46,19 @@
 }
 .nav-tabs > li > a {
     height: 100%;
+}
+.text-center{
+    margin-left: -35%;
+    padding-top: 5%;
+    font-size:20px;
+    color:white;
+    margin-bottom: 2px;
+    position: relative;
+    top:30%;
+}
+.img-circle.img-head{
+    margin-left: 10%;
+    height: 70%;
+    width: auto;
+    float: left;
 }

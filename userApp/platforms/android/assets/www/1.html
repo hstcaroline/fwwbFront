@@ -28,8 +28,9 @@
         * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
             * Enable inline JS: add 'unsafe-inline' to default-src
     -->
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <!--<meta http-equiv="Content-Security-Policy"-->
+    <!--content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta charset="utf-8"/>
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
@@ -40,19 +41,29 @@
     <title>Hello World</title>
 </head>
 <body>
-<p>hello 1.html</p>
-<div class="footer">
-    <ul class="nav nav-tabs">
-        <li>
+<div class="header">
+    <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+        <img src="img/head.png" class="img-circle img-head">
 
-           <a href=""> <img class="footer-img" src="img/icon_user_normal.png"/></a>
+    </div>
+    <div style="height: 100%;width:70%;float: right">
+        <span class="text-center">我的资料</span>
+    </div>
+
+
+</div>
+<div class="footer">
+    <ul class="nav nav-tabs" style="height: 100%">
+        <li>
+            <a id="footer_a1"> <img id="footer_img1" class="footer-img" src="img/icon_location_checked.png"/></a>
         </li>
 
-        <li class=""> <a> <img class="footer-img" src="img/icon_user_checked.png"/></a></li>
+        <li class=""><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
 
         <li class=""><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
 
     </ul>
+</div>
 </div>
 
 <!--<div class="app">-->
