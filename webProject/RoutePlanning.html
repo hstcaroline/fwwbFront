@@ -696,26 +696,46 @@
 
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-        <div id="portlet-config" class="modal fade hide">
+        <div id="portlet-remove" class="modal fade hide">
 
             <div class="modal-header">
 
                 <button data-dismiss="modal" class="close" type="button"></button>
 
-                <h3>说明</h3>
+                <h3>注意</h3>
 
             </div>
 
             <div class="modal-body">
 
-                <p>DONE:</p>
-                <p>页面的布局</p>
-                <p>通过点击添加站点</p>
-                <p>函数：通过两点坐标搜索路径</p>
-                <p>TODO:</p>
-                <p>站点信息编辑</p>
-                <p>切换到数据页面时禁掉两个右侧两个按钮</p>
-                <p>生成路线的响应</p>
+                <p><h4>  此操作不可撤销，确认删除？</h4></p>
+
+                <div class="pull-right">
+                    <button id="portlet-remove-ok" type="button" >确定</button>
+                    <button data-dismiss="modal" type="button">取消</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="portlet-update" class="modal fade hide">
+
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>修改</h3>
+            </div>
+
+            <div class="modal-body">
+
+                <div id="portlet-content">
+                    <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                    <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                </div>
+
+                <div class="pull-right">
+                    <button id="portlet-update-ok" type="button" >确定</button>
+                    <button data-dismiss="modal" type="button">取消</button>
+                </div>
             </div>
 
         </div>
@@ -904,9 +924,12 @@
                                                 <i class="icon-dashboard"></i> 数据</a></li>
 
                                             <li id="addMarker"><p><div class="btn red">
-                                                <i  class="icon-edit"></i> 添加站点</div></p></li>
+                                                <i  class="icon-edit"></i> 添加住址</div></p></li>
 
-                                            <li><div class="btn-group">
+                                            <li id="createStation"><p><div class="btn red">
+                                                <i  class="icon-edit"></i> 生成站点</div></p></li>
+
+                                            <li id="createRoute"><div class="btn-group">
                                                 <a class="btn red" href="#" data-toggle="dropdown">
                                                     &nbsp;<i  class="icon-edit"></i> 生成路线&nbsp;</a>
                                                 <ul class="dropdown-menu control-group hold-on-click pull-right">
@@ -914,7 +937,7 @@
 
                                                         <label class="radio line">
 
-                                                            <input type="radio" name="optionsRadios1" value="option1" />
+                                                            <input type="radio" name="optionsRadios1" value="option1" onclick="routePlanning(0)" />
 
                                                              时间最短
 
@@ -922,7 +945,7 @@
 
                                                         <label class="radio line">
 
-                                                            <input type="radio" name="optionsRadios1" value="option2" checked />
+                                                            <input type="radio" name="optionsRadios1" value="option2" onclick="routePlanning(1)" checked />
 
                                                             成本最低
 
@@ -930,7 +953,7 @@
 
                                                         <label class="radio line">
 
-                                                            <input type="radio" name="optionsRadios1" value="option3" />
+                                                            <input type="radio" name="optionsRadios1" value="option3" onclick="routePlanning(2)" />
 
                                                             乘坐率最高
 
