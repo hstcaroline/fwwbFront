@@ -1,13 +1,11 @@
     var btn_1 = document.getElementById("addMarker");
     var btn_2 = document.getElementById("searchRoute");
+    var btn_3 = document.getElementById("createRoute");
     var clickInfo = document.getElementById("clickInfo");
     var dragInfo = document.getElementById("dragInfo");
     var routeInfo = document.getElementById("routeInfo");
 
-    //标注点数组
-    var markerArr = [{title:"东湖面馆",content:"第五餐饮大楼",point:"121.447895|31.030189",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}},
-        {title:"实验室",content:"软件学院",point:"121.449099|31.029295",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
-		 ];
+    var markerArr = [];
     var ifAddMarker = false;
     var searchState = 0;
     var markCount = 1;
@@ -36,14 +34,18 @@
             getRoute(startPos,endPos);
         }
     };
+    btn_3.onclick = function(){
+        createRoute(markerArr);
+        markerArr=[];
+    };
 
     //创建和初始化地图函数
     function initMap(){
         createMap();//创建地图
         setMapEvent();//设置地图事件
         addMapControl();//向地图添加控件
-        addMarker(markerArr);//向地图添加marker
-        addPolyline(polylinePoints);//向地图添加线
+        //addMarker(markerArr);//向地图添加marker
+        //addPolyline(polylinePoints);//向地图添加线
     }
     
     //创建地图函数
@@ -55,12 +57,22 @@
         driving = new BMap.DrivingRoute(map, {
             renderOptions: {//绘制结果
                 map: map,
-                panel: 'panel'
+                autoViewport: true,
+                enableDragging: true
             },
             onSearchComplete: function(results){
                 if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
-                    var plan = results.getPlan(0);
+                    var plan = driving.getResults().getPlan(0);
                     routeInfo.innerHTML = "距离： " + plan.getDistance(true) + " (" + plan.getDistance(false) + "米)";
+
+                    var num = plan.getNumRoutes();
+                    for(var i=0;i<num;i++){
+                        var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
+                        var polyline = new BMap.Polyline(pts,{strokeColor: "#FF0000", strokeWeight: 3, strokeOpacity: 0.5 });
+                        map.addOverlay(polyline);
+                        PolylineRightClickHandler(polyline);
+                    }
+                    driving.cleanResults();
                 }
             }
         });
@@ -77,8 +89,11 @@
 			var pos = e.point.lng + "|" + e.point.lat;
 			clickInfo.innerHTML = "点击信息： "+pos;
             if(ifAddMarker==true){//标注点数组
-                var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}];
+                var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:21,h:31,l:0,t:0,x:6,lb:5}}];
                 addMarker(marker);
+
+                var point = new BMap.Point(e.point.lng,e.point.lat);
+                markerArr.push(point);
                 markCount++;
             }
 		});
@@ -119,7 +134,7 @@
                     searchState = 4;
                 }
             });
-			var iw = createInfoWindow(Arr,i);
+
 			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
 			marker.setLabel(label);
             map.addOverlay(marker);
@@ -128,8 +143,8 @@
                         color:"#333",
                         cursor:"pointer"
             });
-			
-			(function(){
+
+			var iw = (function(){
 				var index = i;
 				var _iw = createInfoWindow(Arr,i);
 				var _marker = marker;
@@ -149,7 +164,9 @@
 					label.hide();
 					_marker.openInfoWindow(_iw);
 				}
-			})()
+                return _iw;
+			})();
+            MarkerRightClickHandler(marker,iw);
         }
     }
     //创建InfoWindow
@@ -160,12 +177,11 @@
     }
     //创建一个Icon
     function createIcon(json){
-        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        var icon = new BMap.Icon("media/image/marker.png", new BMap.Size(json.w,json.h),
+            {imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)});
         return icon;
     }
-    //标注线数组
-    var polylinePoints = [{style:"solid",weight:3,color:"#f00",opacity:0.6,points:["121.447899|31.030185","121.448789|31.029999","121.446552|31.029319","121.447154|31.027957","121.448205|31.028274","121.448205|31.028321","121.449247|31.028731","121.449076|31.029226"]}
-		 ];
+
     //向地图中添加线函数
     function addPolyline(plPoints){
 		for(var i=0;i<plPoints.length;i++){
@@ -183,6 +199,79 @@
     function getRoute(pointStart,pointEnd) {
         driving.clearResults();
         driving.search(pointStart, pointEnd);
+    }
+
+    function createRoute(markers) {
+        var  group = Math.floor( markers.length /11 ) ;
+        var mode = markers.length %11 ;
+        for(var i =0;i<group;i++){
+            var waypoints = markers.slice(i*11+1,(i+1)*11);
+            driving.search(markers[i*11], markers[(i+1)*11],{waypoints:waypoints});//waypoints表示途经点
+        }
+        if( mode != 0){
+            var waypoints = markers.slice(group*11,markers.length-1);//多出的一段单独进行search
+            driving.search(markers[group*11],markers[markers.length-1],{waypoints:waypoints});
+        }
+    }
+
+    //右键单击marker出现右键菜单事件
+    var ok_1 = document.getElementById("portlet-remove-ok");
+    var ok_2 = document.getElementById("portlet-update-ok");
+    var txt_title = document.getElementById("title");
+    var txt_content = document.getElementById("content");
+    function MarkerRightClickHandler(marker,iw){
+        var label = marker.getLabel();
+        var removeMarker = function(e,ee,marker){//右键删除站点
+            $("#portlet-remove").modal('show');
+            ok_1.onclick = function(){
+                map.removeOverlay(marker);
+                $("#portlet-remove").modal('hide');
+            };
+        };
+        var updateMarker = function(marker){//右键更新站名
+            txt_title.value=label.getContent();
+            txt_content.value="";
+            $("#portlet-update").modal('show');
+            ok_2.onclick = function(){
+                label.setContent(txt_title.value);
+                iw.setContent("<b class='iw_poi_title' title='" + txt_title.value + "'>" + txt_title.value
+                    + "</b><div class='iw_poi_content'>"+txt_content.value+"</div>");
+                iw.redraw();
+                $("#portlet-update").modal('hide');
+            };
+        };
+        var markerMenu=new BMap.ContextMenu();
+        markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
+        markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
+        marker.addContextMenu(markerMenu);//给标记添加右键菜单
+    }
+    function PolylineRightClickHandler(polyline){
+        var removePolyline = function(e,ee,polyline){//右键删除站点
+            $("#portlet-remove").modal('show');
+            ok_1.onclick = function(){
+                map.removeOverlay(polyline);
+                $("#portlet-remove").modal('hide');
+            };
+        };
+        var editPolyline = function(){//右键更新站名
+            polyline.enableEditing();
+            menuItem_edit.disable();
+            menuItem_save.enable();
+        };
+        var savePolyline = function(){//右键更新站名
+            polyline.disableEditing();
+            menuItem_save.disable();
+            menuItem_edit.enable();
+        };
+        var polylineMenu=new BMap.ContextMenu();
+        var menuItem_remove = new BMap.MenuItem('删除路线',removePolyline.bind(polyline));
+        var menuItem_edit = new BMap.MenuItem('编辑',editPolyline.bind(polyline));
+        var menuItem_save = new BMap.MenuItem('保存修改',savePolyline.bind(polyline));
+        polylineMenu.addItem(menuItem_remove);
+        polylineMenu.addItem(menuItem_edit);
+        polylineMenu.addItem(menuItem_save);
+        menuItem_save.disable();
+        polyline.addContextMenu(polylineMenu);//给标记添加右键菜单
     }
 
     initMap();//创建和初始化地图

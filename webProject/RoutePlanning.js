@@ -91,8 +91,7 @@ function addMarker(Arr){
         marker.addEventListener('dragend',function(event){
             dragInfo.innerHTML = "<p>拖曳（删）： </p><p>"+event.point.lng+"|"+event.point.latpos+"</p>";
         });
-
-        var iw = createInfoWindow(Arr,i);
+        
         var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
         marker.setLabel(label);
         map.addOverlay(marker);

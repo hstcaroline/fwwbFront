@@ -79,7 +79,7 @@
 
                 <!-- BEGIN LOGO -->
 
-                <a class="brand" href="statisticTable.html">
+                <a class="brand" href="index.html">
 
                     <img src="media/image/logo.png" alt="logo"/>
 
@@ -402,7 +402,7 @@
 
                 <li class="start active ">
 
-                    <a href="statisticTable.html">
+                    <a href="index.html">
 
                         <i class="icon-home"></i>
 
@@ -694,20 +694,45 @@
 
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-            <div id="portlet-config" class="modal hide">
+            <div id="portlet-remove" class="modal fade hide">
 
                 <div class="modal-header">
 
                     <button data-dismiss="modal" class="close" type="button"></button>
 
-                    <h3>弹出窗口</h3>
+                    <h3>注意</h3>
 
                 </div>
 
                 <div class="modal-body">
 
-                    内容e
+                    <p><h4>  此操作不可撤销，确认删除？</h4></p>
 
+                    <div class="pull-right">
+                        <button id="portlet-remove-ok" type="button" >确定</button>
+                        <button data-dismiss="modal" type="button">取消</button>
+                    </div>
+                </div>
+
+            </div>
+            <div id="portlet-update" class="modal fade hide">
+
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button"></button>
+                    <h3>修改</h3>
+                </div>
+
+                <div class="modal-body">
+
+                    <div id="portlet-content">
+                        <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                        <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                    </div>
+
+                    <div class="pull-right">
+                        <button id="portlet-update-ok" type="button" >确定</button>
+                        <button data-dismiss="modal" type="button">取消</button>
+                    </div>
                 </div>
 
             </div>
@@ -828,7 +853,7 @@
 
                                 <i class="icon-home"></i>
 
-                                <a href="statisticTable.html">首页</a>
+                                <a href="index.html">首页</a>
 
                                 <i class="icon-angle-right"></i>
 
@@ -858,8 +883,7 @@
 
                     <!--百度地图容器-->
                     <div id = "map">
-                        <div style="width:800px;height:450px;border:#ccc solid 1px;" id="dituContent"></div>
-                        <div id="panel" style="position:absolute;left:1050px;top:150px"></div>
+                        <div style="width:1000px;height:500px;border:#ccc solid 1px;" id="dituContent"></div>
                     </div>
                     <div id="info">
                         <div id="routeInfo">里程数</div>
@@ -869,6 +893,7 @@
                     <div id="button">
                         <input id="addMarker" type="button" value="启用添加标记"/>
                         <input id="searchRoute" type="button" value="设置起点"/>
+                        <input id="createRoute" type="button" value="生成路线"/>
                     </div>
                     <script type="text/javascript" src="baiduMap.js"></script>
 
