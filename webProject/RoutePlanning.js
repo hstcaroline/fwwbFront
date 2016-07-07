@@ -304,6 +304,7 @@ function indexOf(marker,Arr) {
     }
     return -1;
 }
+
 //PA:PointsArray[{x,y}]
 //BMPA:BaiduMapPointsArray [{id,BMap.Point:{lng,lat}}]
 function PA2BMPA(points,ifNew){
@@ -342,12 +343,21 @@ function routePlanning(arg_0){
         },
         success: function(points){
             console.log(points);
-            var stations=PA2BMPA(points,false);
+            //points 是二维数组,元素：[id,BMap.Point]
+            var station = [];
+            for(var i=0;i<points.length;i++){
+                station[i] = PA2BMPA(points[i],false);
+            }
+            //var stations=PA2BMPA(points,false);
             var markers=[];
             for(var i=0;i<stations.length;i++){
-                markers.push(stations[i][1]);
+                for(var j=0;j<stations[i].length;j++){
+                    markers[i][j] = stations[i][j][1];
+                }
             }
-            createRoute(markers);
+            for(var i=0;i<markers.length;i++){
+                createRoute(markers);
+            }
         }
     });
     stationArr.length = 0;
