@@ -429,12 +429,12 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       acceptParameter: null,
       enqueueForUpload: true,
       previewsContainer: null,
-      dictDefaultMessage: "Drop files here to upload",
-      dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
-      dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
-      dictFileTooBig: "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.",
-      dictInvalidFileType: "You can't upload files of this type.",
-      dictResponseError: "Server responded with {{statusCode}} code.",
+      dictDefaultMessage: "将文件拖放到此处",
+      dictFallbackMessage: "您的浏览器不支持拖放上传功能.",
+      dictFallbackText: "请通过点击方式上传",
+      dictFileTooBig: "文件过大 ({{filesize}}MB) 最大{{maxFilesize}}MB",
+      dictInvalidFileType: "此类型的文件不支持上传",
+      dictResponseError: "服务器响应： {{statusCode}}",
       accept: function(file, done) {
         return done();
       },

@@ -4,6 +4,7 @@
 
 var btn_1 = document.getElementById("addMarker");
 var btn_2 = document.getElementById("createStation");
+var btn_3 = document.getElementById("createRoute");
 var clickInfo = document.getElementById("clickInfo");
 var dragInfo = document.getElementById("dragInfo");
 
@@ -20,32 +21,36 @@ btn_1.onclick = function(){
     if(ifAddMarker==true){
         ifAddMarker=false;
         btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
+        btn_2.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 生成站点</div></p>';
     }else{
         ifAddMarker=true;
         btn_1.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
+        btn_2.innerHTML='<p><div class="btn red disabled"><i  class="icon-edit"></i> 生成站点</div></p>';
     }
 };
 btn_2.onclick = function(){
-    console.log(window.location+"/addPoints");
-     $.ajax({
-         url: window.location+"/addPoints",
-         type: 'post',
-         dataType: "json",
-         data: {
-             points:BMPA2PA(markerArr)
-         },
-         success: function(points){
-             stationArr=PA2BMPA(points,true);
-             var markers=[];
-             for(var i=0;i<stationArr.length;i++){
-                 var pos = stationArr[i][1].lng+"|"+stationArr[i][1].lat;
-                 var marker = {title:"站点_"+stationArr[i][0],content:"自动生成",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationArr[i][0],type:1};
-                 markers.push(marker);
+    if(ifAddMarker==false){
+        console.log(window.location+"/addPoints");
+         $.ajax({
+             url: window.location+"/addPoints",
+             type: 'post',
+             dataType: "json",
+             data: {
+                 points:BMPA2PA(markerArr)
+             },
+             success: function(points){
+                 stationArr=PA2BMPA(points,true);
+                 var markers=[];
+                 for(var i=0;i<stationArr.length;i++){
+                     var pos = stationArr[i][1].lng+"|"+stationArr[i][1].lat;
+                     var marker = {title:"站点_"+stationArr[i][0],content:"自动生成",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationArr[i][0],type:1};
+                     markers.push(marker);
+                 }
+                 addMarker(markers);
              }
-             addMarker(markers);
-         }
-     });
-     markerArr.length = 0;
+         });
+         markerArr.length = 0;
+    }
 }
 
 //创建和初始化地图函数
@@ -304,6 +309,7 @@ function indexOf(marker,Arr) {
     }
     return -1;
 }
+
 //PA:PointsArray[{x,y}]
 //BMPA:BaiduMapPointsArray [{id,BMap.Point:{lng,lat}}]
 function PA2BMPA(points,ifNew){
@@ -342,12 +348,21 @@ function routePlanning(arg_0){
         },
         success: function(points){
             console.log(points);
-            var stations=PA2BMPA(points,false);
+            //points 是二维数组,元素：[id,BMap.Point]
+            var station = [];
+            for(var i=0;i<points.length;i++){
+                station[i] = PA2BMPA(points[i],false);
+            }
+            //var stations=PA2BMPA(points,false);
             var markers=[];
             for(var i=0;i<stations.length;i++){
-                markers.push(stations[i][1]);
+                for(var j=0;j<stations[i].length;j++){
+                    markers[i][j] = stations[i][j][1];
+                }
             }
-            createRoute(markers);
+            for(var i=0;i<markers.length;i++){
+                createRoute(markers);
+            }
         }
     });
     stationArr.length = 0;
