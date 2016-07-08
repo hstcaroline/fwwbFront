@@ -54,6 +54,8 @@
 
     <link href="media/css/glyphicons.css" rel="stylesheet" />
 
+    <link href="media/css/halflings.css" rel="stylesheet" />
+
     <link href="media/css/dropzone.css" rel="stylesheet"/>
 
     <!-- END PAGE LEVEL STYLES -->
@@ -926,7 +928,7 @@
                                                 <i class="icon-dashboard"></i> 数据</a></li>
 
                                             <li><a href="#fileUpload" data-toggle="tab">
-                                                <i class="icon-dashboard"></i>导入</a></li>
+                                                <i class="icon-dashboard"></i> 导入</a></li>
 
                                             <li id="addMarker"><p><div class="btn red">
                                                 <i  class="icon-edit"></i> 添加住址</div></p></li>
@@ -969,13 +971,6 @@
                                                 </ul>
                                             </div></li>
 
-                                            <li>
-                                                <div id="info">
-                                                    <div id="clickInfo">点击(删)</div>
-                                                    <div id="dragInfo">拖曳（删）</div>
-                                                </div>
-                                            </li>
-
                                         </ul>
 
                                         <div class="tab-content">
@@ -985,7 +980,7 @@
                                                     <!--百度地图容器-->
                                                     <div id = "map">
 
-                                                        <div style="width:100%;height:480px;border:#ccc solid 0px;" id="dituContent"></div>
+                                                        <div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>
 
                                                     </div>
 
@@ -1221,16 +1216,14 @@
 
                                                     支持浏览器版本 Chrome, Firefox, Safari, Opera & Internet Explorer 10.
 
+                                                    <button id="submit-all" class="btn red pull-right mini">开始上传</button>
+
                                                 </p>
 
-                                                <  method="post"enctype="multipart/form-data"
-                                                      class="dropzone" id="dropzoneForm">
-                                                    <div class="fallback">
-                                                        <input name="file" type="file" multiple />
-                                                    </div>
-                                                </form>
+                                                <script src="media/js/dropzone.js"></script>
+                                                <form action="frame.html" id="my-dropzone" class="dropzone"></form>
+                                                <script src="dropdownUpload.js"></script>
 
-                                                <script type="text/javascript" src="dropdownUpload.js"></script>
                                             </div>
 
                                         </div>
@@ -1319,12 +1312,6 @@
 <script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 <!-- END CORE PLUGINS -->
-
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-<script src="media/js/dropzone.js"></script>
-
-<!-- END PAGE LEVEL PLUGINS -->
 
 <script src="media/js/app.js"></script>
 

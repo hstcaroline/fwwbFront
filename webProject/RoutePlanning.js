@@ -4,14 +4,13 @@
 
 var btn_1 = document.getElementById("addMarker");
 var btn_2 = document.getElementById("createStation");
-var btn_3 = document.getElementById("createRoute");
-var clickInfo = document.getElementById("clickInfo");
-var dragInfo = document.getElementById("dragInfo");
 
 //住址数组
 var markerArr = [];
 //站点数组
 var stationArr =[];
+var COLOR=["#FF9900","#333333","#FFFF00","##009933","#CC0066","#009999","#666699","#FF6600"];
+var routeCount=0;
 var ifAddMarker = false;
 var markCount = 1;
 var stationCount = 1;
@@ -21,35 +20,50 @@ btn_1.onclick = function(){
     if(ifAddMarker==true){
         ifAddMarker=false;
         btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
-        btn_2.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 生成站点</div></p>';
     }else{
         ifAddMarker=true;
         btn_1.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
-        btn_2.innerHTML='<p><div class="btn red disabled"><i  class="icon-edit"></i> 生成站点</div></p>';
     }
 };
 btn_2.onclick = function(){
-    if(ifAddMarker==false){
-        console.log(window.location+"/addPoints");
-         $.ajax({
-             url: window.location+"/addPoints",
-             type: 'post',
-             dataType: "json",
-             data: {
-                 points:BMPA2PA(markerArr)
-             },
-             success: function(points){
-                 stationArr=PA2BMPA(points,true);
-                 var markers=[];
-                 for(var i=0;i<stationArr.length;i++){
-                     var pos = stationArr[i][1].lng+"|"+stationArr[i][1].lat;
-                     var marker = {title:"站点_"+stationArr[i][0],content:"自动生成",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationArr[i][0],type:1};
-                     markers.push(marker);
-                 }
-                 addMarker(markers);
+    console.log("http://192.168.1.39:3000/RoutePlanning/addPoints");
+     $.ajax({
+         url: "http://192.168.1.39:3000/RoutePlanning/addPoints",
+         type: 'post',
+         dataType: "json",
+         data: {
+             points:BMPA2PA(markerArr)
+         },
+         success: function(points){
+             var array = PA2BMPA(points,true);
+             for(var i=0;i<array.length;i++){
+                 stationArr.push(array[i]);
              }
-         });
-         markerArr.length = 0;
+             var markers=[];
+             for(var i=0;i<stationArr.length;i++){
+                 var pos = stationArr[i][1].lng+"|"+stationArr[i][1].lat;
+                 var marker = {title:"站点_"+stationArr[i][0],content:"自动生成",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationArr[i][0],type:1};
+                 markers.push(marker);
+             }
+             addMarker(markers);
+             markerArr.length = 0;
+         }
+     });
+}
+
+function checkhHtml5(){
+    var style=true;
+    if (typeof(Worker) === "undefined"){
+        if(navigator.userAgent.indexOf("MSIE 9.0")<=0){
+            style=false;
+        }
+    }
+    if(style==true){
+        var  mapStyle ={
+            features: ["road", "building","water","land"],//隐藏地图上的poi
+            style : "light"
+        }
+        window.map.setMapStyle(mapStyle);
     }
 }
 
@@ -66,6 +80,7 @@ function createMap(){
     var point = new BMap.Point(121.448892,31.028955);//定义一个中心点坐标
     map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
     window.map = map;//将map变量存储在全局
+    checkhHtml5();
     driving = new BMap.DrivingRoute(map, {
         renderOptions: {//绘制结果
             map: map,
@@ -74,11 +89,13 @@ function createMap(){
         },
         onSearchComplete: function(results){
             if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
+                var color = COLOR[(routeCount%COLOR.length)];
+                routeCount++;
                 var plan = driving.getResults().getPlan(0);
                 var num = plan.getNumRoutes();
                 for(var i=0;i<num;i++){
                     var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
-                    var polyline = new BMap.Polyline(pts,{strokeColor: "#00FF00", strokeWeight: 3, strokeOpacity: 0.5 });
+                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9 });
                     map.addOverlay(polyline);
                     PolylineRightClickHandler(polyline);
                 }
@@ -97,7 +114,6 @@ function setMapEvent(){
     map.enableKeyboard();//启用键盘上下左右键移动地图
     map.addEventListener("click", function(e){
         var pos = e.point.lng + "|" + e.point.lat;
-        clickInfo.innerHTML = "<p>点击（删）： </p><p>"+pos+"</p>";
         if(ifAddMarker==true){//标注点数组
             var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:24,h:24,l:0,t:0,x:6,lb:5},id:markCount,type:0}];
             addMarker(marker);
@@ -147,7 +163,6 @@ function addMarker(Arr){
                     stationArr[index][1].lat=event.point.lat;
                 }
             }
-            dragInfo.innerHTML = "<p>拖曳（删）： </p><p>"+event.point.lng+"|"+event.point.lat+"</p>";
         });
         
         var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
@@ -336,10 +351,9 @@ function BMPA2PA(points){
 }
 
 function routePlanning(arg_0){
-    // window.alert(arg_0);
     console.log("generate path");
     $.ajax({
-        url: window.location+"/generatePath",
+        url: "http://192.168.1.39:3000/RoutePlanning/generatePath",
         type: 'post',
         dataType: "json",
         data: {
@@ -347,21 +361,23 @@ function routePlanning(arg_0){
            // policy:arg_0 路线生成策略
         },
         success: function(points){
-            console.log(points);
+            console.log(points[0]);
             //points 是二维数组,元素：[id,BMap.Point]
-            var station = [];
+            var stations = [];
             for(var i=0;i<points.length;i++){
-                station[i] = PA2BMPA(points[i],false);
+                console.log(points[0][0]);
+                stations[i] = PA2BMPA(points[i],false);
             }
             //var stations=PA2BMPA(points,false);
             var markers=[];
             for(var i=0;i<stations.length;i++){
+		        markers[i]=new Array();
                 for(var j=0;j<stations[i].length;j++){
                     markers[i][j] = stations[i][j][1];
                 }
             }
             for(var i=0;i<markers.length;i++){
-                createRoute(markers);
+                createRoute(markers[i]);
             }
         }
     });

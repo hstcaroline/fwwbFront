@@ -6,6 +6,8 @@
     var routeInfo = document.getElementById("routeInfo");
 
     var markerArr = [];
+    var COLOR=["#FF9900","#0099CC","#FFFF00","##009933","#CC0066","#009999","#666699","#FF6600"];
+    var routeCount=0;
     var ifAddMarker = false;
     var searchState = 0;
     var markCount = 1;
@@ -47,13 +49,30 @@
         //addMarker(markerArr);//向地图添加marker
         //addPolyline(polylinePoints);//向地图添加线
     }
-    
+
+    function checkhHtml5(){
+        var style=true;
+        if (typeof(Worker) === "undefined"){
+            if(navigator.userAgent.indexOf("MSIE 9.0")<=0){
+                style=false;
+            }
+        }
+        if(style==true){
+            var  mapStyle ={
+                features: ["road", "building","water","land"],//隐藏地图上的poi
+                style : "dark"  //设置地图风格为高端黑
+            }
+            window.map.setMapStyle(mapStyle);
+        }
+    }
+
     //创建地图函数
     function createMap(){
         var map = new BMap.Map("dituContent");//在百度地图容器中创建地图
         var point = new BMap.Point(121.448892,31.028955);//定义一个中心点坐标
         map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
         window.map = map;//将map变量存储在全局
+        checkhHtml5();
         driving = new BMap.DrivingRoute(map, {
             renderOptions: {//绘制结果
                 map: map,
@@ -64,11 +83,12 @@
                 if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
                     var plan = driving.getResults().getPlan(0);
                     routeInfo.innerHTML = "距离： " + plan.getDistance(true) + " (" + plan.getDistance(false) + "米)";
-
+                    var color = COLOR[(routeCount%COLOR.length)];
+                    routeCount++;
                     var num = plan.getNumRoutes();
                     for(var i=0;i<num;i++){
                         var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
-                        var polyline = new BMap.Polyline(pts,{strokeColor: "#FF0000", strokeWeight: 3, strokeOpacity: 0.5 });
+                        var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 8, strokeOpacity: 0.9 });
                         map.addOverlay(polyline);
                         PolylineRightClickHandler(polyline);
                     }
