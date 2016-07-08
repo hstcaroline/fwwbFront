@@ -36,8 +36,8 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/flat-ui.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    <script type="text/javascript" src="js/myJs.js"></script>
     <title>Hello World</title>
 </head>
 <body>
@@ -49,18 +49,69 @@
     <div style="height: 100%;width:70%;float: right">
         <span class="text-center">我的资料</span>
     </div>
-
-
+</div>
+<div class="content">
+    <div class="headImg">
+        <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
+        <div id="editText" style="display: none">
+            <span class="cancelText">取消</span>
+            <span class="saveText">保存</span>
+        </div>
+    </div>
+    <div class="table-responsive" style="border: 0px">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td><input class="table-inputFlag" readonly=true type="text" value="姓名:"></td>
+                <td class="infoTd"><input id="inputName" type="text" style="border: none" value="黄顺婷"></td>
+            </tr>
+            <tr>
+                <td><input class="table-inputFlag" readonly=true type="text" value="电话:"></td>
+                <td class="infoTd"><input id="inputTel" type="text" style="border: none" value="18200302934"></td>
+            </tr>
+            <tr>
+                <td><input class="table-inputFlag" readonly=true type="text" value="家庭住址:"></td>
+                <td class="infoTd"><input id="inputAddr" type="text" style="border: none" value="上海闵行"></td>
+            </tr>
+            <tr>
+                <td><input class="table-inputFlag" readonly=true type="text" value="班次:"></td>
+                <td class="infoTd"><input id="inputCar" type="text" style="border: none" value="班次A"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="space">
+    </div>
+    <div class="table-responsive" style="border: 0px">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td>工号:</td>
+                <td class="infoTd">G123</td>
+            </tr>
+            <tr>
+                <td>部门:</td>
+                <td class="infoTd">维修部</td>
+            </tr>
+            <tr>
+                <td>组别:</td>
+                <td class="infoTd">A组</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="space">
+    </div>
 </div>
 <div class="footer">
     <ul class="nav nav-tabs" style="height: 100%">
         <li>
-            <a id="footer_a1"> <img id="footer_img1" class="footer-img" src="img/icon_location_checked.png"/></a>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_normal.png"/></a>
         </li>
 
-        <li class=""><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li class=""> <a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_checked.png"/></a></li>
 
-        <li class=""><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li class=""> <a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
 
     </ul>
 </div>
@@ -77,3 +128,11 @@
 <!--<script type="text/javascript" src="js/index.js"></script>-->
 </body>
 </html>
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript">
+    $("#editImg").click(function(){
+        $("#editImg").hide();
+        $("#editText").show();
+        $("#inputName").focus();
+    });
+</script>
