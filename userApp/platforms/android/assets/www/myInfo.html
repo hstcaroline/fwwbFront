@@ -53,9 +53,19 @@
 <div class="content">
     <div class="headImg">
         <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
-        <div id="editText" style="display: none">
-            <span class="cancelText">取消</span>
-            <span class="saveText">保存</span>
+        <div id="editText" style="display: none;">
+
+            <button class="btn cancel" href="#">
+                <i class="cancelImg"></i>
+                <span style="color: red;font-size: 22px;">取消</span>
+            </button>
+            <button class="btn save" href="#">
+                <i class="saveImg"></i>
+                <span style="color: #3498db;font-size: 22px;">保存</span>
+            </button>
+
+
+            <!--<a class="saveText" href="#">保存</a>-->
         </div>
     </div>
     <div class="table-responsive" style="border: 0px">
@@ -99,6 +109,40 @@
             </tr>
             </tbody>
         </table>
+    </div> <div class="table-responsive" style="border: 0px">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td>工号:</td>
+                <td class="infoTd">G123</td>
+            </tr>
+            <tr>
+                <td>部门:</td>
+                <td class="infoTd">维修部</td>
+            </tr>
+            <tr>
+                <td>组别:</td>
+                <td class="infoTd">A组</td>
+            </tr>
+            </tbody>
+        </table>
+    </div> <div class="table-responsive" style="border: 0px">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td>工号:</td>
+                <td class="infoTd">G123</td>
+            </tr>
+            <tr>
+                <td>部门:</td>
+                <td class="infoTd">维修部</td>
+            </tr>
+            <tr>
+                <td>组别:</td>
+                <td class="infoTd">A组</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <div class="space">
     </div>
@@ -106,12 +150,15 @@
 <div class="footer">
     <ul class="nav nav-tabs" style="height: 100%">
         <li>
-            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_normal.png"/></a>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                   src="img/icon_location_normal.png"/></a>
         </li>
 
-        <li class=""> <a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_checked.png"/></a></li>
+        <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                            src="img/icon_user_checked.png"/></a></li>
 
-        <li class=""> <a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                            src="img/icon_charging_normal.png"/></a></li>
 
     </ul>
 </div>
@@ -130,7 +177,7 @@
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript">
-    $("#editImg").click(function(){
+    $("#editImg").click(function () {
         $("#editImg").hide();
         $("#editText").show();
         $("#inputName").focus();
