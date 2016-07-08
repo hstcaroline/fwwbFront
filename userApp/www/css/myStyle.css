@@ -1,37 +1,44 @@
-.footer{
+.footer {
     width: 100%;
     height: 10%;
     position: fixed;
     bottom: 0px;
     left: 0px;
-    border-top:1px solid #b4cef8;
+    border-top: 1px solid #b4cef8;
     background-color: white;
 }
-.header{
+
+body {
+    background-color: #f2f4f4;
+}
+
+.header {
     width: 100%;
     height: 10%;
     position: fixed;
     top: 0px;
     left: 0px;
-    border-top:1px solid #b4cef8;
     background-color: #3498db;
-    text-align:center;
-    vertical-align:middle;
+    text-align: center;
+    display: block;
 }
-.footer-li{
+
+.footer-li {
     width: 30%;
     height: 100%;
     position: absolute;
     float: left;
     display: block;
 }
-.footer-img{
+
+.footer-img {
     width: 30%;
     height: 100%;
     position: relative;
     display: block;
     margin: auto;
 }
+
 .nav-tabs {
     border-bottom: none;
 }
@@ -44,21 +51,93 @@
     height: 100%;
     align-content: center;
 }
+
 .nav-tabs > li > a {
     height: 100%;
 }
-.text-center{
+
+.text-center {
     margin-left: -35%;
     padding-top: 5%;
-    font-size:20px;
-    color:white;
+    font-size: 20px;
+    color: white;
     margin-bottom: 2px;
     position: relative;
-    top:30%;
+    top: 30%;
 }
-.img-circle.img-head{
+
+.img-circle.img-head {
     margin-left: 10%;
     height: 70%;
     width: auto;
     float: left;
+}
+
+.content {
+    background-color: white;
+    width: 100%;
+    display: block;
+    margin-top: 20%;
+    overflow: auto;
+}
+
+.infoTd {
+    text-align: left;
+}
+
+.table-inputFlag {
+    border: none;
+    background-color: white;
+    color: black;
+    width: 40%;
+}
+
+.table-inputInfo {
+    border: none;
+}
+
+.table > tbody > tr > td {
+    line-height: 200%;
+}
+
+.headImg {
+    height: 30%;
+    background-color: white;
+    margin-right: 10%;
+    font-size: x-large;
+}
+
+.space {
+    width: 100%;
+    height: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: #f2f4f4;
+}
+
+.cancelText {
+    color: #ff4a62;
+    margin-left: 10%;
+}
+
+.saveText {
+    color: #0e90d2;
+    margin-left: 50%;
+}
+
+.mapContainer {
+    width: 100%;
+    height: 90%;
+    margin-bottom: 10%;
+    /*background-color: #wh;*/
+    top: 0px;
+    position: fixed;
+}
+
+body, html,#allmap, #dituContent {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
 }

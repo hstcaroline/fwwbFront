@@ -2840,7 +2840,8 @@ table td[class*=col-], table th[class*=col-] {
     }
 
     .table-responsive > .table {
-        margin-bottom: 0
+        margin-bottom: 0;
+        text-align: center;
     }
 
     .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > td, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > thead > tr > th {

@@ -30,26 +30,36 @@
     -->
     <!--<meta http-equiv="Content-Security-Policy"-->
           <!--content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta charset="utf-8"/>
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    <!--引用百度地图API-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+    <script type="text/javascript" src="js/myJs.js"></script>
     <title>Hello World</title>
 </head>
 <body>
 
+<!--百度地图容器-->
+<!--<div id = "dituContent"></div>-->
+
+
+<!--</div>-->
+<div id="dituContent"></div>
 
 <div class="footer">
     <ul class="nav nav-tabs" style="height: 100%">
         <li>
-            <a id="footer_a1"> <img id="footer_img1" class="footer-img" src="img/icon_location_normal.png"/></a>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_checked.png"/></a>
         </li>
 
-        <li class=""><a href="1.html"> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li id="footer_a2" onclick="footerClick(this.id)"><a href="myInfo.html"> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
 
-        <li class=""><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li id="footer_a3" onclick="footerClick(this.id)"><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
 
     </ul>
 </div>
@@ -58,8 +68,11 @@
 </body>
 </html>
 <script type="text/javascript">
-    $("#footer_a1").click(function(){
-//        $("#footer_img1").attr("src","img/icon_user_checked.png");
-        location.href="1.html";
-    });
+    // 百度地图API功能
+    var map = new BMap.Map("dituContent");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+    map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+    map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
 </script>
