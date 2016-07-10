@@ -86,18 +86,12 @@ body {
     margin-top: 18%;
 }
 
-.infoTd {
-    text-align: left;
+.table >tbody > tr > td{
+    vertical-align: middle;
+    padding-left: 10%;
 }
 
-.table-inputFlag {
-    border: none;
-    background-color: white;
-    color: black;
-    width: 40%;
-}
-
-.table-inputInfo {
+.form-control {
     border: none;
 }
 
@@ -110,6 +104,7 @@ body {
     background-color: white;
     margin-right: 5%;
     font-size: x-large;
+    padding-top: 10px;
 }
 
 .headImg:after {
@@ -287,5 +282,4 @@ body, html, #allmap, #dituContent {
 .games-top span{
     font-size: 20px;
     padding-left: 2px;
-    /*font-weight:bold;*/
 }
