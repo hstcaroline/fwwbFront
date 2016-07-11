@@ -71,7 +71,7 @@
 
 <!-- BEGIN BODY -->
 
-<body class="page-header-fixed">
+<body class="page-header-fixed page-sidebar-closed">
 
 <!-- BEGIN HEADER -->
 
@@ -369,6 +369,8 @@
     <!-- BEGIN SIDEBAR -->
 
     <div class="page-sidebar nav-collapse collapse">
+
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 301px;">
 
         <!-- BEGIN SIDEBAR MENU -->
 
@@ -690,6 +692,10 @@
 
         <!-- END SIDEBAR MENU -->
 
+            <div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.3; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 139.816358024691px; background: rgb(161, 178, 189);"></div>
+            <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+        </div>
+
     </div>
 
     <!-- END SIDEBAR -->
@@ -848,7 +854,7 @@
 
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
-                    <h3 class="page-title">
+                    <!-- <h3 class="page-title">
 
                         站点
 
@@ -876,7 +882,7 @@
 
                         <li><a href="#">站点</a></li>
 
-                    </ul>
+                    </ul> 
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
 
@@ -889,33 +895,9 @@
 
                 <div class="span12">
 
-                    <!-- BEGIN INLINE TABS PORTLET-->
+                    <!--BEGIN TABS-->
 
-                    <div class="portlet box red">
-
-                        <div class="portlet-title">
-
-                            <div class="caption"><i class="icon-globe"></i>地图</div>
-
-                            <div class="tools">
-
-                                <a href="javascript:;" class="collapse"></a>
-
-                                <a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-                            </div>
-
-                        </div>
-
-                        <div class="portlet-body">
-
-                            <div class="row-fluid">
-
-                                <div class="span12">
-
-                                    <!--BEGIN TABS-->
-
-                                    <div class="tabbable tabbable-custom tabs-right">
+                    <div class="tabbable tabbable-custom tabs-right">
 
                                         <!-- Only required for left/right tabs -->
 
@@ -1230,17 +1212,7 @@
 
                                     </div>
 
-                                    <!--END TABS-->
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- END INLINE TABS PORTLET-->
+                    <!--END TABS-->
 
                 </div>
 
