@@ -1,7 +1,7 @@
 /**
  * Created by zouwenyun on 2016/6/30.
  */
-
+//mapOverlay: type: [0,marker(住址)]，[1，station（站点）]，[2，polyline（路线）]
 var btn_1 = document.getElementById("addMarker");
 var btn_2 = document.getElementById("createStation");
 
@@ -35,18 +35,18 @@ btn_2.onclick = function(){
              points:BMPA2PA(markerArr)
          },
          success: function(points){
+             markerArr.length = 0;
              var array = PA2BMPA(points,true);
              for(var i=0;i<array.length;i++){
                  stationArr.push(array[i]);
              }
              var markers=[];
-             for(var i=0;i<stationArr.length;i++){
-                 var pos = stationArr[i][1].lng+"|"+stationArr[i][1].lat;
-                 var marker = {title:"站点_"+stationArr[i][0],content:"自动生成",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationArr[i][0],type:1};
+             for(var i=0;i<array.length;i++){
+                 var pos = array[i][1].lng+"|"+array[i][1].lat;
+                 var marker = {title:"站点_"+array[i][0],content:"自动生成",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:array[i][0],type:1};
                  markers.push(marker);
              }
              addMarker(markers);
-             markerArr.length = 0;
          }
      });
 }
@@ -95,11 +95,11 @@ function createMap(){
                 var num = plan.getNumRoutes();
                 for(var i=0;i<num;i++){
                     var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
-                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9 });
+                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9, type: 2});
                     map.addOverlay(polyline);
                     PolylineRightClickHandler(polyline);
                 }
-                driving.cleanResults();
+                //driving.cleanResults();
             }
         }
     });
@@ -362,6 +362,7 @@ function routePlanning(arg_0){
         },
         success: function(points){
             console.log(points[0]);
+            clearRoutes();
             //points 是二维数组,元素：[id,BMap.Point]
             var stations = [];
             for(var i=0;i<points.length;i++){
@@ -381,7 +382,17 @@ function routePlanning(arg_0){
             }
         }
     });
-    stationArr.length = 0;
+    //stationArr.length = 0;
+}
+
+function clearRoutes() {
+    var allOverlay = map.getOverlays();
+    for (var i = 0; i < allOverlay.length ; i++){
+        if(allOverlay[i].type==2){
+            console.log("route"+i);
+            map.removeOverlay(allOverlay[i]);
+        }
+    }
 }
 
 initMap();//创建和初始化地图
