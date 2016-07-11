@@ -53,29 +53,39 @@
 <div class="content">
     <div class="headImg">
         <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
-        <div id="editText" style="display: none">
-            <span class="cancelText">取消</span>
-            <span class="saveText">保存</span>
+        <div id="editText" style="display: none;">
+
+            <a class="btn cancel" href="javascript:location.reload();">
+                <i class="cancelImg"></i>
+                <span style="color: red;font-size: 22px;">取消</span>
+            </a>
+            <a class="btn save" href="javascript:location.reload();">
+                <i class="saveImg"></i>
+                <span style="color: #3498db;font-size: 22px;">保存</span>
+            </a>
+
+
+            <!--<a class="saveText" href="#">保存</a>-->
         </div>
     </div>
     <div class="table-responsive" style="border: 0px">
         <table class="table table-hover">
             <tbody>
             <tr>
-                <td><input class="table-inputFlag" readonly=true type="text" value="姓名:"></td>
-                <td class="infoTd"><input id="inputName" type="text" style="border: none" value="黄顺婷"></td>
+                <td><span>姓名:</span></td>
+                <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
             </tr>
             <tr>
-                <td><input class="table-inputFlag" readonly=true type="text" value="电话:"></td>
-                <td class="infoTd"><input id="inputTel" type="text" style="border: none" value="18200302934"></td>
+                <td><span>电话:</span></td>
+                <td><input id="inputTel" type="text" class="form-control" value="18200302934"></td>
             </tr>
             <tr>
-                <td><input class="table-inputFlag" readonly=true type="text" value="家庭住址:"></td>
-                <td class="infoTd"><input id="inputAddr" type="text" style="border: none" value="上海闵行"></td>
+                <td><span>住址:</span></td>
+                <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
             </tr>
             <tr>
-                <td><input class="table-inputFlag" readonly=true type="text" value="班次:"></td>
-                <td class="infoTd"><input id="inputCar" type="text" style="border: none" value="班次A"></td>
+                <td><span>班次:</span></td>
+                <td><input id="inputCar" type="text" class="form-control" value="班次A"></td>
             </tr>
             </tbody>
         </table>
@@ -86,16 +96,16 @@
         <table class="table table-hover">
             <tbody>
             <tr>
-                <td>工号:</td>
-                <td class="infoTd">G123</td>
+                <td><span>工号:</span></td>
+                <td><input id="inputWorkNum" type="text" class="form-control" style="border: none" value="G233"></td>
             </tr>
             <tr>
-                <td>部门:</td>
-                <td class="infoTd">维修部</td>
+                <td><span>部门:</span></td>
+                <td><input id="inputDepart" type="text" class="form-control" value="维修部"></td>
             </tr>
             <tr>
-                <td>组别:</td>
-                <td class="infoTd">A组</td>
+                <td><span>组别:</span></td>
+                <td><input id="inputTeam" type="text" class="form-control" value="A组"></td>
             </tr>
             </tbody>
         </table>
@@ -106,12 +116,16 @@
 <div class="footer">
     <ul class="nav nav-tabs" style="height: 100%">
         <li>
-            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_normal.png"/></a>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                   src="img/icon_location_normal.png"/></a>
         </li>
 
-        <li class=""> <a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_checked.png"/></a></li>
+        <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                            src="img/icon_user_checked.png"/></a></li>
 
-        <li class=""> <a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                            src="img/icon_charging_normal.png"/></a>
+        </li>
 
     </ul>
 </div>
@@ -130,7 +144,7 @@
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript">
-    $("#editImg").click(function(){
+    $("#editImg").click(function () {
         $("#editImg").hide();
         $("#editText").show();
         $("#inputName").focus();

@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Export html table to excel and csv using jquery</title>
+    <script src="media/js/jquery.js"></script>
+    <link rel="stylesheet" href="media/css/bootstrap.min.css">
+    <script type="text/javascript" src="media/js/toExcel/jquery.base64.js"></script>
+
+    <script type="text/javascript" src="media/js/toExcel/tableExport.js"></script>
+
+    <script type="text/javascript" src="media/js/toExcel/jspdf/libs/sprintf.js">
+    </script>
+
+    <script type="text/javascript"
+            src="media/js/toExcel/jspdf/jspdf.js"></script>
+    <script type="text/javascript" src="media/js/toExcel/jspdf/libs/base64.js"></script>
+
+</head>
+<body>
+[align=right]
+<br><br><br>
+<button class="btn btn-success" onClick="$('#customers').tableExport({type: 'excel', escape: 'false'});">Excel Export
+</button>
+<button class="btn btn-success" onClick="$('#customers').tableExport({type: 'pdf', escape: 'false'});">CSV Export
+</button>
+<br><br>
+[/align]
+<table id="customers" class="table table-striped table-bordered">
+    <thead>
+    <tr class='warning'>
+        <th>Country</th>
+        <th>Population</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Chinna</td>
+        <td>1,363,480,000</td>
+        <td>March 24, 2014</td>
+    </tr>
+    <tr>
+        <td>India</td>
+        <td>1,241,900,000</td>
+        <td>March 24, 2014</td>
+    </tr>
+    <tr>
+        <td>United States</td>
+        <td>317,746,000</td>
+        <td>March 24, 2014</td>
+    </tr>
+    <tr>
+        <td>Indonesia</td>
+        <td>249,866,000</td>
+        <td>July 1, 2013</td>
+    </tr>
+    <tr>
+        <td>Brazil</td>
+        <td>201,032,714</td>
+        <td>July 1, 2013</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
+
