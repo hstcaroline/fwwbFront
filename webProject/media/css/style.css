@@ -3401,7 +3401,7 @@ Styler Panel
 .color-panel .color-mode-icons {
   top:4px;
   right:0;
-  padding:20px;
+  padding:16px;
   cursor:pointer;
   position:absolute;
 }
@@ -3425,7 +3425,7 @@ Styler Panel
 
 .color-mode {
   top:4px;
-  right:40px;
+  right:32px;
   display:none;
   padding:10px 0;
   position:absolute;
