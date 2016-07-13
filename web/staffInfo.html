@@ -445,7 +445,7 @@
                                     <ul class="dropdown-menu pull-right">
                                         <li><a href="#">打印</a></li>
                                         <li><a href="#">保存为 PDF</a></li>
-                                        <li><a href="#">导出到 Excel</a></li>
+                                        <li><a href="#" onclick="getXlsFromTbl('sample_editable_1',null)">导出到 Excel</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -702,6 +702,9 @@
 <script src="media/js/table-editable.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="media/js/app.js"></script>
+
+<!--导出为csv文件-->
+<script src="media/js/toExcel.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
