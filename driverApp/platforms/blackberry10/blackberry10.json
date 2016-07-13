@@ -1,0 +1,53 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "www/config.xml": {
+                "parents": {
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"NfcPlugin\" value=\"com.chariotsolutions.nfc.plugin\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        },
+        "com.chariotsolutions.nfc.plugin": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "file": "plugins/com.chariotsolutions.nfc.plugin/www/phonegap-nfc.js",
+            "id": "com.chariotsolutions.nfc.plugin.NFC",
+            "pluginId": "com.chariotsolutions.nfc.plugin",
+            "runs": true
+        },
+        {
+            "file": "plugins/com.chariotsolutions.nfc.plugin/www/phonegap-nfc.js",
+            "id": "com.chariotsolutions.nfc.plugin.NFC",
+            "pluginId": "com.chariotsolutions.nfc.plugin",
+            "runs": true
+        },
+        {
+            "file": "plugins/com.chariotsolutions.nfc.plugin/www/phonegap-nfc-blackberry.js",
+            "id": "com.chariotsolutions.nfc.plugin.NFCBB10",
+            "pluginId": "com.chariotsolutions.nfc.plugin",
+            "runs": true
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-whitelist": "1.2.2",
+        "com.chariotsolutions.nfc.plugin": "0.4.6"
+    }
+}
