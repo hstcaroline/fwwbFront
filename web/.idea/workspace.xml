@@ -49,6 +49,9 @@
         </entry>
       </file>
 <<<<<<< HEAD
+      <file leaf-file-name="reportForm.html" pinned="false" current-in-tab="false">
+=======
+<<<<<<< HEAD
       <file leaf-file-name="staffInfo.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/staffInfo.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -56,10 +59,23 @@
               <caret line="466" column="52" selection-start-line="466" selection-start-column="52" selection-end-line="466" selection-end-column="52" />
 =======
       <file leaf-file-name="reportForm.html" pinned="false" current-in-tab="true">
+>>>>>>> ee3ed20bb8be38a8d5dfd9fef18e5e422dd5ff9a
         <entry file="file://$PROJECT_DIR$/reportForm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.022123894">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+            <state vertical-scroll-proportion="-7.0">
+              <caret line="444" column="10" selection-start-line="444" selection-start-column="10" selection-end-line="444" selection-end-column="10" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#span#1;n#a#0;n#li#3;n#ul#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tableToExcel.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tableToExcel.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.50884956">
+              <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -236,6 +252,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+<<<<<<< HEAD
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$/media/css" />
+      <recent name="$PROJECT_DIR$/media/image/map" />
+      <recent name="$PROJECT_DIR$/media/image" />
+      <recent name="$PROJECT_DIR$/media/js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+=======
       <recent name="C:\Users\zouwenyun\Desktop\fwwb\fwwbFront\web" />
       <recent name="C:\Users\zouwenyun\Desktop\fwwb\fwwbFront\web\media\css" />
       <recent name="C:\Users\zouwenyun\Desktop\fwwb\fwwbFront\web\media\js" />
@@ -243,6 +269,7 @@
       <recent name="$PROJECT_DIR$/media/image/map" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+>>>>>>> ee3ed20bb8be38a8d5dfd9fef18e5e422dd5ff9a
       <recent name="$PROJECT_DIR$/media/image/map" />
     </key>
   </component>
@@ -439,6 +466,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -446,6 +474,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -453,6 +482,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -472,6 +502,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -523,6 +554,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -530,6 +562,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2686" column="4" selection-start-line="2686" selection-start-column="4" selection-end-line="2686" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -638,6 +671,20 @@
     <entry file="file://$PROJECT_DIR$/reportForm.html">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+        <state vertical-scroll-proportion="-7.0">
+          <caret line="444" column="10" selection-start-line="444" selection-start-column="10" selection-end-line="444" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#span#1;n#a#0;n#li#3;n#ul#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tableToExcel.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.50884956">
+          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+=======
+<<<<<<< HEAD
         <state relative-caret-position="210">
           <caret line="454" column="35" selection-start-line="454" selection-start-column="35" selection-end-line="454" selection-end-column="35" />
           <folding>
@@ -654,6 +701,7 @@
 =======
         <state vertical-scroll-proportion="-0.022123894">
           <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+>>>>>>> ee3ed20bb8be38a8d5dfd9fef18e5e422dd5ff9a
           <folding />
 >>>>>>> d87c60df5f0be1a388951233f46ffaa13479a63b
         </state>
