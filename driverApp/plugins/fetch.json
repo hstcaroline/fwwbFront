@@ -1,0 +1,36 @@
+{
+    "com.blackberry.invoke": {
+        "source": {
+            "type": "local",
+            "path": "/var/folders/d7/l_4xwx_j3ys3_9yg0rvggdvr0000gn/T/com.blackberry.invoke/package"
+        }
+    },
+    "com.chariotsolutions.nfc.plugin": {
+        "source": {
+            "type": "registry",
+            "id": "phonegap-nfc@1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.device": {
+        "source": {
+            "type": "local",
+            "path": "/var/folders/d7/l_4xwx_j3ys3_9yg0rvggdvr0000gn/T/org.apache.cordova.device/package"
+        }
+    },
+    "org.apache.cordova.vibration": {
+        "source": {
+            "type": "local",
+            "path": "/var/folders/d7/l_4xwx_j3ys3_9yg0rvggdvr0000gn/T/org.apache.cordova.vibration/package"
+        }
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist@1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}

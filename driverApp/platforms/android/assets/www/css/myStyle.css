@@ -1,0 +1,233 @@
+.footer {
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid #b4cef8;
+    background-color: white;
+}
+
+body {
+    background-color: #f2f4f4;
+}
+
+.header {
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #3498db;
+    text-align: center;
+    display: block;
+}
+
+.header:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.footer-li {
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    float: left;
+    display: block;
+}
+
+.footer-img {
+    width: 30%;
+    height: 100%;
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+    list-style-type: none;
+    width: 33%;
+    height: 100%;
+    align-content: center;
+}
+
+.nav-tabs > li > a {
+    height: 100%;
+}
+
+.text-center {
+    margin-left: -35%;
+    padding-top: 5%;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 2px;
+    position: relative;
+    top: 30%;
+}
+
+.img-circle.img-head {
+    margin-left: 10%;
+    height: 70%;
+    width: auto;
+    float: left;
+}
+
+.content {
+    background-color: white;
+    width: 100%;
+    display: block;
+    margin-top: 18%;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+    padding-left: 10%;
+}
+
+.form-control {
+    border: none;
+}
+
+/*.table > tbody > tr > td {*/
+/*line-height: 200%;*/
+/*}*/
+
+.headImg {
+    height: 30%;
+    background-color: white;
+    margin-right: 5%;
+    font-size: x-large;
+    padding-top: 10px;
+}
+
+.headImg:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.space {
+    width: 100%;
+    height: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: #f2f4f4;
+}
+
+.cancelImg {
+    background: url("../img/Cancel.png") no-repeat left center;
+    color: #ff4a62;
+    float: left;
+    display: block;
+    width: 26px;
+    height: 30px;
+}
+
+.saveImg {
+    background: url("../img/ok.png") no-repeat left center;
+    color: #ff4a62;
+    float: left;
+    display: block;
+    width: 26px;
+    height: 30px;
+}
+
+.cancel {
+    float: left;
+    display: block;
+    height: 100%;
+    margin-left: 2%;
+    background-color: white;
+}
+
+.save {
+    float: right;
+    display: block;
+    height: 100%;
+    background-color: white;
+}
+
+.mapContainer {
+    width: 100%;
+    height: 90%;
+    margin-bottom: 10%;
+    top: 0px;
+    position: fixed;
+}
+
+body, html, #allmap, #dituContent {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: "微软雅黑";
+}
+
+.headImg span {
+    float: left;
+    font-family: '微软雅黑';
+    color: red;
+}
+
+.readCard {
+    padding-top: 20%;
+    padding-bottom: 20%;
+    height: 50%;
+}
+
+.dashboard-stat.blue {
+    display: none;
+    background-color: #27a9e3;
+    padding-bottom: 10%;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+
+.dashboard-stat:before, .dashboard-stat:after {
+    display: table;
+    line-height: 0;
+    content: "";
+    clear: both;
+}
+
+.staff_headImg {
+    width: 120px;
+    height: 120px;
+    display: block;
+    float: left;
+    margin-top: 10px;
+    margin-left: 15px;
+    border-radius: 6px;
+
+}
+
+.details {
+    float: right;
+    padding-right: 40px;
+}
+
+.details .number {
+    padding-top: 25px;
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: -1px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.dashboard-stat .details .desc {
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-weight: 300;
+    color: #fff;
+}
