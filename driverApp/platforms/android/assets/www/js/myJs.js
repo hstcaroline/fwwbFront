@@ -8,5 +8,8 @@ function footerClick(id){
     if(id=="footer_a2"){
         location.href="myInfo.html";
     }
+    if(id=="footer_a3"){
+        location.href="nfcScan.html";
+    }
 
 }

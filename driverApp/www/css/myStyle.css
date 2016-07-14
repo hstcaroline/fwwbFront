@@ -23,6 +23,12 @@ body {
     display: block;
 }
 
+.header:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 .footer-li {
     width: 30%;
     height: 100%;
@@ -77,34 +83,34 @@ body {
     background-color: white;
     width: 100%;
     display: block;
-    margin-top: 20%;
-    overflow: auto;
-}
-
-.infoTd {
-    text-align: left;
-}
-
-.table-inputFlag {
-    border: none;
-    background-color: white;
-    color: black;
-    width: 40%;
-}
-
-.table-inputInfo {
-    border: none;
+    margin-top: 18%;
 }
 
 .table > tbody > tr > td {
-    line-height: 200%;
+    vertical-align: middle;
+    padding-left: 10%;
 }
+
+.form-control {
+    border: none;
+}
+
+/*.table > tbody > tr > td {*/
+/*line-height: 200%;*/
+/*}*/
 
 .headImg {
     height: 30%;
     background-color: white;
-    margin-right: 10%;
+    margin-right: 5%;
     font-size: x-large;
+    padding-top: 10px;
+}
+
+.headImg:after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .space {
@@ -115,29 +121,113 @@ body {
     background-color: #f2f4f4;
 }
 
-.cancelText {
+.cancelImg {
+    background: url("../img/Cancel.png") no-repeat left center;
     color: #ff4a62;
-    margin-left: 10%;
+    float: left;
+    display: block;
+    width: 26px;
+    height: 30px;
 }
 
-.saveText {
-    color: #0e90d2;
-    margin-left: 50%;
+.saveImg {
+    background: url("../img/ok.png") no-repeat left center;
+    color: #ff4a62;
+    float: left;
+    display: block;
+    width: 26px;
+    height: 30px;
+}
+
+.cancel {
+    float: left;
+    display: block;
+    height: 100%;
+    margin-left: 2%;
+    background-color: white;
+}
+
+.save {
+    float: right;
+    display: block;
+    height: 100%;
+    background-color: white;
 }
 
 .mapContainer {
     width: 100%;
     height: 90%;
     margin-bottom: 10%;
-    /*background-color: #wh;*/
     top: 0px;
     position: fixed;
 }
 
-body, html,#allmap, #dituContent {
+body, html, #allmap, #dituContent {
     width: 100%;
     height: 100%;
-    overflow: hidden;
     margin: 0;
     font-family: "微软雅黑";
+}
+
+.headImg span {
+    float: left;
+    font-family: '微软雅黑';
+    color: red;
+}
+
+.readCard {
+    padding-top: 20%;
+    padding-bottom: 20%;
+    height: 50%;
+}
+
+.dashboard-stat.blue {
+    display: none;
+    background-color: #27a9e3;
+    padding-bottom: 10%;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+
+.dashboard-stat:before, .dashboard-stat:after {
+    display: table;
+    line-height: 0;
+    content: "";
+    clear: both;
+}
+
+.staff_headImg {
+    width: 120px;
+    height: 120px;
+    display: block;
+    float: left;
+    margin-top: 10px;
+    margin-left: 15px;
+    border-radius: 6px;
+
+}
+
+.details {
+    float: right;
+    padding-right: 40px;
+}
+
+.details .number {
+    padding-top: 25px;
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: -1px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.dashboard-stat .details .desc {
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-weight: 300;
+    color: #fff;
 }

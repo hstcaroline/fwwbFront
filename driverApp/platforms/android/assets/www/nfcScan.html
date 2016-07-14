@@ -38,46 +38,99 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
     <script type="text/javascript" src="js/myJs.js"></script>
+
 </head>
 <body>
+<div class="header">
+    <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+        <img src="img/head.png" class="img-circle img-head">
+
+    </div>
+    <div style="height: 100%;width:70%;float: right">
+        <span class="text-center">我的资料</span>
+    </div>
+</div>
 <div class="content">
-    <input id="scan_info" type="text" value="hello" style="width:500px">
-    <input id="map_info" type="text" value="hello" style="width:500px">
+    <!--<input id="scan_info" type="text" value="hello" style="width:500px">-->
+    <!--<input id="map_info" type="text" value="hello" style="width:500px">-->
+    <div align="center" class="readCard" id="readCard">
+        <div style="width:80%;height:200px;border: 2px solid black">
+            <img src="img/swiping_card.png" style="padding-top: 5%">
+        </div>
+        <span class="text-danger" style="font-size: 40px">请刷卡!</span>
+
+    </div>
+</div>
+<a class="btn btn-info" id="readCardBtn" onclick="showStaffInfo()">刷了</a>
+<div class="dashboard-stat blue" id="staffInfo">
+    <div>
+        <img class="staff_headImg" src="img/staff_head.png">
+    </div>
+    <div class="details">
+        <div class="number">
+
+            工号:1349
+
+        </div>
+        <div class="desc">
+
+            <h4>姓名:李云</h4>
+            <h4>电话:18300293442</h4>
+            <h4>部门:维修部</h4>
+
+        </div>
+
+    </div>
+</div>
 </div>
 <div class="footer">
     <ul class="nav nav-tabs" style="height: 100%">
         <li>
-            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_normal.png"/></a>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                   src="img/icon_location_normal.png"/></a>
         </li>
 
-        <li class=""> <a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_user_checked.png"/></a></li>
+        <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                            src="img/icon_user_normal.png"/></a></li>
 
-        <li class=""> <a id="footer_a3" href="nfcScan.html"> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+        <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                            src="img/icon-readCard-checked.png"/></a>
+        </li>
 
     </ul>
 </div>
 </body>
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="cordova.js"></script>-->
 <script type="text/javascript" charset="utf-8" src="js/handlebars.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+
 <script type="text/javascript">
+    //    $("#staffInfo").hide();
     app.initialize();
-    var map = new BMap.Map("allmap");
-	var point = new BMap.Point(116.331398,39.897445);
-	map.centerAndZoom(point,12);
-    var geolocation = new BMap.Geolocation();
-	geolocation.getCurrentPosition(function(r){
-		if(this.getStatus() == BMAP_STATUS_SUCCESS){
-			var mk = new BMap.Marker(r.point);
-			map.addOverlay(mk);
-			map.panTo(r.point);
-            $("#map_info").val('您的位置：'+r.point.lng+','+r.point.lat);
-		}
-		else {
-            $("#map_info").val('failed'+this.getStatus());
-		}
-	},{enableHighAccuracy: true});
+    //    var map = new BMap.Map("allmap");
+    //    var point = new BMap.Point(116.331398, 39.897445);
+    //    map.centerAndZoom(point, 12);
+    //    var geolocation = new BMap.Geolocation();
+    //    geolocation.getCurrentPosition(function (r) {
+    //        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+    //            var mk = new BMap.Marker(r.point);
+    //            map.addOverlay(mk);
+    //            map.panTo(r.point);
+    //            $("#map_info").val('您的位置：' + r.point.lng + ',' + r.point.lat);
+    //        }
+    //        else {
+    //            $("#map_info").val('failed' + this.getStatus());
+    //        }
+    //    }, {enableHighAccuracy: true});
+    function showStaffInfo() {
+        $("#readCardBtn").hide();
+        $("#readCard").animate({
+            paddingTop: '5%',
+            paddingBottom: '5%',
+        });
+        $("#staffInfo").hide();
+        $("#staffInfo").slideDown("slow");
+    }
 </script>
