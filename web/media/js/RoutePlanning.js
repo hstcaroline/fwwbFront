@@ -9,7 +9,8 @@ var btn_2 = document.getElementById("createStation");
 var markerArr = [];
 //站点数组
 var stationArr =[];
-var COLOR=["#FF9900","#333333","#FFFF00","##009933","#CC0066","#009999","#666699","#FF6600"];
+var IP="http://192.168.1.2:3000/RoutePlanning/";
+var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];
 var routeCount=0;
 var ifAddMarker = false;
 var markCount = 1;
@@ -26,15 +27,17 @@ btn_1.onclick = function(){
     }
 };
 btn_2.onclick = function(){
-    console.log("http://192.168.1.39:3000/RoutePlanning/addPoints");
+    console.log(IP+"addPoints");
      $.ajax({
-         url: "http://192.168.1.39:3000/RoutePlanning/addPoints",
+         url: IP+"addPoints",
          type: 'post',
          dataType: "json",
          data: {
              points:BMPA2PA(markerArr)
          },
          success: function(points){
+             clearOverlays(1);
+             clearOverlays(2);
              var array = PA2BMPA(points,true);
              for(var i=0;i<array.length;i++){
                  stationArr.push(array[i]);
@@ -46,7 +49,7 @@ btn_2.onclick = function(){
                  markers.push(marker);
              }
              addMarker(markers);
-             markerArr.length = 0;
+             //markerArr.length = 0;
          }
      });
 }
@@ -95,11 +98,12 @@ function createMap(){
                 var num = plan.getNumRoutes();
                 for(var i=0;i<num;i++){
                     var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
-                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9 });
+                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});
+                    polyline.type=2;
                     map.addOverlay(polyline);
                     PolylineRightClickHandler(polyline);
                 }
-                driving.cleanResults();
+                driving.clearResults();
             }
         }
     });
@@ -114,13 +118,13 @@ function setMapEvent(){
     map.enableKeyboard();//启用键盘上下左右键移动地图
     map.addEventListener("click", function(e){
         var pos = e.point.lng + "|" + e.point.lat;
-        if(ifAddMarker==true){//标注点数组
-            var marker = [{title:"标记_"+markCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:24,h:24,l:0,t:0,x:6,lb:5},id:markCount,type:0}];
+        if(ifAddMarker==true){//添加站点
+            var marker = [{title:"站点_"+stationCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationCount,type:1}];
             addMarker(marker);
 
-            var point = [markCount,new BMap.Point(e.point.lng,e.point.lat)];
-            markerArr.push(point);
-            markCount++;
+            var point = [stationCount,new BMap.Point(e.point.lng,e.point.lat)];
+            stationArr.push(point);
+            stationCount++;
         }
     });
 }
@@ -156,7 +160,7 @@ function addMarker(Arr){
                     markerArr[index][1].lng=event.point.lng;
                     markerArr[index][1].lat=event.point.lat;
                 }
-            }else{
+            }else if(tMarker.type==1){
                 var index = indexOf(tMarker,stationArr);
                 if(index!=-1){
                     stationArr[index][1].lng=event.point.lng;
@@ -351,9 +355,11 @@ function BMPA2PA(points){
 }
 
 function routePlanning(arg_0){
+    ifAddMarker=false;
+    btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
     console.log("generate path");
     $.ajax({
-        url: "http://192.168.1.39:3000/RoutePlanning/generatePath",
+        url: IP+"generatePath",
         type: 'post',
         dataType: "json",
         data: {
@@ -365,7 +371,6 @@ function routePlanning(arg_0){
             //points 是二维数组,元素：[id,BMap.Point]
             var stations = [];
             for(var i=0;i<points.length;i++){
-                console.log(points[0][0]);
                 stations[i] = PA2BMPA(points[i],false);
             }
             //var stations=PA2BMPA(points,false);
@@ -376,12 +381,28 @@ function routePlanning(arg_0){
                     markers[i][j] = stations[i][j][1];
                 }
             }
+            clearOverlays(2);
             for(var i=0;i<markers.length;i++){
                 createRoute(markers[i]);
             }
         }
     });
-    stationArr.length = 0;
 }
 
+function clearOverlays(type) {
+    var allOverlay = map.getOverlays();
+    //console.log("overlay:"+allOverlay.length);
+    for(var i=0;i<allOverlay.length;i++){
+        //console.log(i+":"+allOverlay[i].type);
+        if(allOverlay[i].type==type){
+            map.removeOverlay(allOverlay[i]);
+        }
+    }
+}
+
+
+function initInfo() {
+
+}
+initInfo();
 initMap();//创建和初始化地图

@@ -5284,3 +5284,47 @@ Datatables Plugin(in v1.3)
 .dataTable .details tr:nth-child(even) th {
   background-color: #eee !important;
 }
+
+/* Gridster styles */
+.demo {
+  margin: 0 0;
+  padding:0 3px 0 0;
+  background: #fbfbfb;
+}
+
+.demo:hover .gridster {
+  opacity: 1;
+}
+
+.gridster {
+  width: 940px;
+  margin: 0 auto;
+
+  opacity: .8;
+
+  -webkit-transition: opacity .6s;
+  -moz-transition: opacity .6s;
+  -o-transition: opacity .6s;
+  -ms-transition: opacity .6s;
+  transition: opacity .6s;
+}
+
+.gridster .gs_w {
+  background: #a9302a;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  font-family: 微软雅黑;
+  color: #fcfcfc;
+}
+
+.gridster .player {
+  -webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+}
+
+.gridster .preview-holder {
+  border: none!important;
+  border-radius: 0!important;
+  background: rgba(255,255,255,.2)!important;
+}

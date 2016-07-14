@@ -25,6 +25,8 @@
     <!-- page css-->
     <!--拖拽上传界面显示css-->
     <link href="media/css/dropzone.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="media/css/jquery.gridster.min.css">
+    <link rel="stylesheet" href="media/css/style.css">
     <!--引用百度地图API-->
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
@@ -466,9 +468,12 @@
                             <li><a href="#fileUpload" data-toggle="tab">
                                 <i class="icon-dashboard"></i> 导入</a></li>
 
+                            <li><a href="#routeEdit" data-toggle="tab">
+                                <i class="icon-dashboard"></i> 路线编辑</a></li>
+
                             <li id="addMarker"><p>
                                 <div class="btn red">
-                                    <i class="icon-edit"></i> 添加住址
+                                    <i class="icon-edit"></i> 添加站点
                                 </div>
                                 </p></li>
 
@@ -517,7 +522,6 @@
                                 </div>
 
                             </div>
-
                             <div class="tab-pane flip-scroll" id="mapData">
                                 <p>
                                 <div class="glyphicons no-js bus"><i></i></div>
@@ -725,6 +729,14 @@
                                 <form action="frame.html" id="my-dropzone" class="dropzone"></form>
                                 <script src="media/js/dropdownUpload.js"></script>
                             </div>
+                            <div class="tab-pane" id="routeEdit">
+                                <section class="demo" style="width: 100%; height: 100%">
+                                    <div class="gridster">
+                                        <ul id="blocks"></ul>
+                                    </div>
+                                    <script src="media/js/routeEdit.js"></script>
+                                </section>
+                            </div>
                         </div>
                     </div>
                     <!--END TABS-->
@@ -751,13 +763,22 @@
 <![endif]-->
 <script src="media/js/app.js"></script>
 <!-- PAGE LEVEL -->
-<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="media/js/RoutePlanning.js"></script>
+<script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
     });
-
+</script>
+<script type="text/javascript">
+    var gridster;
+    $(function(){
+        gridster = $(".gridster > ul").gridster({
+            widget_margins: [15, 10],
+            widget_base_dimensions: [75, 25],
+            min_cols: 6
+        }).data('gridster');
+    });
 </script>
 </body>
 </html>
