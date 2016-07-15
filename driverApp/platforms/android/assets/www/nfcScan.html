@@ -47,7 +47,7 @@
 
     </div>
     <div style="height: 100%;width:70%;float: right">
-        <span class="text-center">我的资料</span>
+        <span class="text-center">上车刷卡</span>
     </div>
 </div>
 <div class="content">
@@ -61,7 +61,7 @@
 
     </div>
 </div>
-<a class="btn btn-info" id="readCardBtn" onclick="showStaffInfo()">刷了</a>
+<!-- <a class="btn btn-info" id="readCardBtn" onclick="showStaffInfo()">刷了</a> -->
 <div class="dashboard-stat blue" id="staffInfo">
     <div>
         <img class="staff_headImg" src="img/staff_head.png">
@@ -82,6 +82,10 @@
 
     </div>
 </div>
+    <!--TODO @ Senior Huang：Add a picture.  -->
+    <input id="scan_info" type="text" value="hello" style="width:500px">
+    <!--TODO @ Senior Huang：Add a textaera to show staff info.  -->
+    <!-- <input id="map_info" type="text" value="hello" style="width:500px"> -->
 </div>
 <div class="footer">
     <ul class="nav nav-tabs" style="height: 100%">
@@ -102,7 +106,7 @@
 </body>
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
-<!--<script type="text/javascript" charset="utf-8" src="cordova.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/handlebars.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
@@ -124,13 +128,5 @@
     //            $("#map_info").val('failed' + this.getStatus());
     //        }
     //    }, {enableHighAccuracy: true});
-    function showStaffInfo() {
-        $("#readCardBtn").hide();
-        $("#readCard").animate({
-            paddingTop: '5%',
-            paddingBottom: '5%',
-        });
-        $("#staffInfo").hide();
-        $("#staffInfo").slideDown("slow");
-    }
+    
 </script>
