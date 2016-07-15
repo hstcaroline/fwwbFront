@@ -28,8 +28,8 @@
     <link rel="stylesheet" type="text/css" href="media/css/jquery.gridster.min.css">
     <link rel="stylesheet" href="media/css/style.css">
     <!--引用百度地图API-->
-    <script type="text/javascript"
-            src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+    <!--<script type="text/javascript"-->
+            <!--src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>-->
 </head>
 <!-- END HEAD -->
 
@@ -370,10 +370,10 @@
 
             <div class="modal-body">
 
-                <p><h4>  此操作不可撤销，确认删除？</h4></p>
+                <p><h4> 此操作不可撤销，确认删除？</h4></p>
 
                 <div class="pull-right">
-                    <button id="portlet-remove-ok" type="button" >确定</button>
+                    <button id="portlet-remove-ok" type="button">确定</button>
                     <button data-dismiss="modal" type="button">取消</button>
                 </div>
             </div>
@@ -395,7 +395,7 @@
                 </div>
 
                 <div class="pull-right">
-                    <button id="portlet-update-ok" type="button" >确定</button>
+                    <button id="portlet-update-ok" type="button">确定</button>
                     <button data-dismiss="modal" type="button">取消</button>
                 </div>
             </div>
@@ -729,14 +729,16 @@
                                 <form action="frame.html" id="my-dropzone" class="dropzone"></form>
                                 <script src="media/js/dropdownUpload.js"></script>
                             </div>
-                            <div class="tab-pane" id="routeEdit">
-                                <section class="demo" style="width: 100%; height: 100%">
-                                    <div class="gridster">
+                            <div class="tab-pane" id="routeEdit" style="min-height: 400px;overflow: auto">
+                                <section style="width: 100%; height: 100%">
+                                    <div class="gridster" id="grid">
                                         <ul id="blocks"></ul>
                                     </div>
-                                    <script src="media/js/routeEdit.js"></script>
+
                                 </section>
+
                             </div>
+                            <a type="button" class="btn-info" onclick="saveRoute()">保存</a>
                         </div>
                     </div>
                     <!--END TABS-->
@@ -765,20 +767,16 @@
 <!-- PAGE LEVEL -->
 <script type="text/javascript" src="media/js/RoutePlanning.js"></script>
 <script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="media/js/routeEdit.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
     });
 </script>
 <script type="text/javascript">
-    var gridster;
-    $(function(){
-        gridster = $(".gridster > ul").gridster({
-            widget_margins: [15, 10],
-            widget_base_dimensions: [75, 25],
-            min_cols: 6
-        }).data('gridster');
-    });
+
+
 </script>
 </body>
 </html>
