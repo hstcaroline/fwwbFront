@@ -174,7 +174,6 @@ body, html, #allmap, #dituContent {
 
 .readCard {
     padding-top: 20%;
-    padding-bottom: 20%;
     height: 50%;
 }
 
@@ -185,7 +184,6 @@ body, html, #allmap, #dituContent {
     margin-top: 5%;
     margin-left: 2%;
     margin-right: 2%;
-
 }
 
 .dashboard-stat:before, .dashboard-stat:after {
@@ -254,7 +252,7 @@ body, html, #allmap, #dituContent {
 .wc-toolbar .wc-title {
     text-align: center;
     padding: 0;
-    margin: 0;
+    margin: 0 10%;
     font-size: 18px;
 }
 
@@ -325,31 +323,16 @@ body, html, #allmap, #dituContent {
 
 }
 
-.fc-button {
-    padding: 6px 6px 6px 6px;
-    margin-left: 2px;
-    border: none !important;
-    background-image: none;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    -webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    border-radius: 0 !important;
-    color: #000 !important;
-    border: none !important;
-    text-shadow: none !important;
-    text-align: center;
-}
-
 .fc-text-arrow {
-    font-size: 32px;
+    font-size: 42px;
     font-family: "Courier New", Courier, monospace;
     vertical-align: baseline;
     color: #2b72d0;
     background: transparent;
 }
-
+.fc-text-arrow:hover{
+    color: #8c8c8c;
+}
 .menu_header {
     height: 20%;
     top: 0px;

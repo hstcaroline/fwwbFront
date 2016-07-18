@@ -9,7 +9,11 @@ function footerClick(id){
         location.href="mySchedule.html";
     }
     if(id=="footer_a3"){
-        location.href="slideout.html";
+        location.href="nfcScan.html";
     }
 
 }
+
+$("#myInfo").click(function(){
+    location.href="myInfo.html";
+});

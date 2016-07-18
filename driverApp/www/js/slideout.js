@@ -35,6 +35,7 @@ var prefix = (function prefix() {
   if ('KhtmlOpacity' in styleDeclaration) { return '-khtml-'; }
   return '';
 }());
+    $("#menu").show;
 function extend(destination, from) {
   for (var prop in from) {
     if (from[prop]) {
