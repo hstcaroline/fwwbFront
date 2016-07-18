@@ -5,6 +5,7 @@
 var btn_1 = document.getElementById("addMarker");
 var btn_2 = document.getElementById("createStation");
 
+
 //住址数组
 var markerArr = [];
 //站点数组
@@ -199,6 +200,7 @@ function addMarker(Arr){
         })();
         MarkerRightClickHandler(marker,iw);
     }
+
 }
 
 //创建InfoWindow
@@ -329,7 +331,7 @@ function indexOf(marker,Arr) {
     return -1;
 }
 
-//PA:PointsArray[{x,y}]
+//点的转换 PA:PointsArray[{x,y}]
 //BMPA:BaiduMapPointsArray [{id,BMap.Point:{lng,lat}}]
 function PA2BMPA(points,ifNew){
     var pointsArr = [];
@@ -388,7 +390,7 @@ function routePlanning(arg_0){
         }
     });
 }
-
+//清理某类覆盖物
 function clearOverlays(type) {
     var allOverlay = map.getOverlays();
     //console.log("overlay:"+allOverlay.length);
@@ -399,10 +401,74 @@ function clearOverlays(type) {
         }
     }
 }
-
-
+//初始化地图覆盖物
 function initInfo() {
 
 }
 initInfo();
 initMap();//创建和初始化地图
+
+//搜索功能：站点查询
+// 百度地图API功能
+/*var inputbox = document.getElementById("stationInput");
+var btnSearch = document.getElementById("stationSearch");
+//var searchpanel = document.findElementById("searchResultPanel");
+var names=getNames();
+btnSearch.onclick=function () {
+    setPlace(inputbox.value);
+}
+inputbox.oninput = function autoComplete() {
+}
+function setPlace(name){
+    //找到所有站点，比较名字
+    var allOverlay = map.getOverlays();
+    for(var i=0;i<allOverlay.length;i++){
+        if(allOverlay[i].type==1&&allOverlay[i].getLabel().getContent()==name){
+            var pos=allOverlay[i].getPosition();
+            map.centerAndZoom(pos, 18);
+        }
+    }
+}
+function getNames() {
+    var names = [];
+    var allOverlay = map.getOverlays();
+    for(var i=0;i<allOverlay.length;i++){
+        if(allOverlay[i].type==1){
+            names.push(allOverlay[i].getLabel().getContent());
+        }
+    }
+    return names;
+}*/
+function setPlace(name){
+    //找到所有站点，比较名字
+    var allOverlay = map.getOverlays();
+    for(var i=0;i<allOverlay.length;i++){
+        if(allOverlay[i].type==1&&allOverlay[i].getLabel().getContent()==name){
+            var pos=allOverlay[i].getPosition();
+            map.centerAndZoom(pos, 18);
+        }
+    }
+}
+
+function getNames() {
+    var names = [];
+    var allOverlay = map.getOverlays();
+    for(var i=0;i<allOverlay.length;i++){
+        if(allOverlay[i].type==1){
+            names.push(allOverlay[i].getLabel().getContent());
+        }
+    }
+    return names;
+}
+var proposals = getNames();
+$(document).ready(function () {
+    $('#search-form').autocomplete({
+        hints: proposals,
+        width: 300,
+        height: 30,
+        onSubmit: function(text){
+            setPlace(text);
+            this.hints=getNames();
+        }
+    });
+});

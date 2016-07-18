@@ -5328,3 +5328,11 @@ Datatables Plugin(in v1.3)
   border-radius: 0!important;
   background: rgba(255,255,255,.2)!important;
 }
+
+/*autoComplete*/
+#search-box {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  display: inline;
+}
