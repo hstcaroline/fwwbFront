@@ -15,8 +15,8 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 		params = $.extend({
 			hints: [],
 			placeholder: '站点查询',
-			width: 200,
-			height: 16,
+			width: 420,
+			height: 24,
 			showButton: false,
 			onSubmit: function(text){},
 			onBlur: function(){}
@@ -27,15 +27,26 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 			//Container
 			var searchContainer = $('<div></div>')
 				.addClass('autocomplete-container')
-				.css('height', params.height * 2);	
-				
-			//Text input		
+				.addClass('pull-left')
+				.css('height', params.height * 2);
+
+			//Text input
+			var inputWrapper = $('<div></div>')
+				.addClass('input-icon left')
+				.css({
+					'height' : params.height * 1.5 - 2,
+					'border-left-width': '2px',
+					'border-left-style': 'solid',
+					'border-left-color': '#d84a38'
+				});
+			var icon = $('<i></i>')
+				.addClass('icon-search');
 			var input = $('<input type="text" autocomplete="off" name="query">')
 				.attr('placeholder', params.placeholder)
-				.addClass('autocomplete-input')
+				.addClass('m-wrap')
+				.addClass('placeholder-no-fix')
 				.css({
-					'width' : params.width,
-					'height' : params.height
+					'width' : params.width-2
 				});
 			
 			if(params.showButton){
@@ -45,8 +56,8 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 			//Proposals
 			var proposals = $('<div></div>')
 				.addClass('proposal-box')
-				.css('width', params.width + 18)
-				.css('top', input.height() + 20);
+				.css('width', params.width + 39)
+				.css('top', 36);
 			var proposalList = $('<ul></ul>')
 				.addClass('proposal-list');
 
@@ -129,8 +140,10 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 				//proposalList.empty();
 				params.onBlur();
 			});
-			
-			searchContainer.append(input);
+
+			inputWrapper.append(icon);
+			inputWrapper.append(input);
+			searchContainer.append(inputWrapper);
 			searchContainer.append(proposals);		
 			
 			if(params.showButton){
