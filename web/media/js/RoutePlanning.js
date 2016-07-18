@@ -166,6 +166,7 @@ function addMarker(Arr){
                 if(index!=-1){
                     stationArr[index][1].lng=event.point.lng;
                     stationArr[index][1].lat=event.point.lat;
+                    changeHints(getNames());
                 }
             }
         });
@@ -440,7 +441,8 @@ function setPlace(name){
 function getNames() {
     var names = [];
     for(var i=0;i<stationArr.length;i++){
-        names.push(stationArr[i].name);
+        var point={name:stationArr[i].name,pos:{lat:stationArr[i][1].lat,lng:stationArr[i][1].lng}};
+        names.push(point);
     }
     return names;
 }

@@ -87,7 +87,7 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 					break;
 					case 13: // Enter
 						if(currentSelection > -1){
-							var text = $( "ul.proposal-list li:eq(" + currentSelection + ")" ).html();
+							var text = currentProposals[currentSelection];//var text = $( "ul.proposal-list li:eq(" + currentSelection + ")" ).html();
 							input.val(text);
 						}
 						currentSelection = -1;
@@ -111,18 +111,23 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 					if(input.val() != ''){
 						var word = "^" + input.val() + ".*";
 						proposalList.empty();
-						for(var test in params.hints){
-							if(params.hints[test].match(word)){
-								currentProposals.push(params.hints[test]);	
+						for(var test=0;test<params.hints.length;test++){//for(var test in params.hints){
+							if(params.hints[test].name.match(word)){
+								currentProposals.push(params.hints[test].name);
 								var element = $('<li></li>')
-									.html(params.hints[test])
+									.html('<h4 style="margin-top: 1px;">'+params.hints[test].name+'</h4>'
+										+'<h6 style="margin-top: -5px;">'+params.hints[test].pos.lat+'\'N,'+params.hints[test].pos.lng+'\'E</h6>')
 									.addClass('proposal')
-									.click(function(){
-										input.val($(this).html());
+									.click({name:params.hints[test].name},function(event){
+										event.preventDefault();
+										console.log(test);
+										input.val(event.data.name);
 										proposalList.empty();
 										params.onSubmit(input.val());
 									})
-									.mouseenter(function() {
+									.mouseenter({index:test},function(event) {
+										$('ul.proposal-list li').removeClass('selected');
+										currentSelection=event.data.index;
 										$(this).addClass('selected');
 									})
 									.mouseleave(function() {
@@ -134,7 +139,7 @@ Author: Lorenzo Cioni - https://github.com/lorecioni
 					}
 				}
 			});
-			
+
 			input.blur(function(e){
 				currentSelection = -1;
 				//proposalList.empty();
