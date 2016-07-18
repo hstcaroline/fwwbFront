@@ -4,6 +4,7 @@
 
 var btn_1 = document.getElementById("addMarker");
 var btn_2 = document.getElementById("createStation");
+var search_form = document.getElementById("search-form");
 
 //住址数组
 var markerArr = [];
@@ -120,11 +121,11 @@ function setMapEvent(){
         var pos = e.point.lng + "|" + e.point.lat;
         if(ifAddMarker==true){//添加站点
             var marker = [{title:"站点_"+stationCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:stationCount,type:1}];
-            addMarker(marker);
-
             var point = [stationCount,new BMap.Point(e.point.lng,e.point.lat)];
+            point.name="站点_"+stationCount;
             stationArr.push(point);
             stationCount++;
+            addMarker(marker);
         }
     });
 }
@@ -199,6 +200,7 @@ function addMarker(Arr){
         })();
         MarkerRightClickHandler(marker,iw);
     }
+    changeHints(getNames());
 }
 
 //创建InfoWindow
@@ -272,6 +274,7 @@ function MarkerRightClickHandler(marker,iw){
             var index = indexOf(marker, stationArr);
             if (index != -1) {
                 stationArr.splice(index, 1);
+                changeHints(getNames());
             }
         }
     };
@@ -285,6 +288,13 @@ function MarkerRightClickHandler(marker,iw){
                 + "</b><div class='iw_poi_content'>"+txt_content.value+"</div>");
             iw.redraw();
             $("#portlet-update").modal('hide');
+            if (marker.type == 1) {
+                var index = indexOf(marker, stationArr);
+                if (index != -1) {
+                    stationArr[index].name = txt_title.value;
+                    changeHints(getNames());
+                }
+            }
         };
     };
     var markerMenu=new BMap.ContextMenu();
@@ -329,7 +339,7 @@ function indexOf(marker,Arr) {
     return -1;
 }
 
-//PA:PointsArray[{x,y}]
+//点的转换 PA:PointsArray[{x,y}]
 //BMPA:BaiduMapPointsArray [{id,BMap.Point:{lng,lat}}]
 function PA2BMPA(points,ifNew){
     var pointsArr = [];
@@ -388,7 +398,7 @@ function routePlanning(arg_0){
         }
     });
 }
-
+//清理某类覆盖物
 function clearOverlays(type) {
     var allOverlay = map.getOverlays();
     //console.log("overlay:"+allOverlay.length);
@@ -399,10 +409,49 @@ function clearOverlays(type) {
         }
     }
 }
-
-
+//初始化地图覆盖物
 function initInfo() {
 
 }
 initInfo();
 initMap();//创建和初始化地图
+
+//搜索功能：站点查询
+var proposals = getNames();
+$(document).ready(function () {
+    $('#search-form').autocomplete({
+        hints: proposals,
+        onSubmit: function(text){
+            setPlace(text);
+            this.hints=getNames();
+        }
+    });
+});
+function setPlace(name){
+    //找到所有站点，比较名字
+    var allOverlay = map.getOverlays();
+    for(var i=0;i<allOverlay.length;i++){
+        if(allOverlay[i].type==1&&allOverlay[i].getLabel().getContent()==name){
+            var pos=allOverlay[i].getPosition();
+            map.centerAndZoom(pos, 18);
+        }
+    }
+}
+function getNames() {
+    var names = [];
+    for(var i=0;i<stationArr.length;i++){
+        names.push(stationArr[i].name);
+    }
+    return names;
+}
+function changeHints(newHints) {
+    search_form.innerHTML="";
+    $('#search-form').autocomplete({
+        hints: newHints,
+        onSubmit: function(text){
+            setPlace(text);
+        }
+    });
+}
+
+
