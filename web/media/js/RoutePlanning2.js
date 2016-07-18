@@ -418,36 +418,28 @@ initInfo();
 initMap();//创建和初始化地图
 
 //搜索功能：站点查询
-var names = [];
+var proposals = getNames();
 $(document).ready(function () {
-    //Sample 2
-    $('#stations_select2').select2({
-        placeholder: "站点名称...",
-        allowClear: true
-    });
-    $('#stations_select2').change(function(){
-        var name=stationArr[$("#stations_select2").get(0).selectedIndex-1].name;
-        setPlace(name);
+    $('#search-form').autocomplete({
+        hints: proposals,
+        onSubmit: function(text){
+            setPlace(text);
+            this.hints=getNames();
+        }
     });
 });
 function setPlace(name){
     //找到所有站点，比较名字
-    for(var i=0;i<names.length;i++){
-        if(names[i].name==name){
-            var pos=new BMap.Point(names[i].pos.lng,names[i].pos.lat);
-            map.centerAndZoom(pos, 18);
-        }
-    }
-    /*var allOverlay = map.getOverlays();
-    for(var i=0;i<names.length;i++){
+    var allOverlay = map.getOverlays();
+    for(var i=0;i<allOverlay.length;i++){
         if(allOverlay[i].type==1&&allOverlay[i].getLabel().getContent()==name){
             var pos=allOverlay[i].getPosition();
             map.centerAndZoom(pos, 18);
         }
-    }*/
+    }
 }
 function getNames() {
-    names=[];
+    var names = [];
     for(var i=0;i<stationArr.length;i++){
         var point={name:stationArr[i].name,pos:{lat:stationArr[i][1].lat,lng:stationArr[i][1].lng}};
         names.push(point);
@@ -455,11 +447,13 @@ function getNames() {
     return names;
 }
 function changeHints(newHints) {
-    $('#stations_select2').empty();
-    $('#stations_select2').append('<option value=""></option>');
-    for(var i=0;i<newHints.length;i++){
-        $('#stations_select2').append('<option><span style="font-size: 20px">'+newHints[i].name+'</span><span  style="font-size: 10px">'+newHints[i].pos.lat+'\'N,'+newHints[i].pos.lng+'\'E'+'</span></option>');
-    }
+    search_form.innerHTML="";
+    $('#search-form').autocomplete({
+        hints: newHints,
+        onSubmit: function(text){
+            setPlace(text);
+        }
+    });
 }
 
 

@@ -48,7 +48,7 @@ var routes = [];
 var COLOR = ["#FF9900", "#333333", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
 var stations = [];
 
-getData();
+//getData();
 loadData(routes);
 
 function getData(){

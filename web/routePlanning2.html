@@ -22,12 +22,12 @@
     <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
-    <!-- BEGIN PAGE LEVEL STYLES-->
+    <!-- page css-->
     <!--拖拽上传界面显示css-->
     <link href="media/css/dropzone.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="media/css/jquery.gridster.min.css">
-    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-    <!-- END PAGE LEVEL STYLES-->
+    <link rel="stylesheet" href="media/css/autocomplete.css">
+    <link rel="stylesheet" href="media/css/style.css">
     <!--引用百度地图API-->
     <script type="text/javascript"src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
 </head>
@@ -357,30 +357,43 @@
     <!-- BEGIN PAGE -->
     <div class="page-content">
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
         <div id="portlet-remove" class="modal fade hide">
+
             <div class="modal-header">
+
                 <button data-dismiss="modal" class="close" type="button"></button>
+
                 <h3>注意</h3>
+
             </div>
+
             <div class="modal-body">
+
                 <p><h4> 此操作不可撤销，确认删除？</h4></p>
+
                 <div class="pull-right">
                     <button id="portlet-remove-ok" type="button">确定</button>
                     <button data-dismiss="modal" type="button">取消</button>
                 </div>
             </div>
+
         </div>
 
         <div id="portlet-update" class="modal fade hide">
+
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"></button>
                 <h3>修改</h3>
             </div>
+
             <div class="modal-body">
+
                 <div id="portlet-content">
                     <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
                     <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
                 </div>
+
                 <div class="pull-right">
                     <button id="portlet-update-ok" type="button">确定</button>
                     <button data-dismiss="modal" type="button">取消</button>
@@ -505,13 +518,7 @@
                             <div class="tab-pane active" id="mapRoutePlanning">
                                 <!--百度地图容器-->
                                 <div id="map">
-                                    <div class="control-group span6">
-                                        <div class="controls select2-wrapper">
-                                            <select id="stations_select2" class="span11" name="options2">
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <div id="search-form"></div>
                                     <div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>
                                 </div>
                             </div>
@@ -758,10 +765,10 @@
 <![endif]-->
 <script src="media/js/app.js"></script>
 <!-- PAGE LEVEL -->
-<script type="text/javascript" src="media/js/RoutePlanning.js"></script>
+<script type="text/javascript" src="media/js/RoutePlanning2.js"></script>
 <script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="media/js/autocomplete.js"></script>
 <script type="text/javascript" src="media/js/routeEdit.js"></script>
-<script type="text/javascript" src="media/js/select2.min.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
