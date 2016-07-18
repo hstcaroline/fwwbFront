@@ -5297,7 +5297,7 @@ Datatables Plugin(in v1.3)
 }
 
 .gridster {
-  width: 940px;
+  /*width: 940px;*/
   margin: 0 auto;
 
   opacity: .8;

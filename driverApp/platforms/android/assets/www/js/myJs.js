@@ -6,10 +6,10 @@ function footerClick(id){
         location.href="index.html";
     }
     if(id=="footer_a2"){
-        location.href="myInfo.html";
+        location.href="mySchedule.html";
     }
     if(id=="footer_a3"){
-        location.href="nfcScan.html";
+        location.href="slideout.html";
     }
 
 }
