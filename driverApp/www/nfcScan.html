@@ -35,81 +35,127 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-    <script type="text/javascript" src="js/myJs.js"></script>
+    <link rel="stylesheet" href="css/mocha.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/slideout.css">
+    <link rel="stylesheet" href="css/myStyle.css">
 
 </head>
 <body>
-<div class="header">
-    <div style="height: 100%;width:30%;margin-top: 2%;float: left">
-        <img src="img/head.png" class="img-circle img-head">
 
-    </div>
-    <div style="height: 100%;width:70%;float: right">
-        <span class="text-center">上车刷卡</span>
-    </div>
-</div>
-<div class="content">
-    <!--<input id="scan_info" type="text" value="hello" style="width:500px">-->
-    <!--<input id="map_info" type="text" value="hello" style="width:500px">-->
-    <div align="center" class="readCard" id="readCard">
-        <div style="width:80%;height:200px;border: 2px solid black">
-            <img src="img/swiping_card.png" style="padding-top: 5%">
+<nav id="menu" class="menu" >
+    <div class="menu_header" id="menu_header" style="display: none;">
+        <div class="imgDiv">
+            <img src="img/head.png" class="img-circle" style="width: 25%">
+            <span class="nameText">常旅客</span>
         </div>
-        <span class="text-danger" style="font-size: 40px">请刷卡!</span>
-
     </div>
-</div>
-<!-- <a class="btn btn-info" id="readCardBtn" onclick="showStaffInfo()">刷了</a> -->
-<div class="dashboard-stat blue" id="staffInfo">
-    <div>
-        <img class="staff_headImg" src="img/staff_head.png">
-    </div>
-    <div class="details">
-        <div class="number">
 
-            工号:1349
+    <section class="menu-section" id="menu_section" style="display: none;">
+        <ul class="menu-section-list">
+            <li id="myInfo">
+                <img src="img/icon-info.png" class="menu-icon">
+                <span class="menu-span">我的资料</span>
+            </li>
+            <li id="myCash">
+                <img src="img/icon-cash.png" class="menu-icon">
+                <span class="menu-span">我的工资</span>
+            </li>
+            <li id="myMsg">
+                <img src="img/icon-message.png" class="menu-icon">
+                <span class="menu-span">我的消息</span>
+            </li>
+            <li id="news">
+                <img src="img/icon-news.png" class="menu-icon">
+                <span class="menu-span">公司动态</span>
+            </li>
+        </ul>
+    </section>
+</nav>
+<main id="panel" style="height: 100%;background-color: white">
+
+    <div class="header">
+        <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+            <img src="img/head.png" class="img-circle img-head js-slideout-toggle">
+        </div>
+        <div style="height: 100%;width:70%;float: right">
+            <span class="text-center">上车刷卡</span>
+        </div>
+    </div>
+    <div class="content">
+        <div align="center" class="readCard" id="readCard">
+            <div style="width:80%;height:200px;border: 2px solid black">
+                <img src="img/swiping_card.png" style="padding-top: 5%">
+            </div>
+            <h2 class="text-danger" style="font-size: 40px">请刷卡!</h2>
 
         </div>
-        <div class="desc">
+    </div>
+    <!-- <a class="btn btn-info" id="readCardBtn" onclick="showStaffInfo()">刷了</a> -->
+    <div class="dashboard-stat blue" id="staffInfo">
+        <div>
+            <img class="staff_headImg" src="img/staff_head.png">
+        </div>
+        <div class="details">
+            <div class="number">
 
-            <h4>姓名:李云</h4>
-            <h4>电话:18300293442</h4>
-            <h4>部门:维修部</h4>
+                工号:1349
+
+            </div>
+            <div class="desc">
+
+                <h4>姓名:李云</h4>
+                <h4>电话:18300293442</h4>
+                <h4>部门:维修部</h4>
+
+            </div>
 
         </div>
-
     </div>
-</div>
-    <!--TODO @ Senior Huang：Add a picture.  -->
     <input id="scan_info" type="text" value="hello" style="width:500px">
-    <!--TODO @ Senior Huang：Add a textaera to show staff info.  -->
     <!-- <input id="map_info" type="text" value="hello" style="width:500px"> -->
-</div>
-<div class="footer">
-    <ul class="nav nav-tabs" style="height: 100%">
-        <li>
-            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
-                                                                   src="img/icon_location_normal.png"/></a>
-        </li>
+    </div>
+    <div class="footer">
+        <ul class="nav nav-tabs" style="height: 100%">
+            <li>
+                <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                       src="img/icon_location_normal.png"/></a>
+            </li>
 
-        <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
-                                                                            src="img/icon_user_normal.png"/></a></li>
+            <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon_user_normal.png"/></a>
+            </li>
 
-        <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
-                                                                            src="img/icon-readCard-checked.png"/></a>
-        </li>
+            <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon-readCard-checked.png"/></a>
+            </li>
 
-    </ul>
-</div>
+        </ul>
+    </div>
+</main>
 </body>
 </html>
+<script>
+
+</script>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/handlebars.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/slideout.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/myJs.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/test.js"></script>
+<script>
+    window.onload = function () {
+        $('#menu_header').show();
+        $('#menu_section').show();
 
+        document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
+            slideout.toggle();
+        });
+    };
+</script>
 <script type="text/javascript">
     //    $("#staffInfo").hide();
     app.initialize();
@@ -131,16 +177,16 @@
     $.ajax({
         url: "http://192.168.1.2:3000/DriverApp/getStaffInfo",
         type: 'post',
-        data:{
+        data: {
             TagID: 123
         },
         dataType: 'json',
-        success: function(data){
+        success: function (data) {
             // $("#map_info").val(data);
             $("#map_info").val(data.end);
             console.log(data);
         },
-        error: function(err){
+        error: function (err) {
             $("#map_info").val("error");
         }
     });

@@ -17,8 +17,7 @@ body {
 }
 
 .slideout-panel {
-  /*position:relative;*/
-  /*z-index: 1;*/
+ background-color: white;
   will-change: transform;
 }
 
