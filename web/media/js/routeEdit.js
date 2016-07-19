@@ -47,8 +47,9 @@
 var routes = [];
 var COLOR = ["#FF9900", "#333333", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
 var stations = [];
-
-//getData();
+var startId=0;
+var newRouteIndex=0;
+getData();
 loadData(routes);
 
 function getData(){
@@ -59,14 +60,16 @@ function getData(){
         dataType: 'json',
         async : false,
         success: function (data) {
-            routes = data;
+            routes = data.routes;
+            startId=data.next_id;
+            newRouteIndex=routes.length;
         },
         error: function () {
             alert("链接失败");
         }
     });
 
-};
+}
 
 function loadData(routs) {
     for (var i = 0; i < routs.length; i++) {
@@ -85,6 +88,7 @@ function render() {
         gridster = $(".gridster > ul").gridster({
             widget_margins: [15, 10],
             widget_base_dimensions: [75, 25],
+            extra_cols: 50,
             min_cols: 6
         }).data('gridster');
     });
@@ -92,16 +96,17 @@ function render() {
 }
 var newRoutes = routes;
 function saveRoute() {
-    //var lis = $("#blocks li");
-    //var liLength = lis.length;
-    //alert(liLength);
+    var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
 
-    for (var i = 0; i < newRoutes.length; i++) {
+    for (var i = 0; i < newRouteIndex; i++) {
         newRoutes[i].stations.length = 0;
     }
+    for (var i=newRouteIndex; i<gridster.cols; i++){
+        newRoutes[i]={route:null,stations:[]};
+    }
+
     var col = 1;
     $("#blocks li").each(function () {
-
         var data_row = $(this).attr('data-row') - 1;
         var data_col = $(this).attr('data-col') - 1;
 
@@ -112,27 +117,60 @@ function saveRoute() {
             }
         }
     });
+
     var postDatas = new Array();
     for(var i=0;i<newRoutes.length;i++){
-        var routeId = newRoutes[i].route.id;
         var currentStations = newRoutes[i].stations;
+        if(currentStations.length==0){
+            continue;
+        }
+        var routeId = 0;
+        if(i<newRouteIndex){
+            routeId = newRoutes[i].route.id;
+        }else{
+            routeId=startId;
+            startId++;
+        }
         for(var j=0;j<currentStations.length;j++){
             var data = {"station_id":currentStations[j].id,"route_id":routeId,"index":(j+1)};
             postDatas.push(data);
         }
     }
+    console.log(postDatas);
+
     var da = JSON.stringify(postDatas);
     $.ajax({
         type: 'POST',
         url: 'http://192.168.1.4:3000/users/changeRoute',
         data: da,
         contentType: "application/json",
-        async : false,
+        async : true,
         success: function (data) {
-            alert(data);
+            $.gritter.add({
+                title: '保存成功！',
+                text:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路线数据已成功同步到数据库。可点击<b style="color: #cf4749;">生成路线</b>按钮撤销全部更改，重新生成路线',
+                class_name: 'gritter-light',
+                sticky: false,
+                time: ''
+            });
         },
         error: function () {
             alert("wrong");
         }
     });
 }
+
+jQuery(document).ready(function () {
+    $('#gritter-help').click(function () {
+        $.gritter.add({
+            title: '操作说明：',
+            text: '<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每个方块代表一个车站，按行驶顺序排列，每一列为一条路线。'
+                    +'通过<b style="color: #f6ec59;">拖放</b>方块的方式进行路线的增删与修改。</p>'
+                    +'<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离开页面前点击<b style="color: #f6ec59;">保存</b>按钮保存修改后的路线。</p>',
+            //class_name: 'gritter-light',
+            sticky: false,
+            time: ''
+        });
+        return false;
+    });
+});
