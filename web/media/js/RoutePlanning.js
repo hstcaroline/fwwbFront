@@ -414,8 +414,6 @@ function clearOverlays(type) {
 function initInfo() {
 
 }
-initInfo();
-initMap();//创建和初始化地图
 
 //搜索功能：站点查询
 var names = [];
@@ -438,13 +436,6 @@ function setPlace(name){
             map.centerAndZoom(pos, 18);
         }
     }
-    /*var allOverlay = map.getOverlays();
-    for(var i=0;i<names.length;i++){
-        if(allOverlay[i].type==1&&allOverlay[i].getLabel().getContent()==name){
-            var pos=allOverlay[i].getPosition();
-            map.centerAndZoom(pos, 18);
-        }
-    }*/
 }
 function getNames() {
     names=[];

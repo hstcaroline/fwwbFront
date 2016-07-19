@@ -49,6 +49,8 @@ var COLOR = ["#FF9900", "#333333", "#548C00", "##009933", "#CC0066", "#009999", 
 var stations = [];
 var startId=0;
 var newRouteIndex=0;
+
+initMap();//创建和初始化地图
 getData();
 loadData(routes);
 
@@ -60,9 +62,11 @@ function getData(){
         dataType: 'json',
         async : false,
         success: function (data) {
+            console.log(data);
             routes = data.routes;
             startId=data.next_id;
             newRouteIndex=routes.length;
+            refreshMap();
         },
         error: function () {
             alert("链接失败");
@@ -159,7 +163,24 @@ function saveRoute() {
         }
     });
 }
-
+function refreshMap(){
+    console.log("refreshMap()");
+    var route = [];
+    for(var i=0;i<routes.length;i++){
+        route[i]=[];
+        for(var j=0;j<routes[i].stations.length;j++){
+            var station = routes[i].stations[j];
+            var pos = station.posx + "|" + station.posy;
+            var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+            var point = [station.id,new BMap.Point(station.posx,station.posy)];
+            route[i].push(point[1]);
+            point.name=station.name;
+            stationArr.push(point);
+            addMarker(marker);
+        }
+        createRoute(route[i]);
+    }
+}
 jQuery(document).ready(function () {
     $('#gritter-help').click(function () {
         $.gritter.add({
