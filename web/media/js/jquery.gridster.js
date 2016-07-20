@@ -2946,6 +2946,21 @@
 
         return $widgets;
     };
+    
+    fn.get_widget_at = function(col, row) {
+        var ga = this.gridmap;
+        var $widgets = $();
+        if (col && row) {
+            $widgets = $widgets.add(
+                this.$widgets.filter(function() {
+                    var tcol = $(this).attr('data-col');
+                    var trow = $(this).attr('data-row');
+                    return ( trow === row && tcol === col);
+                })
+            );
+        }
+        return $widgets;
+    };
 
 
     /**
