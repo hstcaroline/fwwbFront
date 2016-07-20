@@ -7,10 +7,10 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
         "com.chariotsolutions.nfc.plugin": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.megster.nfc.reader"
         }
     },

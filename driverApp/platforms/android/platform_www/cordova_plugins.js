@@ -32,9 +32,9 @@ module.exports.metadata =
 {
     "com.blackberry.invoke": "1.0.0",
     "com.chariotsolutions.nfc.plugin": "0.4.6",
+    "cordova-plugin-whitelist": "1.2.2",
     "org.apache.cordova.device": "0.2.4",
-    "org.apache.cordova.vibration": "0.3.4",
-    "cordova-plugin-whitelist": "1.2.2"
+    "org.apache.cordova.vibration": "0.3.4"
 };
 // BOTTOM OF METADATA
 });

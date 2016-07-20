@@ -15,12 +15,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/mocha.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/test.css">
     <link rel="stylesheet" href="css/slideout.css">
     <link rel="stylesheet" href="css/myStyle.css">
 </head>
 <body>
-
 
 <nav id="menu" class="menu">
     <div class="menu_header" id="menu_header" style="display: none;">
@@ -65,9 +65,11 @@
     <!--</div>-->
     <div class="wc-container">
         <div class="ui-widget-header wc-toolbar" style="text-align: center">
-            <span class="fc-text-arrow" onclick=getWeekNum(-6,0,'weekTime')>‹</span>
+            <!--<span class="fc-text-arrow" onclick=getWeekNum(-6,0,'weekTime')>‹</span>-->
+            <i class="icon-angle-left" onclick=getWeekNum(-6,0,'weekTime')></i>
             <span class="wc-title" id="weekTime" onclick="getWeekNum(1,7,this.id)">now</span>
-            <span class="fc-text-arrow" onclick=getWeekNum(8,14,'weekTime');>›</span></span>
+            <i class="icon-angle-right" onclick=getWeekNum(8,14,'weekTime');></i>
+            <!--<span class="fc-text-arrow" onclick=getWeekNum(8,14,'weekTime');>›</span></span>-->
         </div>
 
         <div class="ui-widget-content wc-header">

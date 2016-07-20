@@ -1,7 +1,7 @@
 .footer {
     width: 100%;
     height: 10%;
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     border-top: 1px solid #b4cef8;
@@ -15,10 +15,9 @@ body {
 .header {
     width: 100%;
     height: 10%;
-    position: fixed;
     top: 0px;
     left: 0px;
-    background-color: #3498db;
+    background-color: #33a2e7;
     text-align: center;
     display: block;
 }
@@ -83,7 +82,6 @@ body {
     background-color: white;
     width: 100%;
     display: block;
-    margin-top: 18%;
 }
 
 .table >tbody > tr > td{
@@ -159,7 +157,6 @@ body {
     height: 90%;
     margin-bottom: 10%;
     top: 0px;
-    position: fixed;
 }
 
 body, html, #allmap, #dituContent {
@@ -282,4 +279,169 @@ body, html, #allmap, #dituContent {
 .games-top span{
     font-size: 20px;
     padding-left: 2px;
+}
+.menu_header {
+    height: 20%;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    display: block;
+}
+
+.menu_header .imgDiv {
+    float: left;
+    width: 100%;
+    height: 90%;
+    padding-top: 10%;
+}
+
+.menu_header .nameText {
+    margin-left: 7%;
+    font-size: 20px;
+    color: black;
+    font-family: arial, helvetica;
+}
+
+.menu-icon {
+    margin: 5% 10%;
+    width: 15%;
+}
+
+.menu-span {
+    font-size: 20px;
+}
+/*login*/
+.login {
+    background-color: #666
+}
+
+.login .logo {
+    margin-top: 10px;
+}
+
+.login .logo {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+}
+
+.login .content {
+    background: url(../img/bg-white-lock.png) repeat;
+    margin-left: 10%;
+    padding: 30px;
+    width: 80%;
+}
+
+.login .content .form-title {
+    font-weight: 300;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.login .content h3 {
+    font-size: 22px;
+}
+
+.login .content h3 {
+    color: #eee;
+}
+
+.close {
+    display: inline-block;
+    margin-top: 0px;
+    margin-right: 0px;
+    width: 9px;
+    height: 9px;
+    background-repeat: no-repeat !important;
+    background-image: url("../img/remove-icon-small.png") !important;
+}
+
+.alert-danger, .alert-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
+
+.login .content .control-group {
+    margin-bottom: 20px !important;
+}
+
+.login .content p, .login .content label {
+    color: #fff;
+}
+
+.control-label {
+    margin-top: 2px;
+}
+
+.input-icon.left i {
+    color: #ccc;
+    display: block !important;
+    position: absolute !important;
+    z-index: 1;
+    margin: 9px 2px 4px 10px;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    text-align: center;
+}
+
+[class^="icon-"], [class*=" icon-"], [class^="icon-"]:hover, [class*=" icon-"]:hover {
+    background: none !important;
+}
+
+.login .content .input-icon .m-wrap {
+    margin: 0px !important;
+}
+
+.login .content .m-wrap {
+    width: 100%;
+}
+.input-icon.left input {
+    padding-left: 33px !important;
+    line-height: 30px;
+}
+.login .content .form-actions {
+    background-color: transparent;
+    clear: both;
+    border: 0px;
+    border-bottom1: 1px solid #999;
+    padding: 0px 30px 25px 30px;
+    margin-right: -30px;
+}
+.form-actions:before, .form-actions:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.login .content .form-actions .checkbox {
+    display: inline-block;
+    font-size: 13px;
+    position: relative;
+}
+.login .content p, .login .content label {
+    color: #fff;
+}
+
+.btn.blue {
+    color: white;
+    text-shadow: none;
+    background-color: #4d90fe;
+}
+
+
+.login .content .forget-password {
+    border-top: 1px dotted #eee;
+    padding-top: 10px;
+    margin-top: 25px;
+}
+.login .content p, .login .content label {
+    color: #fff;
+}
+.login .content h4 {
+    color: #eee;
+}
+a {
+    text-shadow: none !important;
+    color: #0d638f;
 }

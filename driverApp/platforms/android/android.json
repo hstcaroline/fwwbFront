@@ -15,15 +15,15 @@
                     ],
                     "/*": [
                         {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -56,14 +56,14 @@
         "com.chariotsolutions.nfc.plugin": {
             "PACKAGE_NAME": "com.megster.nfc.reader"
         },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.megster.nfc.reader"
         },
         "org.apache.cordova.vibration": {
             "PACKAGE_NAME": "com.megster.nfc.reader"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {},
@@ -98,8 +98,8 @@
     "plugin_metadata": {
         "com.blackberry.invoke": "1.0.0",
         "com.chariotsolutions.nfc.plugin": "0.4.6",
+        "cordova-plugin-whitelist": "1.2.2",
         "org.apache.cordova.device": "0.2.4",
-        "org.apache.cordova.vibration": "0.3.4",
-        "cordova-plugin-whitelist": "1.2.2"
+        "org.apache.cordova.vibration": "0.3.4"
     }
 }

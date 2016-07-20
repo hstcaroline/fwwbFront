@@ -4,7 +4,7 @@
     <Languages xmlns="">
         <Language code="en-US" />
     </Languages>
-    <App Author="Apache Cordova Team" BitsPerPixel="32" Description="PhoneGap NFC Reader Demo" Genre="apps.normal" ProductID="{17360BAB-899A-44EC-B353-EA1D28DFC27A}" Publisher="Apache Cordova Team" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="HelloCordova" Version="0.0.1" xmlns="">
+    <App Author="Don Coleman" BitsPerPixel="32" Description="PhoneGap NFC Reader Demo" Genre="apps.normal" ProductID="{17360BAB-899A-44EC-B353-EA1D28DFC27A}" Publisher="Don Coleman" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="NfcReader" Version="0.0.1" xmlns="">
         <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
         <Capabilities>
             <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
@@ -15,7 +15,7 @@
             <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
         </Tasks>
         <Tokens>
-            <PrimaryToken TaskName="_default" TokenID="HelloCordova">
+            <PrimaryToken TaskName="_default" TokenID="NfcReader">
                 <TemplateFlip>
                     <SmallImageURI IsRelative="true" IsResource="false">Background.png</SmallImageURI>
                     <Count>0</Count>

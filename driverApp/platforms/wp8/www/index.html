@@ -1,37 +1,78 @@
 <!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<!-- <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	<title>map demo</title>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--<meta http-equiv="Content-Security-Policy"-->
+          <!--content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    <!--引用百度地图API-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+    <script type="text/javascript" src="js/myJs.js"></script>
+    <title>Hello World</title>
 </head>
 <body>
-	<div id="allmap"></div>
+
+<!--百度地图容器-->
+<!--<div id = "dituContent"></div>-->
+
+
+<!--</div>-->
+<div id="dituContent"></div>
+
+<div class="footer">
+    <ul class="nav nav-tabs" style="height: 100%">
+        <li>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_checked.png"/></a>
+        </li>
+
+        <li id="footer_a2" onclick="footerClick(this.id)"><a> <img class="footer-img" src="img/icon_user_normal.png"/></a></li>
+
+        <li id="footer_a3" onclick="footerClick(this.id)"><a> <img class="footer-img" src="img/icon-readCard-normal.png"/></a></li>
+
+    </ul>
+</div>
+
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	var point = new BMap.Point(116.404, 39.915); //中心点和经纬度
-	map.centerAndZoom(point, 15);//数字越小，显示范围越大
-	map.enableScrollWheelZoom();//启用滚轮效果
-	var pStart = new BMap.Point(116.392214,39.918985);
-	var pEnd = new BMap.Point(116.41478,39.911901);
-	var rectangle = new BMap.Polygon([
-		new BMap.Point(pStart.lng, pStart.lat),
-		new BMap.Point(pStart.lng, pEnd.lat),
-		new BMap.Point(pEnd.lng, pStart.lat),
-		new BMap.Point(pEnd.lng, pEnd.lat)
-	], {strokeColor:"blue", strokeWeight: 2, StrokeOpacity: 0.5});
-	function add_overlay(){
-		map.addOverlay(rectangle);
-	}
-	add_overlay();
+    // 百度地图API功能
+    var map = new BMap.Map("dituContent");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+    map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+    map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
 </script>

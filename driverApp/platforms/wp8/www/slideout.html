@@ -1,0 +1,245 @@
+<!doctype html>
+<!--[if IE 8]>
+<html class="ie8 lt-ie10"><![endif]-->
+<!--[if IE 9]>
+<html class="ie9 lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/mocha.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/slideout.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+
+    <title>Slideout tests</title>
+</head>
+<body>
+
+
+<nav id="menu" class="menu">
+    <div class="menu_header">
+        <div class="imgDiv">
+            <img src="img/head.png" class="img-circle" style="width: 25%">
+            <span class="nameText">常旅客</span>
+        </div>
+    </div>
+
+    <section class="menu-section">
+        <ul class="menu-section-list">
+            <li>
+                <img src="img/icon-info.png" class="menu-icon">
+                <span href="#" class="menu-span">我的资料</span>
+            </li>
+            <li>
+                <img src="img/icon-cash.png" class="menu-icon">
+                <span href="#" class="menu-span">我的工资</span>
+            </li>
+            <li>
+                <img src="img/icon-message.png" class="menu-icon">
+                <span href="#" class="menu-span">我的消息</span>
+            </li>
+            <li>
+                <img src="img/icon-news.png" class="menu-icon">
+                <span href="#" class="menu-span">公司动态</span>
+            </li>
+        </ul>
+    </section>
+</nav>
+
+<main id="panel" style="height: 100%">
+    <!--<div class="panel-header">-->
+    <div class="header">
+        <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+            <img src="img/head.png" class="img-circle img-head js-slideout-toggle">
+        </div>
+        <div style="height: 100%;width:70%;float: right">
+            <span class="text-center">我的排班</span>
+        </div>
+    </div>
+    <!--</div>-->
+    <div class="wc-container">
+        <div class="ui-widget-header wc-toolbar" style="text-align: center">
+        <span class="fc-button" unselectable="on"><span
+                class="fc-text-arrow">‹</span></span>
+            <span class="wc-title">Jul 17, 2016 - Jul 23, 2016</span>
+        <span class="fc-button" unselectable="on"><span
+                class="fc-text-arrow">›</span></span>
+        </div>
+
+        <div class="ui-widget-content wc-header">
+            <table class="gridWeek" style="margin-bottom: 0px;background-color: transparent">
+                <tbody>
+                <tr>
+                    <td class="wc-time-column-header"></td>
+                    <td class="wc-day-column-header wc-day-1">日</td>
+                    <td class="wc-day-column-header wc-day-2">一</td>
+                    <td class="wc-day-column-header wc-day-3">二</td>
+                    <td class="wc-day-column-header wc-day-4">三</td>
+                    <td class="wc-day-column-header wc-day-5">四</td>
+                    <td class="wc-day-column-header wc-day-6">五</td>
+                    <td class="wc-day-column-header wc-day-7">六</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div style="height: 70%;overflow: auto">
+        <div class="wc-container">
+            <table class="gridTable">
+                <tbody>
+                <tr>
+                    <td>5:00-7:00</td>
+                    <td><a href="index.html">
+                        <div class="work">线路1</div>
+                    </a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7:00-9:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="index.html">
+                        <div class="work">线路3</div>
+                    </a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9:00-11:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11:00-13:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>13:00-15:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="index.html">
+                        <div class="work">线路4</div>
+                    </a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>13:00-15:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>15:00-17:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>17:00-19:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>19:00-21:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="footer">
+        <ul class="nav nav-tabs" style="height: 100%">
+            <li>
+                <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                       src="img/icon_location_normal.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon_user_checked.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon-readCard-normal.png"/></a>
+            </li>
+
+        </ul>
+    </div>
+</main>
+
+<!--<script>-->
+<!--mocha.setup('bdd');-->
+<!--var exports = null;-->
+<!--function assert(expr, msg) {-->
+<!--if (!expr) throw new Error(msg || 'failed');-->
+<!--}-->
+<!--</script>-->
+<script src="js/slideout.js"></script>
+<script src="js/myJs.js"></script>
+<script src="js/test.js"></script>
+<script>
+    window.onload = function () {
+        document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
+            slideout.toggle();
+        });
+
+        document.querySelector('.menu').addEventListener('click', function (eve) {
+            if (eve.target.nodeName === 'A') {
+                slideout.close();
+            }
+        });
+
+        var runner = mocha.run();
+    };
+</script>
+</body>
+</html>

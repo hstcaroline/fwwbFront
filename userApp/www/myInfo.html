@@ -35,101 +35,135 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-    <script type="text/javascript" src="js/myJs.js"></script>
+    <link rel="stylesheet" href="css/mocha.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/slideout.css">
+    <link rel="stylesheet" href="css/myStyle.css">
     <title>Hello World</title>
 </head>
 <body>
-<div class="header">
-    <div style="height: 100%;width:30%;margin-top: 2%;float: left">
-        <img src="img/head.png" class="img-circle img-head">
 
-    </div>
-    <div style="height: 100%;width:70%;float: right">
-        <span class="text-center">我的资料</span>
-    </div>
-</div>
-<div class="content">
-    <div class="headImg">
-        <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
-        <div id="editText" style="display: none;">
-
-            <a class="btn cancel" href="javascript:location.reload();">
-                <i class="cancelImg"></i>
-                <span style="color: red;font-size: 22px;">取消</span>
-            </a>
-            <a class="btn save" href="javascript:location.reload();">
-                <i class="saveImg"></i>
-                <span style="color: #3498db;font-size: 22px;">保存</span>
-            </a>
-
-
-            <!--<a class="saveText" href="#">保存</a>-->
+<nav id="menu" class="menu" >
+    <div class="menu_header" id="menu_header" style="display: none;">
+        <div class="imgDiv">
+            <img src="img/head.png" class="img-circle" style="width: 25%">
+            <span class="nameText">常旅客</span>
         </div>
     </div>
-    <div class="table-responsive" style="border: 0px">
-        <table class="table table-hover">
-            <tbody>
-            <tr>
-                <td><span>姓名:</span></td>
-                <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
-            </tr>
-            <tr>
-                <td><span>电话:</span></td>
-                <td><input id="inputTel" type="text" class="form-control" value="18200302934"></td>
-            </tr>
-            <tr>
-                <td><span>住址:</span></td>
-                <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
-            </tr>
-            <tr>
-                <td><span>班次:</span></td>
-                <td><input id="inputCar" type="text" class="form-control" value="班次A"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="space">
-    </div>
-    <div class="table-responsive" style="border: 0px">
-        <table class="table table-hover">
-            <tbody>
-            <tr>
-                <td><span>工号:</span></td>
-                <td><input id="inputWorkNum" type="text" class="form-control" style="border: none" value="G233"></td>
-            </tr>
-            <tr>
-                <td><span>部门:</span></td>
-                <td><input id="inputDepart" type="text" class="form-control" value="维修部"></td>
-            </tr>
-            <tr>
-                <td><span>组别:</span></td>
-                <td><input id="inputTeam" type="text" class="form-control" value="A组"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="space">
-    </div>
-</div>
-<div class="footer">
-    <ul class="nav nav-tabs" style="height: 100%">
-        <li>
-            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
-                                                                   src="img/icon_location_normal.png"/></a>
-        </li>
 
-        <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
-                                                                            src="img/icon_user_checked.png"/></a></li>
+    <section class="menu-section" id="menu_section" style="display: none;">
+        <ul class="menu-section-list">
+            <li id="myInfo">
+                <img src="img/icon-info.png" class="menu-icon">
+                <span class="menu-span">我的班次</span>
+            </li>
+            <li id="myCash">
+                <img src="img/icon-cash.png" class="menu-icon">
+                <span class="menu-span">我的工资</span>
+            </li>
+            <li id="myMsg">
+                <img src="img/icon-message.png" class="menu-icon">
+                <span class="menu-span">我的消息</span>
+            </li>
+            <li id="news">
+                <img src="img/icon-news.png" class="menu-icon">
+                <span class="menu-span">公司动态</span>
+            </li>
+        </ul>
+    </section>
+</nav>
 
-        <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
-                                                                            src="img/icon_charging_normal.png"/></a>
-        </li>
+<main id="panel" style="height: 100%">
 
-    </ul>
-</div>
-</div>
+    <div class="header">
+        <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+            <img src="img/head.png" class="img-circle img-head js-slideout-toggle">
+        </div>
+        <div style="height: 100%;width:70%;float: right">
+            <span class="text-center">我的资料</span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="headImg">
+            <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
+            <div id="editText" style="display: none;">
+
+                <a class="btn cancel" href="javascript:location.reload();">
+                    <i class="cancelImg"></i>
+                    <span style="color: red;font-size: 22px;">取消</span>
+                </a>
+                <a class="btn save" href="javascript:location.reload();">
+                    <i class="saveImg"></i>
+                    <span style="color: #3498db;font-size: 22px;">保存</span>
+                </a>
+
+
+                <!--<a class="saveText" href="#">保存</a>-->
+            </div>
+        </div>
+        <div class="table-responsive" style="border: 0px">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td><span>姓名:</span></td>
+                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
+                </tr>
+                <tr>
+                    <td><span>电话:</span></td>
+                    <td><input id="inputPhone" type="text" class="form-control" value="18200302934"></td>
+                </tr>
+                <tr>
+                    <td><span>住址:</span></td>
+                    <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
+                </tr>
+                <tr>
+                    <td><span>班次:</span></td>
+                    <td><input id="inputClasses" type="text" class="form-control" value="班次A"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="space">
+        </div>
+        <div class="table-responsive" style="border: 0px">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td><span>工号:</span></td>
+                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="G233">
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>部门:</span></td>
+                    <td><input id="inputDepart" type="text" class="form-control" value="维修部"></td>
+                </tr>
+                <tr>
+                    <td><span>组别:</span></td>
+                    <td><input id="inputTeam" type="text" class="form-control" value="A组"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="space">
+        </div>
+    </div>
+    <div class="footer">
+        <ul class="nav nav-tabs" style="height: 100%">
+            <li>
+                <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                       src="img/icon_location_normal.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon_user_checked.png"/></a></li>
+
+            <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img" src="img/icon_charging_normal.png"/></a>
+            </li>
+
+        </ul>
+    </div>
+</main>
 
 <!--<div class="app">-->
 <!--<h1>Apache Cordova</h1>-->
@@ -143,6 +177,42 @@
 </body>
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script src="js/slideout.js"></script>
+<script src="js/myJs.js"></script>
+<script src="js/test.js"></script>
+<script>
+    window.onload = function () {
+        $('#menu_header').show();
+        $('#menu_section').show();
+        document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
+            slideout.toggle();
+        });
+        $.ajax({
+            url: 'http://192.168.1.4:3000/users/getStaff',
+            type: 'POST',
+            async: false,
+            data: {'id': 2},
+            dataType: 'json',
+            success: function (driver) {
+                if (driver != null) {
+                    $("#inputName").val(driver.name);
+                    $("#inputPhone").val(driver.phone);
+                    $("#inputAddr").val(driver.address);
+                    $("#inputClasses").val(driver.classes);
+                    $("#inputJobNum").val(driver.job_number);
+                    $("#inputDepart").val(driver.department);
+                    $("#inputTeam").val(driver.team);
+                }
+                else {
+                    alert('链接失败');
+                }
+            },
+            error: function (xhr, type, exception) {
+                alert(type);
+            }
+        });
+    };
+</script>
 <script type="text/javascript">
     $("#editImg").click(function () {
         $("#editImg").hide();
