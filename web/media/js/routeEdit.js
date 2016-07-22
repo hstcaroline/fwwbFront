@@ -58,9 +58,9 @@ resetStations.onclick = function () {
     map.clearOverlays();
     stationArr=[];
     $.ajax({
-        type: 'GET',
-        //url: 'http://192.168.1.7:3000/users/getRoute',
-        dataType: 'json',
+        url: IP+"addPoints",
+        type: 'post',
+        dataType: "json",
         async : false,
         success: function (data) {
             //stationArr。push&addmarker
