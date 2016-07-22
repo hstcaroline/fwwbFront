@@ -10,11 +10,13 @@
 //    }]
 //}];
 //var block_data = [14, 13, 13, 3, 3, 13, 3, 15, 6, 7, 8, 9, 14, 17];
+var COMPANYADDR = new BMap.Point(121,31);
 var routes = [];
-var COLOR = ["#FF9900", "#333333", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
-var stations = [];
+var UNSAVEDCOLOR = "#333333";
+var COLOR = ["#537082", "#FF9900", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
 var startId=0;
 var newRouteIndex=0;
+var gridster = null;
 var btn_2 = document.getElementById("initMap");
 btn_2.onclick = function(){
     /*console.log(IP+"addPoints");
@@ -46,33 +48,11 @@ btn_2.onclick = function(){
         sticky: false,
         time:''
     });
-    map.clearOverlays();
-    routes = [];
-    stations = [];
-    startId=0;
-    newRouteIndex=0;
-    stationArr=[];
-    stationCount = 1;
-    routeCount=0;
-
-    getData();
-    refreshMap(true);
-    var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
-    if(gridster){
-        gridster.remove_all_widgets(null);
-        for (var i = 0; i < routes.length; i++) {
-            var col = i + 2;
-            for (var j = 0; j < routes[i].stations.length; j++) {
-                var row = j + 1;
-                stations.push(routes[i].stations[j]);
-                var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
-                gridster.add_widget(html,1,1,col,row);
-            }
-        }
-    }
+    reload();
 };
 
 initMap();//创建和初始化地图
+setEvent();
 getData();
 loadData(routes);
 
@@ -88,7 +68,71 @@ function getOppositeCoor(id, event){
     var OppositeCoorLeft = event.clientX-left+document.body.scrollLeft;
     return {'left':OppositeCoorLeft};
 }
-
+function setEvent() {
+    map.addEventListener("click", function(e){
+        var pos = e.point.lng + "|" + e.point.lat;
+        if(ifAddMarker==true){//添加站点
+            //var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
+            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+            var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"未命名_"+stationCount,address:"",num:0};
+            stationArr.push(point);
+            stationCount++;
+            addMarker(marker);
+            var len = gridster.get_widgets_at_col("1").len + 1;
+            var html = "<li id='"+point.id+"'data-row='" + len + "' data-col='" + 1 + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + point.id + "</span>" + point.name + "</li>";
+            gridster.add_widget(html,1,1,1,len);
+         }
+    });
+}
+function MarkerRightClickHandler(marker,iw){
+    var label = marker.getLabel();
+    var removeMarker = function(e,ee,marker) {//右键删除站点
+        $("#portlet-remove").modal('show');
+        ok_1.onclick = function () {
+            map.removeOverlay(marker);
+            $("#portlet-remove").modal('hide');
+            if (marker.type == 0) {
+                var index = indexOf(marker, markerArr);
+                if (index != -1) {
+                    markerArr.splice(index, 1);
+                }
+            }else{
+                var index = indexOf(marker, stationArr);
+                if (index != -1) {
+                    gridster.remove_widget( $( '#'+stationArr[index].id ) );
+                    stationArr.splice(index, 1);
+                    changeHints();
+                }
+            }
+        };
+    };
+    var updateMarker = function(){//右键更新站名
+        txt_title.value=label.getContent();
+        txt_content.value=iw.getContent();
+        $("#portlet-update").modal('show');
+        ok_2.onclick = function(){
+            label.setContent(txt_title.value);
+            iw.setContent(txt_content.value);
+            iw.setTitle(txt_title.value);
+            iw.redraw();
+            $("#portlet-update").modal('hide');
+            if (marker.type == 1) {
+                var index = indexOf(marker, stationArr);
+                if (index != -1) {
+                    stationArr[index].name = txt_title.value;
+                    stationArr[index].address = txt_content.value;
+                    changeHints();
+                    console.log($( '#'+stationArr[index].id ));
+                    $( '#'+stationArr[index].id)[0].innerHTML="<span style='display: none' class='id'>" + stationArr[index].id + "</span>" + stationArr[index].name;
+                }
+            }
+        };
+    };
+    var markerMenu=new BMap.ContextMenu();
+    markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
+    markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
+    marker.addContextMenu(markerMenu);//给标记添加右键菜单
+}
 function getData(){
     $.ajax({
         type: 'GET',
@@ -113,14 +157,14 @@ function loadData(routs) {
         for (var j = 0; j < routs[i].stations.length; j++) {
             var row = j + 1;
             var col = i + 2;
-            stations.push(routs[i].stations[j]);
+            //stations.push(routs[i].stations[j]);
             blocks.innerHTML += "<li id='"+routs[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routs[i].stations[j].id + "</span>" + routs[i].stations[j].name + "</li>";
         }
     }
     render();
 }
 function render() {
-    var gridster;
+    //var gridster;
     $(function () {
         gridster = $(".gridster > ul").gridster({
             widget_margins: [15, 10],
@@ -129,13 +173,23 @@ function render() {
             min_cols: 6,
             draggable:{
                 start:function(event, ui) {
+                    var data_col =$(event.target).attr('data-col');
+                    if(parseInt(data_col)==1){
+                        //第一列点视作散点，不删路线
+                        //optioal：没有移动的也不删路线
+                        return;
+                    }
                     //怎样找到地图上对应的polyline，并删掉
                 },
                 stop: function(event, ui){
                     var points=[];
                     var data_row =$(event.target).attr('data-row');
                     var data_col =$(event.target).attr('data-col');
-
+                    if(parseInt(data_col)==1){
+                        //第一列点视作散点，不画路线
+                        //optioal：没有移动的也不画路线
+                        return;
+                    }
                     var pre_row=(parseInt(data_row)-1).toString();
                     var pre = gridster.get_widget_at(data_col,pre_row);
                     var preId=parseInt(pre.eq(0).attr('id'));
@@ -182,9 +236,9 @@ function render() {
 }
 function saveRoute() {
     var newRoutes = routes;
-    var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
+    var newId=startId;
 
-    for (var i = 0; i < newRouteIndex; i++) {
+    for (var i = 0; i <newRouteIndex; i++) {
         newRoutes[i].stations.length = 0;
     }
     for (var i=newRouteIndex; i<gridster.cols; i++){
@@ -194,16 +248,29 @@ function saveRoute() {
     var col = 1;
     $("#blocks li").each(function () {
         var data_row = $(this).attr('data-row') - 1;
-        var data_col = $(this).attr('data-col') - 1;
-
-        var currentId = $(this).children('span').text();
-        for (var j = 0; j < stations.length; j++) {
+        var data_col = $(this).attr('data-col') - 2;
+        if (data_col >= 0) {
+            var currentId = $(this).children('span').text();
+            var index = indexOf(parseInt(currentId), stationArr);
+            if (index > -1) {
+                var station = {
+                    id: stationArr[index].id,
+                    posx: stationArr[index].pos.lng,
+                    posy: stationArr[index].pos.lat,
+                    name: stationArr[index].name,
+                    address: stationArr[index].address,
+                    num:stationArr[index].num
+                };
+                newRoutes[data_col].stations[data_row] = station;
+            }
+        }
+        /*for (var j = 0; j < stations.length; j++) {
             if (currentId == stations[j].id) {
                 newRoutes[data_col].stations[data_row] = stations[j];
             }
-        }
+        }*/
     });
-
+    console.log(newRoutes);
     var postDatas = new Array();
     for(var i=0;i<newRoutes.length;i++){
         var currentStations = newRoutes[i].stations;
@@ -214,15 +281,15 @@ function saveRoute() {
         if(i<newRouteIndex){
             routeId = newRoutes[i].route.id;
         }else{
-            routeId=startId;
-            startId++;
+            routeId=newId;
+            newId++;
         }
         for(var j=0;j<currentStations.length;j++){
-            var data = {"station_id":currentStations[j].id,"route_id":routeId,"index":(j+1)};
+            var data = {"station":currentStations[j],"route_id":routeId,"index":(j+1)};
             postDatas.push(data);
         }
     }
-
+    console.log(postDatas);
     var da = JSON.stringify(postDatas);
     $.ajax({
         type: 'POST',
@@ -232,12 +299,13 @@ function saveRoute() {
         async : true,
         success: function (data) {
             $.gritter.add({
-                title: '保存成功！',
-                text:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路线数据已成功同步到数据库。可点击<b style="color: #cf4749;">生成路线</b>按钮撤销全部更改，重新生成路线',
+                title: '<b style="color: #cf4749;">保存成功！</b>',
+                text:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路线数据已成功同步到数据库。正在刷新地图...可点击<b style="color: #cf4749;">重新生成地图</b>按钮撤销全部更改，重新生成站点',
                 class_name: 'gritter-light',
                 sticky: false,
                 time: ''
             });
+            reload();
         },
         error: function () {
             alert("wrong");
@@ -247,15 +315,18 @@ function saveRoute() {
 function refreshMap(ifRefreshMarker){
     var route = [];
     if(ifRefreshMarker){
+        map.clearOverlays();
         stationArr=[];
+    }else{
+        //clearOverlays(2);//删除地图上的所有路线
     }
-    //clearOverlays(2);//删除地图上的所有路线
     for(var i=0;i<routes.length;i++){
         route[i]=[];
+        route[i].push(COMPANYADDR);
         for(var j=0;j<routes[i].stations.length;j++){
             var station = routes[i].stations[j];
             var pos = station.posx + "|" + station.posy;
-            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name};
+            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num};
             route[i].push(point.pos);
             if(ifRefreshMarker){
                 var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
@@ -266,16 +337,78 @@ function refreshMap(ifRefreshMarker){
         createRoute(route[i]);
     }
 }
+function routePlanning(arg_0){
+    ifAddMarker=false;
+    btn_addMarker.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
+    console.log("generate path");
+    console.log(parseSimplePointArr(stationArr));
+    $.ajax({
+        url: IP+"generatePath",
+        type: 'post',
+        dataType: "json",
+        data: {
+            points:parseSimplePointArr(stationArr)//,
+            // policy:arg_0 路线生成策略
+        },
+        success: function(data){
+            console.log(data);
+            var routeId = startId;
+            for(var i=0;i<data.length;i++){
+                routes[i]={route:{id:routeId},stations:data[i]};
+                routeId++;
+            }
+            newRouteIndex=routes.length;
+            refreshMap(true);
+            if(gridster){
+                gridster.remove_all_widgets(null);
+                for (var i = 0; i < routes.length; i++) {
+                    var col = i + 2;
+                    for (var j = 0; j < routes[i].stations.length; j++) {
+                        var row = j + 1;
+                        var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                        if(routes[i].stations[j].id<0){
+                            html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                        }
+                        gridster.add_widget(html,1,1,col,row);
+                    }
+                }
+            }
+        }
+    });
+}
+function reload() {
+    routes = [];
+    startId=0;
+    newRouteIndex=0;
+    stationCount = 1;
+    routeCount=0;
+
+    getData();
+    refreshMap(true);
+    if(gridster){
+        gridster.remove_all_widgets(null);
+        for (var i = 0; i < routes.length; i++) {
+            var col = i + 2;
+            for (var j = 0; j < routes[i].stations.length; j++) {
+                var row = j + 1;
+                //stations.push(routes[i].stations[j]);
+                var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                gridster.add_widget(html,1,1,col,row);
+            }
+        }
+    }
+}
 jQuery(document).ready(function () {
     $('#gritter-help').click(function () {
         $.gritter.add({
             title: '操作说明：',
             text: '<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每个方块代表一个车站，按行驶顺序排列，每一列为一条路线。'
                     +'通过<b style="color: #f6ec59;">拖放</b>方块的方式进行路线的增删与修改。</p>'
-                    +'<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离开页面前点击<b style="color: #f6ec59;">保存</b>按钮保存修改后的路线。</p>',
-            //class_name: 'gritter-light',
-            sticky: false,
-            time: ''
+                    +'<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击<b style="color: #f6ec59;">生成路线</b>，将根据所有站点生成最佳路线。生成结果<b style="color: #f6ec59;">不会</b>自动保存。</p>'
+                    +'<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击<b style="color: #f6ec59;">重置地图</b>，将撤销所有更改，恢复上一次保存结果。</p>'
+                    +'<p style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离开页面前点击<b style="color: #f6ec59;">保存</b>按钮保存所有最新的站点及路线。第一列为未加入路线规划的站点，<b style="color: #f6ec59;">默认舍弃</b>。</p>',
+            sticky: true//,
+            //time: ''
         });
         return false;
     });
