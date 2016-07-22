@@ -8,13 +8,11 @@ var btn_upload = document.getElementById("upload");
 var markerArr = [];
 //站点数组
 var stationArr =[];
-var IP="http://192.168.1.2:3000/RoutePlanning/";
+var IP="http://192.168.1.9:3000/RoutePlanning/";
 var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];
-var routeCount=0;
 var ifAddMarker = false;
 var stationCount = 1;
-var driving =null;
-var geoCoder=null;
+//var geoCoder=null;
 
 btn_addMarker.onclick = function(){
     if(ifAddMarker==true){
@@ -66,32 +64,7 @@ function createMap(){
     map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
     window.map = map;//将map变量存储在全局
     checkhHtml5();
-    driving = new BMap.DrivingRoute(map, {
-        renderOptions: {//绘制结果
-            map: map,
-            autoViewport: true,
-            enableDragging: true
-        },
-        onSearchComplete: function(results){
-            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
-                var color = COLOR[(routeCount%COLOR.length)];
-                var plan = driving.getResults().getPlan(0);
-                var num = plan.getNumRoutes();
-                for(var i=0;i<num;i++){
-                    var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
-                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});
-                    polyline.type=2;
-                    //polyline.routeId=routeCount;
-                    map.addOverlay(polyline);
-                    PolylineRightClickHandler(polyline);
-                }
-                routeCount++;
-                driving.clearResults();
-            }
-        }
-    });
-    driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
-    geoCoder=new BMap.Geocoder();
+    //geoCoder=new BMap.Geocoder();
 }
 
 //地图事件设置函数：
@@ -209,12 +182,32 @@ function addPolyline(plPoints){
     }
 }
 
-function getRoute(pointStart,pointEnd) {
-    driving.clearResults();
-    driving.search(pointStart, pointEnd);
-}
-
-function createRoute(markers) {//markers是一个Point数组
+function createRoute(markers,routeID) {//markers是一个Point数组
+    var routeId=parseInt(routeID);
+    var driving = new BMap.DrivingRoute(map, {
+        renderOptions: {//绘制结果
+            map: map,
+            autoViewport: true,
+            enableDragging: true
+        },
+        onSearchComplete: function(results){
+            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
+                var color = COLOR[(routeId%COLOR.length)];
+                var plan = driving.getResults().getPlan(0);
+                var num = plan.getNumRoutes();
+                for(var i=0;i<num;i++){
+                    var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
+                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});
+                    polyline.type=2;
+                    polyline.routeId=routeId;
+                    map.addOverlay(polyline);
+                    PolylineRightClickHandler(polyline);
+                }
+                driving.clearResults();
+            }
+        }
+    });
+    driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
     var  group = Math.floor( markers.length /11 ) ;
     var mode = markers.length %11 ;
     for(var i =0;i<group;i++){

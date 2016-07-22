@@ -17,8 +17,8 @@ var COLOR = ["#537082", "#FF9900", "#548C00", "##009933", "#CC0066", "#009999", 
 var startId=0;
 var newRouteIndex=0;
 var gridster = null;
-var btn_2 = document.getElementById("initMap");
-btn_2.onclick = function(){
+var reloadMap = document.getElementById("reloadMap");
+reloadMap.onclick = function(){
     /*console.log(IP+"addPoints");
      $.ajax({
      url: IP+"addPoints",
@@ -50,6 +50,37 @@ btn_2.onclick = function(){
     });
     reload();
 };
+var resetStations = document.getElementById("resetStations");
+resetStations.onclick = function () {
+    routes = [];
+    newRouteIndex=0;
+    stationCount = 1;
+    map.clearOverlays();
+    stationArr=[];
+    $.ajax({
+        type: 'GET',
+        //url: 'http://192.168.1.7:3000/users/getRoute',
+        dataType: 'json',
+        async : false,
+        success: function (data) {
+            //stationArr。push&addmarker
+            for(var i=0;i<data.length;i++){
+                var pos=data[i].posx + "|" +data[i].posy;
+                var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+                var point = {id:-stationCount,pos:new BMap.Point(data[i].posx,data[i].posy),name:"未命名_"+stationCount,address:"",num:0};//??num
+                stationArr.push(point);
+                stationCount++;
+                addMarker(marker);
+                var len = gridster.get_widgets_at_col("1").len + 1;
+                var html = "<li id='"+point.id+"'data-row='" + len + "' data-col='" + 1 + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + point.id + "</span>" + point.name + "</li>";
+                gridster.add_widget(html,1,1,1,len);
+            }
+        },
+        error: function () {
+            alert("重置失败");
+        }
+    });
+}
 
 initMap();//创建和初始化地图
 setEvent();
@@ -136,7 +167,7 @@ function MarkerRightClickHandler(marker,iw){
 function getData(){
     $.ajax({
         type: 'GET',
-        url: 'http://192.168.1.4:3000/users/getRoute',
+        url: 'http://192.168.1.7:3000/users/getRoute',
         //data: {username:$("#username").val(), content:$("#content").val()},
         dataType: 'json',
         async : false,
@@ -158,13 +189,15 @@ function loadData(routs) {
             var row = j + 1;
             var col = i + 2;
             //stations.push(routs[i].stations[j]);
-            blocks.innerHTML += "<li id='"+routs[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routs[i].stations[j].id + "</span>" + routs[i].stations[j].name + "</li>";
+            blocks.innerHTML += "<li id='"+routs[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[routs[i].route.id % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routs[i].stations[j].id + "</span>" + routs[i].stations[j].name + "</li>";
         }
     }
     render();
 }
 function render() {
     //var gridster;
+    var start_col=null;
+    var start_row=null;
     $(function () {
         gridster = $(".gridster > ul").gridster({
             widget_margins: [15, 10],
@@ -173,62 +206,118 @@ function render() {
             min_cols: 6,
             draggable:{
                 start:function(event, ui) {
-                    var data_col =$(event.target).attr('data-col');
-                    if(parseInt(data_col)==1){
-                        //第一列点视作散点，不删路线
-                        //optioal：没有移动的也不删路线
-                        return;
-                    }
-                    //怎样找到地图上对应的polyline，并删掉
+                    start_col =$(event.target).attr('data-col');
+                    start_row =$(event.target).attr('data-row');
                 },
                 stop: function(event, ui){
-                    var points=[];
                     var data_row =$(event.target).attr('data-row');
                     var data_col =$(event.target).attr('data-col');
-                    if(parseInt(data_col)==1){
-                        //第一列点视作散点，不画路线
-                        //optioal：没有移动的也不画路线
+                    if(data_col==start_col&&data_row==start_row){
+                        console.log("not changed");
                         return;
                     }
-                    var pre_row=(parseInt(data_row)-1).toString();
-                    var pre = gridster.get_widget_at(data_col,pre_row);
-                    var preId=parseInt(pre.eq(0).attr('id'));
-                    if(preId){
-                        var preIndex=indexOf(preId,stationArr);
-                        if(preIndex>=0){
-                            var prePos=stationArr[preIndex].pos;
-                            points.push(prePos);
+                    if(parseInt(start_col)>1){//擦除并绘制原路线
+                        var col=parseInt(start_col)-2;
+                        var routeId=0;
+                        if(col<newRouteIndex){
+                            routeId=routes[col].route.id;
                         }else{
-                            //console.log("not found pre"+preId);
+                            routeId=startId+col-newRouteIndex;
+                        }
+                        var points=[];
+                        points.push(COMPANYADDR);
+                        gridster.get_widgets_at_col(start_col).wigets.each(function () {
+                            //找到各个站点id，points.push()
+                            var id = parseInt($(this).attr('id'));
+                            var index = indexOf(id,stationArr);
+                            if(index > -1){
+                                points.push(stationArr[index].pos);
+                            }
+                        });
+                        console.log("原路线：");
+                        console.log(points);
+                        cleanRoute(routeId);
+                        if(points.length>1){
+                            createRoute(points,routeId);
                         }
                     }
-
-                    var curId=parseInt($(event.target).attr('id'));
-                    var curIndex=indexOf(curId,stationArr);
-                    if(curIndex>=0){
-                        var curPos=stationArr[curIndex].pos;
-                        points.push(curPos);
-                    }else{
-                        //console.log("not found cur"+curId);
-                    }
-
-                    var next_row=(parseInt(data_row)+1).toString();
-                    var next = gridster.get_widget_at(data_col,next_row);
-                    var nextId=parseInt(next.eq(0).attr('id'));
-                    if(nextId){
-                        var nextIndex=indexOf(nextId,stationArr);
-                        if(nextIndex>=0) {
-                            var nextPos = stationArr[nextIndex].pos;
-                            points.push(nextPos);
+                    if(parseInt(data_col) > 1 && data_col!=start_col){//擦除并绘制目标路线
+                        var col=parseInt(data_col)-2;
+                        var routeId=0;
+                        if(col<newRouteIndex){
+                            routeId=routes[col].route.id;
                         }else{
-                            //console.log("not found next"+nextId);
+                            routeId=startId+col-newRouteIndex;
                         }
-                    }
+                        var points=[];
+                        points.push(COMPANYADDR);
+                        gridster.get_widgets_at_col(start_col).wigets.each(function () {
+                            //找到各个站点id，points.push()
+                            var id = parseInt($(this).attr('id'));
+                            var index = indexOf(id,stationArr);
+                            if(index > -1){
+                                points.push(stationArr[index].pos);
+                            }
+                        });
+                        console.log("新路线：");
+                        console.log(points);
+                        cleanRoute(routeId);
+                        if(points.length>1) {
+                            createRoute(points, routeId);
+                        }
+                        /*var points=[];
+                        var pre_row=(parseInt(data_row)-1).toString();
+                        var pre = gridster.get_widget_at(data_col,pre_row);
+                        var preId=parseInt(pre.eq(0).attr('id'));
+                        if(preId){
+                            var preIndex=indexOf(preId,stationArr);
+                            if(preIndex>=0){
+                                var prePos=stationArr[preIndex].pos;
+                                points.push(prePos);
+                            }else{
+                                points.push(COMPANYADDR);
+                            }
+                        }else{
+                            points.push(COMPANYADDR);
+                        }
 
-                    if(points.length>1){
-                        createRoute(points);
+                        var curId=parseInt($(event.target).attr('id'));
+                        var curIndex=indexOf(curId,stationArr);
+                        if(curIndex>=0){
+                            var curPos=stationArr[curIndex].pos;
+                            points.push(curPos);
+                        }else{
+                            console.log("not found cur"+curId);
+                        }
+
+                        var next_row=(parseInt(data_row)+1).toString();
+                        var next = gridster.get_widget_at(data_col,next_row);
+                        var nextId=parseInt(next.eq(0).attr('id'));
+                        if(nextId){
+                            var nextIndex=indexOf(nextId,stationArr);
+                            if(nextIndex>=0) {
+                                var nextPos = stationArr[nextIndex].pos;
+                                points.push(nextPos);
+                            }else{
+                                console.log("not found next"+nextId);
+                            }
+                        }
+
+                        if(points.length>1){
+                            var col=parseInt(data_col)-2;
+                            var routeId=0;
+                            if(col<newRouteIndex){
+                                routeId=routes[col].route.id;
+                            }else{
+                                routeId=startId+col-newRouteIndex;
+                            }
+                            console.log("新增：");
+                            console.log(points);
+                            createRoute(points,routeId);
+                        }*/
                     }
-                    //怎样控制路线颜色
+                    start_col=null;
+                    start_row=null;
                 }
             }
         }).data('gridster');
@@ -293,7 +382,7 @@ function saveRoute() {
     var da = JSON.stringify(postDatas);
     $.ajax({
         type: 'POST',
-        url: 'http://192.168.1.4:3000/users/changeRoute',
+        url: 'http://192.168.1.7:3000/users/changeRoute',
         data: da,
         contentType: "application/json",
         async : true,
@@ -334,7 +423,7 @@ function refreshMap(ifRefreshMarker){
                 addMarker(marker);
             }
         }
-        createRoute(route[i]);
+        createRoute(route[i],routes[i].route.id);
     }
 }
 function routePlanning(arg_0){
@@ -353,6 +442,7 @@ function routePlanning(arg_0){
         success: function(data){
             console.log(data);
             var routeId = startId;
+            routes=[];
             for(var i=0;i<data.length;i++){
                 routes[i]={route:{id:routeId},stations:data[i]};
                 routeId++;
@@ -365,9 +455,11 @@ function routePlanning(arg_0){
                     var col = i + 2;
                     for (var j = 0; j < routes[i].stations.length; j++) {
                         var row = j + 1;
-                        var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                        var html="";
                         if(routes[i].stations[j].id<0){
                             html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                        }else{
+                            html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
                         }
                         gridster.add_widget(html,1,1,col,row);
                     }
@@ -381,7 +473,6 @@ function reload() {
     startId=0;
     newRouteIndex=0;
     stationCount = 1;
-    routeCount=0;
 
     getData();
     refreshMap(true);
@@ -391,9 +482,22 @@ function reload() {
             var col = i + 2;
             for (var j = 0; j < routes[i].stations.length; j++) {
                 var row = j + 1;
-                //stations.push(routes[i].stations[j]);
-                var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[routes[i].route.id % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
                 gridster.add_widget(html,1,1,col,row);
+            }
+        }
+    }
+}
+function cleanRoute(routeId) {
+    var allOverlay = map.getOverlays();
+    console.log(routeId);
+    for(var i=0;i<allOverlay.length;i++){
+        console.log(routeId);
+        if(allOverlay[i].type==2){
+            console.log(allOverlay[i].routeId);
+            if(allOverlay[i].routeId==routeId)
+            {
+                map.removeOverlay(allOverlay[i]);
             }
         }
     }
