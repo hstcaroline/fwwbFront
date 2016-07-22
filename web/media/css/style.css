@@ -5299,9 +5299,7 @@ Datatables Plugin(in v1.3)
 .gridster {
   /*width: 940px;*/
   margin: 0 auto;
-
   opacity: .8;
-
   -webkit-transition: opacity .6s;
   -moz-transition: opacity .6s;
   -o-transition: opacity .6s;
@@ -5328,3 +5326,4 @@ Datatables Plugin(in v1.3)
   border-radius: 0!important;
   background: rgba(255,255,255,.2)!important;
 }
+

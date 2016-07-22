@@ -61,7 +61,7 @@ btn_2.onclick = function(){
     if(gridster){
         gridster.remove_all_widgets(null);
         for (var i = 0; i < routes.length; i++) {
-            var col = i + 1;
+            var col = i + 2;
             for (var j = 0; j < routes[i].stations.length; j++) {
                 var row = j + 1;
                 stations.push(routes[i].stations[j]);
@@ -75,6 +75,19 @@ btn_2.onclick = function(){
 initMap();//创建和初始化地图
 getData();
 loadData(routes);
+
+// 获取鼠标相对div的left值
+function getOppositeCoor(id, event){
+    event = event || window.event;
+    var obj  = document.getElementById(id);
+    var left = obj.offsetLeft;
+    var parObj = obj;
+    while(parObj = parObj.offsetParent){
+        left += parObj.offsetLeft;
+    }
+    var OppositeCoorLeft = event.clientX-left+document.body.scrollLeft;
+    return {'left':OppositeCoorLeft};
+}
 
 function getData(){
     $.ajax({
@@ -99,7 +112,7 @@ function loadData(routs) {
     for (var i = 0; i < routs.length; i++) {
         for (var j = 0; j < routs[i].stations.length; j++) {
             var row = j + 1;
-            var col = i + 1;
+            var col = i + 2;
             stations.push(routs[i].stations[j]);
             blocks.innerHTML += "<li id='"+routs[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[i % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routs[i].stations[j].id + "</span>" + routs[i].stations[j].name + "</li>";
         }
@@ -115,7 +128,7 @@ function render() {
             extra_cols: 50,
             min_cols: 6,
             draggable:{
-                start:function(event, ui){
+                start:function(event, ui) {
                     //怎样找到地图上对应的polyline，并删掉
                 },
                 stop: function(event, ui){
@@ -132,7 +145,7 @@ function render() {
                             var prePos=stationArr[preIndex].pos;
                             points.push(prePos);
                         }else{
-                            console.log("not found pre"+preId);
+                            //console.log("not found pre"+preId);
                         }
                     }
 
@@ -142,7 +155,7 @@ function render() {
                         var curPos=stationArr[curIndex].pos;
                         points.push(curPos);
                     }else{
-                        console.log("not found cur"+curId);
+                        //console.log("not found cur"+curId);
                     }
 
                     var next_row=(parseInt(data_row)+1).toString();
@@ -154,7 +167,7 @@ function render() {
                             var nextPos = stationArr[nextIndex].pos;
                             points.push(nextPos);
                         }else{
-                            console.log("not found next"+nextId);
+                            //console.log("not found next"+nextId);
                         }
                     }
 
@@ -209,7 +222,6 @@ function saveRoute() {
             postDatas.push(data);
         }
     }
-    console.log(postDatas);
 
     var da = JSON.stringify(postDatas);
     $.ajax({

@@ -2,27 +2,37 @@
  * Created by zouwenyun on 2016/6/30.
  */
 
-var btn_1 = document.getElementById("addMarker");
-
+var btn_addMarker = document.getElementById("addMarker");
+var btn_upload = document.getElementById("upload");
 //住址数组
 var markerArr = [];
 //站点数组
 var stationArr =[];
-var IP="http://192.168.1.2:3000/RoutePlanning/";
+var IP="http://192.168.1.4:3000/RoutePlanning/";
 var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];
 var routeCount=0;
 var ifAddMarker = false;
 var stationCount = 1;
 var driving =null;
 
-btn_1.onclick = function(){
+btn_addMarker.onclick = function(){
     if(ifAddMarker==true){
         ifAddMarker=false;
-        btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
+        btn_addMarker.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
     }else{
         ifAddMarker=true;
-        btn_1.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
+        btn_addMarker.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
     }
+};
+btn_upload.onclick = function () {
+    console.log("upload click");
+    var ajax_option={
+        url:IP+"upLoadFile",
+        success:function (data) {
+            console.log(data);
+        }
+    };
+    $("#fileForm").ajaxSubmit(ajax_option);
 };
 
 function checkhHtml5(){
@@ -50,7 +60,7 @@ function initMap(){
 
 //创建地图函数
 function createMap(){
-    var map = new BMap.Map("dituContent");//在百度地图容器中创建地图
+    var map = new BMap.Map("dituContent",{enableMapClick:false});//在百度地图容器中创建地图
     var point = new BMap.Point(121.448892,31.028955);//定义一个中心点坐标
     map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
     window.map = map;//将map变量存储在全局
@@ -337,7 +347,7 @@ function BMPA2PA(points){
 
 function routePlanning(arg_0){
     ifAddMarker=false;
-    btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
+    btn_addMarker.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
     console.log("generate path");
     $.ajax({
         url: IP+"generatePath",

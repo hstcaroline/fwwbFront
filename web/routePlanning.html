@@ -462,15 +462,14 @@
                                 <div class="btn red">
                                     <i class="icon-edit"></i> 添加站点
                                 </div>
-                                </p></li>
+                            </li>
 
-                            <li>
+                            <li><p>
                                 <div class="btn-group">
                                     <a id="createRoute" class="btn red" href="#" data-toggle="dropdown">
                                         &nbsp;<i class="icon-edit"></i> 生成路线&nbsp;</a>
                                     <ul class="dropdown-menu control-group hold-on-click pull-right">
                                         <div class="controls">
-
                                             <label class="radio line">
 
                                                 <input type="radio" name="optionsRadios1" value="option1"
@@ -498,8 +497,7 @@
                                 <div class="btn red tooltips" data-placement="left" data-original-title="撤销所有更改">
                                     <i class="icon-edit"></i> 重置地图
                                 </div>
-                                </p></li>
-
+                            </li>
                         </ul>
 
                         <div class="tab-content">
@@ -714,14 +712,12 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="fileUpload">
-                                <p>
-                                    <span class="label label-important">NOTE:</span>&nbsp;
-                                    支持浏览器版本 Chrome, Firefox, Safari, Opera & Internet Explorer 10.
-                                    <button id="submit-all" class="btn red pull-right mini">开始上传</button>
-                                </p>
-                                <script src="media/js/dropzone.js"></script>
-                                <form action="frame.html" id="my-dropzone" class="dropzone"></form>
-                                <script src="media/js/dropdownUpload.js"></script>
+                                <form id="fileForm" class="form-signin" role="form" method="post" enctype="multipart/form-data">
+                                    <h2 class="form-signin-heading">上传文件</h2>
+                                    <input id="file" type="file" class="form-control"/>
+                                    <br/>
+                                </form>
+                                <button id="upload" class="btn red pull-right mini" type="submit">上传</button>
                             </div>
                             <div class="tab-pane" id="routeEdit" style="min-height: 400px;overflow: auto">
                                 <a class="btn mini red tooltips" onclick="saveRoute()" data-placement="top" data-original-title="保存">
@@ -760,11 +756,12 @@
 <![endif]-->
 <script src="media/js/app.js"></script>
 <!-- PAGE LEVEL -->
-<script type="text/javascript" src="media/js/RoutePlanning.js"></script>
 <script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="media/js/routeEdit.js"></script>
 <script type="text/javascript" src="media/js/select2.min.js"></script>
 <script type="text/javascript" src="media/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="media/js/jquery.form.js"></script>
+<script type="text/javascript" src="media/js/RoutePlanning.js"></script>
+<script type="text/javascript" src="media/js/routeEdit.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
