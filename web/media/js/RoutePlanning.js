@@ -55,6 +55,11 @@ function initMap(){
     createMap();//创建地图
     setMapEvent();//设置地图事件
     addMapControl();//向地图添加控件
+    var home=new BMap.Marker(COMPANYADDR);
+    var icon=new BMap.Icon("media/image/logo.png", new BMap.Size(86,14));
+    home.setIcon(icon);
+    home.disableMassClear();
+    map.addOverlay(home);
 }
 
 //创建地图函数
