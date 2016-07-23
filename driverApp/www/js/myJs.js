@@ -22,4 +22,7 @@ function menuClick(id) {
     if(id=='myCar'){
         location.href = 'myCar.html';
     }
+    if(id=='news'){
+        location.href = 'news.html';
+    }
 }
