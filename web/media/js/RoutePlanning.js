@@ -2,27 +2,36 @@
  * Created by zouwenyun on 2016/6/30.
  */
 
-var btn_1 = document.getElementById("addMarker");
-
+var btn_addMarker = document.getElementById("addMarker");
+var btn_upload = document.getElementById("upload");
 //住址数组
 var markerArr = [];
 //站点数组
 var stationArr =[];
-var IP="http://192.168.1.2:3000/RoutePlanning/";
+var IP="http://192.168.1.9:3000/RoutePlanning/";
 var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];
-var routeCount=0;
 var ifAddMarker = false;
 var stationCount = 1;
-var driving =null;
+//var geoCoder=null;
 
-btn_1.onclick = function(){
+btn_addMarker.onclick = function(){
     if(ifAddMarker==true){
         ifAddMarker=false;
-        btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
+        btn_addMarker.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
     }else{
         ifAddMarker=true;
-        btn_1.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
+        btn_addMarker.innerHTML='<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
     }
+};
+btn_upload.onclick = function () {
+    console.log("upload click");
+    var ajax_option={
+        url:IP+"upLoadFile",
+        success:function (data) {
+            console.log(data);
+        }
+    };
+    $("#fileForm").ajaxSubmit(ajax_option);
 };
 
 function checkhHtml5(){
@@ -46,40 +55,20 @@ function initMap(){
     createMap();//创建地图
     setMapEvent();//设置地图事件
     addMapControl();//向地图添加控件
+    var home=new BMap.Marker(COMPANYADDR);
+    var icon=new BMap.Icon("media/image/logo.png", new BMap.Size(86,14));
+    home.setIcon(icon);
+    home.disableMassClear();
+    map.addOverlay(home);
 }
 
 //创建地图函数
 function createMap(){
-    var map = new BMap.Map("dituContent");//在百度地图容器中创建地图
-    var point = new BMap.Point(121.448892,31.028955);//定义一个中心点坐标
-    map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
+    var map = new BMap.Map("dituContent",{enableMapClick:false});//在百度地图容器中创建地图
+    map.centerAndZoom(COMPANYADDR,11);//设定地图的中心点和坐标并将地图显示在地图容器中
     window.map = map;//将map变量存储在全局
     checkhHtml5();
-    driving = new BMap.DrivingRoute(map, {
-        renderOptions: {//绘制结果
-            map: map,
-            autoViewport: true,
-            enableDragging: true
-        },
-        onSearchComplete: function(results){
-            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
-                var color = COLOR[(routeCount%COLOR.length)];
-                var plan = driving.getResults().getPlan(0);
-                var num = plan.getNumRoutes();
-                for(var i=0;i<num;i++){
-                    var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
-                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});
-                    polyline.type=2;
-                    //polyline.routeId=routeCount;
-                    map.addOverlay(polyline);
-                    PolylineRightClickHandler(polyline);
-                }
-                routeCount++;
-                driving.clearResults();
-            }
-        }
-    });
-    driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
+    //geoCoder=new BMap.Geocoder();
 }
 
 //地图事件设置函数：
@@ -88,16 +77,6 @@ function setMapEvent(){
     map.enableScrollWheelZoom();//启用地图滚轮放大缩小
     map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
     map.enableKeyboard();//启用键盘上下左右键移动地图
-    map.addEventListener("click", function(e){
-        var pos = e.point.lng + "|" + e.point.lat;
-        if(ifAddMarker==true){//添加站点
-            var marker = [{title:"站点_"+stationCount,content:"通过在页面点击添加",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
-            var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"站点_"+stationCount};
-            stationArr.push(point);
-            stationCount++;
-            addMarker(marker);
-        }
-    });
 }
 //地图控件添加函数：
 function addMapControl(){
@@ -177,7 +156,9 @@ function addMarker(Arr){
 //创建InfoWindow
 function createInfoWindow(Arr,i){
     var json = Arr[i];
-    var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+    var iw = new BMap.InfoWindow();//("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+    iw.setTitle(json.title);
+    iw.setContent(json.content);
     return iw;
 }
 //创建一个Icon
@@ -205,12 +186,32 @@ function addPolyline(plPoints){
     }
 }
 
-function getRoute(pointStart,pointEnd) {
-    driving.clearResults();
-    driving.search(pointStart, pointEnd);
-}
-
-function createRoute(markers) {//markers是一个Point数组
+function createRoute(markers,routeID) {//markers是一个Point数组
+    var routeId=parseInt(routeID);
+    var driving = new BMap.DrivingRoute(map, {
+        renderOptions: {//绘制结果
+            map: map,
+            autoViewport: true,
+            enableDragging: true
+        },
+        onSearchComplete: function(results){
+            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
+                var color = COLOR[(routeId%COLOR.length)];
+                var plan = driving.getResults().getPlan(0);
+                var num = plan.getNumRoutes();
+                for(var i=0;i<num;i++){
+                    var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组
+                    var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});
+                    polyline.type=2;
+                    polyline.routeId=routeId;
+                    map.addOverlay(polyline);
+                    PolylineRightClickHandler(polyline);
+                }
+                driving.clearResults();
+            }
+        }
+    });
+    driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
     var  group = Math.floor( markers.length /11 ) ;
     var mode = markers.length %11 ;
     for(var i =0;i<group;i++){
@@ -228,51 +229,7 @@ var ok_1 = document.getElementById("portlet-remove-ok");
 var ok_2 = document.getElementById("portlet-update-ok");
 var txt_title = document.getElementById("title");
 var txt_content = document.getElementById("content");
-function MarkerRightClickHandler(marker,iw){
-    var label = marker.getLabel();
-    var removeMarker = function(e,ee,marker) {//右键删除站点
-        $("#portlet-remove").modal('show');
-        ok_1.onclick = function () {
-            map.removeOverlay(marker);
-            $("#portlet-remove").modal('hide');
-        };
-        if (marker.type == 0) {
-            var index = indexOf(marker, markerArr);
-            if (index != -1) {
-                markerArr.splice(index, 1);
-            }
-        }else{
-            var index = indexOf(marker, stationArr);
-            if (index != -1) {
-                stationArr.splice(index, 1);
-                changeHints();
-            }
-        }
-    };
-    var updateMarker = function(){//右键更新站名
-        txt_title.value=label.getContent();
-        txt_content.value="";
-        $("#portlet-update").modal('show');
-        ok_2.onclick = function(){
-            label.setContent(txt_title.value);
-            iw.setContent("<b class='iw_poi_title' title='" + txt_title.value + "'>" + txt_title.value
-                + "</b><div class='iw_poi_content'>"+txt_content.value+"</div>");
-            iw.redraw();
-            $("#portlet-update").modal('hide');
-            if (marker.type == 1) {
-                var index = indexOf(marker, stationArr);
-                if (index != -1) {
-                    stationArr[index].name = txt_title.value;
-                    changeHints();
-                }
-            }
-        };
-    };
-    var markerMenu=new BMap.ContextMenu();
-    markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
-    markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
-    marker.addContextMenu(markerMenu);//给标记添加右键菜单
-}
+
 function PolylineRightClickHandler(polyline){
     var removePolyline = function(e,ee,polyline){//右键删除站点
         $("#portlet-remove").modal('show');
@@ -304,7 +261,7 @@ function PolylineRightClickHandler(polyline){
 
 function indexOf(marker,Arr) {
     for(var i=0;i<Arr.length;i++){
-        if( marker===Arr[i].id || marker.id == Arr[i].id)
+        if( marker==Arr[i].id || marker.id == Arr[i].id)
             return i;
     }
     return -1;
@@ -335,40 +292,6 @@ function BMPA2PA(points){
     return pointsArr;
 }
 
-function routePlanning(arg_0){
-    ifAddMarker=false;
-    btn_1.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
-    console.log("generate path");
-    $.ajax({
-        url: IP+"generatePath",
-        type: 'post',
-        dataType: "json",
-        data: {
-            points:parseSimplePoint(stationArr)//,
-           // policy:arg_0 路线生成策略
-        },
-        success: function(points){
-            console.log(points[0]);
-            //points 是二维数组,元素：[id,BMap.Point]
-            var stations = [];
-            for(var i=0;i<points.length;i++){
-                stations[i] = PA2BMPA(points[i],false);
-            }
-            //var stations=PA2BMPA(points,false);
-            var markers=[];
-            for(var i=0;i<stations.length;i++){
-		        markers[i]=new Array();
-                for(var j=0;j<stations[i].length;j++){
-                    markers[i][j] = stations[i][j][1];
-                }
-            }
-            clearOverlays(2);
-            for(var i=0;i<markers.length;i++){
-                createRoute(markers[i]);
-            }
-        }
-    });
-}
 //清理某类覆盖物
 function clearOverlays(type) {
     var allOverlay = map.getOverlays();
@@ -410,21 +333,26 @@ function changeHints() {
     }
 }
 
-function parseMarker(points) {
+function parseStationArr(points) {
     var pointsArr = [];
     for(var i=0;i<points.length;i++){
         pointsArr[i].pos = new BMap.Point(points[i].x,points[i].y);
-        pointsArr[i].id = -stationCount;
-        pointsArr[i].name = "未命名站点_"+stationCount;
-        stationCount++;
+        pointsArr[i].id = points[i].id;
+        pointsArr[i].name = points[i].name;
+        pointsArr[i].address = points[i].address;
+        pointsArr[i].num = points[i].num;
     }
     return pointsArr;
 }
-function parseSimplePoint(points) {
+function parseSimplePointArr(points) {
     pointsArr = [];
     for(var i=0;i<points.length;i++){
-        pointsArr[i] = {"x": points[i].pos.lng,
-            "y":points[i].pos.lat};
+        pointsArr[i] = {"x": points[i].pos.lng, 
+            "y":points[i].pos.lat,
+        "name":points[i].name,
+        "id":points[i].id,
+        "address":points[i].address,
+        "num":points[i].num};
     }
     return pointsArr;
 }

@@ -11,12 +11,10 @@
          var submitButton = document.querySelector("#submit-all");
          myDropzone = this;
          submitButton.addEventListener("click", function(e) {
-             if (this.getAcceptedFiles().length > 0) {
                  e.preventDefault();
                  e.stopPropagation();
                  myDropzone.options.autoProcessQueue = true;
                  myDropzone.processQueue(); // Tell Dropzone to process all queued files.
-             }
          });
 
          this.on("addedfile", function(file) {             

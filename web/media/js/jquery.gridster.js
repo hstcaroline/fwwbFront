@@ -2962,6 +2962,25 @@
         return $widgets;
     };
 
+    fn.get_widgets_at_col = function(col) {
+        var ga = this.gridmap;
+        var $widgets = $();
+        var length=0;
+        var max=0;
+        if (col) {
+            $widgets = $widgets.add(
+                this.$widgets.filter(function() {
+                    var tcol = $(this).attr('data-col');
+                    if(tcol === col){
+                        length++;
+                        return true;
+                    }
+                    return false;
+                })
+            );
+        }
+        return {wigets:$widgets,len:length};
+    };
 
     /**
     * Set the current height of the parent grid.
