@@ -34,14 +34,14 @@
         <h3 class="form-title">登录您的帐号</h3>
         <div class="alert alert-error" id="alertDiv" style="display: none;">
             <button class="close" data-dismiss="alert" onclick="closeDiv()" ></button>
-            <span>请输入用户名或密码,初始密码为000000,登录后请及时修改</span>
+            <span id="errorMsg">请输入用户名或密码,初始密码为000000,登录后请及时修改</span>
         </div>
 
         <div class="control-group">
             <div class="controls">
                 <div class="input-icon left">
                     <i class="icon-user"></i>
-                    <input class="m-wrap" type="text" placeholder="用户名" name="username">
+                    <input class="m-wrap" type="text" placeholder="用户名" id="username" value="SH02256">
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="controls">
                 <div class="input-icon left">
                     <i class="icon-lock"></i>
-                    <input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" name="password">
+                    <input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" id="password">
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     记住我
                 </label>
             </div>
-            <button class="btn blue pull-right" onclick="login()">
+            <button class="btn blue pull-right" type="submit" onclick="login()">
                 登录 <i class="icon-circle-arrow-right"></i>
             </button>
         </div>
@@ -100,11 +100,42 @@
 </body>
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script>
+   // var ip='http://192.168.1.4:3000/';
+   var ip = 'http://115.159.218.128:3000/';
+    //        job_number:"SH02256",password:"000000"
     function login() {
-        if ($("#username").val() == null || $("#password").val() == null) {
+        var job_number = $("#username").val();
+        var password =  $("#password").val();
+        if (job_number == "" || password == "") {
             $("#alertDiv").slideDown();
+        }else{
+            var postData = JSON.stringify({job_number:job_number,password:password});
+            $.ajax({
+                url: ip+'users/login',
+                type: 'POST',
+                async: false,
+                data: postData,
+                contentType: "application/json",
+                success: function (user) {
+                    if (user != "") {
+                        $.cookie('userId',user.id,{expires: 7, path: '/'});
+                        location.href='index.html';
+                    }
+                    else {
+                        $("#errorMsg").text('用户名或密码错误,初始密码为000000,登录后请及时修改');
+                        $("#alertDiv").slideDown();
+
+                    }
+                },
+                error: function (xhr, type, exception) {
+                    alert(type);
+                }
+            });
         }
+
+
     }
     function closeDiv(){
         $("#alertDiv").slideUp();

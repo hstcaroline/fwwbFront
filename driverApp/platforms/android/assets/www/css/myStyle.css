@@ -252,7 +252,7 @@ body, html, #allmap, #dituContent {
 .wc-toolbar .wc-title {
     text-align: center;
     padding: 0;
-    margin: 0 10%;
+    margin: 0 5%;
     font-size: 18px;
 }
 
@@ -456,10 +456,12 @@ body, html, #allmap, #dituContent {
 .login .content .m-wrap {
     width: 100%;
 }
+
 .input-icon.left input {
     padding-left: 33px !important;
     line-height: 30px;
 }
+
 .login .content .form-actions {
     background-color: transparent;
     clear: both;
@@ -468,16 +470,19 @@ body, html, #allmap, #dituContent {
     padding: 0px 30px 25px 30px;
     margin-right: -30px;
 }
+
 .form-actions:before, .form-actions:after {
     display: table;
     line-height: 0;
     content: "";
 }
+
 .login .content .form-actions .checkbox {
     display: inline-block;
     font-size: 13px;
     position: relative;
 }
+
 .login .content p, .login .content label {
     color: #fff;
 }
@@ -488,19 +493,212 @@ body, html, #allmap, #dituContent {
     background-color: #4d90fe;
 }
 
-
 .login .content .forget-password {
     border-top: 1px dotted #eee;
     padding-top: 10px;
     margin-top: 25px;
 }
+
 .login .content p, .login .content label {
     color: #fff;
 }
+
 .login .content h4 {
     color: #eee;
 }
+
 a {
     text-shadow: none !important;
     color: #0d638f;
 }
+
+/*myMsg*/
+.newsContainer {
+    width: 100%;
+    height: 17%;
+    padding: 0 5%;
+    border-bottom: 1px solid #eee;
+    margin-top: 5%;
+}
+
+.newsHead {
+    height: 60%;
+    float: left;
+    margin-bottom: 15%;
+}
+
+.newsContainer .userNameSpan {
+    margin-left: 5%;
+    font-size: 18px;
+}
+
+.sendTimeSpan {
+    float: right;
+    font-size: 14px;
+    color: #484747;
+}
+
+.newsContainer h5 {
+    margin-top: 5%;
+    padding-left: 20%;
+    color: #484747;
+}
+
+/*myCar*/
+
+.header .back {
+    float: left;
+    margin-top: 7%;
+    margin-left: 5%;
+}
+
+.header .icon-angle-left {
+    font-size: 20px;
+    color: white;
+}
+
+.mainContainer {
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.carInfo {
+    width: 100%;
+    margin: 2% 3%;
+}
+
+.car-config .column-head {
+    padding-left: 5%;
+    border-top: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    font-weight: 700;
+    height: 33px;
+    background-color: #f5f5f5;
+}
+
+.car-config .list li {
+    overflow: hidden;
+    width: 100%;
+    padding: 5% 5%;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+}
+
+.car-config .list li p {
+    float: right;
+    color: #999;
+}
+
+.car-config .column-head .column-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 33px;
+}
+
+.column-title:before {
+    content: "";
+    float: left;
+    height: 14px;
+    background-color: #22ac38;
+    width: 2px;
+    margin: 9px 5px 0 0;
+}
+
+.car-conent {
+    padding: 0;
+}
+
+.car-conent .tit2 {
+    color: #333;
+    background-color: #f4f4f4;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 24px;
+    position: relative;
+}
+
+.car-conent .tit2:after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #2baa3f;
+    top: 16px;
+    left: 10px;
+}
+
+.list {
+    padding-left: 0;
+}
+
+.report-list li {
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #d7d7d7;
+    padding: 0 5%;
+}
+
+.report-list li p {
+    font-size: 14px;
+    color: #333;
+}
+
+.report-list li span {
+    color: #333;
+    font-size: 14px;
+}
+
+.fr {
+    float: right;
+    width: 8%;
+}
+
+.car-conent .result.yes {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #22ac38;
+    border-radius: 50%;
+}
+
+.car-conent .result {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    /* text-align: center; */
+    vertical-align: middle;
+    position: relative;
+}
+
+.car-conent .result.yes:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 3px;
+    height: 7px;
+    border-bottom: 1px solid #22ac38;
+    border-right: 1px solid #22ac38;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 10;
+}
+
+.result.yes:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 3px;
+    height: 7px;
+    border-bottom: 1px solid #22ac38;
+    border-right: 1px solid #22ac38;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 10;
+}
+

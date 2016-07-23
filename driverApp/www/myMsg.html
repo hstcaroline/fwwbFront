@@ -51,15 +51,12 @@
             <span class="nameText">常旅客</span>
         </div>
     </div>
+
     <section class="menu-section" id="menu_section" style="display: none;">
         <ul class="menu-section-list">
             <li id="myInfo" onclick="menuClick(this.id)">
                 <img src="img/icon-info.png" class="menu-icon">
                 <span class="menu-span">我的资料</span>
-            </li>
-            <li id="myCar" onclick="menuClick(this.id)">
-                <img src="img/icon-drive.png" class="menu-icon">
-                <span class="menu-span">我的车辆</span>
             </li>
             <li id="myCash" onclick="menuClick(this.id)">
                 <img src="img/icon-cash.png" class="menu-icon">
@@ -84,71 +81,39 @@
             <img src="img/head.png" class="img-circle img-head js-slideout-toggle">
         </div>
         <div style="height: 100%;width:70%;float: right">
-            <span class="text-center">我的资料</span>
+            <span class="text-center">我的消息</span>
         </div>
     </div>
-    <div class="content">
-        <div class="headImg">
-            <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
-            <div id="editText" style="display: none;">
-
-                <a class="btn cancel" href="javascript:location.reload();">
-                    <i class="cancelImg"></i>
-                    <span style="color: red;font-size: 22px;">取消</span>
-                </a>
-                <a class="btn save" href="javascript:location.reload();">
-                    <i class="saveImg"></i>
-                    <span style="color: #3498db;font-size: 22px;">保存</span>
-                </a>
-
-
-                <!--<a class="saveText" href="#">保存</a>-->
-            </div>
+    <div class="content" style="height: 80%;overflow-y: auto;">
+        <div class="newsContainer">
+            <img class="img-circle newsHead" src="img/head/head1.png">
+            <span class="userNameSpan">小明</span>
+            <span class="sendTimeSpan">2016-05-02 18:03</span>
+            <h5 class="userName">今天是个好日子!!!</h5>
         </div>
-        <div class="table-responsive" style="border: 0px">
-            <table class="table table-hover">
-                <tbody>
-                <tr>
-                    <td><span>姓名:</span></td>
-                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
-                </tr>
-                <tr>
-                    <td><span>电话:</span></td>
-                    <td><input id="inputPhone" type="text" class="form-control" value="18200302934"></td>
-                </tr>
-                <tr>
-                    <td><span>住址:</span></td>
-                    <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
-                </tr>
-                <tr>
-                    <td><span>班次:</span></td>
-                    <td><input id="inputClasses" type="text" class="form-control" value="班次A"></td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="newsContainer">
+            <img class="img-circle newsHead" src="img/head/head2.jpg">
+            <span class="userNameSpan">小花</span>
+            <span class="sendTimeSpan">2016-05-02 18:03</span>
+            <h5 class="userName">美图秀秀卖广告!!!</h5>
         </div>
-        <div class="space">
+        <div class="newsContainer">
+            <img class="img-circle newsHead" src="img/head/head3.jpg">
+            <span class="userNameSpan">小强</span>
+            <span class="sendTimeSpan">2016-05-02 18:03</span>
+            <h5 class="userName">快~玩游戏</h5>
         </div>
-        <div class="table-responsive" style="border: 0px">
-            <table class="table table-hover">
-                <tbody>
-                <tr>
-                    <td><span>工号:</span></td>
-                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="G233">
-                    </td>
-                </tr>
-                <tr>
-                    <td><span>部门:</span></td>
-                    <td><input id="inputDepart" type="text" class="form-control" value="维修部"></td>
-                </tr>
-                <tr>
-                    <td><span>组别:</span></td>
-                    <td><input id="inputTeam" type="text" class="form-control" value="A组"></td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="newsContainer">
+            <img class="img-circle newsHead" src="img/head/head4.jpg">
+            <span class="userNameSpan">小亮</span>
+            <span class="sendTimeSpan">2016-05-02 18:03</span>
+            <h5 class="userName">吃饭不?</h5>
         </div>
-        <div class="space">
+        <div class="newsContainer">
+            <img class="img-circle newsHead" src="img/head/head5.jpg">
+            <span class="userNameSpan">小君</span>
+            <span class="sendTimeSpan">2016-05-02 18:03</span>
+            <h5 class="userName">拜拜~</h5>
         </div>
     </div>
     <div class="footer">
@@ -219,11 +184,4 @@
 //            }
 //        });
     };
-</script>
-<script type="text/javascript">
-    $("#editImg").click(function () {
-        $("#editImg").hide();
-        $("#editText").show();
-        $("#inputName").focus();
-    });
 </script>

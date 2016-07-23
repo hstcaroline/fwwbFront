@@ -51,22 +51,25 @@
             <span class="nameText">常旅客</span>
         </div>
     </div>
-
     <section class="menu-section" id="menu_section" style="display: none;">
         <ul class="menu-section-list">
-            <li id="myInfo">
+            <li id="myInfo" onclick="menuClick(this.id)">
                 <img src="img/icon-info.png" class="menu-icon">
                 <span class="menu-span">我的资料</span>
             </li>
-            <li id="myCash">
+            <li id="myCar" onclick="menuClick(this.id)">
+                <img src="img/icon-drive.png" class="menu-icon">
+                <span class="menu-span">我的车辆</span>
+            </li>
+            <li id="myCash" onclick="menuClick(this.id)">
                 <img src="img/icon-cash.png" class="menu-icon">
                 <span class="menu-span">我的工资</span>
             </li>
-            <li id="myMsg">
+            <li id="myMsg" onclick="menuClick(this.id)">
                 <img src="img/icon-message.png" class="menu-icon">
                 <span class="menu-span">我的消息</span>
             </li>
-            <li id="news">
+            <li id="news" onclick="menuClick(this.id)">
                 <img src="img/icon-news.png" class="menu-icon">
                 <span class="menu-span">公司动态</span>
             </li>
@@ -179,40 +182,42 @@
 </body>
 </html>
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script src="js/slideout.js"></script>
 <script src="js/myJs.js"></script>
 <script src="js/test.js"></script>
 <script>
     window.onload = function () {
+        var userId = $.cookie('userId');
         $('#menu_header').show();
         $('#menu_section').show();
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
             slideout.toggle();
         });
-        $.ajax({
-            url: 'http://192.168.1.4:3000/users/getDriver',
-            type: 'POST',
-            async: false,
-            data: {'id': 2},
-            dataType: 'json',
-            success: function (driver) {
-                if (driver != null) {
-                    $("#inputName").val(driver.name);
-                    $("#inputPhone").val(driver.phone);
-                    $("#inputAddr").val(driver.address);
-                    $("#inputClasses").val(driver.classes);
-                    $("#inputJobNum").val(driver.job_number);
-                    $("#inputDepart").val(driver.department);
-                    $("#inputTeam").val(driver.team);
-                }
-                else {
-                    alert('链接失败');
-                }
-            },
-            error: function (xhr, type, exception) {
-                alert(type);
-            }
-        });
+//        $.ajax({
+//            url: 'http://192.168.1.4:3000/users/getDriver',
+//            type: 'POST',
+//            async: false,
+//            data: {'id': userId},
+//            dataType: 'json',
+//            success: function (driver) {
+//                if (driver != null) {
+//                    $("#inputName").val(driver.name);
+//                    $("#inputPhone").val(driver.phone);
+//                    $("#inputAddr").val(driver.address);
+//                    $("#inputClasses").val(driver.classes);
+//                    $("#inputJobNum").val(driver.job_number);
+//                    $("#inputDepart").val(driver.department);
+//                    $("#inputTeam").val(driver.team);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
     };
 </script>
 <script type="text/javascript">
