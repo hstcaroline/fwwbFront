@@ -702,3 +702,78 @@ a {
     z-index: 10;
 }
 
+/*news*/
+.news{
+    margin-top: 10px;
+}
+.news ul {
+    padding: 0 10px;
+}
+
+.news li {
+    border-bottom: 1px solid #dadfe3;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.list li .f_c:first-child {
+    margin-bottom: 10px;
+}
+
+.news .list .date {
+    float: left;
+    display: inline-block;
+    height: 48px;
+    position: relative;
+    width: 48px;
+    margin-right: 10px;
+    background: url("../img/news/newsbg.png") no-repeat 0 -178px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.news .date span:first-child {
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+}
+
+.news .date span {
+    display: block;
+}
+
+.news .list .title {
+    color: #0e419c;
+    overflow: hidden;
+    display: block;
+    line-height: 25px;
+    margin-bottom: 10px;
+    font-size: 16px !important;
+    line-height: 24px;
+    max-height: 48px;
+    overflow: hidden;
+}
+
+.f_c:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.news .list .f_l {
+    margin-right: 10px;
+}
+
+.news .f_l {
+    float: left;
+}
+
+.news .list .f_l img {
+    width: 120px;
+    height: 90px;
+    vertical-align: middle;
+}
+
