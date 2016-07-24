@@ -3,7 +3,8 @@ Modify bootstrap buttons
 ***/
 
 /* remove rounds from all elements */
-div, input, select, textarea, span, img, table, td, th, p, a, button, ul, li {
+
+div:not(.timeDropper), input, select, textarea, span, img, table, td, th, p, a, button, ul, li {
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
@@ -456,7 +457,7 @@ textarea[disabled] {
   background-color: #F4F4F4 !important;
 }
 
-input[readonly],
+input[readonly]:not(.timeDropper),
 select[readonly],
 textarea[readonly] {
   cursor: not-allowed;
