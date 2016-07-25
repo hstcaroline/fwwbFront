@@ -321,6 +321,30 @@ $(document).ready(function() {
     });
 });
 
+//搜索功能：线路查询
+$(document).ready(function() {
+    //Sample 2
+    $('#routes_select2').select2({
+        placeholder: "线路名称...",
+        allowClear: true
+    });
+    $('#routes_select2').change(function() {
+        var i = parseInt($("#routes_select2").get(0).selectedIndex) - 1;
+        var id = routes[i].route.id;
+        map.clearOverlays();
+        var route = [];
+        for (var j = 0; j < routes[i].stations.length; j++) {
+            var station = routes[i].stations[j];
+            var pos = station.posx + "|" + station.posy;
+            var point = new BMap.Point(station.posx, station.posy);
+            route.push(point);
+            var marker = [{ title: station.name, content: station.address, point: pos, isOpen: 0, icon: { w: 15, h: 20, l: 0, t: 0, x: 6, lb: 5 }, id: station.id, type: 1 }];
+            addMarker(marker);
+        }
+        createRoute(route, id);
+    });
+});
+
 function setPlace(id) {
     //找到所有站点，比较名字
     for (var i = 0; i < stationArr.length; i++) {
@@ -336,6 +360,12 @@ function changeHints() {
     $('#stations_select2').append('<option value=""></option>');
     for (var i = 0; i < stationArr.length; i++) {
         $('#stations_select2').append('<option><span style="font-size: 20px">' + stationArr[i].name + '</span><span  style="font-size: 10px">' + stationArr[i].pos.lat + '\'N,' + stationArr[i].pos.lng + '\'E' + '</span></option>');
+    }
+
+    $('#routes_select2').empty();
+    $('#routes_select2').append('<option value=""></option>');
+    for (var i = 0; i < routes.length; i++) {
+        $('#routes_select2').append('<option><span style="font-size: 20px">' + routes[i].route.name + '</span></option>');
     }
 }
 
