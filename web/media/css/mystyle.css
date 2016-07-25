@@ -1,0 +1,29 @@
+.ui-widget-header{
+    border: 1px solid white;
+    background: #4d90fe;
+}
+
+.wc-toolbar .wc-title {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-size: 25px;
+}
+.ui-widget-header .ui-state-default {
+    border: 1px solid #4d90fe;
+     background: white ;
+    font-weight: normal;
+    height: 40px;
+    width: 70px;
+}
+.wc-header tr{
+    background: #4d90fe;
+    color: white;
+}
+.wc-cal-event .wc-title {
+    padding: 5%;
+    font-size: 17px;
+    color: white;
+    line-height: 20px;
+}
