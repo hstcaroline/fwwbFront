@@ -19,6 +19,7 @@ body {
 .slideout-panel {
  background-color: white;
   will-change: transform;
+  overflow-x: hidden;
 }
 
 .slideout-open,

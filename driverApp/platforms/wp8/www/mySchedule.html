@@ -32,19 +32,23 @@
 
     <section class="menu-section" id="menu_section" style="display: none;">
         <ul class="menu-section-list">
-            <li id="myInfo">
+            <li id="myInfo" onclick="menuClick(this.id)">
                 <img src="img/icon-info.png" class="menu-icon">
                 <span class="menu-span">我的资料</span>
             </li>
-            <li id="myCash">
+            <li id="myCar" onclick="menuClick(this.id)">
+                <img src="img/icon-drive.png" class="menu-icon">
+                <span class="menu-span">我的车辆</span>
+            </li>
+            <li id="myCash" onclick="menuClick(this.id)">
                 <img src="img/icon-cash.png" class="menu-icon">
                 <span class="menu-span">我的工资</span>
             </li>
-            <li id="myMsg">
+            <li id="myMsg" onclick="menuClick(this.id)">
                 <img src="img/icon-message.png" class="menu-icon">
                 <span class="menu-span">我的消息</span>
             </li>
-            <li id="news">
+            <li id="news" onclick="menuClick(this.id)">
                 <img src="img/icon-news.png" class="menu-icon">
                 <span class="menu-span">公司动态</span>
             </li>
@@ -65,11 +69,10 @@
     <!--</div>-->
     <div class="wc-container">
         <div class="ui-widget-header wc-toolbar" style="text-align: center">
-            <!--<span class="fc-text-arrow" onclick=getWeekNum(-6,0,'weekTime')>‹</span>-->
-            <i class="icon-angle-left" onclick=getWeekNum(-6,0,'weekTime')></i>
-            <span class="wc-title" id="weekTime" onclick="getWeekNum(1,7,this.id)">now</span>
-            <i class="icon-angle-right" onclick=getWeekNum(8,14,'weekTime');></i>
-            <!--<span class="fc-text-arrow" onclick=getWeekNum(8,14,'weekTime');>›</span></span>-->
+            <i class="icon-angle-left" onclick=getWeekNum(-6,0,'weekStartTime','weekEndTime')></i>
+            <span class="wc-title" id="weekStartTime" onclick="getWeekNum(1,7,'weekStartTime','weekEndTime')"></span>到
+            <span class="wc-title" id="weekEndTime" onclick="getWeekNum(1,7,'weekStartTime','weekEndTime')"></span>
+            <i class="icon-angle-right" onclick=getWeekNum(8,14,'weekStartTime','weekEndTime');></i>
         </div>
 
         <div class="ui-widget-content wc-header">
@@ -222,18 +225,42 @@
 <!--}-->
 <!--</script>-->
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script src="js/slideout.js"></script>
 <script src="js/myJs.js"></script>
 <script src="js/test.js"></script>
 <script src="js/date.js"></script>
 <script>
     window.onload = function () {
+        var driverId = $.cookie('userId');
         $('#menu_header').show();
         $('#menu_section').show();
-        getWeekNum(1, 7, 'weekTime');
+        getWeekNum(1, 7, 'weekStartTime', 'weekEndTime');
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
             slideout.toggle();
         });
+        var startTime = $("#weekStartTime").text();
+        var endTime = $("#weekEndTime").text();
+        var postData = JSON.stringify({id: driverId, startdate: startTime, enddate: endTime});
+//        $.ajax({
+//            url: 'http://192.168.1.4:3000/users/getRouteDriver',
+//            type: 'POST',
+//            async: false,
+//            data: postData,
+//            dataType: 'json',
+//            contentType: "application/json",
+//            success: function (driver) {
+//                if (driver != null) {
+//                    alert(driver);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
     };
 </script>
 </body>
