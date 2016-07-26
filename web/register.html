@@ -497,6 +497,9 @@
                                         </div>
                                         <div class="tab-pane" id="tab2">
                                             <h3 class="block">填写个人基本信息</h3>
+                                            <div class="alert">
+                                                请准确填写以下信息，若存在错误将无法注册新用户。
+                                            </div>
                                             <div class="control-group">
                                                 <label class="control-label">姓名<span class="required">*</span></label>
                                                 <div class="controls">
@@ -530,6 +533,7 @@
                                                         <option>技术部</option>
                                                         <option>采购部</option>
                                                         <option>后勤部</option>
+                                                        <option>行政部</option>
                                                         <option>董事长办公室</option>
                                                         <option>总经理办公室</option>
                                                         <option>经理办公室</option>
@@ -547,6 +551,19 @@
                                                         <option>B2组</option>
                                                         <option>C1组</option>
                                                         <option>C2组</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">职位</label>
+                                                <div class="controls">
+                                                    <select name="job" id="job_list" class="span6">
+                                                        <option>经理</option>
+                                                        <option>总监</option>
+                                                        <option>组长</option>
+                                                        <option>副组长</option>
+                                                        <option>干事</option>
+                                                        <option>管理员</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -613,6 +630,12 @@
                                                 </div>
                                             </div>
                                             <div class="control-group">
+                                                <label class="control-label">职位:</label>
+                                                <div class="controls">
+                                                    <span class="text display-value" data-display="job"></span>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
                                                 <label class="control-label">工作内容:</label>
                                                 <div class="controls">
                                                     <span class="text display-value" data-display="work"></span>
@@ -660,8 +683,8 @@
 <script src="media/js/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript" src="media/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="media/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript" src="media/js/select2.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript" src="media/js/jquery.gritter.js"></script>
 <script src="media/js/app.js"></script>
 <script src="media/js/register.js"></script>
