@@ -1,6 +1,4 @@
 var FormWizard = function () {
-
-
     return {
         //main function to initiate the module
         init: function () {
@@ -129,14 +127,20 @@ var FormWizard = function () {
                         $(this).html(input.val());
                     } else if (input.is("select")) {
                         $(this).html(input.find('option:selected').text());
-                    } else if (input.is(":radio") && input.is(":checked")) {
-                        $(this).html(input.attr("data-title"));
-                    } else if ($(this).attr("data-display") == 'card_expiry') {
-                        $(this).html($('[name="card_expiry_mm"]', form).val() + '/' + $('[name="card_expiry_yyyy"]', form).val());
+                    }else if ($(this).attr("data-display") == 'gender') {
+                        var gender = "";
+                        $('[name="gender"]').each(function(){
+                            if($(this).attr('checked')=='checked'){
+                                gender=($(this).attr('data-title'));
+                            }
+                        });
+                        $(this).html(gender);
                     } else if ($(this).attr("data-display") == 'authority') {
                         var authority = [];
                         $('[name="authority[]"]').each(function(){
-                            authority.push($(this).attr('data-title'));
+                            if($(this).attr('checked')=='checked'){
+                                authority.push($(this).attr('data-title'));
+                            }
                         });
                         $(this).html(authority.join("<br>"));
                     }
