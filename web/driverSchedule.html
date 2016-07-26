@@ -27,29 +27,7 @@
     <link rel='stylesheet' type='text/css' href='media/css/jquery.weekcalendar.css'/>
     <link href="media/css/mystyle.css" rel="stylesheet" type="text/css"/>
     <style type='text/css'>
-        body {
-            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-            margin: 0;
-        }
 
-        p.description {
-            font-size: 0.8em;
-            padding: 1em;
-            top: 3.2em;
-            margin-right: 400px;
-        }
-
-        #message {
-            font-size: 0.7em;
-            position: absolute;
-            top: 1em;
-            right: 1em;
-            width: 350px;
-            display: none;
-            padding: 1em;
-            background: #ffc;
-            border: 1px solid #dda;
-        }
     </style>
 </head>
 <!-- END HEAD -->
@@ -810,13 +788,11 @@
 
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_week" data-toggle="tab">按周统计</a></li>
-
                         <li class=""><a href="#tab_month" data-toggle="tab">按月统计</a></li>
-
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active " id="tab_week">
+                        <div class="tab-pane active" id="tab_week">
                             <div class="portlet-body light-grey">
                                 <div class="row-fluid">
                                     <div class="span12">
@@ -851,7 +827,37 @@
                         </div>
                         <div class="tab-pane " id="tab_month">
                             <div class="row-fluid">
+                                <div class="span12">
+                                    <!-- BEGIN BORDERED TABLE PORTLET-->
+                                    <div class="portlet box yellow">
+                                        <div class="portlet-title">
+                                            <div class="caption"><i class="icon-coffee"></i>月排班表</div>
+                                        </div>
 
+                                        <div class="portlet-body">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>线路</th>
+                                                    <th>司机</th>
+                                                    <th>车牌</th>
+                                                    <th>时间段</th>
+                                                    <th>是否缺勤</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody id="tableBody">
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- END BORDERED TABLE PORTLET-->
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -891,10 +897,11 @@
     var year = new Date().getFullYear();
     var month = new Date().getMonth();
     var day = new Date().getDate();
-    var url = 'http://192.168.1.7:3000/users/getRouteDriver';
+    var url = 'http://192.168.1.7:3000/users/getRouteDriverByDate';
     var eventData = {
         options: {
             allowEventDelete: true,
+            allowEventResize: false,
             data: url,
             eventDelete: function (calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
                 if (confirm('You want to delete this event?')) {
@@ -908,15 +915,50 @@
         events: [
             {
                 'id': 1,
-                'start': new Date(year, month, day, 12),
-                'end': new Date(year, month, day, 13, 35),
-                'title': '司机:李林,</br>' + '车牌:沪2345,</br>路线:线路1</br>'
+                "date":  new Date(2016, 7, 30),
+                'title': 'newwwd',
+                "status": "ready",
+                'driver': {
+                    "id": 1,
+                    "name": "司机A"
+                },
+                "route": {
+                    "id": 31,
+                    "name": "route",
+                    "time": null,
+                    "status": "ok"
+                },
             },
             {
                 'id': 2,
-                'start': new Date(year, month, day, 14),
-                'end': new Date(year, month, day, 14, 45),
-                'title': 'Dev Meeting'
+                "date":  new Date(2016, 7, 24),
+                "status": "ready",
+                'driver': {
+                    "id": 2,
+                    "name": "司机B"
+                },
+                "route": {
+                    "id": 29,
+                    "name": "route",
+                    "time": null,
+                    "status": "ok"
+                },
+            }, {
+                'id': 3,
+                "date":  new Date(2016, 7, 31),
+                'start': new Date(year, month, day),
+                'end': new Date(year, month, day),
+                "status": "ready",
+                'driver': {
+                    "id": 3,
+                    "name": "司机C"
+                },
+                "route": {
+                    "id": 36,
+                    "name": "route",
+                    "time": null,
+                    "status": "ok"
+                },
             },
 //            {
 //                'id': 3,
@@ -945,9 +987,50 @@
         ]
     }
     var newData = eventData;
+    var allRoute = [
+        {
+            "id": 29,
+            "name": "route1",
+            "time": 5
+        },
+        {
+            "id": 31,
+            "name": "route2",
+            "time": 7
+        },
+        {
+            "id": 34,
+            "name": "route3",
+            "time": 10
+        },
+        {
+            "id": 35,
+            "name": "route4",
+            "time": 5
+        },
+        {
+            "id": 36,
+            "name": "route5",
+            "time": 8
+        },
+        {
+            "id": 37,
+            "name": "route6",
+            "time": 8
+        }, {
+            "id": 38,
+            "name": "route7",
+            "time": 8
+        }, {
+            "id": 39,
+            "name": "route8",
+            "time": 8
+        }
+    ];
     $(document).ready(function () {
         // getData();
         showCalendar(eventData);
+        loadTable();
 
     });
     function getData() {
@@ -956,21 +1039,27 @@
             "id": 2,
             "startdate": "2016-7-18",
             "enddate": "2016-7-24"
-        }
-
+        };
+        //获取所有线路
+        $.get(ip + '/users/getRoutename', function (data) {
+            allRoute = data;
+        });
+        //获取当前时间段的所有排班信息
         $.post(ip + 'users/getRouteDriver', postData, function (data) {
             alert(data);
         });
+
     }
     function showCalendar(data) {
+
         $('#calendar').weekCalendar({
             data: data,
-            timeslotsPerHour: 4,
+            timeslotsPerHour: 1,
             allowCalEventOverlap: true,
             overlapEventsSeparate: true,
             totalEventsWidthPercentInOneColumn: 95,
             newEventText: 'title',
-
+            allRoute: allRoute,
             height: function ($calendar) {
                 return $(window).height() - $('h1').outerHeight(true);
             },
@@ -988,13 +1077,13 @@
                 alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
             },
             eventDrop: function (calEvent, $event) {
-                changeData(newData.events, calEvent.id, calEvent.start, calEvent.end);
+                changeData(calEvent.id, calEvent.route, calEvent.date);
                 displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
             },
-            eventResize: function (calEvent, $event) {
-                changeData(newData.events, calEvent.id, calEvent.start, calEvent.end);
-                displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
+//            eventResize: function (calEvent, $event) {
+//                changeData(newData.events, calEvent.id, calEvent.start, calEvent.end);
+//                displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+//            },
             eventClick: function (calEvent, $event) {
                 displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
             },
@@ -1022,17 +1111,34 @@
 
         $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
     }
-    function changeData(data, id, startTime, endTime) {
-        var length = data.length;
+    function changeData( id, route, date) {
+        var newEvents = newData.events;
+        var length = newEvents.length;
         for (var i = 0; i < length; i++) {
-            if (id == data[i].id) {
-                data[i].start = startTime;
-                data[i].end = endTime;
+            if (id == newEvents[i].id) {
+                newEvents[i].route = route;
+                newEvents[i].date = date;
             }
         }
     }
     function saveSchedule() {
         showCalendar(newData);
+    }
+    function loadTable() {
+        var days = Date.getDaysInMonth(new Date().getFullYear(), new Date().getMonth());
+        var scheduleNum = 5;
+        for (var i = 1; i < days + 1; i++) {
+            var day = '<tr><td rowspan="' + scheduleNum + '"> 6月' + i + '日</td>';
+            var route = '';
+            for (var k = 0; k < 5; k++) {
+                if (k != 0) {
+                    route += '<tr>';
+                }
+                route += '<td>线路A</td><td>司机A</td><td>沪A2244</td>线路A<td>7:00 am-9:00 am</td><td>否</td>';
+                route += '</tr>';
+            }
+            $("#tableBody").append(day + route);
+        }
     }
 </script>
 </body>

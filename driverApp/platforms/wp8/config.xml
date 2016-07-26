@@ -17,7 +17,7 @@
         Don Coleman
     </author>
     <access origin="*" />
-    <content src="index.html" />
+    <content src="login.html" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
 </widget>

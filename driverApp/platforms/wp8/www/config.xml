@@ -10,5 +10,9 @@
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
-    <content src="index.html" />
+    <content src="login.html" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon src="res/icon/blackberry10/icon-80.png" density="ldpi" />
+    </platform>
 </widget>
