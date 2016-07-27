@@ -23,6 +23,7 @@
     <!--引用百度地图API-->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
     <script type="text/javascript" src="js/myJs.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <title>Hello World</title>
     <style type="text/css">
 		body, html,#dituContent {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
@@ -63,8 +64,7 @@
 </html>
 <script type="text/javascript">
     // 百度地图API功能
-    var IP = "http://192.168.1.7:3000/socket";
-    var IP2 = "http://192.168.1.7:3000/users"
+    var IP = "http://192.168.1.7:3000/drivingManager";
     var curStationIndex = null;
     var stations = new Array();
     var posPushTimer = null;
@@ -82,7 +82,7 @@
     if(routeId!=null){
         console.log('ready');
         $.ajax({
-            url: IP2+'/getRouteById',
+            url: IP+'/getRouteById',
             type: 'post',
             data: {
                 id: routeId
@@ -92,15 +92,24 @@
                 console.log(data);
                 var len = data.stations.length;
                 var transit = new BMap.DrivingRoute(map, {
-                    renderOption: {
-                        map: null
+                    renderOptions: {
+                        map: null,
+                        autoViewPort: true
                     },
                     onSearchComplete: function(results){
 
                         if(transit.getStatus()==BMAP_STATUS_SUCCESS){
                             console.log('search ok');
-                            var pts = results.getPlan(0).getRoute(0).getPath();
+                            var pts = new Array();
+                            for(var i=0;i<len-1;i++){
+                                var temPts = results.getPlan(0).getRoute(i).getPath();
+                                if(temPts!=null){
+                                    pts = pts.concat(temPts);
+                                }
+                            }
+                            //var pts = results.getPlan(0).getRoute(1).getPath();
                             var temColor = "#000000";
+                            console.log(pts.length);
                             for(var i=0;i<pts.length;i++){
                                 var temPts = new Array();
                                 for(var j=0;j<15&&i<pts.length;j++){
@@ -112,26 +121,27 @@
                                 }else{
                                     temColor = "#0088FF";
                                 }
-
-                                var temPolyline = new BMap.Polyline(temPts, {strokeColor: temColor, strokeWeight: 10, strokeOpacity: 0.9});
+                                var temPolyline = new BMap.Polyline(temPts, {strokeColor: temColor, strokeWeight: 8, strokeOpacity: 0.9});
                                 map.addOverlay(temPolyline);
                             }
-                            // var polyline = new BMap.Polyline(pts, {strokeColor: "#0022FF", strokeWeight: 10, strokeOpacity: 0.9});
-                            // map.addOverlay(polyline);
                             var centerPoint = new BMap.Point(data.stations[len/2].posx, data.stations[len/2].posy);
-                            map.centerAndZoom(centerPoint, 13);
+                            map.centerAndZoom(centerPoint, 12);
                         }
                     }
                 });
 
                 var startPoint = new BMap.Point(data.stations[0].posx, data.stations[0].posy);
+                map.addOverlay(new BMap.Marker(startPoint));
                 var endPoint = new BMap.Point(data.stations[len-1].posx, data.stations[len-1].posy);
+                map.addOverlay(new BMap.Marker(endPoint));
                 var wayStations = new Array();
                 for(var i=1;i<len-1;i++){
                     var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
+                    map.addOverlay(new BMap.Marker(temPoint));
                     wayStations.push(temPoint);
                 }
-                transit.search(startPoint, endPoint, {waypoint: wayStations});
+                transit.search(startPoint, endPoint, {waypoints: wayStations});
+                //transit.search(startPoint, endPoint);
             }
         });
     }
@@ -198,4 +208,9 @@
             });
         });
     }
+    function playAudio(url){
+        var my_media = new Media(url, null, null);
+        my_media.play();
+    }
+    //playAudio("h123.mp3");
 </script>
