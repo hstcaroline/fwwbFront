@@ -4,11 +4,11 @@
 /**
  * 日期范围工具类
  */
-$(function () { ;
+$(function () {
+    ;
 });
 
-function getWeekNum(snum, lnum, id)
-{
+function getWeekNum(snum, lnum, startId, endId) {
     var myDate = new Date();
     var day = myDate.getDay();//返回0-6
     //var today = new Array('星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六');
@@ -18,8 +18,8 @@ function getWeekNum(snum, lnum, id)
 
     endday = getthisDay(-day + lnum); //算得周日
     startday = getthisDay(-day + snum);//算的周一
-
-    $("#"+id).html(startday+'到'+endday);
+    $("#" + startId).text(startday);
+    $("#" + endId).html(endday);
 }
 //取得日期
 function getthisDay(day) {
@@ -46,7 +46,7 @@ function getdaybytype(type) {
             getWeekNum(1, 7);
             break;
         case 2:
-            getWeekNum(-6,0);
+            getWeekNum(-6, 0);
             break;
         case 3:
             getWeekNum(8, 14);

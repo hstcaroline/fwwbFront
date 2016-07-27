@@ -1,22 +1,5 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
 <head>
     <!--
@@ -38,20 +21,31 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
     <!--引用百度地图API-->
-    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
     <script type="text/javascript" src="js/myJs.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <title>Hello World</title>
+    <style type="text/css">
+		body, html,#dituContent {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
 </head>
 <body>
 
-<!--百度地图容器-->
-<!--<div id = "dituContent"></div>-->
 
 
-<!--</div>-->
+<!-- <div>
+    <button>haha</button>
+    <button>hehe</button>
+</div> -->
+<div class="header">
+    <button id="startRoute">开始</button>
+    <button id="nextStation">下一站</button>
+    <button id="stopRoute">结束</button>
+</div>
 <div id="dituContent"></div>
 
 <div class="footer">
+
     <ul class="nav nav-tabs" style="height: 100%">
         <li>
             <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img" src="img/icon_location_checked.png"/></a>
@@ -70,10 +64,153 @@
 </html>
 <script type="text/javascript">
     // 百度地图API功能
-    var map = new BMap.Map("dituContent");    // 创建Map实例
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
-    map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
-    map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
-    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    var IP = "http://192.168.1.7:3000/drivingManager";
+    var curStationIndex = null;
+    var stations = new Array();
+    var posPushTimer = null;
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+    var routeId = getUrlParam("routeId");
+    var map = new BMap.Map("dituContent", {enableMapClick: false});    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(121.48187, 31.240698), 14);  // 初始化地图,设置中心点坐标和地图级别
 
+    map.enableScrollWheelZoom();     //开启鼠标滚轮缩放
+
+    if(routeId!=null){
+        console.log('ready');
+        $.ajax({
+            url: IP+'/getRouteById',
+            type: 'post',
+            data: {
+                id: routeId
+            },
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                var len = data.stations.length;
+                var transit = new BMap.DrivingRoute(map, {
+                    renderOptions: {
+                        map: null,
+                        autoViewPort: true
+                    },
+                    onSearchComplete: function(results){
+
+                        if(transit.getStatus()==BMAP_STATUS_SUCCESS){
+                            console.log('search ok');
+                            var pts = new Array();
+                            for(var i=0;i<len-1;i++){
+                                var temPts = results.getPlan(0).getRoute(i).getPath();
+                                if(temPts!=null){
+                                    pts = pts.concat(temPts);
+                                }
+                            }
+                            //var pts = results.getPlan(0).getRoute(1).getPath();
+                            var temColor = "#000000";
+                            console.log(pts.length);
+                            for(var i=0;i<pts.length;i++){
+                                var temPts = new Array();
+                                for(var j=0;j<15&&i<pts.length;j++){
+                                    temPts.push(pts[i]);
+                                    i++;
+                                }
+                                if(temColor=="#0088FF"){
+                                    temColor = "#000000";
+                                }else{
+                                    temColor = "#0088FF";
+                                }
+                                var temPolyline = new BMap.Polyline(temPts, {strokeColor: temColor, strokeWeight: 8, strokeOpacity: 0.9});
+                                map.addOverlay(temPolyline);
+                            }
+                            var centerPoint = new BMap.Point(data.stations[len/2].posx, data.stations[len/2].posy);
+                            map.centerAndZoom(centerPoint, 12);
+                        }
+                    }
+                });
+
+                var startPoint = new BMap.Point(data.stations[0].posx, data.stations[0].posy);
+                map.addOverlay(new BMap.Marker(startPoint));
+                var endPoint = new BMap.Point(data.stations[len-1].posx, data.stations[len-1].posy);
+                map.addOverlay(new BMap.Marker(endPoint));
+                var wayStations = new Array();
+                for(var i=1;i<len-1;i++){
+                    var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
+                    map.addOverlay(new BMap.Marker(temPoint));
+                    wayStations.push(temPoint);
+                }
+                transit.search(startPoint, endPoint, {waypoints: wayStations});
+                //transit.search(startPoint, endPoint);
+            }
+        });
+    }
+    $("#nextStation").click(function(){
+        console.log("to next station");
+        if(stations.length>curStationIndex+1){
+            curStationIndex++;
+        }
+    });
+    $("#startRoute").click(function(){
+        console.log("start route");
+        $.ajax({
+            url: IP+'/startDrive',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                routeId: routeId
+            },
+            success: function(data){
+                console.log(data);
+            }
+        });
+        if(stations.length!=0){
+            curStationIndex = 0;
+            posPushTimer = window.setInterval(pushPosition, 1000);
+        }
+        posPushTimer = window.setInterval(pushPosition, 10000);
+    });
+
+    $("#stopRoute").click(function(){
+        console.log("stop route");
+        $.ajax({
+            url: IP+'/stopDrive',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                routeId: routeId
+            },
+            success: function(data){
+                console.log(data);
+            }
+        });
+        window.clearInterval(posPushTimer);
+    });
+    function pushPosition(){
+        var geolocation = new BMap.Geolocation();
+        console.log('ready to push');
+        geolocation.getCurrentPosition(function(r){
+            console.log(r);
+            $.ajax({
+                url: IP+'/pushPosition',
+                type: 'post',
+                dataType: 'json',
+                data:{
+                    routeId: routeId,
+                    point:{
+                        lng: r.point.lng,
+                        lat: r.point.lat
+                    }
+                },
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        });
+    }
+    function playAudio(url){
+        var my_media = new Media(url, null, null);
+        my_media.play();
+    }
+    //playAudio("h123.mp3");
 </script>
