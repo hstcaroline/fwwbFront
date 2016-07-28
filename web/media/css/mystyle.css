@@ -114,3 +114,11 @@ p.description {
     margin-right: 20px;
     width: 80px;
 }
+/*driverMonthSchedule*/
+.dataTable .details td, .dataTable .details th {
+    border: 1px solid #ddd;
+    text-align:center;
+}
+.dataTable .details tr :hover {
+    opacity: 0.4;
+}
