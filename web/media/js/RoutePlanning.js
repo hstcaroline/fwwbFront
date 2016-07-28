@@ -8,7 +8,7 @@ var btn_upload = document.getElementById("upload");
 var markerArr = [];
 //站点数组
 var stationArr =[];
-var IP="http://192.168.1.9:3000/RoutePlanning/";
+var IP="http://192.168.1.7:3000/RoutePlanning/";
 var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];
 var ifAddMarker = false;
 var stationCount = 1;

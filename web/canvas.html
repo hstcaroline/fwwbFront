@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>车辆信息 | 厂车管理系统</title>
+    <title>员工信息 | 厂车管理系统</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
@@ -22,23 +22,18 @@
     <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
-    <!-- BEGIN PAGE LEVEL STYLES-->
-    <!--拖拽上传界面显示css-->
-    <link href="media/css/dropzone.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="media/css/jquery.gridster.min.css">
+    <!-- BEGIN PAGE LEVEL STYLES -->
     <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-    <link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-    <!-- END PAGE LEVEL STYLES-->
-    <!--引用百度地图API-->
-    <script type="text/javascript"src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+    <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+    <!-- END PAGE LEVEL STYLES -->
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class="page-header-fixed page-sidebar-closed">
+<body class="page-header-fixed">
 <!-- BEGIN HEADER -->
 <div class="header navbar navbar-inverse navbar-fixed-top">
-
     <!-- BEGIN TOP NAVIGATION BAR -->
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -357,39 +352,6 @@
 
     <!-- BEGIN PAGE -->
     <div class="page-content">
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-        <div id="portlet-remove" class="modal fade hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>注意</h3>
-            </div>
-            <div class="modal-body">
-                <p><h4> 此操作不可撤销，确认删除？</h4></p>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn">取 消</button>
-                <button id="portlet-remove-ok" class="btn green">确 定</button>
-            </div>
-        </div>
-
-        <div id="portlet-update" class="modal fade hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>修改</h3>
-            </div>
-            <div class="modal-body">
-                <div id="portlet-content">
-                    <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
-                    <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn">取 消</button>
-                <button id="portlet-update-ok" class="btn green">确 定</button>
-            </div>
-        </div>
-
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
@@ -438,328 +400,151 @@
                         </div>
                     </div>
                     <!-- END STYLE CUSTOMIZER -->
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <h3 class="page-title">
+                        员工
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="index.html">首页</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">信息管理</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li><a href="#">员工</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
                 </div>
             </div>
             <!--开始内容-->
             <div class="row-fluid">
-                <div class="span12">
-                    <!--BEGIN TABS-->
-                    <div class="tabbable tabbable-custom tabs-right" style="padding-top: 10px;">
-                        <!-- Only required for left/right tabs -->
-                        <ul class="nav nav-tabs tabs-right">
-                            <li class="active"><a href="#mapRoutePlanning" data-toggle="tab">
-                                <i class="icon-picture"></i> 地图</a></li>
-                            <li><a href="#mapData" data-toggle="tab">
-                                <i class="icon-dashboard"></i> 数据</a></li>
-
-                            <li><a href="#fileUpload" data-toggle="tab">
-                                <i class="icon-dashboard"></i> 导入</a></li>
-
-                            <li><a href="#routeEdit" data-toggle="tab">
-                                <i class="icon-dashboard"></i> 路线编辑</a></li>
-
-                            <li id="addMarker"><p>
-                                <div class="btn red">
-                                    <i class="icon-edit"></i> 添加站点
-                                </div>
-                            </li>
-
-                            <li><p>
-                                <div class="btn-group">
-                                    <a id="createRoute" class="btn red" href="#" data-toggle="dropdown">
-                                        &nbsp;<i class="icon-edit"></i> 生成路线&nbsp;</a>
-                                    <ul class="dropdown-menu control-group hold-on-click pull-right">
-                                        <div class="controls">
-                                            <label class="radio line">
-
-                                                <input type="radio" name="optionsRadios1" value="option1"
-                                                       onclick="routePlanning(0)"/>
-                                                时间最短
-                                            </label>
-
-                                            <label class="radio line">
-                                                <input type="radio" name="optionsRadios1" value="option2"
-                                                       onclick="routePlanning(1)" checked/>
-                                                成本最低
-                                            </label>
-
-                                            <label class="radio line">
-                                                <input type="radio" name="optionsRadios1" value="option3"
-                                                       onclick="routePlanning(2)"/>
-                                                乘坐率最高
-                                            </label>
-                                        </div>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li id="reloadMap"><p>
-                                <div class="btn red tooltips" data-placement="left" data-original-title="恢复最新保存的方案">
-                                    <i class="icon-edit"></i> 撤销更改
-                                </div>
-                            </li>
-
-                            <li id="resetStations"><p>
-                                <div class="btn red tooltips" data-placement="left" data-original-title="删除所有更改">
-                                    <i class="icon-edit"></i> 生成站点
-                                </div>
-                            </li>
-                            <li id="selecttime"><p>
-                                <label>时间</label>
-                                <div>
-                                <select id="selectroutetime" class="form-control">
-                                    <option value="1">0:00-2:00</option>
-                                    <option value="2">2:00-4:00</option>
-                                    <option value="3">4:00-6:00</option>
-                                    <option value="4">6:00-8:00</option>
-                                    <option value="5" selected>8:00-10:00</option>
-                                    <option value="6">10:00-12:00</option>
-                                    <option value="7">12:00-14:00</option>
-                                    <option value="8">14:00-16:00</option>
-                                    <option value="9">16:00-18:00</option>
-                                    <option value="10">18:00-20:00</option>
-                                    <option value="11">20:00-22:00</option>
-                                </select>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="mapRoutePlanning">
-                                <!--百度地图容器-->
-                                <div id="map">
-                                    <div class="control-group span6">
-                                        <div class="controls select2-wrapper">
-                                            <select id="stations_select2" class="span11" name="options2">
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>
-                                </div>
-                            </div>
-                            <div class="tab-pane flip-scroll" id="mapData">
-                                <p>
-                                <div class="glyphicons no-js bus"><i></i></div>
-                                </p>
-                                <table class="table table-striped table-hover table-condensed flip-content">
-                                    <thead class="flip-content">
-                                    <tr>
-                                        <th>#</th>
-
-                                        <th>班次</th>
-
-                                        <th>厂车类型</th>
-
-                                        <th>始发站</th>
-
-                                        <th>终点站</th>
-
-                                        <th>始发时间</th>
-
-                                        <th>到达时间</th>
-
-                                        <th class="numeric">预计载客数</th>
-
-                                        <th class="numeric">最大载客数</th>
-
-                                        <th class="numeric">司机工号</th>
-
-                                        <th>状态</th>
-
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-
-                                        <td>0830沪B43265</td>
-
-                                        <td>大巴</td>
-
-                                        <td>建德花园站</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>08:30</td>
-
-                                        <td>09:40</td>
-
-                                        <td class="numeric">35</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12335</td>
-
-                                        <td><span class="label label-success">运行中</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-
-                                        <td>0845沪B43873</td>
-
-                                        <td>大巴</td>
-
-                                        <td>人民广场</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>08:45</td>
-
-                                        <td>10：05</td>
-
-                                        <td class="numeric">52</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12352</td>
-
-                                        <td><span class="label label-success">运行中</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-
-                                        <td>1415沪B43265</td>
-
-                                        <td>大巴</td>
-
-                                        <td>恒大华城站</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>14:15</td>
-
-                                        <td>14:50</td>
-
-                                        <td class="numeric">15</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12842</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-
-                                        <td>2005沪B43873</td>
-
-                                        <td>大巴</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>恒大华城站</td>
-
-                                        <td>20:05</td>
-
-                                        <td>20:40</td>
-
-                                        <td class="numeric">15</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12842</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-
-                                        <td>1830沪B43265</td>
-
-                                        <td>大巴</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>建德花园站</td>
-
-                                        <td>18:30</td>
-
-                                        <td>19:40</td>
-
-                                        <td class="numeric">33</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12212</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-
-                                        <td>1635沪B32765</td>
-
-                                        <td>大巴</td>
-
-                                        <td>宝山站</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>16:35</td>
-
-                                        <td>18:00</td>
-
-                                        <td class="numeric">47</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12352</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-
-                                        <td>1200沪B32765</td>
-
-                                        <td>大巴</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>宝山站</td>
-
-                                        <td>12:00</td>
-
-                                        <td>13:25</td>
-
-                                        <td class="numeric">47</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12352</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="fileUpload">
-                                <form id="fileForm" class="form-signin" role="form" method="post" enctype="multipart/form-data">
-                                    <h2 class="form-signin-heading">上传文件</h2>
-                                    <input id="file" type="file" class="form-control"/>
-                                    <br/>
-                                </form>
-                                <button id="upload" class="btn red pull-right mini" type="submit">上传</button>
-                            </div>
-                            <div class="tab-pane" id="routeEdit" style="min-height: 400px;overflow: auto">
-                                <a class="btn mini red tooltips" onclick="saveRoute()" data-placement="top" data-original-title="保存">
-                                    <i class="icon-save"></i></a>
-                                <a class="btn mini green tooltips" id="gritter-help" data-placement="top" data-original-title="帮助">
-                                    <i class="icon-bookmark"></i></a>
-                                <section style="width: 100%; height: 100%">
-                                    <div class="gridster" id="grid">
-                                        <ul id="blocks"></ul>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END TABS-->
-                </div>
+                <canvas id="myCanvas" width=2000 height=80 class="span12"></canvas>
+                <script type="text/javascript">
+                var canvas=document.getElementById('myCanvas');
+                var ctx=canvas.getContext('2d');
+                var canvas_point1,canvas_point2;
+                var canvas_left,canvas_right;
+                var canvas_select=0;
+                var poss=0;
+                var months=["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.font = canvas.width/80+"pt Calibri";
+                //ctx.strokeStyle = 'rgba(255,255,255,1)';
+                //ctx.lineWidth = canvas.width/1000;
+                function draw(){
+                    ctx.clearRect(0,0,canvas.width,canvas.height+10);
+                    ctx.fillStyle='#3D3D3D';
+                    ctx.fillRect(0,0,canvas.width,canvas.height);
+                    //ctx.fillRect(canvas_point2,0,canvas.width-canvas_point2,10);
+                    ctx.fillStyle='#E02222';                    
+                    ctx.fillRect(canvas_point1,0,canvas_point2-canvas_point1,canvas.height);
+                    ctx.fillStyle='#FFFFFF';
+                    var linetop=canvas.height/10*8.5;
+                    var step=canvas.width/360;
+                    var posl=0;//canvas.width/720;
+                    for(var i=0;i<360;i++){
+                        //ctx.moveTo(posl,linetop);
+                        //if(i%30==0) ctx.moveTo(posl,canvas.height/10*7);
+                        if(i%30==0) ctx.fillRect(posl,canvas.height/10*7,canvas.width/1000,canvas.height*0.3);
+                        else        ctx.fillRect(posl,linetop,canvas.width/1000,canvas.height*0.15);
+                        posl+=step;
+                    }
+                    //ctx.stroke();
+                    for(var i=0;i<12;i++)
+                        ctx.fillText(months[i],i*canvas.width/12+canvas.width/24,canvas.height/2);  
+
+                }
+                //canvas.onclick=function(e){
+                //    console.log(e);
+                //    console.log(canvas.clientWidth);
+                //}
+                canvas.onmousedown=function(e){
+                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                    if(pos>canvas_point1&&pos<canvas_point2){
+                        canvas_select=3;
+                        poss=pos;
+                        canvas_left=pos-canvas_point1;
+                        canvas_right=canvas_point2-pos;
+                    }
+                    /*
+                    if(Math.abs(pos-canvas_point1)<4&&Math.abs(pos-canvas_point1)<Math.abs(pos-canvas_point2))
+                        canvas_select=1;
+                    if(Math.abs(pos-canvas_point2)<4&&Math.abs(pos-canvas_point1)>=Math.abs(pos-canvas_point2))
+                        canvas_select=2;*/
+                }
+                canvas.onmousemove=function(e){
+                    if(canvas_select==3){
+                        var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                        if(Math.abs(pos-poss)>5){
+                            canvas_point1=pos-canvas_left;
+                            canvas_point2=pos+canvas_right;
+                            draw();
+                            poss=pos;
+                        }
+                        return;
+                    }
+                    if(canvas_select==1){
+                        var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                        canvas_point1=pos;
+                        draw();
+                    }
+                    if(canvas_select==2){
+                        var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                        canvas_point2=pos;
+                        draw();
+                    }
+                }
+                canvas.onmouseup=function(e){
+                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                    if(canvas_select==1){
+                        canvas_point1=pos;
+                        draw();
+                    }
+                    if(canvas_select==2){
+                        canvas_point2=pos;
+                        draw();
+                    }
+                    canvas_select=0;
+                }
+                canvas.onmousewheel=function(e){
+                    console.log(e.wheelDelta);
+                    console.log((canvas_point2-canvas_point1)*365/canvas.width);
+                    if(e.wheelDelta>0&&(canvas_point2-canvas_point1)*365/canvas.width<21){
+                        canvas_point1-=canvas.width/365;
+                        canvas_point2+=canvas.width/365;
+                        draw();
+                    } 
+                    if(e.wheelDelta<0&&(canvas_point2-canvas_point1)*365/canvas.width>3){
+                        canvas_point1+=canvas.width/365;
+                        canvas_point2-=canvas.width/365;
+                        draw();
+                    } 
+
+                }
+                function canvasselect(x,y){
+                    canvas_point1=x*canvas.width/365;
+                    canvas_point2=y*canvas.width/365;
+                    draw();
+                }
+                canvasselect(150,180);
+                i=120;
+                var date=new Date("2016-1-1");
+                date.setDate(date.getDate()+i);
+                var s=(date.getMonth()+1)+"-"+date.getDate();
+                console.log(s);
+                </script>
             </div>
+            </div>
+
         </div>
+
+
+
     </div>
     <!-- END PAGE CONTAINER-->
 
@@ -778,18 +563,23 @@
 <script src="media/js/excanvas.min.js"></script>
 <script src="media/js/respond.min.js"></script>
 <![endif]-->
-<script src="media/js/app.js"></script>
-<!-- PAGE LEVEL -->
-<script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
 <script type="text/javascript" src="media/js/select2.min.js"></script>
-<script type="text/javascript" src="media/js/jquery.gritter.js"></script>
-<script type="text/javascript" src="media/js/jquery.form.js"></script>
-<script type="text/javascript" src="media/js/RoutePlanning.js"></script>
-<script type="text/javascript" src="media/js/routeEdit.js"></script>
+<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+<script src="media/js/table-editable.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="media/js/app.js"></script>
+
+<!--导出为csv文件-->
+<script src="media/js/toExcel.js"></script>
 <script>
     jQuery(document).ready(function () {
-        App.init();
+//        App.init();
+        TableEditable.init();
     });
+
 </script>
+
 </body>
 </html>
