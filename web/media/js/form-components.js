@@ -95,10 +95,11 @@ var FormComponents = function () {
 
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
-                rtl : App.isRTL()
+                rtl : App.isRTL(),
+                format: 'yyyy-mm-dd'
             });
         }
-    }
+    };
 
     var handleTimePickers = function () {
         
@@ -414,11 +415,17 @@ var FormComponents = function () {
     }
 
     var handleMultiSelect = function () {
-        $('#my_multi_select1').multiSelect();
-        $('#my_multi_select2').multiSelect({
-            selectableOptgroup: true
-        });        
-    }
+        var select1=$('#my_multi_select1');
+        var select2=$('#my_multi_select2');
+        if(select1.length>0){
+            select1.multiSelect();
+        }
+        if(select2.length>0){
+            select2.multiSelect({
+                selectableOptgroup: true
+            });
+        }
+    };
 
     var handleInputMasks = function () {
         $.extend($.inputmask.defaults, {
