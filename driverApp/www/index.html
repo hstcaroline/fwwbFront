@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="css/buttons.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
     <!--引用百度地图API-->
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>-->
     <script type="text/javascript" src="js/myJs.js"></script>
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <title>Hello World</title>
@@ -47,12 +47,20 @@
 </div> -->
 
 <div id="dituContent"></div>
-<div class="buttom-button" id="startDiv">
-    <button class="button button-glow button-circle button-action button-jumbo" id="startRoute">开始</button>
+<div class="buttom-button " id="startDiv">
+    <div class="center-block">
+        <button class="button button-glow button-circle button-action button-jumbo" id="startRoute">开始</button>
+    </div>
 </div>
 <div class="buttom-button" id="goDiv">
-    <button   class="button button-glow button-circle button-action button-jumbo nextBtn" id="stopRoute" style="margin-left: 10%">下一站</button>
-    <button class="button  button-glow button-circle button-action button-jumbo endBtn" id="nextStation" style="margin-left:10%">结束</button>
+    <div class="center-block">
+        <button class="button button-glow button-circle button-action button-jumbo nextBtn" id="stopRoute"
+                style="margin-right: 10px">下一站
+        </button>
+        <button class="button  button-glow button-circle button-action button-jumbo endBtn" id="nextStation"
+                style="margin-left:10px">结束
+        </button>
+    </div>
 </div>
 <div class="footer">
 

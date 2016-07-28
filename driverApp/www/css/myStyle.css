@@ -786,14 +786,17 @@ a {
     background-color: white;
 }
 .button-circle.button-jumbo{
-    width: 120px;
-    height: 120px;
-    margin-left: 30%;
-    margin-top: 3%;
+    width: 100px;
+    height: 100px;
+    margin-top: 5%;
 }
 .button-circle.button-jumbo.endBtn{
-    background-color: red;
+    background-color: #e02222;
+    border-color: #e02222;
 }
 .button-circle.button-jumbo.nextBtn{
-    background-color: blue;
+    background-color: #0362fd;
+}
+.center-block{
+    display: table;
 }
