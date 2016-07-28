@@ -717,69 +717,6 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
-                    <!-- BEGIN STYLE CUSTOMIZER -->
-                    <div class="color-panel hidden-phone">
-                        <div class="color-mode-icons icon-color"></div>
-                        <div class="color-mode-icons icon-color-close" style="display: none;"></div>
-                        <div class="color-mode" style="display: none;">
-                            <p>主题颜色</p>
-                            <ul class="inline">
-                                <li class="color-black current color-default" data-style="default"></li>
-                                <li class="color-blue" data-style="blue"></li>
-                                <li class="color-brown" data-style="brown"></li>
-                                <li class="color-purple" data-style="purple"></li>
-                                <li class="color-grey" data-style="grey"></li>
-                                <li class="color-white color-light" data-style="light"></li>
-                            </ul>
-                            <label>
-                                <span>布局</span>
-                                <select class="layout-option m-wrap small">
-                                    <option value="fluid" selected="">填充</option>
-                                    <option value="boxed">居中</option>
-                                </select>
-                            </label>
-                            <label>
-                                <span>页眉</span>
-                                <select class="header-option m-wrap small">
-                                    <option value="fixed" selected="">固定</option>
-                                    <option value="default">默认</option>
-                                </select>
-                            </label>
-                            <label>
-                                <span>侧边栏</span>
-                                <select class="sidebar-option m-wrap small">
-                                    <option value="fixed">固定</option>
-                                    <option value="default" selected="">默认</option>
-                                </select>
-                            </label>
-                            <label>
-                                <span>页脚</span>
-                                <select class="footer-option m-wrap small">
-                                    <option value="fixed">固定</option>
-                                    <option value="default" selected="">默认</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <!-- END STYLE CUSTOMIZER -->
-
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                    <!--<h3 class="page-title">-->
-                    <!--车辆-->
-                    <!--</h3>-->
-                    <!--<ul class="breadcrumb">-->
-                    <!--<li>-->
-                    <!--<i class="icon-home"></i>-->
-                    <!--<a href="index.html">首页</a>-->
-                    <!--<i class="icon-angle-right"></i>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                    <!--<a href="#">信息管理</a>-->
-                    <!--<i class="icon-angle-right"></i>-->
-                    <!--</li>-->
-                    <!--<li><a href="#">车辆</a></li>-->
-                    <!--</ul>-->
-                    <!-- END PAGE TITLE & BREADCRUMB-->
                 </div>
             </div>
             <!--开始内容-->
@@ -881,7 +818,6 @@
             <div class="modal-header">
                 <button type="button" class="close"
                         data-dismiss="modal" aria-hidden="true">
-                    &times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
                     选择司机和车辆
@@ -911,10 +847,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
+                <button type="button" class="btn red"
                         data-dismiss="modal">取消
                 </button>
-                <button type="button" class="btn btn-primary" id="submitBtn"  data-dismiss="modal" aria-hidden="true">
+                <button type="button" class="btn green" id="submitBtn"  data-dismiss="modal" aria-hidden="true">
                     确定
                 </button>
             </div>
@@ -956,7 +892,7 @@
             allowEventDelete: true,
             allowEventResize: false,
             eventDelete: function (calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
-                if (confirm('You want to delete this event?')) {
+                if (confirm('你确定要删除该排班信息吗?')) {
                     calendar.weekCalendar('removeEvent', calEvent.id);
                 }
             },
@@ -979,6 +915,10 @@
                     "time": null,
                     "status": "ok"
                 },
+                "bus":{
+                    id:1,
+                    plate_number:'A234'
+                }
             }, {
                 'id': 3,
                 "date": new Date(2016,6,30),
@@ -993,6 +933,10 @@
                     "time": null,
                     "status": "ok"
                 },
+                "bus":{
+                    id:1,
+                    plate_number:'A234'
+                }
             }
         ],
         allRoute: [
@@ -1068,7 +1012,7 @@
         $('#calendar').weekCalendar({
             data: eventData,
             timeslotsPerHour: 1,
-            allowCalEventOverlap: true,
+            allowCalEventOverlap: false,
             overlapEventsSeparate: true,
             totalEventsWidthPercentInOneColumn: 95,
             newEventText: 'title',
@@ -1085,38 +1029,7 @@
                     });
                 }
             },
-            eventNew: function (calEvent, $event) {
-                displayMessage('<strong>Added event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-                alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
-            },
-            eventDrop: function (calEvent, $event) {
-//                changeData(calEvent.id, calEvent.route, calEvent.date);
-                displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-//            eventResize: function (calEvent, $event) {
-//                changeData(newData.events, calEvent.id, calEvent.start, calEvent.end);
-//                displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-//            },
-            eventClick: function (calEvent, $event) {
-                alert("in");
-                displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            eventMouseover: function (calEvent, $event) {
-                displayMessage('<strong>Mouseover Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            eventMouseout: function (calEvent, $event) {
-                displayMessage('<strong>Mouseout Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
-            },
-            noEvents: function () {
-                displayMessage('There are no events for this week');
-            },
-            nextWeek: function () {
-                //add 8 days to be sure of being in prev week - allows for daylight savings or other anomolies
-//                var newDate = new Date(this.element.data('startDate').getTime() + MILLIS_IN_WEEK + MILLIS_IN_DAY);
-//                this._clearCalendar();
-//                this._loadCalEvents(newDate);
-                alert('newDate');
-            },
+
 
         });
         function displayMessage(message) {

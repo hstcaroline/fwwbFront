@@ -21,16 +21,20 @@ p.description {
     background: #ffc;
     border: 1px solid #dda;
 }
-.ui-widget-header{
+
+.ui-widget-header {
     border: 1px solid white;
-    background: #4d90fe;
+    background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
 }
-.wc-toolbar{
+
+.wc-toolbar {
     height: 20px;
 }
-.wc-title-hide,.wc-title-hide-driver{
-    /*display: none;*/
+
+.wc-title-hide, .wc-title-hide-driver {
+    display: none;
 }
+
 .wc-toolbar .wc-title {
     text-align: center;
     padding: 0;
@@ -38,20 +42,75 @@ p.description {
     color: white;
     font-size: 25px;
 }
+
 .ui-widget-header .ui-state-default {
     border: 1px solid #4d90fe;
-     background: white ;
+    background: white;
     font-weight: normal;
     height: 30px;
     width: 70px;
 }
-.wc-header tr{
-    background: #4d90fe;
+
+.wc-header {
+    background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
+}
+
+.wc-header tr {
+    /*background: #4d90fe;*/
     color: white;
 }
+
+.wc-cal-event {
+    background: -webkit-gradient(linear, left top, left bottom, from(#22ac38), to(#14932f));
+}
+
 .wc-cal-event .wc-title {
+
     padding: 5%;
     font-size: 17px;
     color: white;
     line-height: 20px;
+}
+
+.wc-cal-event .wc-time {
+    background: -webkit-gradient(linear, left top, left bottom, from(#22ac38), to(#14932f));
+    border: 1px solid #0888e6;
+    border-bottom: 2px solid white;
+}
+
+.wc-time-header-cell {
+    background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
+}
+
+.wc-grid-timeslot-header, .wc-header .wc-time-column-header {
+    background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
+    width: 5%;
+}
+
+.wc-am-pm {
+    color: #efeaea;
+    font-size: 15px;
+}
+
+.wc-time-column-header {
+    width: 5%;
+}
+
+.modal-body {
+    float: none;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-footer {
+    background-color: white;
+    float: none;
+    display: table;
+    margin-left: auto;
+    margin-right: auto
+}
+.modal-footer .btn{
+    margin-right: 20px;
+    width: 80px;
 }

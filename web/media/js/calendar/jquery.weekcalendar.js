@@ -21,10 +21,13 @@
  */
 var ip = 'http://192.168.1.7:3000';
 var currentEvent;
-var newEvents ;
+var newEvents;
 var startDate;
 var endDate;
 var allRoute;
+var allDriver;
+var allBus;
+var ifSubmit;
 (function ($) {
     // check the jquery version
     var _v = $.fn.jquery.split('.'),
@@ -136,10 +139,10 @@ var allRoute;
                         //        calendar.weekCalendar(
                         //            'formatTime', calEvent.end);
                         //}
-                        return '司机信息';
+                        return '排班信息';
                     },
                     eventBody: function (calEvent, calendar) {
-                        return calEvent.driver.name;
+                        return '司机:' + calEvent.driver.name + '</br>车辆:' + calEvent.bus.plate_number;
                     },
                     shortMonths: ['1月', '2月', '3月', '4月', '5月', '7月', '7月', '8月', '9月', '10月', '11月', '12月'],
                     longMonths: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -403,13 +406,18 @@ var allRoute;
                     self.element.find('.wc-cal-event').each(function () {
                         if ($(this).data('calEvent').id === eventId) {
                             $(this).remove();
+                            for(var i in newEvents){
+                                if(eventId == newEvents[i].id){
+                                    newEvents.splice(i,1);
+                                }
+                            }
                             return false;
                         }
                     });
 
                     //this could be more efficient rather than running on all days regardless...
                     self.element.find('.wc-day-column-inner').each(function () {
-                        self._adjustOverlappingEvents($(this));
+                        //self._adjustOverlappingEvents($(this));
                     });
                 },
 
@@ -427,7 +435,7 @@ var allRoute;
 
                     //this could be more efficient rather than running on all days regardless...
                     self.element.find('.wc-day-column-inner').each(function () {
-                        self._adjustOverlappingEvents($(this));
+                        //self._adjustOverlappingEvents($(this));
                     });
                 },
 
@@ -501,7 +509,6 @@ var allRoute;
                     }
                     var newDate = new Date(this.element.data('startDate').getTime());
                     newDate.setDate(newDate.getDate() + this.options.daysToShow);
-                    alert('in next');
                     this._clearCalendar();
                     this._loadCalEvents(newDate);
                 },
@@ -1111,8 +1118,7 @@ var allRoute;
                             var topPosition = clickYRounded * options.timeslotHeight;
                             $newEvent.css({top: topPosition});
 
-                            //if (!options.preventDragOnEventCreation) {
-                            if (true) {
+                            if (!options.preventDragOnEventCreation) {
                                 $target.bind('mousemove.newevent', function (event) {
                                     $newEvent.show();
                                     $newEvent.addClass('ui-resizable-resizing');
@@ -1133,82 +1139,88 @@ var allRoute;
                         }
 
                     }).mouseup(function (event) {
-                        //弹出选择框
-                        $('#showModalBtn').click();
-                        var chooseDriver;
-                        var chooseBus;
                         var $target = $(event.target);
-                        //提交所选数据
-                        $("#submitBtn").click(function(){
-                            chooseDriver = $("#driver").val();
-                            chooseBus = $("#bus").val();
-                            var $weekDay = $target.closest('.wc-day-column-inner');
-                            var $newEvent = $weekDay.find('.wc-new-cal-event-creating');
+                        var $weekDay = $target.closest('.wc-day-column-inner');
+                        var $newEvent = $weekDay.find('.wc-new-cal-event-creating');
+                        var firstIn = true;
+                        if ($newEvent.length) {
+                            var createdFromSingleClick = !$newEvent.hasClass('ui-resizable-resizing');
 
-                            if ($newEvent.length) {
-                                var createdFromSingleClick = !$newEvent.hasClass('ui-resizable-resizing');
-
-                                //if even created from a single click only, default height
-                                if (createdFromSingleClick) {
-                                    $newEvent.css({height: options.timeslotHeight * options.defaultEventLength}).show();
-                                }
-                                var top = parseInt($newEvent.css('top'));
-                                var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $newEvent, top);
-
-                                $newEvent.remove();
-                                var routeIndex = top/options.timeslotHeight;
-                                console.log(allRoute);
-                                var newCalEvent = {
-                                    //start: eventDuration.start,
-                                    //end: eventDuration.end,
-                                    //title: options.newEventText
-                                    id:'new',
-                                    date:eventDuration.start,
-                                    driver:{
-                                        id:chooseDriver,
-                                        name:'somebody'
-                                    },
-                                    bus:{
-                                        id:chooseBus,
-                                    },
-                                    route:allRoute[routeIndex]
-                                };
-                                var showAsSeparatedUser = options.showAsSeparateUsers && options.users && options.users.length;
-
-                                if (showAsSeparatedUser) {
-                                    newCalEvent = self._setEventUserId(newCalEvent, $weekDay.data('wcUserId'));
-                                }
-                                else if (!options.showAsSeparateUsers && options.users && options.users.length == 1) {
-                                    newCalEvent = self._setEventUserId(newCalEvent, self._getUserIdFromIndex(0));
-                                }
-
-                                var freeBusyManager = self.getFreeBusyManagerForEvent(newCalEvent);
-
-                                var $renderedCalEvent = self._renderEvent(newCalEvent, $weekDay);
-
-                                if (!options.allowCalEventOverlap) {
-                                    self._adjustForEventCollisions($weekDay, $renderedCalEvent, newCalEvent, newCalEvent);
-                                    self._positionEvent($weekDay, $renderedCalEvent);
-                                } else {
-                                    self._adjustOverlappingEvents($weekDay);
-                                }
-
-                                var proceed = self._trigger('beforeEventNew', event, {
-                                    'calEvent': newCalEvent,
-                                    'createdFromSingleClick': createdFromSingleClick,
-                                    'calendar': self.element
-                                });
-                                if (proceed) {
-                                    options.eventNew(newCalEvent, $renderedCalEvent, freeBusyManager, self.element, event);
-                                }
-                                else {
-                                    $($renderedCalEvent).remove();
-                                }
+                            //if even created from a single click only, default height
+                            if (createdFromSingleClick) {
+                                $newEvent.css({height: options.timeslotHeight * options.defaultEventLength}).show();
                             }
-                        });
+                            var top = parseInt($newEvent.css('top'));
+                            var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $newEvent, top);
 
+                            $newEvent.remove();
+                            if (eventDuration.start.toLocaleString() <= new Date().toLocaleString()) {
+                                alert("不能创建当前时间以前的排班信息");
+                                return;
+                            }
+                            var routeIndex = top / options.timeslotHeight;
+                            ifSubmit = false;
+                            //弹出选择框
+                            $('#showModalBtn').click();
+                            var chooseDriverId;
+                            var chooseBusId;
+//提交所选数据
+                            $("#submitBtn").click(function () {
+                                if(firstIn==true){
+                                    chooseDriverId = $("#driver").val();
+                                    chooseBusId = $("#bus").val();
+                                    var chooseDriver;
+                                    var chooseBus;
+                                    for (var i in allDriver) {
+                                        if (chooseDriverId == allDriver[i].id) {
+                                            chooseDriver = allDriver[i];
+                                        }
+                                    }
+                                    for (var i in allBus) {
+                                        if (chooseBusId == allBus[i].id) {
+                                            chooseBus = allBus[i];
+                                        }
+                                    }
+                                    var newCalEvent = {
+                                        //id: 'new',
+                                        date: eventDuration.start,
+                                        "status": 'ready',
+                                        driver: chooseDriver,
+                                        bus: chooseBus,
+                                        route: allRoute[routeIndex]
+                                    };
+                                    //var freeBusyManager = self.getFreeBusyManagerForEvent(newCalEvent);
+                                    newEvents.push(newCalEvent);
+                                    var $renderedCalEvent = self._renderEvent(newCalEvent, $weekDay);
+                                    firstIn = false;
+                                }
+
+
+                                //if (!options.allowCalEventOverlap) {
+                                //    //self._adjustForEventCollisions($weekDay, $renderedCalEvent, newCalEvent, newCalEvent);
+                                //    self._positionEvent($weekDay, $renderedCalEvent);
+                                //} else {
+                                //    self._adjustOverlappingEvents($weekDay);
+                                //}
+
+                                //var proceed = self._trigger('beforeEventNew', event, {
+                                //    'calEvent': newCalEvent,
+                                //    'createdFromSingleClick': createdFromSingleClick,
+                                //    'calendar': self.element
+                                //});
+                                //if (proceed) {
+                                //    options.eventNew(newCalEvent, $renderedCalEvent, freeBusyManager, self.element, event);
+                                //}
+                                //else {
+                                //    $($renderedCalEvent).remove();
+                                //}
+                            });
+
+
+                        }
                     });
                 },
+
 
                 /*
                  * load calendar events for the week based on the date provided
@@ -1272,7 +1284,7 @@ var allRoute;
                         //发送ajax请求获取数据
                         _currentAjaxCall = $.ajax({
                             type: 'post',
-                            url:  options.url,
+                            url: options.url,
                             data: jsonOptions,
                             dataType: 'json',
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -1292,11 +1304,31 @@ var allRoute;
                                 $.get(ip + '/users/getRoutename', function (data) {
                                     allRoute = data;
                                 });
+                                $("#driver").html('');
+                                $("#bus").html('');
+
+                                //获取所有司机
+                                $.get(ip + '/users/getAllDriverSimple', function (data) {
+                                    allDriver = data;
+                                    for (var i in data) {
+                                        var html = '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                                        $("#driver").append(html);
+                                    }
+
+                                });
+                                //获取所有车辆
+                                $.get(ip + '/users/getAllBusSimple', function (data) {
+                                    allBus = data;
+                                    for (var i in data) {
+                                        var html = '<option value="' + data[i].id + '">' + data[i].plate_number + '</option>';
+                                        $("#bus").append(html);
+                                    }
+                                });
                                 eventData.allRoute = allRoute;
                                 currentEvent = eventData.events;
                                 newEvents = currentEvent;
-                                startDate =  self._fomatDate(weekStartDate);
-                                 endDate =     self._fomatDate(weekEndDate);
+                                startDate = self._fomatDate(weekStartDate);
+                                endDate = self._fomatDate(weekEndDate);
                                 self._renderEvents(eventData, $weekDayColumns);
                             },
                             complete: function () {
@@ -1315,6 +1347,7 @@ var allRoute;
                     }
                     else if (options.data) {
                         currentEvent = options.data.events;
+                        newEvents = currentEvent;
                         allRoute = options.data.allRoute;
                         self._renderEvents(options.data, $weekDayColumns);
                     }
@@ -1552,7 +1585,7 @@ var allRoute;
                     });
 
                     $weekDayColumns.each(function () {
-                        self._adjustOverlappingEvents($(this));
+                        //self._adjustOverlappingEvents($(this));
                     });
 
                     options.calendarAfterLoad(self.element);
@@ -1662,53 +1695,53 @@ var allRoute;
                 /*
                  * Find groups of overlapping events
                  */
-                _groupOverlappingEventElements: function ($weekDay) {
-                    var $events = $weekDay.find('.wc-cal-event:visible');
-                    var sortedEvents = $events.sort(function (a, b) {
-                        return $(a).data('calEvent').start.getTime() - $(b).data('calEvent').start.getTime();
-                    });
-
-                    var lastEndTime = new Date(0, 0, 0);
-                    var groups = [];
-                    var curGroups = [];
-                    var $curEvent;
-                    $.each(sortedEvents, function () {
-                        $curEvent = $(this);
-                        //checks, if the current group list is not empty, if the overlapping is finished
-                        if (curGroups.length > 0) {
-                            if (lastEndTime.getTime() <= $curEvent.data('calEvent').start.getTime()) {
-                                //finishes the current group list by adding it to the resulting list of groups and cleans it
-
-                                groups.push(curGroups);
-                                curGroups = [];
-                            }
-                        }
-
-                        //finds the first group to fill with the event
-                        for (var groupIndex = 0; groupIndex < curGroups.length; groupIndex++) {
-                            if (curGroups[groupIndex].length > 0) {
-                                //checks if the event starts after the end of the last event of the group
-                                if (curGroups[groupIndex][curGroups[groupIndex].length - 1].data('calEvent').end.getTime() <= $curEvent.data('calEvent').start.getTime()) {
-                                    curGroups[groupIndex].push($curEvent);
-                                    if (lastEndTime.getTime() < $curEvent.data('calEvent').end.getTime()) {
-                                        lastEndTime = $curEvent.data('calEvent').end;
-                                    }
-                                    return;
-                                }
-                            }
-                        }
-                        //if not found, creates a new group
-                        curGroups.push([$curEvent]);
-                        if (lastEndTime.getTime() < $curEvent.data('calEvent').end.getTime()) {
-                            lastEndTime = $curEvent.data('calEvent').end;
-                        }
-                    });
-                    //adds the last groups in result
-                    if (curGroups.length > 0) {
-                        groups.push(curGroups);
-                    }
-                    return groups;
-                },
+                //_groupOverlappingEventElements: function ($weekDay) {
+                //    var $events = $weekDay.find('.wc-cal-event:visible');
+                //    var sortedEvents = $events.sort(function (a, b) {
+                //        return $(a).data('calEvent').start.getTime() - $(b).data('calEvent').start.getTime();
+                //    });
+                //
+                //    var lastEndTime = new Date(0, 0, 0);
+                //    var groups = [];
+                //    var curGroups = [];
+                //    var $curEvent;
+                //    $.each(sortedEvents, function () {
+                //        $curEvent = $(this);
+                //        //checks, if the current group list is not empty, if the overlapping is finished
+                //        if (curGroups.length > 0) {
+                //            if (lastEndTime.getTime() <= $curEvent.data('calEvent').start.getTime()) {
+                //                //finishes the current group list by adding it to the resulting list of groups and cleans it
+                //
+                //                groups.push(curGroups);
+                //                curGroups = [];
+                //            }
+                //        }
+                //
+                //        //finds the first group to fill with the event
+                //        for (var groupIndex = 0; groupIndex < curGroups.length; groupIndex++) {
+                //            if (curGroups[groupIndex].length > 0) {
+                //                //checks if the event starts after the end of the last event of the group
+                //                if (curGroups[groupIndex][curGroups[groupIndex].length - 1].data('calEvent').end.getTime() <= $curEvent.data('calEvent').start.getTime()) {
+                //                    curGroups[groupIndex].push($curEvent);
+                //                    if (lastEndTime.getTime() < $curEvent.data('calEvent').end.getTime()) {
+                //                        lastEndTime = $curEvent.data('calEvent').end;
+                //                    }
+                //                    return;
+                //                }
+                //            }
+                //        }
+                //        //if not found, creates a new group
+                //        curGroups.push([$curEvent]);
+                //        if (lastEndTime.getTime() < $curEvent.data('calEvent').date.getTime()) {
+                //            lastEndTime = $curEvent.data('calEvent').date;
+                //        }
+                //    });
+                //    //adds the last groups in result
+                //    if (curGroups.length > 0) {
+                //        groups.push(curGroups);
+                //    }
+                //    return groups;
+                //},
 
 
                 /*
@@ -1760,10 +1793,10 @@ var allRoute;
                         $weekDays.each(function (index, weekDay) {
                             var $weekDay = $(weekDay);
                             var $calEvent = self._renderEvent(calEvent, $weekDay);
-                            self._adjustForEventCollisions($weekDay, $calEvent, calEvent, calEvent);
+                            //self._adjustForEventCollisions($weekDay, $calEvent, calEvent, calEvent);
                             self._refreshEventDetails(calEvent, $calEvent);
                             self._positionEvent($weekDay, $calEvent);
-                            self._adjustOverlappingEvents($weekDay);
+                            //self._adjustOverlappingEvents($weekDay);
                         });
                     }
                 },
@@ -1813,68 +1846,68 @@ var allRoute;
                  * duration  based on the overlap. If no satisfactory adjustment can be made, the event is reverted to
                  * it's original location.
                  */
-                _adjustForEventCollisions: function ($weekDay, $calEvent, newCalEvent, oldCalEvent, maintainEventDuration) {
-                    var options = this.options;
-
-                    if (options.allowCalEventOverlap) {
-                        return;
-                    }
-                    var adjustedStart, adjustedEnd;
-                    var self = this;
-
-                    $weekDay.find('.wc-cal-event').not($calEvent).each(function () {
-                        var currentCalEvent = $(this).data('calEvent');
-
-                        ////has been dropped onto existing event overlapping the end time
-                        //if (newCalEvent.start.getTime() < currentCalEvent.end.getTime() &&
-                        //    newCalEvent.end.getTime() >= currentCalEvent.end.getTime()) {
-                        //
-                        //    adjustedStart = currentCalEvent.end;
-                        //}
-                        //has been dropped onto existing event overlapping the end time
-                        if (newCalEvent.start.getDate() == currentCalEvent.end.getDate() &&
-                            newCalEvent.route.id == currentCalEvent.route.id) {
-                            adjustedStart = currentCalEvent.end;
-                        }
-
-
-                        //has been dropped onto existing event overlapping the start time
-                        if (newCalEvent.end.getTime() > currentCalEvent.start.getTime() &&
-                            newCalEvent.start.getTime() <= currentCalEvent.start.getTime()) {
-
-                            adjustedEnd = currentCalEvent.start;
-                        }
-                        //has been dropped inside existing event with same or larger duration
-                        if (oldCalEvent.resizable == false ||
-                            (newCalEvent.end.getTime() <= currentCalEvent.end.getTime() &&
-                            newCalEvent.start.getTime() >= currentCalEvent.start.getTime())) {
-
-                            adjustedStart = oldCalEvent.start;
-                            adjustedEnd = oldCalEvent.end;
-                            return false;
-                        }
-
-                    });
-
-
-                    newCalEvent.start = adjustedStart || newCalEvent.start;
-
-                    if (adjustedStart && maintainEventDuration) {
-                        newCalEvent.end = new Date(adjustedStart.getTime() + (oldCalEvent.end.getTime() - oldCalEvent.start.getTime()));
-                        self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, oldCalEvent);
-                    } else {
-                        newCalEvent.end = adjustedEnd || newCalEvent.end;
-                    }
-
-
-                    //reset if new cal event has been forced to zero size
-                    if (newCalEvent.start.getTime() >= newCalEvent.end.getTime()) {
-                        newCalEvent.start = oldCalEvent.start;
-                        newCalEvent.end = oldCalEvent.end;
-                    }
-
-                    $calEvent.data('calEvent', newCalEvent);
-                },
+                //_adjustForEventCollisions: function ($weekDay, $calEvent, newCalEvent, oldCalEvent, maintainEventDuration) {
+                //    var options = this.options;
+                //
+                //    if (options.allowCalEventOverlap) {
+                //        return;
+                //    }
+                //    var adjustedStart, adjustedEnd;
+                //    var self = this;
+                //
+                //
+                //    $weekDay.find('.wc-cal-event').not($calEvent).each(function () {
+                //        var currentCalEvent = $(this).data('calEvent');
+                //
+                //        ////has been dropped onto existing event overlapping the end time
+                //        //if (newCalEvent.start.getTime() < currentCalEvent.end.getTime() &&
+                //        //    newCalEvent.end.getTime() >= currentCalEvent.end.getTime()) {
+                //        //
+                //        //    adjustedStart = currentCalEvent.end;
+                //        //}
+                //        //has been dropped onto existing event overlapping the end time
+                //        if (newCalEvent.date.getDay() == currentCalEvent.date.getDay() &&
+                //            newCalEvent.route.id == currentCalEvent.route.id) {
+                //            return false;
+                //        }
+                //
+                //
+                //        ////has been dropped onto existing event overlapping the start time
+                //        //if (newCalEvent.date.getTime() == currentCalEvent.date.getTime() &&
+                //        //    newCalEvent.date.getTime() <= currentCalEvent.date.getTime()) {
+                //        //
+                //        //    adjustedEnd = currentCalEvent.start;
+                //        //}
+                //        //has been dropped inside existing event with same or larger duration
+                //        if (oldCalEvent.resizable == false ||
+                //            (newCalEvent.end.getTime() <= currentCalEvent.end.getTime() &&
+                //            newCalEvent.start.getTime() >= currentCalEvent.start.getTime())) {
+                //
+                //            adjustedStart = oldCalEvent.start;
+                //            adjustedEnd = oldCalEvent.end;
+                //            return false;
+                //        }
+                //
+                //    });
+                //
+                //    newCalEvent.start = adjustedStart || newCalEvent.start;
+                //
+                //    if (adjustedStart && maintainEventDuration) {
+                //        newCalEvent.end = new Date(adjustedStart.getTime() + (oldCalEvent.end.getTime() - oldCalEvent.start.getTime()));
+                //        //self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, oldCalEvent);
+                //    } else {
+                //        newCalEvent.end = adjustedEnd || newCalEvent.end;
+                //    }
+                //
+                //
+                //    //reset if new cal event has been forced to zero size
+                //    if (newCalEvent.start.getTime() >= newCalEvent.end.getTime()) {
+                //        newCalEvent.start = oldCalEvent.start;
+                //        newCalEvent.end = oldCalEvent.end;
+                //    }
+                //
+                //    $calEvent.data('calEvent', newCalEvent);
+                //},
 
                 /**
                  * Add draggable capabilities to an event
@@ -1925,6 +1958,7 @@ var allRoute;
                                 $calEvent.hide();
                                 return;
                             }
+
                             var newCalEvent = $.extend(true, {}, calEvent, {
                                 route: options.data.allRoute[index],
                                 date: eventDuration.start
@@ -1936,7 +1970,12 @@ var allRoute;
                                     newEvents[i].date = eventDuration.start;
                                 }
                             }
-                            self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, calEvent, true);
+////不能重叠
+//                            if(!self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, calEvent, true)){
+//                                var $renderedOldEvent = self._renderEvent(calEvent, self._findWeekDayForEvent(calEvent, $weekDayColumns));
+//                                $calEvent.hide();
+//                                return;
+//                            };
 
 
                             //trigger drop callback
@@ -1981,13 +2020,13 @@ var allRoute;
                             if (self._needDSTdayShift($calEvent.data('calEvent').start, newEnd))
                                 newEnd = self._getDSTdayShift(newEnd, -1);
                             var newCalEvent = $.extend(true, {}, calEvent, {start: calEvent.start, end: newEnd});
-                            self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, calEvent);
+                            //self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, calEvent);
 
                             //trigger resize callback
                             options.eventResize(newCalEvent, calEvent, $calEvent);
                             self._refreshEventDetails(newCalEvent, $calEvent);
                             self._positionEvent($weekDay, $calEvent);
-                            self._adjustOverlappingEvents($weekDay);
+                            //self._adjustOverlappingEvents($weekDay);
                             $calEvent.data('preventClick', true);
                             setTimeout(function () {
                                 $calEvent.removeData('preventClick');
@@ -3161,6 +3200,7 @@ var allRoute;
         });
 
     }
+
 })(jQuery);
 
 function saveSchedule() {
@@ -3174,7 +3214,8 @@ function saveSchedule() {
         contentType: "application/json",
         success: function (msg) {
             if (msg != null) {
-                alert(msg);
+                alert('保存成功');
+                location.reload();
             }
             else {
                 alert('链接失败');
@@ -3184,7 +3225,9 @@ function saveSchedule() {
             alert(type);
         }
     });
-
-    // showCalendar(newData);
 }
 
+
+function checkSubmit() {
+    ifSubmit = true;
+}
