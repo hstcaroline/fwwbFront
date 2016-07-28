@@ -869,6 +869,58 @@
     <!-- END PAGE CONTAINER-->
 
 </div>
+<button class="btn btn-primary btn-lg hide" data-toggle="modal"
+        data-target="#myModal" id="showModalBtn">
+    开始演示模态框
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    选择司机和车辆
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="driver">司机姓名</label>
+                        <select class="form-control" id="driver">
+                            <option value="1">司机1</option>
+                            <option value="2">司机2</option>
+                            <option value="3">司机3</option>
+                            <option value="4">司机4</option>
+                            <option value="5">司机5</option>
+                        </select>
+                        <label for="bus">车牌号</label>
+                        <select class="form-control" id="bus">
+                            <option value="1">厂车1</option>
+                            <option value="2">厂车2</option>
+                            <option value="3">厂车3</option>
+                            <option value="4">厂车4</option>
+                            <option value="5">厂车5</option>
+                        </select>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" id="submitBtn"  data-dismiss="modal" aria-hidden="true">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <!-- END PAGE -->
 <!-- END CONTAINER -->
 
@@ -894,44 +946,28 @@
 <script type='text/javascript' src='media/js/calendar/jquery.weekcalendar.js'></script>
 
 <script type='text/javascript'>
-    var year = new Date().getFullYear();
-    var month = new Date().getMonth();
-    var day = new Date().getDate();
-    var url = 'http://192.168.1.7:3000/users/getRouteDriverByDate';
+    $.ajaxSetup({
+        async: false,
+    });
+    var ip = 'http://192.168.1.7:3000';
+    var url = ip + '/users/getRouteDriverByDate';
     var eventData = {
         options: {
             allowEventDelete: true,
             allowEventResize: false,
-            data: url,
             eventDelete: function (calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
                 if (confirm('You want to delete this event?')) {
                     calendar.weekCalendar('removeEvent', calEvent.id);
                 }
             },
             deletable: function (calEvent, element) {
-                return calEvent.start > Date.today();
+                return calEvent.date > Date.today();
             }
         },
         events: [
             {
-                'id': 1,
-                "date":  new Date(2016, 7, 30),
-                'title': 'newwwd',
-                "status": "ready",
-                'driver': {
-                    "id": 1,
-                    "name": "司机A"
-                },
-                "route": {
-                    "id": 31,
-                    "name": "route",
-                    "time": null,
-                    "status": "ok"
-                },
-            },
-            {
                 'id': 2,
-                "date":  new Date(2016, 7, 24),
+                "date": new Date(2016,6,27),
                 "status": "ready",
                 'driver': {
                     "id": 2,
@@ -945,9 +981,7 @@
                 },
             }, {
                 'id': 3,
-                "date":  new Date(2016, 7, 31),
-                'start': new Date(year, month, day),
-                'end': new Date(year, month, day),
+                "date": new Date(2016,6,30),
                 "status": "ready",
                 'driver': {
                     "id": 3,
@@ -959,112 +993,91 @@
                     "time": null,
                     "status": "ok"
                 },
+            }
+        ],
+        allRoute: [
+            {
+                "id": 29,
+                "name": "route1",
+                "time": 5
             },
-//            {
-//                'id': 3,
-//                'start': new Date(year, month, day + 1, 18),
-//                'end': new Date(year, month, day + 1, 18, 45),
-//                'title': 'Hair cut'
-//            },
-//            {
-//                'id': 4,
-//                'start': new Date(year, month, day - 1, 8),
-//                'end': new Date(year, month, day - 1, 9, 30),
-//                'title': 'Team breakfast'
-//            },
-//            {
-//                'id': 5,
-//                'start': new Date(year, month, day + 7, 14),
-//                'end': new Date(year, month, day + 7, 16),
-//                'title': '下一周'
-//            },
-//            {
-//                'id': 6,
-//                'start': new Date(year, month, day + 1, 15),
-//                'end': new Date(year, month, day + 1, 17),
-//                'title': 'Overlay event'
-//            }
+            {
+                "id": 31,
+                "name": "route2",
+                "time": 7
+            },
+            {
+                "id": 34,
+                "name": "route3",
+                "time": 10
+            },
+            {
+                "id": 35,
+                "name": "route4",
+                "time": 5
+            },
+            {
+                "id": 36,
+                "name": "route5",
+                "time": 8
+            },
+            {
+                "id": 37,
+                "name": "route6",
+                "time": 8
+            }, {
+                "id": 38,
+                "name": "route7",
+                "time": 8
+            }, {
+                "id": 39,
+                "name": "route8",
+                "time": 8
+            }
         ]
     }
-    var newData = eventData;
-    var allRoute = [
-        {
-            "id": 29,
-            "name": "route1",
-            "time": 5
-        },
-        {
-            "id": 31,
-            "name": "route2",
-            "time": 7
-        },
-        {
-            "id": 34,
-            "name": "route3",
-            "time": 10
-        },
-        {
-            "id": 35,
-            "name": "route4",
-            "time": 5
-        },
-        {
-            "id": 36,
-            "name": "route5",
-            "time": 8
-        },
-        {
-            "id": 37,
-            "name": "route6",
-            "time": 8
-        }, {
-            "id": 38,
-            "name": "route7",
-            "time": 8
-        }, {
-            "id": 39,
-            "name": "route8",
-            "time": 8
-        }
-    ];
-    $(document).ready(function () {
-        // getData();
-        showCalendar(eventData);
-        loadTable();
 
+    $(document).ready(function () {
+//        getData();
+        showCalendar();
+        loadTable();
     });
     function getData() {
         var postData =
         {
-            "id": 2,
-            "startdate": "2016-7-18",
-            "enddate": "2016-7-24"
+            "startdate": "2016-7-24",
+            "enddate": "2016-7-30"
         };
         //获取所有线路
         $.get(ip + '/users/getRoutename', function (data) {
             allRoute = data;
         });
-        //获取当前时间段的所有排班信息
-        $.post(ip + 'users/getRouteDriver', postData, function (data) {
-            alert(data);
+//        获取当前时间段的所有排班信息
+        $.post(ip + '/users/getRouteDriverByDate', postData, function (data) {
+            for (var i in data) {
+                data[i].date = new Date(data[i].date);
+            }
+            eventData.events = data;
+            eventData.allRoute = allRoute;
         });
 
+
     }
-    function showCalendar(data) {
+    function showCalendar() {
 
         $('#calendar').weekCalendar({
-            data: data,
+            data: eventData,
             timeslotsPerHour: 1,
             allowCalEventOverlap: true,
             overlapEventsSeparate: true,
             totalEventsWidthPercentInOneColumn: 95,
             newEventText: 'title',
-            allRoute: allRoute,
+            url: '',
             height: function ($calendar) {
                 return $(window).height() - $('h1').outerHeight(true);
             },
             eventRender: function (calEvent, $event) {
-                if (calEvent.end.getTime() < new Date().getTime()) {
+                if (calEvent.date.getTime() < new Date().getTime()) {
                     $event.css('backgroundColor', '#aaa');
                     $event.find('.time').css({
                         backgroundColor: '#999',
@@ -1077,7 +1090,7 @@
                 alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
             },
             eventDrop: function (calEvent, $event) {
-                changeData(calEvent.id, calEvent.route, calEvent.date);
+//                changeData(calEvent.id, calEvent.route, calEvent.date);
                 displayMessage('<strong>Moved Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
             },
 //            eventResize: function (calEvent, $event) {
@@ -1085,6 +1098,7 @@
 //                displayMessage('<strong>Resized Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
 //            },
             eventClick: function (calEvent, $event) {
+                alert("in");
                 displayMessage('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
             },
             eventMouseover: function (calEvent, $event) {
@@ -1111,19 +1125,17 @@
 
         $('<div id="message" class="ui-corner-all"></div>').prependTo($('body'));
     }
-    function changeData( id, route, date) {
-        var newEvents = newData.events;
-        var length = newEvents.length;
-        for (var i = 0; i < length; i++) {
-            if (id == newEvents[i].id) {
-                newEvents[i].route = route;
-                newEvents[i].date = date;
-            }
-        }
-    }
-    function saveSchedule() {
-        showCalendar(newData);
-    }
+//    function changeData(id, route, date) {
+//        var newEvents = currentEvent;
+//        var length = newEvents.length;
+//        for (var i = 0; i < length; i++) {
+//            if (id == newEvents[i].id) {
+//                newEvents[i].route = route;
+//                newEvents[i].date = date;
+//            }
+//        }
+//    }
+
     function loadTable() {
         var days = Date.getDaysInMonth(new Date().getFullYear(), new Date().getMonth());
         var scheduleNum = 5;

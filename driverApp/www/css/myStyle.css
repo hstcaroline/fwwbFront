@@ -776,4 +776,24 @@ a {
     height: 90px;
     vertical-align: middle;
 }
-
+.buttom-button{
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    bottom: 10%;
+    left: 0px;
+    border-top: 1px solid #b4cef8;
+    background-color: white;
+}
+.button-circle.button-jumbo{
+    width: 120px;
+    height: 120px;
+    margin-left: 30%;
+    margin-top: 3%;
+}
+.button-circle.button-jumbo.endBtn{
+    background-color: red;
+}
+.button-circle.button-jumbo.nextBtn{
+    background-color: blue;
+}

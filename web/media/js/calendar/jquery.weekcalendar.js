@@ -19,7 +19,12 @@
  * If you're after a monthly calendar plugin, check out this one :
  * http://arshaw.com/fullcalendar/
  */
-
+var ip = 'http://192.168.1.7:3000';
+var currentEvent;
+var newEvents ;
+var startDate;
+var endDate;
+var allRoute;
 (function ($) {
     // check the jquery version
     var _v = $.fn.jquery.split('.'),
@@ -52,7 +57,7 @@
                     businessHours: {start: 8, end: 18, limitDisplay: false},
                     newEventText: 'New Event',
                     timeslotHeight: 70,
-                    defaultEventLength: 2,
+                    defaultEventLength: 1,
                     timeslotsPerHour: 4,
                     minDate: null,
                     maxDate: null,
@@ -72,7 +77,6 @@
                     readonly: false,
                     allowEventCreation: true,
                     hourLine: false,
-                    allRoute: null,
                     deletable: function (calEvent, element) {
                         return true;
                     },
@@ -553,11 +557,11 @@
                     var options = this.options;
                     if (options.businessHours.limitDisplay) {
                         //options.timeslotsPerDay = options.timeslotsPerHour * (options.businessHours.end - options.businessHours.start);
-                        options.timeslotsPerDay = options.timeslotsPerHour * (options.allRoute.length);
+                        options.timeslotsPerDay = options.timeslotsPerHour * (options.data.allRoute.length);
                         options.millisToDisplay = (options.businessHours.end - options.businessHours.start) * 3600000; // 60 * 60 * 1000
                         options.millisPerTimeslot = options.millisToDisplay / options.timeslotsPerDay;
                     } else {
-                        options.timeslotsPerDay = options.timeslotsPerHour * options.allRoute.length;
+                        options.timeslotsPerDay = options.timeslotsPerHour * options.data.allRoute.length;
                         options.millisToDisplay = MILLIS_IN_DAY;
                         options.millisPerTimeslot = MILLIS_IN_DAY / options.timeslotsPerDay;
                     }
@@ -1025,7 +1029,7 @@
                     //start = (options.businessHours.limitDisplay ? options.businessHours.start : 0),
                     //end = (options.businessHours.limitDisplay ? options.businessHours.end : 24);
                         start = 0;
-                    end = options.allRoute.length;
+                    end = options.data.allRoute.length;
                     renderRow = '<tr class=\"wc-grid-row-events\">';
                     renderRow += '<td class=\"wc-grid-timeslot-header\">';
                     for (var i = start; i < end; i++) {
@@ -1037,7 +1041,7 @@
                         else {
                             //renderRow += '<div class=\"wc-time-header-cell\">' + self._hourForIndex(i) + '<span class=\"wc-am-pm\">' + self._amOrPm(i) + '</span></div>';
                             renderRow += '<div class=\"wc-time-header-cell\">' + '<span class=\"wc-am-pm\">'
-                                + options.allRoute[i].name + '</span></div>';
+                                + options.data.allRoute[i].name + '</span></div>';
                         }
                         renderRow += '</div>';
                     }
@@ -1107,7 +1111,8 @@
                             var topPosition = clickYRounded * options.timeslotHeight;
                             $newEvent.css({top: topPosition});
 
-                            if (!options.preventDragOnEventCreation) {
+                            //if (!options.preventDragOnEventCreation) {
+                            if (true) {
                                 $target.bind('mousemove.newevent', function (event) {
                                     $newEvent.show();
                                     $newEvent.addClass('ui-resizable-resizing');
@@ -1128,59 +1133,80 @@
                         }
 
                     }).mouseup(function (event) {
+                        //弹出选择框
+                        $('#showModalBtn').click();
+                        var chooseDriver;
+                        var chooseBus;
                         var $target = $(event.target);
+                        //提交所选数据
+                        $("#submitBtn").click(function(){
+                            chooseDriver = $("#driver").val();
+                            chooseBus = $("#bus").val();
+                            var $weekDay = $target.closest('.wc-day-column-inner');
+                            var $newEvent = $weekDay.find('.wc-new-cal-event-creating');
 
-                        var $weekDay = $target.closest('.wc-day-column-inner');
-                        var $newEvent = $weekDay.find('.wc-new-cal-event-creating');
+                            if ($newEvent.length) {
+                                var createdFromSingleClick = !$newEvent.hasClass('ui-resizable-resizing');
 
-                        if ($newEvent.length) {
-                            var createdFromSingleClick = !$newEvent.hasClass('ui-resizable-resizing');
+                                //if even created from a single click only, default height
+                                if (createdFromSingleClick) {
+                                    $newEvent.css({height: options.timeslotHeight * options.defaultEventLength}).show();
+                                }
+                                var top = parseInt($newEvent.css('top'));
+                                var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $newEvent, top);
 
-                            //if even created from a single click only, default height
-                            if (createdFromSingleClick) {
-                                $newEvent.css({height: options.timeslotHeight * options.defaultEventLength}).show();
+                                $newEvent.remove();
+                                var routeIndex = top/options.timeslotHeight;
+                                console.log(allRoute);
+                                var newCalEvent = {
+                                    //start: eventDuration.start,
+                                    //end: eventDuration.end,
+                                    //title: options.newEventText
+                                    id:'new',
+                                    date:eventDuration.start,
+                                    driver:{
+                                        id:chooseDriver,
+                                        name:'somebody'
+                                    },
+                                    bus:{
+                                        id:chooseBus,
+                                    },
+                                    route:allRoute[routeIndex]
+                                };
+                                var showAsSeparatedUser = options.showAsSeparateUsers && options.users && options.users.length;
+
+                                if (showAsSeparatedUser) {
+                                    newCalEvent = self._setEventUserId(newCalEvent, $weekDay.data('wcUserId'));
+                                }
+                                else if (!options.showAsSeparateUsers && options.users && options.users.length == 1) {
+                                    newCalEvent = self._setEventUserId(newCalEvent, self._getUserIdFromIndex(0));
+                                }
+
+                                var freeBusyManager = self.getFreeBusyManagerForEvent(newCalEvent);
+
+                                var $renderedCalEvent = self._renderEvent(newCalEvent, $weekDay);
+
+                                if (!options.allowCalEventOverlap) {
+                                    self._adjustForEventCollisions($weekDay, $renderedCalEvent, newCalEvent, newCalEvent);
+                                    self._positionEvent($weekDay, $renderedCalEvent);
+                                } else {
+                                    self._adjustOverlappingEvents($weekDay);
+                                }
+
+                                var proceed = self._trigger('beforeEventNew', event, {
+                                    'calEvent': newCalEvent,
+                                    'createdFromSingleClick': createdFromSingleClick,
+                                    'calendar': self.element
+                                });
+                                if (proceed) {
+                                    options.eventNew(newCalEvent, $renderedCalEvent, freeBusyManager, self.element, event);
+                                }
+                                else {
+                                    $($renderedCalEvent).remove();
+                                }
                             }
-                            var top = parseInt($newEvent.css('top'));
-                            var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $newEvent, top);
+                        });
 
-                            $newEvent.remove();
-                            var newCalEvent = {
-                                start: eventDuration.start,
-                                end: eventDuration.end,
-                                title: options.newEventText
-                            };
-                            var showAsSeparatedUser = options.showAsSeparateUsers && options.users && options.users.length;
-
-                            if (showAsSeparatedUser) {
-                                newCalEvent = self._setEventUserId(newCalEvent, $weekDay.data('wcUserId'));
-                            }
-                            else if (!options.showAsSeparateUsers && options.users && options.users.length == 1) {
-                                newCalEvent = self._setEventUserId(newCalEvent, self._getUserIdFromIndex(0));
-                            }
-
-                            var freeBusyManager = self.getFreeBusyManagerForEvent(newCalEvent);
-
-                            var $renderedCalEvent = self._renderEvent(newCalEvent, $weekDay);
-
-                            if (!options.allowCalEventOverlap) {
-                                self._adjustForEventCollisions($weekDay, $renderedCalEvent, newCalEvent, newCalEvent);
-                                self._positionEvent($weekDay, $renderedCalEvent);
-                            } else {
-                                self._adjustOverlappingEvents($weekDay);
-                            }
-
-                            var proceed = self._trigger('beforeEventNew', event, {
-                                'calEvent': newCalEvent,
-                                'createdFromSingleClick': createdFromSingleClick,
-                                'calendar': self.element
-                            });
-                            if (proceed) {
-                                options.eventNew(newCalEvent, $renderedCalEvent, freeBusyManager, self.element, event);
-                            }
-                            else {
-                                $($renderedCalEvent).remove();
-                            }
-                        }
                     });
                 },
 
@@ -1217,7 +1243,8 @@
                     self._updateDayColumnHeader($weekDayColumns);
 
                     //load events by chosen means
-                    if (typeof options.data == 'string') {
+                    //if (typeof options.url == 'string') {
+                    if (options.url != '') {
                         if (options.loading) {
                             options.loading(true);
                         }
@@ -1245,7 +1272,7 @@
                         //发送ajax请求获取数据
                         _currentAjaxCall = $.ajax({
                             type: 'post',
-                            url: options.data,
+                            url:  options.url,
                             data: jsonOptions,
                             dataType: 'json',
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -1254,8 +1281,23 @@
                                 }
                             },
                             success: function (data) {
-                                //getTimeSlot
-                                self._renderEvents(data, $weekDayColumns);
+                                for (var i in data) {
+                                    data[i].date = new Date(data[i].date);
+                                }
+                                //eventData.events = [];
+                                eventData.events = data;
+                                //eventData.allRoute = allRoute;
+
+                                //获取所有线路
+                                $.get(ip + '/users/getRoutename', function (data) {
+                                    allRoute = data;
+                                });
+                                eventData.allRoute = allRoute;
+                                currentEvent = eventData.events;
+                                newEvents = currentEvent;
+                                startDate =  self._fomatDate(weekStartDate);
+                                 endDate =     self._fomatDate(weekEndDate);
+                                self._renderEvents(eventData, $weekDayColumns);
                             },
                             complete: function () {
                                 _currentAjaxCall = null;
@@ -1272,6 +1314,8 @@
                             });
                     }
                     else if (options.data) {
+                        currentEvent = options.data.events;
+                        allRoute = options.data.allRoute;
                         self._renderEvents(options.data, $weekDayColumns);
                     }
 
@@ -1533,9 +1577,6 @@
                 _renderEvent: function (calEvent, $weekDay) {
                     var self = this;
                     var options = this.options;
-                    if (calEvent.start.getTime() > calEvent.end.getTime()) {
-                        return; // can't render a negative height
-                    }
 
                     var eventClass, eventHtml, $calEventList, $modifiedEvent;
 
@@ -1734,17 +1775,17 @@
                     var options = this.options;
                     var calEvent = $calEvent.data('calEvent');
                     var num = 1;
-                    var routeNum = options.allRoute.length;
+                    var routeNum = options.data.allRoute.length;
                     for (var i = 0; i < routeNum; i++) {
-                        if (calEvent.route.id == options.allRoute[i].id) {
+                        if (calEvent.route.id == options.data.allRoute[i].id) {
                             num = i;
                         }
                     }
                     var pxTop = num * $weekDay.height() / routeNum;
-                    var pxPerMillis = $weekDay.height() / options.millisToDisplay;
+                    //var pxPerMillis = $weekDay.height() / options.millisToDisplay;
                     var firstHourDisplayed = options.businessHours.limitDisplay ? options.businessHours.start : 0;
-                    var startMillis = this._getDSTdayShift(calEvent.start).getTime() - this._getDSTdayShift(new Date(calEvent.start.getFullYear(), calEvent.start.getMonth(), calEvent.start.getDate(), firstHourDisplayed)).getTime();
-                    var eventMillis = this._getDSTdayShift(calEvent.end).getTime() - this._getDSTdayShift(calEvent.start).getTime();
+                    //var startMillis = this._getDSTdayShift(calEvent.start).getTime() - this._getDSTdayShift(new Date(calEvent.start.getFullYear(), calEvent.start.getMonth(), calEvent.start.getDate(), firstHourDisplayed)).getTime();
+                    //var eventMillis = this._getDSTdayShift(calEvent.end).getTime() - this._getDSTdayShift(calEvent.start).getTime();
                     //pxTop = pxPerMillis * startMillis;
                     //var pxHeight = pxPerMillis * eventMillis;
                     var pxHeight = $weekDay.height() / routeNum;
@@ -1870,21 +1911,33 @@
                             var top = Math.round(parseInt(ui.position.top));
                             var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $calEvent, top);
                             var calEvent = $calEvent.data('calEvent');
-                            var routeNum = options.allRoute.length;
+                            var routeNum = options.data.allRoute.length;
                             var heightPerSolt = $weekDay.height() / routeNum;
                             var index = top / heightPerSolt;
-                            //$calEvent = ui.element;
-                            //var currentId = $calEvent.find('.wc-title hide').val();
-                            //calEvent.id = options.allRoute[index];
+                            var currentDate = new Date();
+                            var c = currentDate.toLocaleDateString();
+                            var $weekDayColumns = self.element.find('.wc-day-column-inner');
+                            //如果比当前时间早,不允许修改
+                            if (eventDuration.start.toLocaleDateString() <= currentDate.toLocaleDateString()) {
+                                alert("不能修改今天以及过去的排班信息");
+                                //self._adjustForEventCollisions($weekDay, $calEvent, calEvent, calEvent);
+                                var $renderedOldEvent = self._renderEvent(calEvent, self._findWeekDayForEvent(calEvent, $weekDayColumns));
+                                $calEvent.hide();
+                                return;
+                            }
                             var newCalEvent = $.extend(true, {}, calEvent, {
-                                //start: eventDuration.start,
-                                //end: eventDuration.end,
-                                route: options.allRoute[index],
+                                route: options.data.allRoute[index],
                                 date: eventDuration.start
                             });
-
+                            var length = newEvents.length;
+                            for (var i = 0; i < length; i++) {
+                                if (calEvent.id == newEvents[i].id) {
+                                    newEvents[i].route = options.data.allRoute[index];
+                                    newEvents[i].date = eventDuration.start;
+                                }
+                            }
                             self._adjustForEventCollisions($weekDay, $calEvent, newCalEvent, calEvent, true);
-                            var $weekDayColumns = self.element.find('.wc-day-column-inner');
+
 
                             //trigger drop callback
                             options.eventDrop(newCalEvent, calEvent, $calEvent);
@@ -1892,6 +1945,7 @@
                             var $newEvent = self._renderEvent(newCalEvent, self._findWeekDayForEvent(newCalEvent, $weekDayColumns));
                             //var $newEvent = self._renderEvent(newCalEvent, $calEvent);
                             $calEvent.hide();
+
                             //
                             $calEvent.data('preventClick', true);
                             //
@@ -3084,16 +3138,53 @@
             return this;
         }
     });
+    function saveSchedule() {
+        var postData = JSON.stringify({startdate: '2016-7-24', enddate: '2016-7-30', routeDriver: newData.events});
+        console.log(postData);
+        $.ajax({
+            url: ip + '/users/changeRouteDrivers',
+            type: 'POST',
+            async: false,
+            data: postData,
+            contentType: "application/json",
+            success: function (msg) {
+                if (msg != null) {
+                    alert(msg);
+                }
+                else {
+                    alert('链接失败');
+                }
+            },
+            error: function (xhr, type, exception) {
+                alert(type);
+            }
+        });
 
+    }
 })(jQuery);
 
-function getTimeSlot(date, timeNum) {
-    //'start': new Date(year, month, day, 12),
-    //'end': new Date(year, month, day, 13, 35),
-    var time = new Array();
-    switch (date) {
-        case 1:
-            time.push()
-    }
+function saveSchedule() {
+    var postData = JSON.stringify({startdate: startDate, enddate: endDate, routeDriver: newEvents});
+    console.log(postData);
+    $.ajax({
+        url: ip + '/users/changeRouteDrivers',
+        type: 'POST',
+        async: false,
+        data: postData,
+        contentType: "application/json",
+        success: function (msg) {
+            if (msg != null) {
+                alert(msg);
+            }
+            else {
+                alert('链接失败');
+            }
+        },
+        error: function (xhr, type, exception) {
+            alert(type);
+        }
+    });
 
+    // showCalendar(newData);
 }
+

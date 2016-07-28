@@ -29,7 +29,7 @@ p.description {
     height: 20px;
 }
 .wc-title-hide,.wc-title-hide-driver{
-    display: none;
+    /*display: none;*/
 }
 .wc-toolbar .wc-title {
     text-align: center;

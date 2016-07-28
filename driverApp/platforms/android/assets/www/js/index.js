@@ -54,7 +54,7 @@ var app = {
         var tag = nfcEvent.tag;
         var temInfo = JSON.stringify(tag);
         $("#scan_info").val("onNfc "+temInfo);
-        showStaffInfo();
+        //showStaffInfo();
     },
     onNdef: function (nfcEvent) {
         var tag = nfcEvent.tag;
@@ -68,3 +68,5 @@ var app = {
         }
     }
 };
+
+app.initialize();

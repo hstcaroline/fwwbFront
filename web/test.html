@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>车辆信息 | 厂车管理系统</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <script type="text/css">
+
+    </script>
+
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body>
+
+<h2>创建模态框（Modal）</h2>
+<!-- 按钮触发模态框 -->
+<button class="btn btn-primary btn-lg" data-toggle="modal"
+        data-target="#myModal" id="cc">
+    开始演示模态框
+</button>
+<button class="btn btn-primary btn-lg" id="show">
+    开启点击
+</button>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    选择司机和车辆
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="driver">选择列表</label>
+                        <select class="form-control" id="driver">
+                            <option value="1">司机1</option>
+                            <option value="2">司机2</option>
+                            <option value="3">司机3</option>
+                            <option value="4">司机4</option>
+                            <option value="5">司机5</option>
+                        </select>
+                        <label for="bus">选择列表</label>
+                        <select class="form-control" id="bus">
+                            <option value="1">厂车1</option>
+                            <option value="2">厂车2</option>
+                            <option value="3">厂车3</option>
+                            <option value="4">厂车4</option>
+                            <option value="5">厂车5</option>
+                        </select>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="ok"  data-dismiss="modal" aria-hidden="true">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- END PAGE -->
+<!-- END CONTAINER -->
+
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script src="media/js/excanvas.min.js"></script>
+<script src="media/js/respond.min.js"></script>
+<![endif]-->
+<script src="media/js/app.js"></script>
+<script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="media/js/calendar/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script type='text/javascript' src='media/js/calendar/jquery-ui-1.8.11.custom.min.js'></script>
+
+<script type="text/javascript" src="media/js/calendar/date.js"></script>
+<script type='text/javascript' src='media/js/calendar/jquery.weekcalendar.js'></script>
+<script>
+$("#ok").click(function () {
+    alert($("#driver").val());
+
+})
+$("#show").click(function () {
+   $("#cc").click();
+
+})
+</script>
+</body>
+</html>
