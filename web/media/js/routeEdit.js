@@ -52,6 +52,7 @@ reloadMap.onclick = function(){
 };
 var resetStations = document.getElementById("resetStations");
 resetStations.onclick = function () {
+    //map.setZoom(13);
     routes = [];
     newRouteIndex=0;
     stationCount = 1;
@@ -77,7 +78,7 @@ resetStations.onclick = function () {
                     console.log("finsish");
                     console.log(res);
                     var pos=res.lng + "|" +res.lat;
-                    var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:15,h:20,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+                    var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
                     var point = {id:-stationCount,pos:new BMap.Point(res.lng,res.lat),name:"未命名_"+stationCount,address:"",num:res2.num,time:res2.time};//??num
                     stationArr.push(point);
                     stationCount++;
@@ -120,6 +121,18 @@ setEvent();
 getData();
 loadData(routes);
 
+map.addEventListener('zoomend', function(type,target){
+    var overlays=map.getOverlays();
+    var zoom=map.getZoom();
+    for(var i=0;i<overlays.length;i++){
+        if(overlays[i].V.className=="BMap_Marker BMap_noprint"){
+            var icon=createIcon({w:(zoom-8)*5,h:(zoom-8)*5,l:0,t:0,x:6,lb:5},1);
+            console.log(overlays[i].setIcon(icon));
+        }
+    }
+    console.log(map.getZoom());
+});
+
 // 获取鼠标相对div的left值
 function getOppositeCoor(id, event){
     event = event || window.event;
@@ -137,7 +150,7 @@ function setEvent() {
         var pos = e.point.lng + "|" + e.point.lat;
         if(ifAddMarker==true){//添加站点
             //var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
-            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:15,h:20,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
             var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"未命名_"+stationCount,address:"",num:0,time:document.getElementById("selectroutetime").value};
             stationArr.push(point);
             stationCount++;
@@ -459,7 +472,7 @@ function refreshMap(ifRefreshMarker){
             var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
             route[i].push(point.pos);
             if(ifRefreshMarker){
-                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:15,h:20,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
                 stationArr.push(point);
                 addMarker(marker);
             }

@@ -450,6 +450,7 @@
                         <div class="tabbable tabbable-custom tabs-right" style="padding-top: 10px;">
                             <!-- Only required for left/right tabs -->
                             <ul class="nav nav-tabs tabs-right">
+
                                 <li class="active">
                                     <a href="#mapRoutePlanning" data-toggle="tab">
                                         <i class="icon-picture"></i> 地图</a>
@@ -469,13 +470,29 @@
                                         <i class="icon-dashboard"></i> 路线编辑</a>
                                 </li>
 
+                                <li id="selecttime"><p>
+                                    <div class="tooltips" data-placement="left"  data-original-title="选择显示路线的时间段">
+                                    <select id="selectroutetime" class="form-control span12" >
+                                        <option value="1">0:00-2:00</option>
+                                        <option value="2">2:00-4:00</option>
+                                        <option value="3">4:00-6:00</option>
+                                        <option value="4">6:00-8:00</option>
+                                        <option value="5" selected>8:00-10:00</option>
+                                        <option value="6">10:00-12:00</option>
+                                        <option value="7">12:00-14:00</option>
+                                        <option value="8">14:00-16:00</option>
+                                        <option value="9">16:00-18:00</option>
+                                        <option value="10">18:00-20:00</option>
+                                        <option value="11">20:00-22:00</option>
+                                    </select>
+                                    </div>
+                                </li>
                                 <li id="addMarker">
                                     <p>
                                         <div class="btn red">
                                             <i class="icon-edit"></i> 添加站点
                                         </div>
                                 </li>
-
                                 <li>
                                     <p>
                                         <div class="btn-group">
@@ -516,24 +533,6 @@
                             <li id="resetStations"><p>
                                 <div class="btn red tooltips" data-placement="left" data-original-title="删除所有更改">
                                     <i class="icon-edit"></i> 生成站点
-                                </div>
-                            </li>
-                            <li id="selecttime"><p>
-                                <label>时间</label>
-                                <div>
-                                <select id="selectroutetime" class="form-control">
-                                    <option value="1">0:00-2:00</option>
-                                    <option value="2">2:00-4:00</option>
-                                    <option value="3">4:00-6:00</option>
-                                    <option value="4">6:00-8:00</option>
-                                    <option value="5" selected>8:00-10:00</option>
-                                    <option value="6">10:00-12:00</option>
-                                    <option value="7">12:00-14:00</option>
-                                    <option value="8">14:00-16:00</option>
-                                    <option value="9">16:00-18:00</option>
-                                    <option value="10">18:00-20:00</option>
-                                    <option value="11">20:00-22:00</option>
-                                </select>
                                 </div>
                             </li>
                         </ul>

@@ -65,7 +65,7 @@ function initMap() {
 //创建地图函数
 function createMap() {
     var map = new BMap.Map("dituContent", { enableMapClick: false }); //在百度地图容器中创建地图
-    map.centerAndZoom(COMPANYADDR, 11); //设定地图的中心点和坐标并将地图显示在地图容器中
+    map.centerAndZoom(COMPANYADDR, 12); //设定地图的中心点和坐标并将地图显示在地图容器中
     window.map = map; //将map变量存储在全局
     checkhHtml5();
     //geoCoder=new BMap.Geocoder();
