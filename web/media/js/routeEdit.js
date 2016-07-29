@@ -77,7 +77,7 @@ resetStations.onclick = function () {
                     console.log("finsish");
                     console.log(res);
                     var pos=res.lng + "|" +res.lat;
-                    var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:24,h:30,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+                    var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:15,h:20,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
                     var point = {id:-stationCount,pos:new BMap.Point(res.lng,res.lat),name:"未命名_"+stationCount,address:"",num:res2.num,time:res2.time};//??num
                     stationArr.push(point);
                     stationCount++;
@@ -137,7 +137,7 @@ function setEvent() {
         var pos = e.point.lng + "|" + e.point.lat;
         if(ifAddMarker==true){//添加站点
             //var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
-            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:24,h:30,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:15,h:20,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
             var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"未命名_"+stationCount,address:"",num:0,time:document.getElementById("selectroutetime").value};
             stationArr.push(point);
             stationCount++;
@@ -459,7 +459,7 @@ function refreshMap(ifRefreshMarker){
             var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
             route[i].push(point.pos);
             if(ifRefreshMarker){
-                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:24,h:30,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:15,h:20,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
                 stationArr.push(point);
                 addMarker(marker);
             }
