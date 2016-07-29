@@ -73,18 +73,22 @@ resetStations.onclick = function () {
             console.log(data.length);
             //stationArr。push&addmarker            
             for(var i=0;i<num;i++){
-                console.log(data[i]);
-                var pos=data[i].posx + "|" +data[i].posy;
-                var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
-                var point = {id:-stationCount,pos:new BMap.Point(data[i].posx,data[i].posy),name:"未命名_"+stationCount,address:"",num:data[i].num,time:data[i].time};//??num
-                stationArr.push(point);
-                stationCount++;
-                console.log("finish"+i+"__1");
-                addMarker(marker);
+                getNearstValid(data[i], function(res,res2){
+                    console.log("finsish");
+                    console.log(res);
+                    var pos=res.lng + "|" +res.lat;
+                    var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:24,h:30,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+                    var point = {id:-stationCount,pos:new BMap.Point(res.lng,res.lat),name:"未命名_"+stationCount,address:"",num:res2.num,time:res2.time};//??num
+                    stationArr.push(point);
+                    stationCount++;
+                    //console.log("finish"+i+"__1");
+                    addMarker(marker);
+                });
+                
                 //var len = gridster.get_widgets_at_col("1").len + 1;
                 //var html = "<li id='"+point.id+"'data-row='" + i+1 + "' data-col='" + 1 + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + point.id + "</span>" + point.name + "</li>";
                 //gridster.add_widget(html,1,1,1,i+1);
-                console.log("finish"+i+"__2");
+                //console.log("finish"+i+"__2");
             }
         },
         error: function () {
@@ -92,6 +96,19 @@ resetStations.onclick = function () {
         }
     });
 }
+function getNearstValid(data, cb){
+        var ptA=new BMap.Point(data.posx,data.posy);
+        var temP = null;
+        var driving = new BMap.DrivingRoute(map, {renderOptions:{map: null}, policy: BMAP_DRIVING_POLICY_LEAST_TIME});
+        var point_t = new BMap.Point(121.404, 31.915);
+        driving.setSearchCompleteCallback(function(results){
+            temP = results.getPlan(0).getRoute(0).vr[0];
+            cb(temP,data);
+        });
+        driving.search(ptA, point_t);
+    }
+
+
 var selectroutetime=document.getElementById("selectroutetime");
 selectroutetime.onchange=function()
 {
@@ -120,7 +137,7 @@ function setEvent() {
         var pos = e.point.lng + "|" + e.point.lat;
         if(ifAddMarker==true){//添加站点
             //var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
-            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:24,h:30,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
             var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"未命名_"+stationCount,address:"",num:0,time:document.getElementById("selectroutetime").value};
             stationArr.push(point);
             stationCount++;
@@ -442,7 +459,7 @@ function refreshMap(ifRefreshMarker){
             var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
             route[i].push(point.pos);
             if(ifRefreshMarker){
-                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:24,h:30,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
                 stationArr.push(point);
                 addMarker(marker);
             }
