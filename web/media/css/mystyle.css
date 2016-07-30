@@ -122,3 +122,12 @@ p.description {
 .dataTable .details tr :hover {
     opacity: 0.4;
 }
+.yearSelect{
+    padding: 0px;
+    margin: 0;
+    width: 120px;
+    margin-left: 10px;
+}
+.table-bordered th, .table-bordered td{
+    text-align: center;
+}

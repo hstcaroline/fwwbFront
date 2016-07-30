@@ -1,49 +1,10 @@
-var data = [];
-data[0] = {gender: "男", dept: "人力资源部", group: "A1组", job: "经理", content: "略"};
-data[1] = {gender: "男", dept: "行政部", group: "B1组", job: "组长", content: "略"};
-data[2] = {gender: "女", dept: "行政部", group: "B1组", job: "副组长", content: "略"};
-data[3] = {gender: "男", dept: "运输部", group: "C2组", job: "组长", content: "略"};
+var extralData;
+var oTable;
 
 var TableAdvanced = function () {
 
-    var initTable1 = function () {
-
-        /* Formating function for row details */
-        function fnFormatDetails(oTable, nTr) {
-            //var aData=data[parseInt(nTr.id)%data.length];
-            ////var aData = oTable.fnGetData( nTr );
-            //var sOut = '<table>';
-            //sOut += '<tr><td>性别:</td><td>'+aData.gender+'</td></tr>';
-            //sOut += '<tr><td>部门:</td><td>'+aData.dept+'</td></tr>';
-            //sOut += '<tr><td>组别:</td><td>'+aData.group+'</td></tr>';
-            //sOut += '<tr><td>职位:</td><td>'+aData.job+'</td></tr>';
-            //sOut += '<tr><td>工作简介:</td><td>'+aData.content+'</td></tr>';
-            //sOut += '</table>';
-            //return sOut;
-            var html = '<table class="table table-bordered table-hover">'
-                +'<tr> <th>日期</th>'
-                +'<th>时间段</th>'
-                +'<th>线路</th>'
-                +'<th>司机信息</th>'
-                +'<th>车辆信息</th>'
-                +'<th>出勤情况</th>'
-                +'<th>编辑</th>'
-                +'</tr>';
-            for (var i = 1; i < 6; i++) {
-                html += '<tr id="' + (i - 1) + '">';
-                html += '<td>' + i + '</td>'
-                    + ' <td> 1</td> '
-                    + ' <td>2index' + i + '</td> '
-                    + '<td>1212A</td>'
-                    + '<td >ssww</td>'
-                    + '<td > ss</td>'
-                    + '<td ><a href="javascript:;" class="btn red mini delete"><i class="icon-trash"></i> 删除</a></td> ' +
-                    '</tr>';
-            }
-            html += '</table>';
-            return html;
-        }
-
+    var initTable1 = function (data) {
+        extralData = data;
         /*
          * Insert a 'details' column to the table
          */
@@ -52,15 +13,15 @@ var TableAdvanced = function () {
         nCloneTd.style.cssText = "vertical-align: middle;text-align: center";
         nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
 
-        $('#sample_1 thead tr').each(function () {
+        $('#monthScheduleTable thead tr').each(function () {
             this.insertBefore(nCloneTh, this.childNodes[0]);
         });
 
-        $('#sample_1 tbody tr').each(function () {
+        $('#monthScheduleTable tbody tr').each(function () {
             this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
         });
 
-        $('#sample_1 a.delete').live('click', function (e) {
+        $('#monthScheduleTable a.delete').live('click', function (e) {
             e.preventDefault();
             $("#modal_remove").modal('show');
             $("#remove").click(function () {
@@ -73,7 +34,7 @@ var TableAdvanced = function () {
         /*
          * Initialse DataTables, with no sorting on the 'details' column
          */
-        var oTable = $('#sample_1').dataTable({
+        oTable = $('#monthScheduleTable').dataTable({
             "aoColumnDefs": [
                 {"bSortable": false, "aTargets": [0]}
             ],
@@ -83,18 +44,18 @@ var TableAdvanced = function () {
                 [5, 15, 20, "All"] // change per page values here
             ],
             // set the initial value
-            "iDisplayLength": 5,
+            "iDisplayLength": 5
         });
 
-        jQuery('#sample_1_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify table search input
-        jQuery('#sample_1_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
-        jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialzie select2 dropdown
+        jQuery('#monthScheduleTable_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify table search input
+        jQuery('#monthScheduleTable_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
+        jQuery('#monthScheduleTable_wrapper .dataTables_length select').select2(); // initialzie select2 dropdown
 
         /* Add event listener for opening and closing details
          * Note that the indicator for showing which row is open is not controlled by DataTables,
          * rather it is done here
          */
-        $('#sample_1').on('click', ' tbody td .row-details', function () {
+        $('#monthScheduleTable').on('click', ' tbody td .row-details', function () {
             var nTr = $(this).parents('tr')[0];
             if (oTable.fnIsOpen(nTr)) {
                 /* This row is already open - close it */
@@ -107,15 +68,70 @@ var TableAdvanced = function () {
                 oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
             }
         });
+
     };
     return {
         //main function to initiate the module
-        init: function () {
+        init: function (data) {
             if (!jQuery().dataTable) {
                 return;
             }
-            initTable1();
+            initTable1(data);
         }
     };
 
 }();
+
+/* Formating function for row details */
+function fnFormatDetails(oTable, nTr) {
+    var html = '<table class="table table-bordered table-hover">'
+        + '<tr> <th>日期</th>'
+        + '<th>时间段</th>'
+        + '<th>线路</th>'
+        + '<th>司机信息</th>'
+        + '<th>车辆信息</th>'
+        + '<th>出勤情况</th>'
+        + '<th>编辑</th>'
+        + '</tr>';
+    for (var i in extralData) {
+        //当天有未显示的数据
+        if (nTr.id == extralData[i].day - 1) {
+            var routeLength = extralData[i].driverRoute.length;
+            //从第二个开始显示剩余信息
+            for (var j = 1; j < routeLength; j++) {
+                html += '<tr id="' + (i - 1) + '">';
+                html += '<td>' + i + '</td>'
+                    + ' <td> 1</td> '
+                    + ' <td>2index' + i + '</td> '
+                    + '<td>1212A</td>'
+                    + '<td >ssww</td>'
+                    + '<td > ss</td>'
+                    + '<td ><a href="javascript:;" class="btn red mini delete"><i class="icon-trash"></i> 删除</a></td> '
+                    + '</tr>';
+            }
+            html += '</table>';
+            return html;
+        }
+    }
+    html += '<td colspan="7">无多余信息</td>'
+    html += '</table>';
+    return html;
+
+    for (var i = 1; i < 6; i++) {
+        html += '<tr id="' + (i - 1) + '">';
+        html += '<td>' + i + '</td>'
+            + ' <td> 1</td> '
+            + ' <td>2index' + i + '</td> '
+            + '<td>1212A</td>'
+            + '<td >ssww</td>'
+            + '<td > ss</td>'
+            + '<td ><a href="javascript:;" class="btn red mini delete"><i class="icon-trash"></i> 删除</a></td> '
+            + '</tr>';
+    }
+    html += '</table>';
+    return html;
+}
+var load = function (data) {
+    extralData = data;
+    oTable.fnDraw();
+};
