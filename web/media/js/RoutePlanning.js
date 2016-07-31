@@ -198,13 +198,36 @@ function createRoute(markers, routeID) { //markers是一个Point数组
         onSearchComplete: function(results) {
             if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
                 var color = COLOR[(routeId % COLOR.length)];
+                //console.log(driving.getResults());
+                //console.log(driving.getResults().getPlan(0));
                 var plan = driving.getResults().getPlan(0);
                 var num = plan.getNumRoutes();
                 for (var i = 0; i < num; i++) {
                     var pts = plan.getRoute(i).getPath(); //通过驾车实例，获得一系列点的数组
+                    //console.log(pts);
                     var polyline = new BMap.Polyline(pts, { strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9 });
                     polyline.type = 2;
                     polyline.routeId = routeId;
+                    polyline.addEventListener("mouseover", function(e){
+                        var allOverlay = map.getOverlays();
+                        for(var i=0;i<allOverlay.length;i++){
+                            if(allOverlay[i].type==2){
+                                if(allOverlay[i].routeId==polyline.routeId){
+                                    allOverlay[i].setStrokeWeight(10);
+                                }
+                            }
+                        }
+                    })
+                    polyline.addEventListener("mouseout", function(e){
+                        var allOverlay = map.getOverlays();
+                        for(var i=0;i<allOverlay.length;i++){
+                            if(allOverlay[i].type==2){
+                                if(allOverlay[i].routeId==polyline.routeId){
+                                    allOverlay[i].setStrokeWeight(6);
+                                }
+                            }
+                        }
+                    })
                     map.addOverlay(polyline);
                     PolylineRightClickHandler(polyline);
                 }
