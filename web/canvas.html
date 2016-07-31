@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>员工信息 | 厂车管理系统</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+    <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+    <!-- END PAGE LEVEL STYLES -->
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse navbar-fixed-top">
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="index.html">
+                <img src="media/image/logo.png" alt="logo"/>
+            </a>
+            <!-- END LOGO -->
+
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                <img src="media/image/menu-toggler.png" alt=""/>
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav pull-right">
+                <!-- BEGIN TODO DROPDOWN -->
+                <li class="dropdown" id="header_task_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-tasks"></i>
+                        <span class="badge">3</span>
+                    </a>
+                    <ul class="dropdown-menu extended tasks">
+                        <li>
+                            <p>您有 3 个待办事项</p>
+                        </li>
+                        <li>
+                            <a href="#">
+                                        <span class="task">
+                                        <span class="desc">更新车辆信息</span>
+                                        <span class="percent">40%</span>
+                                        </span>
+                                        <span class="progress progress-success ">
+                                        <span style="width: 40%;" class="bar"></span>
+                                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                    <span class="task">
+                                    <span class="desc">审核班车乘坐申请</span>
+                                    <span class="percent">65%</span>
+                                    </span>
+                                    <span class="progress progress-danger progress-striped active">
+                                    <span style="width: 65%;" class="bar"></span>
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                    <span class="task">
+                                    <span class="desc">更新下周排班信息</span>
+                                    <span class="percent">10%</span>
+                                    </span>
+                                    <span class="progress progress-warning progress-striped">
+                                    <span style="width: 10%;" class="bar"></span>
+                                    </span>
+                            </a>
+                        </li>
+                        <li class="external">
+                            <a href="#">查看所有待办事项 <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
+
+                <!-- BEGIN INBOX DROPDOWN -->
+                <li class="dropdown" id="header_inbox_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-envelope"></i>
+                        <span class="badge">12</span>
+                    </a>
+                    <ul class="dropdown-menu extended inbox">
+                        <li>
+                            <p>您有12条未读消息</p>
+                        </li>
+                        <li>
+                            <a href="inbox.html?a=view">
+                                <span class="photo"><img src="media/image/avatar2.jpg" alt=""/></span>
+                                        <span class="subject">
+                                        <span class="from">xxx</span>
+                                        <span class="time">刚刚</span>
+                                        </span>
+                                        <span class="message">
+                                        Vivamus sed auctor nibh congue nibh. auctor nibh
+                                        auctor nibh...
+                                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="inbox.html?a=view">
+                                <span class="photo"><img src="./media/image/avatar3.jpg" alt=""/></span>
+                                    <span class="subject">
+                                    <span class="from">xxx</span>
+                                    <span class="time">16 分钟以前</span>
+                                    </span>
+                                    <span class="message">
+                                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
+                                    auctor nibh...
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="inbox.html?a=view">
+                                <span class="photo"><img src="./media/image/avatar1.jpg" alt=""/></span>
+                                    <span class="subject">
+                                    <span class="from">xxx</span>
+                                    <span class="time">2 小时以前</span>
+                                    </span>
+                                    <span class="message">
+                                    Vivamus sed nibh auctor nibh congue nibh. auctor nibh
+                                    auctor nibh...
+                                    </span>
+                            </a>
+                        </li>
+                        <li class="external">
+                            <a href="inbox.html">查看所有消息 <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="media/image/avatar1_small.jpg"/>
+                        <span class="username">某某某（管理员）</span>
+                        <i class="icon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="extra_profile.html"><i class="icon-user"></i> 个人资料</a></li>
+                        <li><a href="page_calendar.html"><i class="icon-calendar"></i> 我的日程</a></li>
+                        <li><a href="inbox.html"><i class="icon-envelope"></i> 我的消息 (12)</a></li>
+                        <li><a href="#"><i class="icon-tasks"></i> 待办事项 (3)</a></li>
+                        <li class="divider"></li>
+                        <li><a href="extra_lock.html"><i class="icon-lock"></i> 锁屏</a></li>
+                        <li><a href="login.html"><i class="icon-power-off"></i> 注销</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar nav-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu">
+            <li>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler hidden-phone"></div>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <li>
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <form class="sidebar-search">
+                    <div class="input-box">
+                        <a href="javascript:;" class="remove"></a>
+                        <input type="text" placeholder="搜索..."/>
+                        <input type="button" class="submit" value=" "/>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="start">
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span class="title">首页</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-bookmark-empty"></i>
+                    <span class="title">快速查询</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="layout_horizontal_sidebar_menu.html">
+                            站点</a>
+                    </li>
+                    <li>
+                        <a href="layout_horizontal_menu1.html">
+                            路线</a>
+                    </li>
+                    <li>
+                        <a href="layout_horizontal_menu1.html">
+                            乘坐情况</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            司机排班
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-table"></i> 排班大表</a></li>
+                            <li><a href="#"><i class="icon-list-alt"></i> 我的排班</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="active">
+                <a href="javascript:;">
+                    <i class="icon-cogs"></i>
+                    <span class="title">信息管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="ui_general.html">
+                            站点</a>
+                    </li>
+                    <li>
+                        <a href="ui_buttons.html">
+                            路线</a>
+                    </li>
+                    <li>
+                        <a href="ui_modals.html">
+                            员工</a>
+                    </li>
+                    <li>
+                        <a href="ui_modals.html">
+                            车辆</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            用户权限
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-user"></i> 新增用户</a></li>
+                            <li><a href="#"><i class="icon-group"></i> 所有用户</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-user"></i>
+                    <span class="title">个人中心</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="javascript:;">
+                            个人账户
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-file-text-alt"></i> 个人资料</a></li>
+                            <li><a href="#"><i class="icon-key"></i> 更换密码</a></li>
+                            <li><a href="#"><i class="icon-off"></i> 切换账号</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            我的日程
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-bell"></i> 待办事项</a></li>
+                            <li><a href="#"><i class="icon-calendar"></i> 全部日程</a></li>
+                            <li><a href="#"><i class="icon-plus-sign"></i> 新建任务</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            消息中心
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-envelope"></i> 未读消息</a></li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-file"></i>
+                                    申请与建议
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">乘坐申请</a></li>
+                                    <li><a href="#">调班申请</a></li>
+                                    <li><a href="#">我的建议</a></li>
+                                    <li><a href="#">其它</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="icon-mail-forward"></i> 收件箱</a></li>
+                            <li><a href="#"><i class="icon-mail-reply"></i> 发件箱</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-pencil"></i>
+                    <span class="title">注册</span>
+                </a>
+            </li>
+            <li class="last ">
+                <a href="charts.html">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">公司动态</span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN STYLE CUSTOMIZER -->
+                    <div class="color-panel hidden-phone">
+                        <div class="color-mode-icons icon-color"></div>
+                        <div class="color-mode-icons icon-color-close" style="display: none;"></div>
+                        <div class="color-mode" style="display: none;">
+                            <p>主题颜色</p>
+                            <ul class="inline">
+                                <li class="color-black current color-default" data-style="default"></li>
+                                <li class="color-blue" data-style="blue"></li>
+                                <li class="color-brown" data-style="brown"></li>
+                                <li class="color-purple" data-style="purple"></li>
+                                <li class="color-grey" data-style="grey"></li>
+                                <li class="color-white color-light" data-style="light"></li>
+                            </ul>
+                            <label>
+                                <span>布局</span>
+                                <select class="layout-option m-wrap small">
+                                    <option value="fluid" selected="">填充</option>
+                                    <option value="boxed">居中</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>页眉</span>
+                                <select class="header-option m-wrap small">
+                                    <option value="fixed" selected="">固定</option>
+                                    <option value="default">默认</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>侧边栏</span>
+                                <select class="sidebar-option m-wrap small">
+                                    <option value="fixed">固定</option>
+                                    <option value="default" selected="">默认</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>页脚</span>
+                                <select class="footer-option m-wrap small">
+                                    <option value="fixed">固定</option>
+                                    <option value="default" selected="">默认</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- END STYLE CUSTOMIZER -->
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <h3 class="page-title">
+                        员工
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="index.html">首页</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">信息管理</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li><a href="#">员工</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!--开始内容-->
+            <div class="row-fluid">
+                <canvas id="myCanvas" width=2000 height=80 class="span12"></canvas>
+                <script type="text/javascript">
+                var canvas=document.getElementById('myCanvas');
+                var ctx=canvas.getContext('2d');
+                var canvas_point1,canvas_point2;
+                var canvas_left,canvas_right;
+                var canvas_select=0;
+                var poss=0;
+                var months=["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.font = canvas.width/80+"pt Calibri";
+                //ctx.strokeStyle = 'rgba(255,255,255,1)';
+                //ctx.lineWidth = canvas.width/1000;
+                function draw(){
+                    ctx.clearRect(0,0,canvas.width,canvas.height+10);
+                    ctx.fillStyle='#3D3D3D';
+                    ctx.fillRect(0,0,canvas.width,canvas.height);
+                    //ctx.fillRect(canvas_point2,0,canvas.width-canvas_point2,10);
+                    ctx.fillStyle='#E02222';                    
+                    ctx.fillRect(canvas_point1,0,canvas_point2-canvas_point1,canvas.height);
+                    ctx.fillStyle='#FFFFFF';
+                    var linetop=canvas.height/10*8.5;
+                    var step=canvas.width/360;
+                    var posl=0;//canvas.width/720;
+                    for(var i=0;i<360;i++){
+                        //ctx.moveTo(posl,linetop);
+                        //if(i%30==0) ctx.moveTo(posl,canvas.height/10*7);
+                        if(i%30==0) ctx.fillRect(posl,canvas.height/10*7,canvas.width/1000,canvas.height*0.3);
+                        else        ctx.fillRect(posl,linetop,canvas.width/1000,canvas.height*0.15);
+                        posl+=step;
+                    }
+                    //ctx.stroke();
+                    for(var i=0;i<12;i++)
+                        ctx.fillText(months[i],i*canvas.width/12+canvas.width/24,canvas.height/2);  
+
+                }
+                //canvas.onclick=function(e){
+                //    console.log(e);
+                //    console.log(canvas.clientWidth);
+                //}
+                canvas.onmousedown=function(e){
+                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                    if(pos>canvas_point1&&pos<canvas_point2){
+                        canvas_select=3;
+                        poss=pos;
+                        canvas_left=pos-canvas_point1;
+                        canvas_right=canvas_point2-pos;
+                    }
+                    /*
+                    if(Math.abs(pos-canvas_point1)<4&&Math.abs(pos-canvas_point1)<Math.abs(pos-canvas_point2))
+                        canvas_select=1;
+                    if(Math.abs(pos-canvas_point2)<4&&Math.abs(pos-canvas_point1)>=Math.abs(pos-canvas_point2))
+                        canvas_select=2;*/
+                }
+                canvas.onmousemove=function(e){
+                    if(canvas_select==3){
+                        var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                        if(Math.abs(pos-poss)>5){
+                            canvas_point1=pos-canvas_left;
+                            canvas_point2=pos+canvas_right;
+                            draw();
+                            poss=pos;
+                        }
+                        return;
+                    }
+                    if(canvas_select==1){
+                        var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                        canvas_point1=pos;
+                        draw();
+                    }
+                    if(canvas_select==2){
+                        var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                        canvas_point2=pos;
+                        draw();
+                    }
+                }
+                canvas.onmouseup=function(e){
+                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                    if(canvas_select==1){
+                        canvas_point1=pos;
+                        draw();
+                    }
+                    if(canvas_select==2){
+                        canvas_point2=pos;
+                        draw();
+                    }
+                    canvas_select=0;
+                }
+                canvas.onmousewheel=function(e){
+                    console.log(e.wheelDelta);
+                    console.log((canvas_point2-canvas_point1)*365/canvas.width);
+                    if(e.wheelDelta>0&&(canvas_point2-canvas_point1)*365/canvas.width<21){
+                        canvas_point1-=canvas.width/365;
+                        canvas_point2+=canvas.width/365;
+                        draw();
+                    } 
+                    if(e.wheelDelta<0&&(canvas_point2-canvas_point1)*365/canvas.width>3){
+                        canvas_point1+=canvas.width/365;
+                        canvas_point2-=canvas.width/365;
+                        draw();
+                    } 
+
+                }
+                function canvasselect(x,y){
+                    canvas_point1=x*canvas.width/365;
+                    canvas_point2=y*canvas.width/365;
+                    draw();
+                }
+                canvasselect(150,180);
+                i=120;
+                var date=new Date("2016-1-1");
+                date.setDate(date.getDate()+i);
+                var s=(date.getMonth()+1)+"-"+date.getDate();
+                console.log(s);
+                </script>
+            </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <!-- END PAGE CONTAINER-->
+
+</div>
+<!-- END PAGE -->
+<!-- END CONTAINER -->
+
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script src="media/js/excanvas.min.js"></script>
+<script src="media/js/respond.min.js"></script>
+<![endif]-->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="media/js/select2.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+<script src="media/js/table-editable.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="media/js/app.js"></script>
+
+<!--导出为csv文件-->
+<script src="media/js/toExcel.js"></script>
+<script>
+    jQuery(document).ready(function () {
+//        App.init();
+        TableEditable.init();
+    });
+
+</script>
+
+</body>
+</html>

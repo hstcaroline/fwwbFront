@@ -113,7 +113,6 @@ body {
 
 .space {
     width: 100%;
-    height: 10%;
     padding-top: 2%;
     padding-bottom: 2%;
     background-color: #f2f4f4;
@@ -444,4 +443,441 @@ body, html, #allmap, #dituContent {
 a {
     text-shadow: none !important;
     color: #0d638f;
+}
+.menu_header {
+    height: 20%;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    display: block;
+}
+
+.menu_header .imgDiv {
+    float: left;
+    width: 100%;
+    height: 90%;
+    padding-top: 10%;
+}
+
+.menu_header .nameText {
+    margin-left: 7%;
+    font-size: 20px;
+    color: black;
+    font-family: arial, helvetica;
+}
+
+.menu-icon {
+    margin: 5% 10%;
+    width: 15%;
+}
+
+.menu-span {
+    font-size: 20px;
+}
+/*myschedule*/
+.wc-container {
+    font-family: arial, helvetica;
+}
+
+.wc-toolbar {
+    padding: 1em;
+    font-size: 0.8em;
+}
+
+.ui-widget-header {
+    background-color: #c5f1e9;
+    color: #222222;
+    font-weight: bold;
+    margin-bottom: -10px;
+    line-height: 19px;
+}
+
+.wc-toolbar .wc-nav {
+    float: left;
+}
+
+.wc-toolbar .wc-title {
+    text-align: center;
+    padding: 0;
+    margin: 0 5%;
+    font-size: 18px;
+}
+
+.ui-widget-content {
+    /*border: 1px solid #f5f5f5;*/
+    background: #e2ebdf;
+    color: #222222;
+}
+
+.wc-header {
+    background: #c5f1e9;
+    /*border-width: 1px 0;*/
+    /*border-style: solid;*/
+}
+
+.wc-container table td {
+    margin: 0;
+    padding: 0;
+}
+
+.wc-header .wc-day-column-header {
+    text-align: center;
+    padding: 0.4em;
+}
+
+.wc-day-column-header {
+    border-width: 0 0 1px 3px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.gridTable {
+    overflow: auto;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    border: 1px solid #ddd
+}
+
+.gridWeek {
+    width: 100%;
+}
+
+.gridWeek > tbody > tr > td, .gridTable > tbody > tr > th {
+    border: 1px solid #ddd;
+    width: 12.5%;
+    text-align: center;
+}
+
+.gridTable > tbody > tr > td, .gridTable > tbody > tr > th {
+    border: 1px solid #ddd;
+    width: 12.5%;
+    text-align: center;
+}
+
+.gridTable > tbody > tr {
+    line-height: 35px;
+}
+
+.work {
+    background-color: #2b72d0;
+    border: 1px solid #1b62c0;
+    color: #fff;
+    padding: 0;
+    font-weight: bold;
+
+}
+
+.icon-angle-left, .icon-angle-right {
+    font-size: 32px;
+    vertical-align: baseline;
+    color: #2b72d0;
+    background: transparent;
+}
+
+.icon-angle-left:hover {
+    color: #8c8c8c;
+}
+
+.icon-angle-right:hover {
+    color: #8c8c8c;
+}
+/*news*/
+.bodyDiv{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mainContainer{
+    overflow-y: auto;
+    height: 90%;
+}
+.news{
+    margin-top: 10px;
+}
+.news ul {
+    padding: 0 10px;
+}
+
+.news li {
+    border-bottom: 1px solid #dadfe3;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.list li .f_c:first-child {
+    margin-bottom: 10px;
+}
+
+.news .list .date {
+    float: left;
+    display: inline-block;
+    height: 48px;
+   // position: relative;
+    width: 48px;
+    margin-right: 10px;
+    background: url("../img/news/newsbg.png") no-repeat 0 -178px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.news .date span:first-child {
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+}
+
+.news .date span {
+    display: block;
+}
+
+.news .list .title {
+    color: #0e419c;
+    overflow: hidden;
+    display: block;
+    line-height: 25px;
+    margin-bottom: 10px;
+    font-size: 16px !important;
+    line-height: 24px;
+    max-height: 48px;
+    overflow: hidden;
+}
+
+.f_c:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.news .list .f_l {
+    margin-right: 10px;
+}
+
+.news .f_l {
+    float: left;
+}
+
+.news .list .f_l img {
+    width: 120px;
+    height: 90px;
+    vertical-align: middle;
+}
+
+/*myMsg*/
+.newsContainer {
+    width: 100%;
+    height: 17%;
+    padding: 0 5%;
+    border-bottom: 1px solid #eee;
+    margin-top: 5%;
+}
+
+.newsHead {
+    height: 60%;
+    float: left;
+    margin-bottom: 15%;
+}
+
+.newsContainer .userNameSpan {
+    margin-left: 5%;
+    font-size: 18px;
+}
+
+.sendTimeSpan {
+    float: right;
+    font-size: 14px;
+    color: #484747;
+}
+
+.newsContainer h5 {
+    margin-top: 5%;
+    padding-left: 20%;
+    color: #484747;
+}
+
+.header .back {
+    float: left;
+    margin-top: 7%;
+    margin-left: 5%;
+}
+
+.header .icon-angle-left {
+    font-size: 20px;
+    color: white;
+}
+/*myCar*/
+
+.header .back {
+    float: left;
+    margin-top: 7%;
+    margin-left: 5%;
+}
+
+.header .icon-angle-left {
+    font-size: 20px;
+    color: white;
+}
+
+.mainContainer {
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.carInfo {
+    width: 100%;
+    margin: 2% 3%;
+}
+
+.car-config .column-head {
+    padding-left: 5%;
+    border-top: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    font-weight: 700;
+    height: 33px;
+    background-color: #f5f5f5;
+}
+
+.car-config .list li {
+    overflow: hidden;
+    width: 100%;
+    padding: 5% 5%;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+}
+
+.car-config .list li p {
+    float: right;
+    color: #999;
+}
+
+.car-config .column-head .column-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 33px;
+}
+
+.column-title:before {
+    content: "";
+    float: left;
+    height: 14px;
+    background-color: #22ac38;
+    width: 2px;
+    margin: 9px 5px 0 0;
+}
+
+.car-conent {
+    padding: 0;
+}
+
+.car-conent .tit2 {
+    color: #333;
+    background-color: #f4f4f4;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 24px;
+    position: relative;
+}
+
+.car-conent .tit2:after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #2baa3f;
+    top: 16px;
+    left: 10px;
+}
+
+.list {
+    padding-left: 0;
+}
+
+.report-list li {
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #d7d7d7;
+    padding: 0 5%;
+}
+
+.report-list li p {
+    font-size: 14px;
+    color: #333;
+}
+
+.report-list li span {
+    color: #333;
+    font-size: 14px;
+}
+
+.fr {
+    float: right;
+    width: 8%;
+}
+
+.car-conent .result.yes {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #22ac38;
+    border-radius: 50%;
+}
+
+.car-conent .result {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    /* text-align: center; */
+    vertical-align: middle;
+    position: relative;
+}
+
+.car-conent .result.yes:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 3px;
+    height: 7px;
+    border-bottom: 1px solid #22ac38;
+    border-right: 1px solid #22ac38;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 10;
+}
+
+.result.yes:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 3px;
+    height: 7px;
+    border-bottom: 1px solid #22ac38;
+    border-right: 1px solid #22ac38;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 10;
+}
+/*.myCash*/
+.month_head{
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    padding-left: 22px;
+}
+.selectMonth{
+    border: 1px solid #eee;
+    width: 100px;
+    height: 22px;
+    margin-left: 5px;
 }

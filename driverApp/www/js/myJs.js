@@ -16,6 +16,9 @@ function menuClick(id) {
     if (id == 'myInfo') {
         location.href = 'myInfo.html';
     }
+    if (id == 'myCash') {
+        location.href = 'myCash.html';
+    }
     if (id == 'myMsg') {
         location.href = 'myMsg.html';
     }

@@ -364,7 +364,6 @@ body, html, #allmap, #dituContent {
     margin: 5% 10%;
     width: 15%;
 }
-
 .menu-span {
     font-size: 20px;
 }
@@ -776,4 +775,28 @@ a {
     height: 90px;
     vertical-align: middle;
 }
-
+/*index*/
+.buttom-button{
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    bottom: 10%;
+    left: 0px;
+    border-top: 1px solid #b4cef8;
+    background-color: white;
+}
+.button-circle.button-jumbo{
+    width: 100px;
+    height: 100px;
+    margin-top: 5%;
+}
+.button-circle.button-jumbo.endBtn{
+    background-color: #e02222;
+    border-color: #e02222;
+}
+.button-circle.button-jumbo.nextBtn{
+    background-color: #0362fd;
+}
+.center-block{
+    display: table;
+}

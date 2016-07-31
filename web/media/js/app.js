@@ -721,17 +721,17 @@ var App = function () {
 
             //core handlers
             handleInit();
-            handleResponsiveOnResize(); // set and handle responsive    
-            handleUniform();        
-            handleScrollers(); // handles slim scrolling contents 
+            handleResponsiveOnResize(); // set and handle responsive
+            handleUniform();
+            handleScrollers(); // handles slim scrolling contents
             handleResponsiveOnInit(); // handler responsive elements on page load
 
             //layout handlers
             handleFixedSidebar(); // handles fixed sidebar menu
-            handleFixedSidebarHoverable(); // handles fixed sidebar on hover effect 
+            handleFixedSidebarHoverable(); // handles fixed sidebar on hover effect
             handleSidebarMenu(); // handles main menu
             handleHorizontalMenu(); // handles horizontal menu
-            handleSidebarToggler(); // handles sidebar hide/show            
+            handleSidebarToggler(); // handles sidebar hide/show
             handleFixInputPlaceholderForIE(); // fixes/enables html5 placeholder attribute for IE9, IE8
             handleGoTop(); //handles scroll to top functionality in the footer
             handleTheme(); // handles style customer tool
@@ -785,7 +785,7 @@ var App = function () {
         blockUI: function (el, centerY) {
             var el = jQuery(el); 
             el.block({
-                    message: '<img src="./media/image/ajax-loading.gif" align="">',
+                    message: '<img src="media/image/ajax-loading.gif" align="">',
                     centerY: centerY != undefined ? centerY : true,
                     css: {
                         top: '10%',

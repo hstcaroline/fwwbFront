@@ -47,12 +47,22 @@
 </div> -->
 
 <div id="dituContent"></div>
-<div class="buttom-button" id="startDiv">
-    <button class="button button-glow button-circle button-action button-jumbo" id="startRoute">开始</button>
+<div class="buttom-button " id="startDiv">
+    <div class="center-block" >
+        <button class="button button-glow button-circle button-action button-jumbo" id="startRoute"
+                style="margin-top: 25px">开始</button>
+    </div>
 </div>
 <div class="buttom-button" id="goDiv">
-    <button   class="button button-glow button-circle button-action button-jumbo nextBtn" id="stopRoute" style="margin-left: 10%">下一站</button>
-    <button class="button  button-glow button-circle button-action button-jumbo endBtn" id="nextStation" style="margin-left:10%">结束</button>
+
+    <div class="center-block">
+        <button class="button button-glow button-circle button-action button-jumbo nextBtn" id="nextStation"
+                style="margin-right: 10px; margin-top: 25px">下一站
+        </button>
+        <button class="button  button-glow button-circle button-action button-jumbo endBtn" id="stopRoute"
+                style="margin-left:10px; margin-top: 25px">结束
+        </button>
+    </div>
 </div>
 <div class="footer">
 
@@ -149,11 +159,16 @@
                         }
                     }
                 });
-
+                var startIcon = new BMap.Icon('img/start.png', new BMap.Size(40, 120));
+                startIcon.setSize(new BMap.Size(170, 246));
+                startIcon.setImageSize(new BMap.Size(40, 60));
+                var endIcon = new BMap.Icon('img/end.png', new BMap.Size(40, 120));
+                endIcon.setSize(new BMap.Size(170, 246));
+                endIcon.setImageSize(new BMap.Size(40, 60));
                 var startPoint = new BMap.Point(data.stations[0].posx, data.stations[0].posy);
-                map.addOverlay(new BMap.Marker(startPoint));
+                map.addOverlay(new BMap.Marker(startPoint, {icon: startIcon}));
                 var endPoint = new BMap.Point(data.stations[len - 1].posx, data.stations[len - 1].posy);
-                map.addOverlay(new BMap.Marker(endPoint));
+                map.addOverlay(new BMap.Marker(endPoint, {icon: endIcon}));
                 var wayStations = new Array();
                 for (var i = 1; i < len - 1; i++) {
                     var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
@@ -172,11 +187,9 @@
         }
     });
     $("#startRoute").click(function () {
-        console.log("start route");
         $.ajax({
             url: IP + '/startDrive',
             type: 'post',
-            dataType: 'json',
             data: {
                 routeId: routeId
             },
@@ -198,7 +211,6 @@
         $.ajax({
             url: IP + '/stopDrive',
             type: 'post',
-            dataType: 'json',
             data: {
                 routeId: routeId
             },
@@ -230,9 +242,5 @@
             });
         });
     }
-    function playAudio(url) {
-        var my_media = new Media(url, null, null);
-        my_media.play();
-    }
-    playAudio("h123.mp3");
+
 </script>

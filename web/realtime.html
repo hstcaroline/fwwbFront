@@ -22,12 +22,13 @@
     <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
-    <!-- page css-->
+    <!-- BEGIN PAGE LEVEL STYLES-->
     <!--拖拽上传界面显示css-->
     <link href="media/css/dropzone.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="media/css/jquery.gridster.min.css">
-    <link rel="stylesheet" href="media/css/autocomplete.css">
-    <link rel="stylesheet" href="media/css/style.css">
+    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+    <link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES-->
     <!--引用百度地图API-->
     <script type="text/javascript"src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
 </head>
@@ -357,49 +358,35 @@
     <!-- BEGIN PAGE -->
     <div class="page-content">
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
         <div id="portlet-remove" class="modal fade hide">
-
             <div class="modal-header">
-
                 <button data-dismiss="modal" class="close" type="button"></button>
-
                 <h3>注意</h3>
-
             </div>
-
             <div class="modal-body">
-
                 <p><h4> 此操作不可撤销，确认删除？</h4></p>
-
-                <div class="pull-right">
-                    <button id="portlet-remove-ok" type="button">确定</button>
-                    <button data-dismiss="modal" type="button">取消</button>
-                </div>
             </div>
-
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn">取 消</button>
+                <button id="portlet-remove-ok" class="btn green">确 定</button>
+            </div>
         </div>
 
         <div id="portlet-update" class="modal fade hide">
-
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button"></button>
                 <h3>修改</h3>
             </div>
-
             <div class="modal-body">
-
                 <div id="portlet-content">
                     <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
                     <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
                 </div>
-
-                <div class="pull-right">
-                    <button id="portlet-update-ok" type="button">确定</button>
-                    <button data-dismiss="modal" type="button">取消</button>
-                </div>
             </div>
-
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn">取 消</button>
+                <button id="portlet-update-ok" class="btn green">确 定</button>
+            </div>
         </div>
 
         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -459,286 +446,21 @@
                     <!--BEGIN TABS-->
                     <div class="tabbable tabbable-custom tabs-right" style="padding-top: 10px;">
                         <!-- Only required for left/right tabs -->
-                        <ul class="nav nav-tabs tabs-right">
-                            <li class="active"><a href="#mapRoutePlanning" data-toggle="tab">
-                                <i class="icon-picture"></i> 地图</a></li>
-                            <li><a href="#mapData" data-toggle="tab">
-                                <i class="icon-dashboard"></i> 数据</a></li>
-
-                            <li><a href="#fileUpload" data-toggle="tab">
-                                <i class="icon-dashboard"></i> 导入</a></li>
-
-                            <li><a href="#routeEdit" data-toggle="tab">
-                                <i class="icon-dashboard"></i> 路线编辑</a></li>
-
-                            <li id="addMarker"><p>
-                                <div class="btn red">
-                                    <i class="icon-edit"></i> 添加站点
-                                </div>
-                                </p></li>
-
-                            <li id="createStation"><p>
-                                <div class="btn red">
-                                    <i class="icon-edit"></i> 生成站点
-                                </div>
-                                </p></li>
-
-                            <li>
-                                <div class="btn-group">
-                                    <a id="createRoute" class="btn red" href="#" data-toggle="dropdown">
-                                        &nbsp;<i class="icon-edit"></i> 生成路线&nbsp;</a>
-                                    <ul class="dropdown-menu control-group hold-on-click pull-right">
-                                        <div class="controls">
-
-                                            <label class="radio line">
-
-                                                <input type="radio" name="optionsRadios1" value="option1"
-                                                       onclick="routePlanning(0)"/>
-                                                时间最短
-                                            </label>
-
-                                            <label class="radio line">
-                                                <input type="radio" name="optionsRadios1" value="option2"
-                                                       onclick="routePlanning(1)" checked/>
-                                                成本最低
-                                            </label>
-
-                                            <label class="radio line">
-                                                <input type="radio" name="optionsRadios1" value="option3"
-                                                       onclick="routePlanning(2)"/>
-                                                乘坐率最高
-                                            </label>
-                                        </div>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-
+                        
                         <div class="tab-content">
                             <div class="tab-pane active" id="mapRoutePlanning">
                                 <!--百度地图容器-->
                                 <div id="map">
-                                    <div id="search-form"></div>
+                                    <div class="control-group span6">
+                                        <div class="controls select2-wrapper">
+                                            <select id="stations_select2" class="span11" name="options2">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>
                                 </div>
                             </div>
-                            <div class="tab-pane flip-scroll" id="mapData">
-                                <p>
-                                <div class="glyphicons no-js bus"><i></i></div>
-                                </p>
-                                <table class="table table-striped table-hover table-condensed flip-content">
-                                    <thead class="flip-content">
-                                    <tr>
-                                        <th>#</th>
-
-                                        <th>班次</th>
-
-                                        <th>厂车类型</th>
-
-                                        <th>始发站</th>
-
-                                        <th>终点站</th>
-
-                                        <th>始发时间</th>
-
-                                        <th>到达时间</th>
-
-                                        <th class="numeric">预计载客数</th>
-
-                                        <th class="numeric">最大载客数</th>
-
-                                        <th class="numeric">司机工号</th>
-
-                                        <th>状态</th>
-
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-
-                                        <td>0830沪B43265</td>
-
-                                        <td>大巴</td>
-
-                                        <td>建德花园站</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>08:30</td>
-
-                                        <td>09:40</td>
-
-                                        <td class="numeric">35</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12335</td>
-
-                                        <td><span class="label label-success">运行中</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-
-                                        <td>0845沪B43873</td>
-
-                                        <td>大巴</td>
-
-                                        <td>人民广场</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>08:45</td>
-
-                                        <td>10：05</td>
-
-                                        <td class="numeric">52</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12352</td>
-
-                                        <td><span class="label label-success">运行中</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-
-                                        <td>1415沪B43265</td>
-
-                                        <td>大巴</td>
-
-                                        <td>恒大华城站</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>14:15</td>
-
-                                        <td>14:50</td>
-
-                                        <td class="numeric">15</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12842</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-
-                                        <td>2005沪B43873</td>
-
-                                        <td>大巴</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>恒大华城站</td>
-
-                                        <td>20:05</td>
-
-                                        <td>20:40</td>
-
-                                        <td class="numeric">15</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12842</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-
-                                        <td>1830沪B43265</td>
-
-                                        <td>大巴</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>建德花园站</td>
-
-                                        <td>18:30</td>
-
-                                        <td>19:40</td>
-
-                                        <td class="numeric">33</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12212</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-
-                                        <td>1635沪B32765</td>
-
-                                        <td>大巴</td>
-
-                                        <td>宝山站</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>16:35</td>
-
-                                        <td>18:00</td>
-
-                                        <td class="numeric">47</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12352</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-
-                                        <td>1200沪B32765</td>
-
-                                        <td>大巴</td>
-
-                                        <td>武宁新村站</td>
-
-                                        <td>宝山站</td>
-
-                                        <td>12:00</td>
-
-                                        <td>13:25</td>
-
-                                        <td class="numeric">47</td>
-
-                                        <td class="numeric">60</td>
-
-                                        <td class="numeric">12352</td>
-
-                                        <td><span class="label label-danger">未运行</span></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="fileUpload">
-                                <p>
-                                    <span class="label label-important">NOTE:</span>&nbsp;
-                                    支持浏览器版本 Chrome, Firefox, Safari, Opera & Internet Explorer 10.
-                                    <button id="submit-all" class="btn red pull-right mini">开始上传</button>
-                                </p>
-                                <script src="media/js/dropzone.js"></script>
-                                <form action="frame.html" id="my-dropzone" class="dropzone"></form>
-                                <script src="media/js/dropdownUpload.js"></script>
-                            </div>
-                            <div class="tab-pane" id="routeEdit" style="min-height: 400px;overflow: auto">
-                                <section style="width: 100%; height: 100%">
-                                    <div class="gridster" id="grid">
-                                        <ul id="blocks"></ul>
-                                    </div>
-
-                                </section>
-
-                            </div>
-                            <a type="button" class="btn-info" onclick="saveRoute()">保存</a>
                         </div>
                     </div>
                     <!--END TABS-->
@@ -765,18 +487,25 @@
 <![endif]-->
 <script src="media/js/app.js"></script>
 <!-- PAGE LEVEL -->
-<script type="text/javascript" src="media/js/RoutePlanning2.js"></script>
 <script src="media/js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="media/js/autocomplete.js"></script>
-<script type="text/javascript" src="media/js/routeEdit.js"></script>
+<script type="text/javascript" src="media/js/select2.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="media/js/jquery.form.js"></script>
+<script type="text/javascript" src="media/js/realtime.js"></script>
+<script src="media/js/socket.io.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
     });
-</script>
-<script type="text/javascript">
-
-
+    var socket = io.connect("http://localhost:3000");    
+    socket.on('drive message', function(msg){
+        console.log(msg);
+        addBus(msg);        
+    });
+    socket.on('end drive',function(msg){
+        console.log(msg);
+        removeBus(msg);
+    })
 </script>
 </body>
 </html>

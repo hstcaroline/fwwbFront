@@ -13,3 +13,17 @@ function footerClick(id){
     }
 
 }
+function menuClick(id) {
+    if (id == 'myWork') {
+        location.href = 'myWork.html';
+    }
+    if (id == 'myMsg') {
+        location.href = 'myMsg.html';
+    }
+    if(id=='news'){
+        location.href = 'news.html';
+    }
+    if(id=='myCash'){
+        location.href = 'myCash.html';
+    }
+}

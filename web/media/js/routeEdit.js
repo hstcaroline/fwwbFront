@@ -52,28 +52,44 @@ reloadMap.onclick = function(){
 };
 var resetStations = document.getElementById("resetStations");
 resetStations.onclick = function () {
+    //map.setZoom(13);
     routes = [];
     newRouteIndex=0;
     stationCount = 1;
     map.clearOverlays();
     stationArr=[];
+    var temp={};
+    temp.time=document.getElementById("selectroutetime").value;
+    console.log(temp);
+    var da = JSON.stringify(temp);
     $.ajax({
-        url: IP+"addPoints",
+        url: "http://192.168.1.7:3000/RoutePlanning/getnewStationByTime",
         type: 'post',
+        data:da,
+        contentType: "application/json",
         dataType: "json",
         async : false,
         success: function (data) {
-            //stationArr。push&addmarker
-            for(var i=0;i<data.length;i++){
-                var pos=data[i].posx + "|" +data[i].posy;
-                var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
-                var point = {id:-stationCount,pos:new BMap.Point(data[i].posx,data[i].posy),name:"未命名_"+stationCount,address:"",num:0};//??num
-                stationArr.push(point);
-                stationCount++;
-                addMarker(marker);
-                var len = gridster.get_widgets_at_col("1").len + 1;
-                var html = "<li id='"+point.id+"'data-row='" + len + "' data-col='" + 1 + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + point.id + "</span>" + point.name + "</li>";
-                gridster.add_widget(html,1,1,1,len);
+            var num=data.length;
+            console.log(data.length);
+            //stationArr。push&addmarker            
+            for(var i=0;i<num;i++){
+                getNearstValid(data[i], function(res,res2){
+                    console.log("finsish");
+                    console.log(res);
+                    var pos=res.lng + "|" +res.lat;
+                    var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+                    var point = {id:-stationCount,pos:new BMap.Point(res.lng,res.lat),name:"未命名_"+stationCount,address:"",num:res2.num,time:res2.time};//??num
+                    stationArr.push(point);
+                    stationCount++;
+                    //console.log("finish"+i+"__1");
+                    addMarker(marker);
+                });
+                
+                //var len = gridster.get_widgets_at_col("1").len + 1;
+                //var html = "<li id='"+point.id+"'data-row='" + i+1 + "' data-col='" + 1 + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + point.id + "</span>" + point.name + "</li>";
+                //gridster.add_widget(html,1,1,1,i+1);
+                //console.log("finish"+i+"__2");
             }
         },
         error: function () {
@@ -81,11 +97,44 @@ resetStations.onclick = function () {
         }
     });
 }
+function getNearstValid(data, cb){
+        var ptA=new BMap.Point(data.posx,data.posy);
+        var temP = null;
+        var driving = new BMap.DrivingRoute(map, {renderOptions:{map: null}, policy: BMAP_DRIVING_POLICY_LEAST_TIME});
+        var point_t = new BMap.Point(121.404, 31.915);
+        driving.setSearchCompleteCallback(function(results){
+            temP = results.getPlan(0).getRoute(0).vr[0];
+            cb(temP,data);
+        });
+        driving.search(ptA, point_t);
+    }
+
+
+var selectroutetime=document.getElementById("selectroutetime");
+selectroutetime.onchange=function()
+{
+    reload();
+}
 
 initMap();//创建和初始化地图
 setEvent();
 getData();
 loadData(routes);
+
+map.addEventListener('zoomend', function(type,target){
+    var overlays=map.getOverlays();
+    var zoom=map.getZoom();
+    for(var i=0;i<overlays.length;i++){
+        console.log(overlays[i].V.className);
+        console.log(overlays[i].type);
+        console.log(overlays[i].routeId);
+        if(overlays[i].V.className=="BMap_Marker BMap_noprint"){
+            var icon=createIcon({w:(zoom-8)*5,h:(zoom-8)*5,l:0,t:0,x:6,lb:5},1);
+            overlays[i].setIcon(icon);
+        }
+    }
+    console.log(map.getZoom());
+});
 
 // 获取鼠标相对div的left值
 function getOppositeCoor(id, event){
@@ -104,8 +153,8 @@ function setEvent() {
         var pos = e.point.lng + "|" + e.point.lat;
         if(ifAddMarker==true){//添加站点
             //var gridster = $(".gridster ul").gridster().data('gridster');//获取对象
-            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
-            var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"未命名_"+stationCount,address:"",num:0};
+            var marker = [{title:"未命名_"+stationCount,content:"",point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:-stationCount,type:1}];
+            var point = {id:-stationCount,pos:new BMap.Point(e.point.lng,e.point.lat),name:"未命名_"+stationCount,address:"",num:0,time:document.getElementById("selectroutetime").value};
             stationArr.push(point);
             stationCount++;
             addMarker(marker);
@@ -164,11 +213,18 @@ function MarkerRightClickHandler(marker,iw){
     markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
     marker.addContextMenu(markerMenu);//给标记添加右键菜单
 }
+
 function getData(){
+    var temp={};
+    temp.time=document.getElementById("selectroutetime").value;
+    console.log(temp);
+    var da = JSON.stringify(temp);
     $.ajax({
-        type: 'GET',
-        url: 'http://192.168.1.7:3000/users/getRoute',
+        url: 'http://127.0.0.1:3000/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
+        type:'POST',
+        data:da,
+        contentType: "application/json",
         dataType: 'json',
         async : false,
         success: function (data) {
@@ -348,7 +404,8 @@ function saveRoute() {
                     posy: stationArr[index].pos.lat,
                     name: stationArr[index].name,
                     address: stationArr[index].address,
-                    num:stationArr[index].num
+                    num:stationArr[index].num,
+                    time:stationArr[index].time
                 };
                 newRoutes[data_col].stations[data_row] = station;
             }
@@ -379,10 +436,10 @@ function saveRoute() {
         }
     }
     console.log(postDatas);
-    var da = JSON.stringify(postDatas);
+    var da = JSON.stringify({time:document.getElementById("selectroutetime").value,routeinfo:postDatas});
     $.ajax({
         type: 'POST',
-        url: 'http://192.168.1.7:3000/users/changeRoute',
+        url: 'http://192.168.1.7:3000/users/changeRouteByTime',
         data: da,
         contentType: "application/json",
         async : true,
@@ -415,10 +472,10 @@ function refreshMap(ifRefreshMarker){
         for(var j=0;j<routes[i].stations.length;j++){
             var station = routes[i].stations[j];
             var pos = station.posx + "|" + station.posy;
-            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num};
+            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
             route[i].push(point.pos);
             if(ifRefreshMarker){
-                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
                 stationArr.push(point);
                 addMarker(marker);
             }
@@ -432,7 +489,7 @@ function routePlanning(arg_0){
     console.log("generate path");
     console.log(parseSimplePointArr(stationArr));
     $.ajax({
-        url: IP+"generatePath",
+        url: "http://192.168.1.9:3000/RoutePlanning/generatePath",
         type: 'post',
         dataType: "json",
         data: {
@@ -517,3 +574,37 @@ jQuery(document).ready(function () {
         return false;
     });
 });
+$('#grid .gs_w').live('mouseover', function (e) {
+        var col =$(this).attr('data-col')-2;
+        var routeId=0;
+        if(col<newRouteIndex){
+            routeId=routes[col].route.id;
+        }else{
+            routeId=startId+col-newRouteIndex;
+        }
+        var allOverlay = map.getOverlays();
+        for(var i=0;i<allOverlay.length;i++){
+            if(allOverlay[i].type==2){
+                if(allOverlay[i].routeId==routeId){
+                    allOverlay[i].setStrokeWeight(10);
+                }
+            }
+        }
+    });
+$('#grid .gs_w').live('mouseout', function (e) {
+        var col =$(this).attr('data-col')-2;
+        var routeId=0;
+        if(col<newRouteIndex){
+            routeId=routes[col].route.id;
+        }else{
+            routeId=startId+col-newRouteIndex;
+        }
+        var allOverlay = map.getOverlays();
+        for(var i=0;i<allOverlay.length;i++){
+            if(allOverlay[i].type==2){
+                if(allOverlay[i].routeId==routeId){
+                    allOverlay[i].setStrokeWeight(6);
+                }
+            }
+        }
+    });
