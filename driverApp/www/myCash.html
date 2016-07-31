@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <title>Hello World</title>
+</head>
+<body>
+
+
+<div class="header">
+    <div class="back">
+        <i class="icon-angle-left" id="backBtn"><span>&nbsp;返回</span></i>
+    </div>
+    <div style="height: 100%;width:70%;float: right">
+        <span class="text-center">工资明细</span>
+    </div>
+</div>
+<div class="mainContainer">
+    <div class="column car-config">
+        <div class="month_head">
+            <label><i class="icon-calendar"></i></label>
+            <select class="selectMonth" id="month">
+                <option value="6">2016年7月</option>
+                <option value="5">2016年6月</option>
+                <option value="4">2016年5月</option>
+            </select>
+        </div>
+        <div class="column-head">
+            <div class="column-title">基本工资</div>
+        </div>
+        <div class="column-body">
+            <ul class="list">
+                <li class="list-item">
+                    <span>总收入</span>
+                    <p class="detail" style="color: #0e90d2">6700元</p>
+                </li> <li class="list-item">
+                    <span>工作天数</span>
+                    <p class="detail">20天</p>
+                </li>
+                <li class="list-item">
+                    <span>请假</span>
+                    <p>5天</p>
+                </li>
+                <li class="list-item">
+                    <span>加班</span>
+                    <p>4天</p>
+                </li>
+                <li class="list-item">
+                    <span>工件数</span>
+                    <p>100个/天</p>
+                </li>
+            </ul>
+        </div>
+        <div class="column-head">
+            <div class="column-title">工资提成</div>
+        </div>
+        <div class="column-body">
+            <ul class="list">
+                <li class="list-item">
+                    <span>提成收入</span>
+                    <p class="detail" style="color: #0e90d2">1000元</p>
+                </li>
+                <li class="list-item">
+                    <span>奖金</span>
+                    <p class="detail" style="color: #d2666f">500元</p>
+                </li>
+                <li class="list-item">
+                    <span>其它收入</span>
+                    <p>200元</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script>
+    window.onload = function () {
+//        $.ajax({
+//            url: 'http://192.168.1.4:3000/users/getDriver',
+//            type: 'POST',
+//            async: false,
+//            data: {'id': userId},
+//            dataType: 'json',
+//            success: function (driver) {
+//                if (driver != null) {
+//                    $("#inputName").val(driver.name);
+//                    $("#inputPhone").val(driver.phone);
+//                    $("#inputAddr").val(driver.address);
+//                    $("#inputClasses").val(driver.classes);
+//                    $("#inputJobNum").val(driver.job_number);
+//                    $("#inputDepart").val(driver.department);
+//                    $("#inputTeam").val(driver.team);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
+    };
+</script>
+<script type="text/javascript">
+    $("#backBtn").click(function () {
+        javascript:history.back(-1);
+    });
+
+</script>

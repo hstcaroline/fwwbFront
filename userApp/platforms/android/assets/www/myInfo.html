@@ -54,19 +54,19 @@
 
     <section class="menu-section" id="menu_section" style="display: none;">
         <ul class="menu-section-list">
-            <li id="myInfo">
+            <li id="myWork" onclick="menuClick(this.id)">
                 <img src="img/icon-info.png" class="menu-icon">
-                <span class="menu-span">我的班次</span>
+                <span class="menu-span">我的排班</span>
             </li>
-            <li id="myCash">
+            <li id="myCash" onclick="menuClick(this.id)">
                 <img src="img/icon-cash.png" class="menu-icon">
                 <span class="menu-span">我的工资</span>
             </li>
-            <li id="myMsg">
+            <li id="myMsg" onclick="menuClick(this.id)">
                 <img src="img/icon-message.png" class="menu-icon">
                 <span class="menu-span">我的消息</span>
             </li>
-            <li id="news">
+            <li id="news" onclick="menuClick(this.id)">
                 <img src="img/icon-news.png" class="menu-icon">
                 <span class="menu-span">公司动态</span>
             </li>
@@ -187,30 +187,30 @@
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
             slideout.toggle();
         });
-        $.ajax({
-            url: 'http://192.168.1.4:3000/users/getStaff',
-            type: 'POST',
-            async: false,
-            data: {'id': 2},
-            dataType: 'json',
-            success: function (driver) {
-                if (driver != null) {
-                    $("#inputName").val(driver.name);
-                    $("#inputPhone").val(driver.phone);
-                    $("#inputAddr").val(driver.address);
-                    $("#inputClasses").val(driver.classes);
-                    $("#inputJobNum").val(driver.job_number);
-                    $("#inputDepart").val(driver.department);
-                    $("#inputTeam").val(driver.team);
-                }
-                else {
-                    alert('链接失败');
-                }
-            },
-            error: function (xhr, type, exception) {
-                alert(type);
-            }
-        });
+//        $.ajax({
+//            url: 'http://192.168.1.4:3000/users/getStaff',
+//            type: 'POST',
+//            async: false,
+//            data: {'id': 2},
+//            dataType: 'json',
+//            success: function (driver) {
+//                if (driver != null) {
+//                    $("#inputName").val(driver.name);
+//                    $("#inputPhone").val(driver.phone);
+//                    $("#inputAddr").val(driver.address);
+//                    $("#inputClasses").val(driver.classes);
+//                    $("#inputJobNum").val(driver.job_number);
+//                    $("#inputDepart").val(driver.department);
+//                    $("#inputTeam").val(driver.team);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
     };
 </script>
 <script type="text/javascript">
