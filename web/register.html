@@ -446,7 +446,7 @@
                                                 <li class="span3">
                                                     <a href="#tab3" data-toggle="tab" class="step">
                                                         <span class="number">3</span>
-                                                        <span class="desc"><i class="icon-ok"></i> 权限管理</span>
+                                                        <span class="desc"><i class="icon-ok"></i> 角色管理</span>
                                                     </a>
                                                 </li>
                                                 <li class="span3">
@@ -555,7 +555,7 @@
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label">职位</label>
+                                                <label class="control-label">岗位</label>
                                                 <div class="controls">
                                                     <select name="job" id="job_list" class="span6">
                                                         <option>经理</option>
@@ -575,111 +575,29 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab3">
-                                            <h3 class="block">用户权限管理</h3>
-                                            <div class="portlet">
-                                                <div class="portlet-title">
-                                                    <div class="caption"><i class="icon-reorder"></i>授权说明</div>
-                                                    <div class="tools">
-                                                        <a href="javascript:;" class="collapse"></a>
+                                            <h3 class="block">用户角色管理</h3>
+                                            <div class="control-group">
+                                                <div id="info">
+                                                    <p><span class="label label-success" id="authority_route">厂车班次管理</span>
+                                                        <span class="label label-success" id="authority_driver">司机排班管理</span>
+                                                        <span class="label label-success" id="authority_car">车辆信息管理</span>
+                                                        <span class="label label-success" id="authority_staff">员工信息管理</span></p>
+                                                    <div class="alert">
+                                                        角色说明：最高权限
                                                     </div>
                                                 </div>
-                                                <div class="portlet-body">
-                                                    <div class="accordion row-fluid" id="accordion1">
-                                                        <div class="accordion-group span3">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
-                                                                    <i class="icon-angle-left"></i>
-                                                                    厂车班次管理
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_1" class="accordion-body collapse">
-                                                                <div class="accordion-inner">
-                                                                    <table class="table table-hover table-striped table-bordered" style="margin-bottom: 5px">
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="accordion-group span3">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
-                                                                    <i class="icon-angle-left"></i>
-                                                                    司机排班管理
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_2" class="accordion-body collapse">
-                                                                <div class="accordion-inner">
-                                                                    <table class="table table-hover table-striped table-bordered" style="margin-bottom: 5px">
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="accordion-group span3">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
-                                                                    <i class="icon-angle-left"></i>
-                                                                    员工信息管理
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_3" class="accordion-body collapse">
-                                                                <div class="accordion-inner">
-                                                                    <table class="table table-hover table-striped table-bordered" style="margin-bottom: 5px">
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="accordion-group span3">
-                                                            <div class="accordion-heading">
-                                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse_4">
-                                                                    <i class="icon-angle-left"></i>
-                                                                    车辆信息管理
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapse_4" class="accordion-body collapse">
-                                                                <div class="accordion-inner">
-                                                                    <table class="table table-hover table-striped table-bordered" style="margin-bottom: 5px">
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                        <tr><td>简要的操作说明</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="control-group pull-right">
-                                                <label class="control-label" style="margin-right: 30px">授权<span class="required">*</span>:</label>
-                                                <div class="controls pull-right" style="margin-left:0px">
-                                                    <label class="checkbox">
-                                                        <input id="checkbox_1" type="checkbox" name="authority[]" value="1" data-title="厂车班次管理" /> 厂车班次管理
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input id="checkbox_2" type="checkbox" name="authority[]" value="2" data-title="司机排班管理"/> 司机排班管理
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input id="checkbox_3" type="checkbox" name="authority[]" value="3" data-title="员工信息管理"/> 员工信息管理
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input id="checkbox_4" type="checkbox" name="authority[]" value="4" data-title="车辆信息管理"/> 车辆信息管理
-                                                    </label>
-                                                    <div id="form_authority_error"></div>
+                                                <label class="control-label">角色</label>
+                                                <div class="controls">
+                                                    <select name="role" id="role_list" class="span6">
+                                                        <option>董事长</option>
+                                                        <option>总经理</option>
+                                                        <option>运输部总监</option>
+                                                        <option>人事部总监</option>
+                                                        <option>乘车需求审核员</option>
+                                                        <option>员工档案管理员</option>
+                                                        <option>车辆档案管理员</option>
+                                                        <option>厂车路线规划员</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -731,9 +649,9 @@
                                             </div>
                                             <h4 class="form-section">权限</h4>
                                             <div class="control-group">
-                                                <label class="control-label">允许操作:</label>
+                                                <label class="control-label">角色:</label>
                                                 <div class="controls">
-                                                    <span class="text display-value" data-display="authority"></span>
+                                                    <span class="text display-value" data-display="role"></span>
                                                 </div>
                                             </div>
                                         </div>
