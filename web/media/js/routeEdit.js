@@ -125,9 +125,12 @@ map.addEventListener('zoomend', function(type,target){
     var overlays=map.getOverlays();
     var zoom=map.getZoom();
     for(var i=0;i<overlays.length;i++){
+        console.log(overlays[i].V.className);
+        console.log(overlays[i].type);
+        console.log(overlays[i].routeId);
         if(overlays[i].V.className=="BMap_Marker BMap_noprint"){
             var icon=createIcon({w:(zoom-8)*5,h:(zoom-8)*5,l:0,t:0,x:6,lb:5},1);
-            console.log(overlays[i].setIcon(icon));
+            overlays[i].setIcon(icon);
         }
     }
     console.log(map.getZoom());
@@ -217,7 +220,7 @@ function getData(){
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
-        url: 'http://192.168.1.7:3000/users/getRouteByTime',
+        url: 'http://127.0.0.1:3000/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'POST',
         data:da,
@@ -571,3 +574,37 @@ jQuery(document).ready(function () {
         return false;
     });
 });
+$('#grid .gs_w').live('mouseover', function (e) {
+        var col =$(this).attr('data-col')-2;
+        var routeId=0;
+        if(col<newRouteIndex){
+            routeId=routes[col].route.id;
+        }else{
+            routeId=startId+col-newRouteIndex;
+        }
+        var allOverlay = map.getOverlays();
+        for(var i=0;i<allOverlay.length;i++){
+            if(allOverlay[i].type==2){
+                if(allOverlay[i].routeId==routeId){
+                    allOverlay[i].setStrokeWeight(10);
+                }
+            }
+        }
+    });
+$('#grid .gs_w').live('mouseout', function (e) {
+        var col =$(this).attr('data-col')-2;
+        var routeId=0;
+        if(col<newRouteIndex){
+            routeId=routes[col].route.id;
+        }else{
+            routeId=startId+col-newRouteIndex;
+        }
+        var allOverlay = map.getOverlays();
+        for(var i=0;i<allOverlay.length;i++){
+            if(allOverlay[i].type==2){
+                if(allOverlay[i].routeId==routeId){
+                    allOverlay[i].setStrokeWeight(6);
+                }
+            }
+        }
+    });

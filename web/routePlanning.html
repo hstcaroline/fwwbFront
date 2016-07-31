@@ -465,10 +465,10 @@
                                         <i class="icon-dashboard"></i> 导入</a>
                                 </li>
 
-                                <li>
+                              <!--  <li>
                                     <a href="#routeEdit" data-toggle="tab">
                                         <i class="icon-dashboard"></i> 路线编辑</a>
-                                </li>
+                                </li>-->
 
                                 <li id="selecttime"><p>
                                     <div class="tooltips" data-placement="left"  data-original-title="选择显示路线的时间段">
@@ -557,7 +557,19 @@
                                         </div>
                                         <div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>
                                     </div>
+                                    <div id="routeEdit" style="min-height: 400px;overflow: auto">
+                                        <a class="btn mini red tooltips" onclick="saveRoute()" data-placement="top" data-original-title="保存">
+                                            <i class="icon-save"></i></a>
+                                        <a class="btn mini green tooltips" id="gritter-help" data-placement="top" data-original-title="帮助">
+                                            <i class="icon-bookmark"></i></a>
+                                        <section style="width: 100%; height: 100%">
+                                            <div class="gridster" id="grid">
+                                                <ul id="blocks"></ul>
+                                            </div>
+                                        </section>
+                                    </div>
                                 </div>
+
                                 <div class="tab-pane flip-scroll" id="mapData">
                                     <p>
                                         <div class="glyphicons no-js bus"><i></i></div>
@@ -763,7 +775,7 @@
                                     </form>
                                     <button id="upload" class="btn red pull-right mini" type="submit">上传</button>
                                 </div>
-                                <div class="tab-pane" id="routeEdit" style="min-height: 400px;overflow: auto">
+                            <!--    <div class="tab-pane" id="routeEdit" style="min-height: 400px;overflow: auto">
                                     <a class="btn mini red tooltips" onclick="saveRoute()" data-placement="top" data-original-title="保存">
                                         <i class="icon-save"></i></a>
                                     <a class="btn mini green tooltips" id="gritter-help" data-placement="top" data-original-title="帮助">
@@ -774,7 +786,7 @@
                                         </div>
                                     </section>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <!--END TABS-->
                     </div>
