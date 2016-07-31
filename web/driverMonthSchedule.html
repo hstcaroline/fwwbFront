@@ -51,18 +51,22 @@
                 <div class="navbar-inner">
                     <ul class="nav">
                         <li>
-                            <a href="index.html">
-                                首页
+                            <a href="routePlanning.html">
+                                线路规划
                             </a>
                         </li>
-
+                        <li>
+                            <a href="realTime.html">
+                                运行动态
+                            </a>
+                        </li>
                         <li class="active">
 
                             <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
 
                                 <span class="selected"></span>
 
-                                Layouts
+                                目录
 
                                 <span class="arrow"></span>
 
@@ -70,81 +74,90 @@
 
                             <ul class="dropdown-menu">
 
-                                <li>
+                                <li class="dropdown-submenu">
 
-                                    <a href="layout_horizontal_sidebar_menu.html">
+                                    <a href="javascript:;">
 
-                                        Horzontal &amp; Sidebar Menu </a>
+                                        数据查询
 
-                                </li>
+                                        <span class="arrow"></span>
 
-                                <li class="active">
+                                    </a>
 
-                                    <a href="layout_horizontal_menu1.html">
-
-                                        Horzontal Menu 1 </a>
-
-                                </li>
-
-                                <li>
-
-                                    <a href="layout_horizontal_menu2.html">
-
-                                        Horzontal Menu 2 </a>
-
-                                </li>
-
-                                <li>
-
-                                    <a href="layout_promo.html">
-
-                                        Promo Page </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="stationInfo.html">
+                                                所有站点</a>
+                                        </li>
+                                        <li>
+                                            <a href="rideList.html">
+                                                乘车名单</a>
+                                        </li>
+                                        <li>
+                                            <a href="reportForm.html">
+                                                报表</a>
+                                        </li>
+                                    </ul>
 
                                 </li>
+                                <li class="dropdown-submenu">
 
-                                <li>
+                                    <a href="javascript:;">
 
-                                    <a href="layout_email.html">
+                                        信息管理
 
-                                        Email Templates </a>
+                                        <span class="arrow"></span>
+                                    </a>
 
-                                </li>
+                                    <ul class="dropdown-menu">
 
-                                <li>
+                                        <li>
+                                            <a href="staffInfo.html">
+                                                员工</a>
+                                        </li>
+                                        <li>
+                                            <a href="carInfo.html">
+                                                车辆</a></li>
+                                        <li>
+                                            <a href="driverSchedule.html">
+                                                司机排班</a>
+                                        </li>
 
-                                    <a href="layout_ajax.html">
-
-                                        Content Loading via Ajax</a>
-
-                                </li>
-
-                                <li>
-
-                                    <a href="layout_sidebar_closed.html">
-
-                                        Sidebar Closed Page </a>
-
-                                </li>
-
-                                <li>
-
-                                    <a href="layout_blank_page.html">
-
-                                        Blank Page </a>
+                                    </ul>
 
                                 </li>
+                                <li class="dropdown-submenu">
 
-                                <li>
+                                    <a href="javascript:;">
 
-                                    <a href="layout_boxed_page.html">Boxed Page</a>
+                                        系统管理
 
-                                </li>
+                                        <span class="arrow"></span>
+                                    </a>
 
-                                <li>
+                                    <ul class="dropdown-menu">
 
-                                    <a href="layout_boxed_not_responsive.html">
+                                        <li class="dropdown-submenu">
 
-                                        Non-Responsive Boxed Layout </a>
+                                            <a href="javascript:;">角色管理<span class="arrow"></span></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li><a href="role_create.html">创建角色</a></li>
+                                                <li><a href="role_edit.html">更改角色</a></li>
+
+                                            </ul>
+
+                                        </li>
+                                        <li>
+                                            <a href="authorityMng.html">
+                                                权限管理</a></li>
+                                        <li>
+                                            <a href="register.html">
+                                                创建用户</a>
+                                        </li>
+
+                                    </ul>
 
                                 </li>
 
@@ -152,7 +165,7 @@
 
                                     <a href="javascript:;">
 
-                                        More options
+                                        个人中心
 
                                         <span class="arrow"></span>
 
@@ -160,35 +173,56 @@
 
                                     <ul class="dropdown-menu">
 
-                                        <li><a href="#">Second level link</a></li>
-
                                         <li class="dropdown-submenu">
 
-                                            <a href="javascript:;">More options<span class="arrow"></span></a>
+                                            <a href="javascript:;">个人账户<span class="arrow"></span></a>
 
                                             <ul class="dropdown-menu">
 
-                                                <li><a href="index.html">Third level link</a></li>
+                                                <li><a href="userProfile.html">个人资料</a></li>
 
-                                                <li><a href="index.html">Third level link</a></li>
-
-                                                <li><a href="index.html">Third level link</a></li>
-
-                                                <li><a href="index.html">Third level link</a></li>
-
-                                                <li><a href="index.html">Third level link</a></li>
-
+                                                <li><a href="changePsw.html">更改密码</a></li>
                                             </ul>
 
                                         </li>
 
-                                        <li><a href="index.html">Second level link</a></li>
+                                        <li class="dropdown-submenu">
 
-                                        <li><a href="index.html">Second level link</a></li>
+                                            <a href="javascript:;">我的日程<span class="arrow"></span></a>
 
-                                        <li><a href="index.html">Second level link</a></li>
+                                            <ul class="dropdown-menu">
+
+                                                <li><a href="index.html">待办事项</a></li>
+
+                                                <li><a href="index.html">全部日程</a></li>
+                                                <li><a href="index.html">新建任务</a></li>
+                                            </ul>
+
+                                        </li>
+                                        <li class="dropdown-submenu">
+
+                                            <a href="javascript:;">我的日程<span class="arrow"></span></a>
+
+                                            <ul class="dropdown-menu">
+
+                                                <li><a href="index.html">消息中心</a></li>
+
+                                                <li><a href="index.html">申请与建议</a></li>
+                                                <li><a href="index.html">收件箱</a></li>
+                                                <li><a href="index.html">发件箱</a></li>
+                                            </ul>
+
+                                        </li>
+
 
                                     </ul>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="news.html">
+                                        公司动态 </a>
 
                                 </li>
 
@@ -198,71 +232,13 @@
 
                         </li>
 
-                        <li>
-
-                            <a href="">Tables</a>
-
-                        </li>
-
-                        <li class="">
-
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="">Extra
-
-                                <span class="arrow"></span>
-
-                            </a>
-
-                            <ul class="dropdown-menu">
-
-                                <li><a href="index.html">About Us</a></li>
-
-                                <li><a href="index.html">Services</a></li>
-
-                                <li><a href="index.html">Pricing</a></li>
-
-                                <li><a href="index.html">FAQs</a></li>
-
-                                <li><a href="index.html">Gallery</a></li>
-
-                                <li><a href="index.html">Registration</a></li>
-
-                                <li><a href="index.html">2 Columns (Left)</a></li>
-
-                                <li><a href="index.html">2 Columns (Right)</a></li>
-
-                            </ul>
-
-                            <b class="caret-out"></b>
-
-                        </li>
-
-                        <li>
-
-                            <span class="hor-menu-search-form-toggler">&nbsp;</span>
-
-                            <div class="search-form hidden-phone hidden-tablet">
-
-                                <form class="form-search">
-
-                                    <div class="input-append">
-
-                                        <input type="text" placeholder="Search..." class="m-wrap">
-
-                                        <button type="button" class="btn"></button>
-
-                                    </div>
-
-                                </form>
-
-                            </div>
-
-                        </li>
 
                     </ul>
 
                 </div>
 
             </div>
+
 
             <!-- END HORIZANTAL MENU -->
 
@@ -910,36 +886,7 @@
         }
         return array;
     }
-    function formatTime(index) {
-        switch (index) {
-            case 1:
-                return '00:00-02:00';
-            case 2:
-                return '02:00-04:00';
-            case 3:
-                return '04:00-06:00';
-            case 4:
-                return '06:00-08:00';
-            case 5:
-                return '08:00-10:00';
-            case 6:
-                return '10:00-12:00';
-            case 7:
-                return '12:00-14:00';
-            case 8:
-                return '14:00-16:00';
-            case 9:
-                return '16:00-18:00';
-            case 10:
-                return '18:00-20:00';
-            case 11:
-                return '20:00-22:00';
-            case 12:
-                return '22:00-24:00';
-            default:
-                return '10:00-12:00';
-        }
-    }
+
     $("#goSearch").click(function () {
         getData();
         load(extralData);

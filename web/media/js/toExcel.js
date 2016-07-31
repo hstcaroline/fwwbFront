@@ -124,7 +124,7 @@ function getTblData1(inTbl, inWindow) {
         for (var j = 0; j < curTbl.rows.length; j++) {
             for (var i = 0; i < curTbl.rows[j].cells.length; i++) {
                 var s = curTbl.rows[j].cells[i].innerText;
-                if(s=="编辑"||s=="删除"){
+                if (s == "编辑" || s == "删除") {
                     continue;
                 }
                 s = s.replace(",", " ");

@@ -220,7 +220,7 @@ function getData(){
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
-        url: 'http://127.0.0.1:3000/users/getRouteByTime',
+        url: 'http://192.168.1.7:3000/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'POST',
         data:da,

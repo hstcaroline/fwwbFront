@@ -8,7 +8,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>所有用户 | 厂车管理系统</title>
+    <title>站点信息 | 厂车管理系统</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
@@ -22,9 +22,11 @@
     <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
-    <link rel="stylesheet" href="media/css/DT_bootstrap.css">
+    <!-- BEGIN PAGE LEVEL STYLES -->
     <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css"/>
-    <link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="media/css/DT_bootstrap.css"/>
+
+    <!-- END PAGE LEVEL STYLES -->
 </head>
 <!-- END HEAD -->
 
@@ -32,7 +34,6 @@
 <body class="page-header-fixed">
 <!-- BEGIN HEADER -->
 <div class="header navbar navbar-inverse navbar-fixed-top">
-
     <!-- BEGIN TOP NAVIGATION BAR -->
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -193,52 +194,38 @@
                 <div class="sidebar-toggler hidden-phone"></div>
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
             </li>
-            <li>
-                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-                <form class="sidebar-search">
-                    <div class="input-box">
-                        <a href="javascript:;" class="remove"></a>
-                        <input type="text" placeholder="搜索..."/>
-                        <input type="button" class="submit" value=" "/>
-                    </div>
-                </form>
-                <!-- END RESPONSIVE QUICK SEARCH FORM -->
-            </li>
-            <li class="start active ">
-                <a href="index.html">
+            <li class="start ">
+                <a href="routePlanning.html">
                     <i class="icon-home"></i>
-                    <span class="title">首页</span>
+                    <span class="title">线路规划</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="">
+            <li class="start ">
+                <a href="realTime.html">
+                    <i class="icon-truck"></i>
+                    <span class="title">运行状态</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li class="active">
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
-                    <span class="title">快速查询</span>
+                    <span class="title">数据查询</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
-                        <a href="layout_horizontal_sidebar_menu.html">
-                            站点</a>
+                    <li class="active" >
+                        <a href="stationInfo.html">
+                            所有站点</a>
                     </li>
                     <li>
-                        <a href="layout_horizontal_menu1.html">
-                            路线</a>
+                        <a href="rideList.html">
+                            乘车名单</a>
                     </li>
                     <li>
-                        <a href="layout_horizontal_menu1.html">
-                            乘坐情况</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            司机排班
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#"><i class="icon-table"></i> 排班大表</a></li>
-                            <li><a href="#"><i class="icon-list-alt"></i> 我的排班</a></li>
-                        </ul>
+                        <a href="reportForm.html">
+                            报表</a>
                     </li>
                 </ul>
             </li>
@@ -250,30 +237,42 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="ui_general.html">
-                            站点</a>
-                    </li>
-                    <li>
-                        <a href="ui_buttons.html">
-                            路线</a>
-                    </li>
-                    <li>
-                        <a href="ui_modals.html">
+                        <a href="staffInfo.html">
                             员工</a>
                     </li>
                     <li>
-                        <a href="ui_modals.html">
-                            车辆</a>
-                    </li>
+                        <a href="carInfo.html">
+                            车辆</a></li>
                     <li>
+                        <a href="driverSchedule.html">
+                            司机排班</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class=" icon-star"></i>
+                    <span class="title">系统管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="open">
                         <a href="javascript:;">
-                            用户权限
+                            角色管理
                             <span class="arrow"></span>
                         </a>
-                        <ul class="sub-menu">
-                            <li><a href="#"><i class="icon-user"></i> 新增用户</a></li>
-                            <li><a href="#"><i class="icon-group"></i> 所有用户</a></li>
+                        <ul class="sub-menu" style="display: block">
+                            <li ><a href="role_create.html"><i class="icon-file-text-alt"></i> 创建角色</a></li>
+                            <li><a href="role_edit.html"><i class="icon-key"></i> 更改角色</a></li>
                         </ul>
+                    </li>
+
+                    <li class="">
+                        <a href="authorityMng.html">
+                            权限管理</a></li>
+                    <li >
+                        <a href="register.html">
+                            创建用户</a>
                     </li>
                 </ul>
             </li>
@@ -290,9 +289,8 @@
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#"><i class="icon-file-text-alt"></i> 个人资料</a></li>
-                            <li><a href="#"><i class="icon-key"></i> 更换密码</a></li>
-                            <li><a href="#"><i class="icon-off"></i> 切换账号</a></li>
+                            <li><a href="userProfile.html"><i class="icon-file-text-alt"></i> 个人资料</a></li>
+                            <li><a href="changePsw.html"><i class="icon-key"></i> 更换密码</a></li>
                         </ul>
                     </li>
                     <li>
@@ -332,14 +330,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="">
-                <a href="javascript:;">
-                    <i class="icon-pencil"></i>
-                    <span class="title">注册</span>
-                </a>
-            </li>
             <li class="last ">
-                <a href="charts.html">
+                <a href="news.html">
                     <i class="icon-bar-chart"></i>
                     <span class="title">公司动态</span>
                 </a>
@@ -402,7 +394,7 @@
 
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                     <h3 class="page-title">
-                        用户
+                        站点
                     </h3>
                     <ul class="breadcrumb">
                         <li>
@@ -414,11 +406,7 @@
                             <a href="#">信息管理</a>
                             <i class="icon-angle-right"></i>
                         </li>
-                        <li>
-                            <a href="#">权限管理</a>
-                            <i class="icon-angle-right"></i>
-                        </li>
-                        <li><a href="#">所有用户</a></li>
+                        <li><a href="#">站点</a></li>
                     </ul>
                     <!-- END PAGE TITLE & BREADCRUMB-->
                 </div>
@@ -426,185 +414,59 @@
             <!--开始内容-->
             <div class="row-fluid">
                 <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
                     <div class="portlet box red">
                         <div class="portlet-title">
-                            <div class="caption"><i class="icon-comments"></i>用户管理</div>
-                            <div class="tools">
-                                <a href="javascript:;" class="collapse"></a>
-                            </div>
+                            <div class="caption"><i class="icon-edit"></i>站点信息</div>
+                            <div class="tools"><a href="javascript:;" class="collapse"></a></div>
                         </div>
                         <div class="portlet-body">
-                            <table class="table table-striped table-bordered table-hover table-full-width"
-                                   id="sample_1">
+                            <div class="clearfix">
+                                <div class="btn-group pull-right">
+                                    <button class="btn blue" onclick="getXlsFromTbl('sample_editable_1',null)"><i class="m-icon-swapdown m-icon-white"
+                                                                ></i>导出为Excel
+                                    </button>
+                                    <!--<button class="btn dropdown-toggle" data-toggle="dropdown">-->
+                                    <!--文件 <i class="icon-angle-down"></i>-->
+                                    <!--</button>-->
+                                    <!--<ul class="dropdown-menu pull-right">-->
+                                    <!--<li><a href="#">打印</a></li>-->
+                                    <!--<li><a href="#">保存为 PDF</a></li>-->
+                                    <!--<li><a href="#" onclick="getXlsFromTbl('sample_editable_1',null)">导出到 Excel</a></li>-->
+                                    <!--</ul>-->
+                                </div>
+
+                            </div>
+
+                            <input style="display: none" id="attri_value" value="12">
+                            <table class="table table-striped table-hover table-condensed" id="sample_editable_1"
+                                   width="100%">
                                 <thead>
                                 <tr>
-                                    <th width="5%">#</th>
-                                    <th width="28%">姓名</th>
-                                    <th width="32%">工号</th>
-                                    <th width="28%">角色</th>
-                                    <th width="5%"></th>
+                                    <th>编号</th>
+                                    <th>站点名称</th>
+                                    <th>所在位置</th>
+                                    <th>运行时间段</th>
+                                    <th>周围员工</th>
+                                    <th>状态</th>
+                                    <th>编辑</th>
+                                    <th>删除</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr id="0">
-                                    <td style="vertical-align: middle;text-align: center">1</td>
-                                    <td style="vertical-align: middle">某某某</td>
-                                    <td style="vertical-align: middle">1212A</td>
-                                    <td>
-                                        <div class="control-group" style="margin-bottom: 0">
-                                            <div class="controls">
-                                                <select class="m-wrap span12" tabindex="1">
-                                                    <option>董事长</option>
-                                                    <option>总经理</option>
-                                                    <option>运输部总监</option>
-                                                    <option>人事部总监</option>
-                                                    <option>乘车需求审核员</option>
-                                                    <option>员工档案管理员</option>
-                                                    <option>车辆档案管理员</option>
-                                                    <option>厂车路线规划员</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;text-align: center"><a href="javascript:;" class="btn red mini delete">
-                                        <i class="icon-trash"></i></a></td>
-                                </tr>
-                                <tr id="1">
-                                    <td style="vertical-align: middle;text-align: center">2</td>
-                                    <td style="vertical-align: middle">某某某</td>
-                                    <td style="vertical-align: middle">1212A</td>
-                                    <td>
-                                        <div class="control-group" style="margin-bottom: 0">
-                                            <div class="controls">
-                                                <select class="m-wrap span12" tabindex="1">
-                                                    <option>董事长</option>
-                                                    <option>总经理</option>
-                                                    <option>运输部总监</option>
-                                                    <option>人事部总监</option>
-                                                    <option>乘车需求审核员</option>
-                                                    <option>员工档案管理员</option>
-                                                    <option>车辆档案管理员</option>
-                                                    <option>厂车路线规划员</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;text-align: center"><a href="javascript:;" class="btn red mini delete">
-                                        <i class="icon-trash"></i></a></td>
-                                </tr>
-                                <tr id="2">
-                                    <td style="vertical-align: middle;text-align: center">3</td>
-                                    <td style="vertical-align: middle">某某某</td>
-                                    <td style="vertical-align: middle">1212A</td>
-                                    <td>
-                                        <div class="control-group" style="margin-bottom: 0">
-                                            <div class="controls">
-                                                <select class="m-wrap span12" tabindex="1">
-                                                    <option>董事长</option>
-                                                    <option>总经理</option>
-                                                    <option>运输部总监</option>
-                                                    <option>人事部总监</option>
-                                                    <option>乘车需求审核员</option>
-                                                    <option>员工档案管理员</option>
-                                                    <option>车辆档案管理员</option>
-                                                    <option>厂车路线规划员</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;text-align: center"><a href="javascript:;" class="btn red mini delete">
-                                        <i class="icon-trash"></i></a></td>
-                                </tr>
-                                <tr id="3">
-                                    <td style="vertical-align: middle;text-align: center">4</td>
-                                    <td style="vertical-align: middle">某某某</td>
-                                    <td style="vertical-align: middle">1212A</td>
-                                    <td>
-                                        <div class="control-group" style="margin-bottom: 0">
-                                            <div class="controls">
-                                                <select class="m-wrap span12" tabindex="1">
-                                                    <option>董事长</option>
-                                                    <option>总经理</option>
-                                                    <option>运输部总监</option>
-                                                    <option>人事部总监</option>
-                                                    <option>乘车需求审核员</option>
-                                                    <option>员工档案管理员</option>
-                                                    <option>车辆档案管理员</option>
-                                                    <option>厂车路线规划员</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;text-align: center"><a href="javascript:;" class="btn red mini delete">
-                                        <i class="icon-trash"></i></a></td>
-                                </tr>
-                                <tr id="4">
-                                    <td style="vertical-align: middle;text-align: center">5</td>
-                                    <td style="vertical-align: middle">某某某</td>
-                                    <td style="vertical-align: middle">1212A</td>
-                                    <td>
-                                        <div class="control-group" style="margin-bottom: 0">
-                                            <div class="controls">
-                                                <select class="m-wrap span12" tabindex="1">
-                                                    <option>董事长</option>
-                                                    <option>总经理</option>
-                                                    <option>运输部总监</option>
-                                                    <option>人事部总监</option>
-                                                    <option>乘车需求审核员</option>
-                                                    <option>员工档案管理员</option>
-                                                    <option>车辆档案管理员</option>
-                                                    <option>厂车路线规划员</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;text-align: center"><a href="javascript:;" class="btn red mini delete">
-                                        <i class="icon-trash"></i></a></td>
-                                </tr>
-                                <tr id="5">
-                                    <td style="vertical-align: middle;text-align: center">6</td>
-                                    <td style="vertical-align: middle">某某某</td>
-                                    <td style="vertical-align: middle">1212A</td>
-                                    <td>
-                                        <div class="control-group" style="margin-bottom: 0">
-                                            <div class="controls">
-                                                <select class="m-wrap span12" tabindex="1">
-                                                    <option>董事长</option>
-                                                    <option>总经理</option>
-                                                    <option>运输部总监</option>
-                                                    <option>人事部总监</option>
-                                                    <option>乘车需求审核员</option>
-                                                    <option>员工档案管理员</option>
-                                                    <option>车辆档案管理员</option>
-                                                    <option>厂车路线规划员</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle;text-align: center"><a href="javascript:;" class="btn red mini delete">
-                                        <i class="icon-trash"></i></a></td>
-                                </tr>
+                                <tbody id="allStations">
                                 </tbody>
                             </table>
                         </div>
-                        <div id="modal_remove" class="modal hide fade" tabindex="-1" data-backdrop="static"
-                             data-keyboard="false">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h3>注意</h3>
-                            </div>
-                            <div class="modal-body">
-                                <h5>此操作不可撤销，确定删除此用户?</h5>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn mini">取消</button>
-                                <button type="button" data-dismiss="modal" class="btn red mini" id="remove">删除</button>
-                            </div>
-                        </div>
                     </div>
+
+                    <!-- END EXAMPLE TABLE PORTLET-->
+
                 </div>
+
             </div>
         </div>
+
+
     </div>
     <!-- END PAGE CONTAINER-->
 
@@ -623,17 +485,59 @@
 <script src="media/js/excanvas.min.js"></script>
 <script src="media/js/respond.min.js"></script>
 <![endif]-->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
 <script type="text/javascript" src="media/js/select2.min.js"></script>
-<script type="text/javascript" src="media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+<script src="media/js/table-editable.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
 <script src="media/js/app.js"></script>
-<script src="media/js/userManagement.js"></script>
+
+<!--导出为csv文件-->
+<script src="media/js/toExcel.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
-        TableAdvanced.init();
+        loadData();
+        TableEditable.init();
     });
-
+    var ip = 'http://192.168.1.7:3000';
+    function loadData() {
+        $.ajax({
+            url: ip + '/users/getStation',
+            type: 'get',
+            async: false,
+            contentType: "application/json",
+            success: function (stations) {
+                if (stations != null) {
+                    loadTable(stations);
+                }
+                else {
+                    alert('链接失败');
+                }
+            },
+            error: function (xhr, type, exception) {
+                alert(type);
+            }
+        });
+    }
+    function loadTable(data) {
+        var html = '';
+        for (var i in data) {
+            html += '<tr class="">'
+                    + '<td>' + (i*1+1) + '</td>'
+                    + '<td>' + data[i].name + '</td>'
+                    + '<td>' + data[i].address + '</td>'
+                    + '<td>' + formatTime(data[i].time) + '</td>'
+                    + '<td>' + data[i].num + '人</td>'
+                    +'<td><span class="label label-success">'+formatStatus(data[i].status)+'</span></td>'
+                    + '<td> <a class="edit" href="javascript:;"><i class = "icon-trash" > </i> 编辑 </a> </td>'
+                    + '<td> <a class="delete" href="javascript:;"><i class = "icon-trash" > </i> 删除 </a> </td>'
+                    + '</tr>'
+        }
+        $("#allStations").html(html);
+    }
 </script>
+
 </body>
 </html>
