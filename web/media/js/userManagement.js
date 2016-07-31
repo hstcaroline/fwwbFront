@@ -41,9 +41,9 @@ var TableAdvanced = function () {
 
         $('#sample_1 a.delete').live('click', function (e) {
             e.preventDefault();
+            var nRow = $(this).parents('tr')[0];
             $("#modal_remove").modal('show');
             $("#remove").click (function () {
-                var nRow = $(this).parents('tr')[0];
                 oTable.fnDeleteRow(nRow);
                 $("#modal_remove").modal('hide');
             });
