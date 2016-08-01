@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>车辆信息 | 厂车管理系统</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!--引用百度地图API-->
+    <script type="text/javascript"src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse navbar-fixed-top">
+
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="index.html">
+                <img src="media/image/logo.png" alt="logo"/>
+            </a>
+            <!-- END LOGO -->
+
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                <img src="media/image/menu-toggler.png" alt=""/>
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav pull-right">
+                <!-- BEGIN TODO DROPDOWN -->
+                <li class="dropdown" id="header_task_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-tasks"></i>
+                        <span class="badge">3</span>
+                    </a>
+                    <ul class="dropdown-menu extended tasks">
+                        <li>
+                            <p>您有 3 个待办事项</p>
+                        </li>
+                        <li>
+                            <a href="#">
+                                        <span class="task">
+                                        <span class="desc">更新车辆信息</span>
+                                        <span class="percent">40%</span>
+                                        </span>
+                                        <span class="progress progress-success ">
+                                        <span style="width: 40%;" class="bar"></span>
+                                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                    <span class="task">
+                                    <span class="desc">审核班车乘坐申请</span>
+                                    <span class="percent">65%</span>
+                                    </span>
+                                    <span class="progress progress-danger progress-striped active">
+                                    <span style="width: 65%;" class="bar"></span>
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                    <span class="task">
+                                    <span class="desc">更新下周排班信息</span>
+                                    <span class="percent">10%</span>
+                                    </span>
+                                    <span class="progress progress-warning progress-striped">
+                                    <span style="width: 10%;" class="bar"></span>
+                                    </span>
+                            </a>
+                        </li>
+                        <li class="external">
+                            <a href="#">查看所有待办事项 <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
+
+                <!-- BEGIN INBOX DROPDOWN -->
+                <li class="dropdown" id="header_inbox_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-envelope"></i>
+                        <span class="badge">12</span>
+                    </a>
+                    <ul class="dropdown-menu extended inbox">
+                        <li>
+                            <p>您有12条未读消息</p>
+                        </li>
+                        <li>
+                            <a href="inbox.html?a=view">
+                                <span class="photo"><img src="media/image/avatar2.jpg" alt=""/></span>
+                                        <span class="subject">
+                                        <span class="from">xxx</span>
+                                        <span class="time">刚刚</span>
+                                        </span>
+                                        <span class="message">
+                                        Vivamus sed auctor nibh congue nibh. auctor nibh
+                                        auctor nibh...
+                                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="inbox.html?a=view">
+                                <span class="photo"><img src="./media/image/avatar3.jpg" alt=""/></span>
+                                    <span class="subject">
+                                    <span class="from">xxx</span>
+                                    <span class="time">16 分钟以前</span>
+                                    </span>
+                                    <span class="message">
+                                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
+                                    auctor nibh...
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="inbox.html?a=view">
+                                <span class="photo"><img src="./media/image/avatar1.jpg" alt=""/></span>
+                                    <span class="subject">
+                                    <span class="from">xxx</span>
+                                    <span class="time">2 小时以前</span>
+                                    </span>
+                                    <span class="message">
+                                    Vivamus sed nibh auctor nibh congue nibh. auctor nibh
+                                    auctor nibh...
+                                    </span>
+                            </a>
+                        </li>
+                        <li class="external">
+                            <a href="inbox.html">查看所有消息 <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="media/image/avatar1_small.jpg"/>
+                        <span class="username">某某某（管理员）</span>
+                        <i class="icon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="extra_profile.html"><i class="icon-user"></i> 个人资料</a></li>
+                        <li><a href="page_calendar.html"><i class="icon-calendar"></i> 我的日程</a></li>
+                        <li><a href="inbox.html"><i class="icon-envelope"></i> 我的消息 (12)</a></li>
+                        <li><a href="#"><i class="icon-tasks"></i> 待办事项 (3)</a></li>
+                        <li class="divider"></li>
+                        <li><a href="extra_lock.html"><i class="icon-lock"></i> 锁屏</a></li>
+                        <li><a href="login.html"><i class="icon-power-off"></i> 注销</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar nav-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu">
+            <li>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler hidden-phone"></div>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <li>
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <form class="sidebar-search">
+                    <div class="input-box">
+                        <a href="javascript:;" class="remove"></a>
+                        <input type="text" placeholder="搜索..."/>
+                        <input type="button" class="submit" value=" "/>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="start active ">
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span class="title">首页</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-bookmark-empty"></i>
+                    <span class="title">快速查询</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="layout_horizontal_sidebar_menu.html">
+                            站点</a>
+                    </li>
+                    <li>
+                        <a href="layout_horizontal_menu1.html">
+                            路线</a>
+                    </li>
+                    <li>
+                        <a href="layout_horizontal_menu1.html">
+                            乘坐情况</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            司机排班
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-table"></i> 排班大表</a></li>
+                            <li><a href="#"><i class="icon-list-alt"></i> 我的排班</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-cogs"></i>
+                    <span class="title">信息管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="ui_general.html">
+                            站点</a>
+                    </li>
+                    <li>
+                        <a href="ui_buttons.html">
+                            路线</a>
+                    </li>
+                    <li>
+                        <a href="ui_modals.html">
+                            员工</a>
+                    </li>
+                    <li>
+                        <a href="ui_modals.html">
+                            车辆</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            用户权限
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-user"></i> 新增用户</a></li>
+                            <li><a href="#"><i class="icon-group"></i> 所有用户</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-user"></i>
+                    <span class="title">个人中心</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="javascript:;">
+                            个人账户
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-file-text-alt"></i> 个人资料</a></li>
+                            <li><a href="#"><i class="icon-key"></i> 更换密码</a></li>
+                            <li><a href="#"><i class="icon-off"></i> 切换账号</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            我的日程
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-bell"></i> 待办事项</a></li>
+                            <li><a href="#"><i class="icon-calendar"></i> 全部日程</a></li>
+                            <li><a href="#"><i class="icon-plus-sign"></i> 新建任务</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            消息中心
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-envelope"></i> 未读消息</a></li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-file"></i>
+                                    申请与建议
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">乘坐申请</a></li>
+                                    <li><a href="#">调班申请</a></li>
+                                    <li><a href="#">我的建议</a></li>
+                                    <li><a href="#">其它</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="icon-mail-forward"></i> 收件箱</a></li>
+                            <li><a href="#"><i class="icon-mail-reply"></i> 发件箱</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-pencil"></i>
+                    <span class="title">注册</span>
+                </a>
+            </li>
+            <li class="last ">
+                <a href="charts.html">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">公司动态</span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN STYLE CUSTOMIZER -->
+                    <div class="color-panel hidden-phone">
+                        <div class="color-mode-icons icon-color"></div>
+                        <div class="color-mode-icons icon-color-close" style="display: none;"></div>
+                        <div class="color-mode" style="display: none;">
+                            <p>主题颜色</p>
+                            <ul class="inline">
+                                <li class="color-black current color-default" data-style="default"></li>
+                                <li class="color-blue" data-style="blue"></li>
+                                <li class="color-brown" data-style="brown"></li>
+                                <li class="color-purple" data-style="purple"></li>
+                                <li class="color-grey" data-style="grey"></li>
+                                <li class="color-white color-light" data-style="light"></li>
+                            </ul>
+                            <label>
+                                <span>布局</span>
+                                <select class="layout-option m-wrap small">
+                                    <option value="fluid" selected="">填充</option>
+                                    <option value="boxed">居中</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>页眉</span>
+                                <select class="header-option m-wrap small">
+                                    <option value="fixed" selected="">固定</option>
+                                    <option value="default">默认</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>侧边栏</span>
+                                <select class="sidebar-option m-wrap small">
+                                    <option value="fixed">固定</option>
+                                    <option value="default" selected="">默认</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>页脚</span>
+                                <select class="footer-option m-wrap small">
+                                    <option value="fixed">固定</option>
+                                    <option value="default" selected="">默认</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- END STYLE CUSTOMIZER -->
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <h3 class="page-title">
+                        车辆
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="index.html">首页</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">信息管理</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li><a href="#">车辆</a></li>
+                    </ul>
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <!--开始内容-->
+            <!--<div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>-->
+            <div>
+                <div class="row-fluid">
+                    <canvas id="myCanvas" width="3640" height="146" class="span12"></canvas>
+                </div>
+                <div id="chartContainer" style="min-width:700px;height:400px"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- END PAGE CONTAINER-->
+
+</div>
+<!-- END PAGE -->
+<!-- END CONTAINER -->
+
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<script type="text/javascript" src="highcharts/lib/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="highcharts/lib/highcharts.js"></script>
+<script type="text/javascript" src="highcharts/lib/highcharts-more.js"></script>
+<!--<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>-->
+<!--<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>-->
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<!--<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>-->
+<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script src="media/js/excanvas.min.js"></script>
+<script src="media/js/respond.min.js"></script>
+<![endif]-->
+<script src="media/js/app.js"></script>
+<link href="highcharts/css/nv.d3.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="highcharts/css/custom.css">
+<!--<link rel="stylesheet" href="highcharts/css/font-style.css">-->
+
+<script>
+//    $(document).ready(function () {
+
+        $(function () {
+            App.init();
+            Highcharts.theme = {
+                colors: [ '#E02222', '#3D3D3D', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+                chart: {
+                    backgroundColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                        stops: [
+                            [0, 'rgb(255, 255, 255)'],
+                            [1, 'rgb(240, 240, 255)']
+                        ]
+                    },
+                    borderWidth: 2,
+                    plotBackgroundColor: 'rgba(255, 255, 255, .9)',
+                    plotShadow: true,
+                    plotBorderWidth: 1
+                },
+                title: {
+                    style: {
+                        color: '#000',
+                        font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+                    }
+                },
+                subtitle: {
+                    style: {
+                        color: '#666666',
+                        font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+                    }
+                },
+                xAxis: {
+                    gridLineWidth: 1,
+                    lineColor: '#000',
+                    tickColor: '#000',
+                    labels: {
+                        style: {
+                            color: '#000',
+                            font: '11px Trebuchet MS, Verdana, sans-serif'
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: '#333',
+                            fontWeight: 'bold',
+                            fontSize: '12px',
+                            fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+
+                        }
+                    }
+                },
+                yAxis: {
+                    minorTickInterval: 'auto',
+                    lineColor: '#000',
+                    lineWidth: 1,
+                    tickWidth: 1,
+                    tickColor: '#000',
+                    labels: {
+                        style: {
+                            color: '#000',
+                            font: '11px Trebuchet MS, Verdana, sans-serif'
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: '#333',
+                            fontWeight: 'bold',
+                            fontSize: '12px',
+                            fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+                        }
+                    }
+                },
+                legend: {
+                    itemStyle: {
+                        font: '9pt Trebuchet MS, Verdana, sans-serif',
+                        color: 'black'
+
+                    },
+                    itemHoverStyle: {
+                        color: '#039'
+                    },
+                    itemHiddenStyle: {
+                        color: 'gray'
+                    }
+                },
+                labels: {
+                    style: {
+                        color: '#99b'
+                    }
+                },
+
+                navigation: {
+                    buttonOptions: {
+                        theme: {
+                            stroke: '#CCCCCC'
+                        }
+                    }
+                }
+            };
+            var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+            function revertDate(index){
+                var dayRefer = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+                var date = new Date('2016-1-1');
+                date.setDate(date.getDate()+index);
+                var res = (date.getMonth()+1)+"月"+date.getDate()+"日 "+dayRefer[date.getDay()];
+                return res;
+            }
+
+            function revertDateRange(a, b){
+                var dateArr = new Array();
+                for(var i=a;i<=b;i++){
+                    var temDateStr = revertDate(i);
+                    dateArr.push(temDateStr);
+                }
+                return dateArr;
+            }
+            var leftBorder = 20;
+            var rightBorder = 24;
+            var curLen = 5;
+            var curX = 0;
+            var temLeft = 0;
+            var temRight = 4;
+            var okData = [679,555,501,624,650,662,557,552,684,597,679,589,584,504,579,508,578,682,534,696,683,576,506,631,502,674,608,533,681,513,507,553,624,578,599,655,638,673,650,574,606,665,697,579,642,643,510,501,681,638,537,594,654,582,605,618,615,608,669,699,555,628,622,684,543,660,534,591,611,525,581,528,624,627,627,627,637,521,659,605,699,697,558,649,565,593,571,614,604,591,549,631,562,599,589,515,525,530,650,654,583,561,551,504,531,626,524,692,522,578,663,524,519,516,524,675,592,601,642,627,647,616,537,625,527,632,505,581,594,604,588,686,690,662,638,557,623,599,572,648,633,661,612,555,671,574,651,538,631,677,604,658,558,531,543,632,634,679,513,546,678,625,547,509,558,515,501,503,668,673,684,550,562,555,569,664,681,608,692,517,665,662,521,577,554,671,514,582,515,629,565,642,609,690,655,629,594,553,641,630,666,665,666,670,517,555,542,549,550,546,518,643,696,539,631,586,691,501,551,522,522,682,693,565,586,622,537,533,661,680,540,522,592,583,553,696,697,630,588,504,614,571,537,694,514,501,592,683,593,508,656,612,630,541,674,547,546,502,512,524,576,671,621,627,519,658,574,596,552,620,570,595,576,692,582,533,528,579,564,670,651,501,652,596,600,519,595,580,665,665,692,588,507,647,621,529,527,546,555,690,616,676,632,612,614,508,643,600,634,510,689,610,699,615,532,635,608,535,689,592,519,576,685,692,510,631,522,676,632,560,647,610,514,655,662,653,606,644,579,655,512,542,657,534,567,675,542,503,590,518,666,544,588,651,660,620,624,592,582,581,617,572,530,509,654,600];
+            var noData = [20,261,273,65,179,271,174,65,294,231,40,60,64,128,257,98,36,116,158,187,165,284,136,15,201,141,154,104,41,149,49,31,276,41,132,211,250,133,245,114,258,288,155,150,287,298,105,235,160,107,128,169,87,114,24,61,275,113,277,219,220,271,279,63,134,288,186,264,188,4,208,235,40,251,39,80,108,250,36,263,43,81,208,159,72,237,144,31,233,224,256,87,116,197,196,216,247,272,159,215,42,284,183,120,177,216,152,64,182,182,152,192,204,196,188,146,169,1,213,213,272,250,37,240,230,85,78,247,142,272,203,57,92,238,42,285,88,63,154,148,254,218,243,287,175,188,254,29,181,250,121,246,296,269,126,146,286,257,287,96,52,176,174,191,169,121,38,298,27,249,201,285,123,40,107,299,262,135,28,139,173,257,113,160,244,147,165,240,131,129,265,158,53,257,124,279,66,254,37,210,26,5,86,99,286,66,266,234,107,95,60,43,128,121,118,1,105,256,193,31,134,11,274,183,24,258,206,93,94,215,124,230,222,80,27,46,191,68,119,182,262,3,104,46,60,34,74,234,66,178,213,227,294,145,285,169,290,172,234,7,130,114,0,150,227,160,113,21,144,84,181,188,88,208,107,192,266,89,139,47,296,211,99,8,260,194,158,137,78,33,193,63,133,123,44,218,192,115,1,58,212,44,150,248,85,201,21,157,40,169,287,80,99,94,218,26,211,23,296,263,193,59,32,74,92,136,87,33,46,61,5,187,49,7,141,214,24,118,158,121,298,250,140,92,54,116,274,197,248,187,257,171,246,74,97,124,51,115,43,281,52,184,147,249,268,150];
+            var mouseKey = false;
+
+            $('#chartContainer').highcharts({
+                chart: {
+                    type: 'column',
+                    events: {
+                        load: function(){
+                            for(var i=-leftBorder;i<365-leftBorder;i++){
+                                this.options.xAxis[0].categories[i] = revertDate(i+leftBorder);
+                            }
+                            var chart_t = this;
+                            this.redraw();
+                            function plus_minus(){
+                                if(rightBorder-leftBorder>=5){
+                                    console.log('here');
+                                    leftBorder++;
+                                    rightBorder--;
+                                    temLeft++;
+                                    temRight--;
+                                    chart_t.series[0].data[curLen-1].remove();
+                                    chart_t.series[1].data[curLen-1].remove();
+                                    chart_t.series[0].data[0].remove();
+                                    chart_t.series[1].data[0].remove();
+                                    curLen-=2;
+                                    //chart_t.options.xAxis[0].categories = revertDateRange(leftBorder, rightBorder);
+                                }
+                            }
+                            function minus_plus(){
+                                if(leftBorder>0&&rightBorder<okData.length-1&&rightBorder-leftBorder<=11){
+                                    leftBorder--;
+                                    rightBorder++;
+                                    temLeft--;
+                                    temRight++;
+                                    chart_t.series[0].addPoint([temLeft, noData[leftBorder]]);
+                                    chart_t.series[1].addPoint([temLeft, noData[leftBorder]]);
+                                    chart_t.series[0].addPoint([temRight, noData[rightBorder]]);
+                                    chart_t.series[1].addPoint([temRight, noData[rightBorder]]);
+                                    curLen+=2;
+                                    //chart_t.options.xAxis[0].categories = revertDateRange(leftBorder, rightBorder);
+                                }
+                            }
+                            function plus_plus(){
+                                if(rightBorder<okData.length-1){
+                                    leftBorder++;
+                                    rightBorder++;
+                                    temRight++;
+                                    temLeft++;
+                                    //chart_t.options.xAxis[0].categories[temRight] = revertDate(rightBorder);
+                                    chart_t.series[0].addPoint([temRight, noData[rightBorder]]);
+                                    chart_t.series[1].addPoint([temRight, okData[rightBorder]]);
+                                    //chart_t.options.xAxis[0].categories.slice(temLeft-1, 1);
+                                    chart_t.series[0].data[0].remove();
+                                    chart_t.series[1].data[0].remove();
+                                }
+                            }
+
+                            function minus_minus(){
+                                if(leftBorder>0){
+                                    leftBorder--;
+                                    temRight--;
+                                    temLeft--;
+                                    //chart_t.options.xAxis[0].categories[temLeft] = revertDate(leftBorder);
+                                    chart_t.series[0].addPoint([temLeft, noData[leftBorder]]);
+                                    chart_t.series[1].addPoint([temLeft, okData[leftBorder]]);
+//                                    chart_t.series[0].setData(noData.slice(leftBorder, rightBorder+1));
+//                                    chart_t.series[1].setData(okData.slice(leftBorder, rightBorder+1));
+                                    rightBorder--;
+                                    curLen++;
+                                    chart_t.options.xAxis[0].categories.slice(temRight, 1);
+                                    chart_t.series[0].data[curLen-1].remove();
+                                    chart_t.series[1].data[curLen-1].remove();
+                                    curLen--;
+                                    //chart_t.options.xAxis[0].categories = revertDateRange(leftBorder, rightBorder);
+                                }
+                            }
+                            var canvas=document.getElementById('myCanvas');
+                            var ctx=canvas.getContext('2d');
+                            var canvas_point1,canvas_point2;
+                            var canvas_left,canvas_right;
+                            var canvas_select=0;
+                            var poss=0;
+                            var months=["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
+                            ctx.textBaseline = 'middle';
+                            ctx.textAlign = 'center';
+                            ctx.font = canvas.width/80+"pt Calibri";
+                            function draw(){
+                                ctx.clearRect(0,0,canvas.width,canvas.height+10);
+                                ctx.fillStyle='#3D3D3D';
+                                ctx.fillRect(0,0,canvas.width,canvas.height);
+                                ctx.fillStyle='#E02222';
+                                ctx.fillRect(canvas_point1,0,canvas_point2-canvas_point1,canvas.height);
+                                ctx.fillStyle='#FFFFFF';
+                                var linetop=canvas.height/10*8.5;
+                                var step=canvas.width/360;
+                                var posl=0;
+                                for(var i=0;i<360;i++){
+                                    if(i%30==0) ctx.fillRect(posl,canvas.height/10*7,canvas.width/1000,canvas.height*0.3);
+                                    else        ctx.fillRect(posl,linetop,canvas.width/1000,canvas.height*0.15);
+                                    posl+=step;
+                                }
+                                for(var i=0;i<12;i++)
+                                    ctx.fillText(months[i],i*canvas.width/12+canvas.width/24,canvas.height/2);
+
+                            }
+                            function canvasselect(x,y){
+                                canvas_point1=x*canvas.width/365;
+                                canvas_point2=y*canvas.width/365;
+                                draw();
+                            }
+                            canvasselect(leftBorder,rightBorder);
+
+                            $("#chartContainer").click(function(e){
+
+                            });
+                            $("#chartContainer").on('mousemove', function(e){
+                                if(mouseKey==true){
+                                    if(e.clientX-curX>=10){
+                                        curX = e.clientX;
+                                        plus_plus();
+                                        canvasselect(leftBorder, rightBorder);
+                                    }
+                                    if(curX-e.clientX>=10){
+                                        curX = e.clientX;
+                                        minus_minus();
+                                        canvasselect(leftBorder, rightBorder);
+                                    }
+                                }
+                            });
+                            $("#chartContainer").on('mousedown', function(e){
+                                mouseKey = true;
+                                curX = e.clientX;
+                                console.log('mouse down');
+                            });
+                            $("#chartContainer").on('mouseup', function(e){
+                                mouseKey = false;
+                            });
+                            $("#chartContainer").on('mousewheel', function(e){
+                                var delta = e.originalEvent.wheelDelta;
+                                if(delta>3){
+                                    plus_minus();
+                                    canvasselect(leftBorder, rightBorder);
+                                }
+                                if(delta<-3){
+                                    minus_plus();
+                                    canvasselect(leftBorder, rightBorder);
+                                }
+                            });
+
+
+                            canvas.onmousedown=function(e){
+                                var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                                if(pos>canvas_point1&&pos<canvas_point2){
+                                    canvas_select=3;
+                                    poss=pos;
+                                    canvas_left=pos-canvas_point1;
+                                    canvas_right=canvas_point2-pos;
+                                }
+                                mouseKey = true;
+                                curX = e.clientX;
+                            }
+                            canvas.onmousemove=function(e){
+                                if(canvas_select==3){
+                                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                                    if(Math.abs(pos-poss)>5){
+                                        canvas_point1=pos-canvas_left;
+                                        canvas_point2=pos+canvas_right;
+                                        draw();
+                                        poss=pos;
+                                    }
+                                }
+                                if(canvas_select==1){
+                                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                                    canvas_point1=pos;
+                                    draw();
+                                }
+                                if(canvas_select==2){
+                                    var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                                    canvas_point2=pos;
+                                    draw();
+                                }
+                                if(mouseKey==true){
+                                    if(e.clientX-curX>=10){
+                                        curX = e.clientX;
+                                        plus_plus();
+                                    }
+                                    if(curX-e.clientX>=10){
+                                        curX = e.clientX;
+                                        minus_minus();
+                                    }
+                                }
+                            }
+                            canvas.onmouseup=function(e){
+                                var pos=e.offsetX*canvas.width/canvas.clientWidth;
+                                if(canvas_select==1){
+                                    canvas_point1=pos;
+                                    draw();
+                                }
+                                if(canvas_select==2){
+                                    canvas_point2=pos;
+                                    draw();
+                                }
+                                console.log(curLen);
+                                for(var i=curLen-1;i>=0;i--){
+                                    chart_t.series[0].data[i].remove();
+                                    chart_t.series[1].data[i].remove();
+                                    console.log('delete ok');
+                                }
+                                temLeft += parseInt(canvas_point1/10)-leftBorder;
+                                temRight += parseInt(canvas_point2/10)-rightBorder;
+                                leftBorder = parseInt(canvas_point1/10);
+                                rightBorder = parseInt(canvas_point2/10);
+                                for(var i=temLeft;i<temRight+1;i++){
+                                    chart_t.series[0].addPoint([i, noData[i+leftBorder-temLeft]]);
+                                    chart_t.series[1].addPoint([i, okData[i+leftBorder-temLeft]]);
+                                }
+                                canvas_select=0;
+                                mouseKey = false;
+                            }
+                            canvas.onmousewheel=function(e){
+                                console.log(e.wheelDelta);
+                                console.log((canvas_point2-canvas_point1)*365/canvas.width);
+                                if(e.wheelDelta>0&&(canvas_point2-canvas_point1)*365/canvas.width<21){
+                                    canvas_point1-=canvas.width/365;
+                                    canvas_point2+=canvas.width/365;
+                                    draw();
+                                }
+                                if(e.wheelDelta<0&&(canvas_point2-canvas_point1)*365/canvas.width>3){
+                                    canvas_point1+=canvas.width/365;
+                                    canvas_point2-=canvas.width/365;
+                                    draw();
+                                }
+                            }
+
+
+                        }
+                    }
+                },
+                title: {
+                    text: 'Stacked column chart'
+                },
+                xAxis: {
+                    //categories: ['7月25日 周一', '周二', '周三', '周四', '周五', '周六']
+                    categories: revertDateRange(leftBorder, rightBorder)
+                },
+                yAxis: {
+                    min: 0,
+                    max: 1250,
+                    title: {
+                        text: 'Total fruit consumption'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    x: -70,
+                    verticalAlign: 'top',
+                    y: 20,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>'+ this.x +'</b><br/>'+
+                                this.series.name +': '+ this.y +'<br/>'+
+                                '计划乘车人数: '+ this.point.stackTotal;
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                        }
+                    }
+                },
+                series: [{
+                    name: '未上车人数',
+                    data: noData.slice(leftBorder, rightBorder+1)
+                }, {
+                    name: '实际乘坐数',
+                    data: okData.slice(leftBorder, rightBorder+1)
+                }]
+            });
+
+
+        });
+
+
+</script>
+<!--<script type="text/javascript">-->
+    <!--//站点数组-->
+    <!--var routes = [];-->
+    <!--var COMPANYADDR = new BMap.Point(121.47373,31.217665);-->
+    <!--var IP="http://192.168.1.7:3000/users/";-->
+    <!--var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];-->
+    <!--function checkhHtml5(){-->
+        <!--var style=true;-->
+        <!--if (typeof(Worker) === "undefined"){-->
+            <!--if(navigator.userAgent.indexOf("MSIE 9.0")<=0){-->
+                <!--style=false;-->
+            <!--}-->
+        <!--}-->
+        <!--if(style==true){-->
+            <!--var  mapStyle ={-->
+                <!--features: ["road", "building","water","land"],//隐藏地图上的poi-->
+                <!--style : "light"-->
+            <!--}-->
+            <!--window.map.setMapStyle(mapStyle);-->
+        <!--}-->
+    <!--}-->
+    <!--//创建和初始化地图函数-->
+    <!--function initMap(){-->
+        <!--createMap();//创建地图-->
+        <!--setMapEvent();//设置地图事件-->
+        <!--addMapControl();//向地图添加控件-->
+        <!--var home=new BMap.Marker(COMPANYADDR);-->
+        <!--var icon=new BMap.Icon("media/image/logo.png", new BMap.Size(86,14));-->
+        <!--home.setIcon(icon);-->
+        <!--home.disableMassClear();-->
+        <!--map.addOverlay(home);-->
+    <!--}-->
+
+    <!--//创建地图函数-->
+    <!--function createMap(){-->
+        <!--var map = new BMap.Map("dituContent",{enableMapClick:false});//在百度地图容器中创建地图-->
+        <!--map.centerAndZoom(COMPANYADDR,11);//设定地图的中心点和坐标并将地图显示在地图容器中-->
+        <!--window.map = map;//将map变量存储在全局-->
+        <!--checkhHtml5();-->
+    <!--}-->
+
+    <!--//地图事件设置函数：-->
+    <!--function setMapEvent(){-->
+        <!--map.enableDragging();//启用地图拖拽事件，默认启用(可不写)-->
+        <!--map.enableScrollWheelZoom();//启用地图滚轮放大缩小-->
+        <!--map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)-->
+        <!--map.enableKeyboard();//启用键盘上下左右键移动地图-->
+    <!--}-->
+    <!--//地图控件添加函数：-->
+    <!--function addMapControl(){}-->
+
+    <!--//创建marker-->
+    <!--function addMarker(Arr){-->
+        <!--for(var i=0;i<Arr.length;i++){-->
+            <!--var json = Arr[i];-->
+            <!--var p0 = json.point.split("|")[0];-->
+            <!--var p1 = json.point.split("|")[1];-->
+            <!--var point = new BMap.Point(p0,p1);-->
+            <!--var iconImg = createIcon(json.icon);-->
+            <!--var marker = new BMap.Marker(point,{icon:iconImg});-->
+
+            <!--marker.id=json.id;-->
+            <!--var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});-->
+            <!--marker.setLabel(label);-->
+            <!--map.addOverlay(marker);-->
+            <!--label.setStyle({-->
+                <!--borderColor:"#808080",-->
+                <!--color:"#333",-->
+                <!--cursor:"pointer"-->
+            <!--});-->
+            <!--marker.addEventListener("click",function(){-->
+                <!--alert(json.id);-->
+                <!--/*定位到图表-->
+                <!--$('html,body').stop();-->
+                 <!--$('html,body').animate({-->
+                 <!--scrollTop:$('#chartid').offset().top-->
+                 <!--},1000);-->
+                 <!--*/-->
+            <!--});-->
+
+            <!--var iw = (function(){-->
+                <!--var index = i;-->
+                <!--var _iw = createInfoWindow(Arr,i);-->
+                <!--var _marker = marker;-->
+                <!--_marker.addEventListener("dblclick",function(){-->
+                    <!--this.openInfoWindow(_iw);-->
+                <!--});-->
+                <!--_marker.addEventListener("mouseout",function(){-->
+                    <!--this.closeInfoWindow();-->
+                <!--});-->
+                <!--_iw.addEventListener("open",function(){-->
+                    <!--_marker.getLabel().hide();-->
+                <!--});-->
+                <!--_iw.addEventListener("close",function(){-->
+                    <!--_marker.getLabel().show();-->
+                <!--});-->
+                <!--if(!!json.isOpen){-->
+                    <!--label.hide();-->
+                    <!--_marker.openInfoWindow(_iw);-->
+                <!--}-->
+                <!--return _iw;-->
+            <!--})();-->
+        <!--}-->
+    <!--}-->
+
+    <!--//创建InfoWindow-->
+    <!--function createInfoWindow(Arr,i){-->
+        <!--var json = Arr[i];-->
+        <!--var iw = new BMap.InfoWindow();-->
+        <!--iw.setTitle(json.title);-->
+        <!--iw.setContent(json.content);-->
+        <!--return iw;-->
+    <!--}-->
+    <!--//创建一个Icon-->
+    <!--function createIcon(json){-->
+        <!--var icon = new BMap.Icon("media/image/map/station.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})-->
+        <!--return icon;-->
+    <!--}-->
+
+    <!--function createRoute(markers,routeID) {//markers是一个Point数组-->
+        <!--var routeId=parseInt(routeID);-->
+        <!--var driving = new BMap.DrivingRoute(map, {-->
+            <!--renderOptions: {//绘制结果-->
+                <!--map: map,-->
+                <!--autoViewport: true,-->
+                <!--enableDragging: true-->
+            <!--},-->
+            <!--onSearchComplete: function(results){-->
+                <!--if (driving.getStatus() == BMAP_STATUS_SUCCESS) {-->
+                    <!--var color = COLOR[(routeId%COLOR.length)];-->
+                    <!--var plan = driving.getResults().getPlan(0);-->
+                    <!--var num = plan.getNumRoutes();-->
+                    <!--for(var i=0;i<num;i++){-->
+                        <!--var pts = plan.getRoute(i).getPath();   //通过驾车实例，获得一系列点的数组-->
+                        <!--var polyline = new BMap.Polyline(pts,{strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});-->
+                        <!--polyline.type=2;-->
+                        <!--polyline.routeId=routeId;-->
+                        <!--map.addOverlay(polyline);-->
+                    <!--}-->
+                    <!--driving.clearResults();-->
+                <!--}-->
+            <!--}-->
+        <!--});-->
+        <!--driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);-->
+        <!--var  group = Math.floor( markers.length /11 ) ;-->
+        <!--var mode = markers.length %11 ;-->
+        <!--for(var i =0;i<group;i++){-->
+            <!--var waypoints = markers.slice(i*11+1,(i+1)*11);-->
+            <!--driving.search(markers[i*11], markers[(i+1)*11],{waypoints:waypoints});//waypoints表示途经点-->
+        <!--}-->
+        <!--if( mode != 0){-->
+            <!--var waypoints = markers.slice(group*11,markers.length-1);//多出的一段单独进行search-->
+            <!--driving.search(markers[group*11],markers[markers.length-1],{waypoints:waypoints});-->
+        <!--}-->
+    <!--}-->
+
+    <!--function getData(){-->
+        <!--$.ajax({-->
+            <!--type: 'GET',-->
+            <!--url: IP+'getRoute',-->
+            <!--dataType: 'json',-->
+            <!--async : false,-->
+            <!--success: function (data) {-->
+                <!--routes = data.routes;-->
+                <!--refreshMap();-->
+            <!--},-->
+            <!--error: function () {-->
+                <!--alert("链接失败");-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
+
+    <!--function refreshMap(){-->
+        <!--var route = [];-->
+        <!--for(var i=0;i<routes.length;i++){-->
+            <!--route[i]=[];-->
+            <!--route[i].push(COMPANYADDR);-->
+            <!--for(var j=0;j<routes[i].stations.length;j++){-->
+                <!--var station = routes[i].stations[j];-->
+                <!--var pos = station.posx + "|" + station.posy;-->
+                <!--var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:32,h:40,l:0,t:0,x:6,lb:5},id:station.id}];-->
+                <!--addMarker(marker);-->
+                <!--var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num};-->
+                <!--route[i].push(point.pos);-->
+            <!--}-->
+            <!--createRoute(route[i],routes[i].route.id);-->
+        <!--}-->
+    <!--}-->
+    <!--initMap();//创建和初始化地图-->
+    <!--getData();-->
+<!--</script>-->
+</body>
+</html>
