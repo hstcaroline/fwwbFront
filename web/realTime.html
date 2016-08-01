@@ -488,7 +488,7 @@
     jQuery(document).ready(function () {
         App.init();
     });
-    var socket = io.connect("http://localhost:3000");    
+    var socket = io.connect("http://115.159.218.128:3000")
     socket.on('drive message', function(msg){
         console.log(msg);
         addBus(msg);        
