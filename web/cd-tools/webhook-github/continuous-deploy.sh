@@ -4,7 +4,7 @@ ROOT=$(dirname "${BASH_SOURCE}")/../..
 
 cd $ROOT
 # Kill the process.
-pkill node http-server
+pkill node
 # Pull the code.
 git pull
 ## Restart the server.
