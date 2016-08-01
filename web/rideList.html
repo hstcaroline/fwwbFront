@@ -221,7 +221,7 @@
                         <a href="stationInfo.html">
                             所有站点</a>
                     </li>
-                    <li class="active">
+                    <li class="">
                         <a href="rideList.html">
                             乘车名单</a>
                     </li>
@@ -763,7 +763,6 @@
         });
 
     }
-    var ip = 'http://192.168.0.108:3000';
     function getStations() {
         $.ajax({
             url: ip + '/users/getStation',

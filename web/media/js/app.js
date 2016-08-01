@@ -1,6 +1,7 @@
 /**
 Core script to handle the entire layout and base functions
 **/
+var ip = 'http://192.168.1.7:3000';
 var App = function () {
 
     // IE mode

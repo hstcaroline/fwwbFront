@@ -215,7 +215,7 @@
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="active" >
+                    <li class="" >
                         <a href="stationInfo.html">
                             所有站点</a>
                     </li>
@@ -501,7 +501,6 @@
         loadData();
         TableEditable.init();
     });
-    var ip = 'http://192.168.1.7:3000';
     function loadData() {
         $.ajax({
             url: ip + '/users/getStation',

@@ -63,7 +63,7 @@ resetStations.onclick = function () {
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
-        url: "http://192.168.1.7:3000/RoutePlanning/getnewStationByTime",
+        url: ip+"/RoutePlanning/getnewStationByTime",
         type: 'post',
         data:da,
         contentType: "application/json",
