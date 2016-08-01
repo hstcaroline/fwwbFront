@@ -9,7 +9,7 @@ var markerArr = [];
 //站点数组
 var stationArr =[];
 var busArr={};
-var IP="http://192.168.1.7:3000/drivingmanager/";
+var IP=ip+"/drivingmanager/";
 var COLOR=["#FF9900","#333333","#548C00","##009933","#CC0066","#009999","#666699","#FF6600","#8F4586"];
 var ifAddMarker = false;
 var stationCount = 1;
@@ -142,7 +142,7 @@ function addroute(routeid)
     var temp={id:routeid};
     var da = JSON.stringify(temp);
     $.ajax({
-        url: 'http://192.168.1.7:3000/users/getRouteByid',
+        url: ip+'/users/getRouteByid',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'post',
         data:da,
@@ -420,7 +420,7 @@ function getData(){
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
-        url: 'http://192.168.1.7:3000/users/getRoute',
+        url: ip+'/users/getRoute',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'get',
         //data:da,
