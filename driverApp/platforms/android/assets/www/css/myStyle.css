@@ -291,11 +291,15 @@ body, html, #allmap, #dituContent {
     position: relative;
     background-color: #fff;
     width: 100%;
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
+    table-layout: fixed;
+    word-break: break-all;
 }
 
 .gridWeek {
     width: 100%;
+    table-layout: fixed;
+    word-break: break-all;
 }
 
 .gridWeek > tbody > tr > td, .gridTable > tbody > tr > th {
@@ -320,6 +324,10 @@ body, html, #allmap, #dituContent {
     color: #fff;
     padding: 0;
     font-weight: bold;
+
+}
+.work:hover {
+   opacity: 0.8;
 
 }
 
@@ -799,4 +807,17 @@ a {
 }
 .center-block{
     display: table;
+}
+/*.myCash*/
+.month_head{
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    padding-left: 22px;
+}
+.selectMonth{
+    border: 1px solid #eee;
+    width: 100px;
+    height: 22px;
+    margin-left: 5px;
 }

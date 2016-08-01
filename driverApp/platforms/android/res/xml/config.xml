@@ -15,8 +15,8 @@
         <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
     </feature>
     <allow-intent href="market:*" />
-    <icon density="ldpi" src="res/icon/blackberry10/icon-80.png" />
-    <name>NfcReader</name>
+    <icon density="ldpi" src="res/icon/blackberry10/icon.png" />
+    <name>Pyxister</name>
     <description>
         PhoneGap NFC Reader Demo
     </description>
