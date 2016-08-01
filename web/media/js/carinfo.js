@@ -1,3 +1,5 @@
+var carManageIP = ip + "/CarManage"
+
 jQuery(document).ready(function() {
     App.init();
     TableEditable.init();
@@ -18,7 +20,7 @@ jQuery(document).ready(function() {
     console.log($("#sample_editable_1"));
     getDate();
     /*($.ajax({
-        url: ip+ '/getAllStaff',
+        url: carManageIP+ '/getAllStaff',
         type: 'post',
         success: function(staffList){
             console.log(staffList);
@@ -31,7 +33,7 @@ jQuery(document).ready(function() {
 
 function getDate() {
     $.ajax({
-        url: ip + '/getAllBus',
+        url: carManageIP + '/getAllBus',
         dataType: 'json',
         success: function(data) {
             console.log(data);
@@ -64,7 +66,7 @@ $('#sample_editable_1 a.remove').live('click', function(e) {
     var jqTds = $('>td', nRow);
     oTable.fnDeleteRow(nRow);
     $.ajax({
-        url: ip + '/removeBus',
+        url: carManageIP + '/removeBus',
         type: 'post',
         data: {
             id: jqTds[0].innerHTML
@@ -105,7 +107,7 @@ $('#sample_editable_1 a.save').live('click', function(e) {
     temp.driving_license = aData[6];
     console.log(temp);
     $.ajax({
-        url: ip + '/changeBus',
+        url: carManageIP + '/changeBus',
         type: 'post',
         data: temp,
         dataType: 'json',
@@ -125,7 +127,7 @@ $("#btnCarInfoAdd").click(function() {
     temCar.driving_license = $("#driving_license").val();
     console.log(temCar);
     $.ajax({
-        url: ip + '/addCar',
+        url: carManageIP + '/addCar',
         type: 'post',
         data: {
             carInfo: temCar
