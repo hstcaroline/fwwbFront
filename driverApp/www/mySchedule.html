@@ -79,7 +79,7 @@
             <table class="gridWeek" style="margin-bottom: 0px;background-color: transparent">
                 <tbody>
                 <tr>
-                    <td class="wc-time-column-header"></td>
+                    <td class="wc-time-column-header" style="width: 50px"></td>
                     <td class="wc-day-column-header wc-day-1">一</td>
                     <td class="wc-day-column-header wc-day-2">二</td>
                     <td class="wc-day-column-header wc-day-3">三</td>
@@ -96,9 +96,9 @@
     <div style="height: 70%;overflow: auto">
         <div class="wc-container">
             <table class="gridTable">
-                <tbody>
-                <tr>
-                    <td>5:00-7:00</td>
+                <tbody id="scheduleTbody">
+                <tr id="">
+                    <td>00:00-02:00</td>
                     <td><a href="index.html">
                         <div class="work">线路1</div>
                     </a></td>
@@ -109,90 +109,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
-                    <td>7:00-9:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="index.html">
-                        <div class="work">线路3</div>
-                    </a></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>9:00-11:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>11:00-13:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>13:00-15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="index.html">
-                        <div class="work">线路4</div>
-                    </a></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>13:00-15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>15:00-17:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>17:00-19:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>19:00-21:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+
                 </tbody>
             </table>
         </div>
@@ -231,6 +148,7 @@
 <script src="js/test.js"></script>
 <script src="js/date.js"></script>
 <script>
+    var startTime;
     window.onload = function () {
         var driverId = $.cookie('userId');
         $('#menu_header').show();
@@ -239,29 +157,59 @@
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
             slideout.toggle();
         });
-        var startTime = $("#weekStartTime").text();
+        startTime = $("#weekStartTime").text();
         var endTime = $("#weekEndTime").text();
         var postData = JSON.stringify({id: driverId, startdate: startTime, enddate: endTime});
-//        $.ajax({
-//            url: 'http://192.168.1.4:3000/users/getRouteDriver',
-//            type: 'POST',
-//            async: false,
-//            data: postData,
-//            dataType: 'json',
-//            contentType: "application/json",
-//            success: function (driver) {
-//                if (driver != null) {
-//                    alert(driver);
-//                }
-//                else {
-//                    alert('链接失败');
-//                }
-//            },
-//            error: function (xhr, type, exception) {
-//                alert(type);
-//            }
-//        });
+        $.ajax({
+            url: ip + 'users/getRouteDriver',
+            type: 'POST',
+            async: false,
+            data: postData,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (driver) {
+                if (driver != null) {
+                    // alert(driver);
+                    loadTable(driver);
+                }
+                else {
+                    alert('链接失败');
+                }
+            },
+            error: function (xhr, type, exception) {
+                alert(type);
+            }
+        });
     };
+    function loadTable(data) {
+        var html = '';
+        for (var i = 1; i < 13; i++) {
+            html += '<tr id="tr' + i + '">'
+                    + '<td style="width: 50px">' + formatTime(i) + '</td>'
+                    + '<td id="td' + i + '-1">&nbsp;</td>'
+                    + '<td id="td' + i + '-2">&nbsp;</td>'
+                    + '<td id="td' + i + '-3">&nbsp;</td>'
+                    + '<td id="td' + i + '-4">&nbsp;</td>'
+                    + '<td id="td' + i + '-5">&nbsp;</td>'
+                    + '<td id="td' + i + '-6">&nbsp;</td>'
+                    + '<td id="td' + i + '-7">&nbsp;</td>'
+            '</tr>';
+        }
+        $("#scheduleTbody").html(html);
+        for (var i in data) {
+            var date = new Date(data[i].date);
+            //相差天数,找到对应id
+            var days = Math.floor(Math.abs((new Date(startTime).getTime() - date.getTime())) / (1000 * 60 * 60 * 24)) + 1;
+            var innerHtml = ' <div class="work" onclick="showInMap(' + data[i].route.id + ')">' + data[i].route.id + '号线</div>';
+            var trId = data[i].route.time;
+            var tdId = 'td' + trId + '-' + days;
+            $("#" + tdId).html(innerHtml);
+        }
+    }
+    function showInMap(routeId) {
+        $.cookie('routeId',routeId,{expires: 7, path: '/'});
+        window.location.href = 'index.html?routeId=' + routeId;
+    }
 </script>
 </body>
 </html>
