@@ -445,7 +445,8 @@ function saveRoute() {
         success: function (data) {
             $.gritter.add({
                 title: '<b style="color: #cf4749;">保存成功！</b>',
-                text:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路线数据已成功同步到数据库。正在刷新地图...可点击<b style="color: #cf4749;">重新生成地图</b>按钮撤销全部更改，重新生成站点',
+                text:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路线数据已成功同步到数据库。正在刷新地图...可点击<b style="color: #cf4749;">生成站点</b>按钮撤销全部更改，重新生成站点'
+                +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在自动生成最新司机排班表...可前往<b style="color: #cf4749;">信息管理</b><b style="color: #ec7d7d;"> > </b><b style="color: #cf4749;">司机排班</b>查看排班详情',
                 class_name: 'gritter-light',
                 sticky: false,
                 time: ''
