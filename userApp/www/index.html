@@ -65,6 +65,22 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/realtime.js"></script>
+<script src="js/socket.io.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        App.init();
+    });
+    var socket = io.connect("http://115.159.218.128:3000")
+    socket.on('drive message', function(msg){
+        console.log(msg);
+        addBus(msg);        
+    });
+    socket.on('end drive',function(msg){
+        console.log(msg);
+        removeBus(msg);
+    })
+</script>
 </body>
 </html>
 <script type="text/javascript">
