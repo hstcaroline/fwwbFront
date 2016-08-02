@@ -241,7 +241,7 @@
                 </a>
                 <ul class="sub-menu active">
                     <li>
-                        <a href="staffInfo.html" class='active'> 
+                        <a href="staffInfo.html" class='active'>
                             员工</a>
                     </li>
                     <li>
@@ -677,7 +677,7 @@
         TableEditable.init();
 
         $.ajax({
-            url: window.location+ '/getAllStaff',
+            url: ip+'/StaffInfoManage'+ '/getAllStaff',
             type: 'post',
             data: null,
             dataType: 'json',
@@ -752,7 +752,7 @@
         console.log(jqTds[0].innerHTML);
         infoTable.fnDeleteRow(nRow);
         $.ajax({
-            url: window.location+'/removeStaff',
+            url: ip+'/StaffInfoManage'+'/removeStaff',
             type: 'post',
             data: {
                 staffId: jqTds[0].innerHTML
@@ -772,7 +772,7 @@
         var infoTable = $("#infoTable").DataTable();
         infoTable.fnDeleteRow(index);
         $.ajax({
-            url: window.location+'/removeStaff',
+            url: ip+'/StaffInfoManage'+'/removeStaff',
             type: 'post',
             data: {
                 staffId: staffId
@@ -800,7 +800,7 @@
         console.log(temStaff);
 
         $.ajax({
-            url: window.location+'/addStaff',
+            url: ip+'/StaffInfoManage'+'/addStaff',
             type: 'post',
             data: {
                 staffInfo: temStaff
