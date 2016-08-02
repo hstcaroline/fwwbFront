@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.megster.nfc.reader" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>NfcReader</name>
+    <name>Pyxister</name>
     <description>
         PhoneGap NFC Reader Demo
     </description>
@@ -13,6 +13,6 @@
     <content src="login.html" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <icon src="res/icon/blackberry10/icon-80.png" density="ldpi" />
+        <icon src="res/icon/blackberry10/icon.png" density="ldpi" />
     </platform>
 </widget>

@@ -219,7 +219,7 @@ function getData(){
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
-        url: 'http://192.168.1.7:3000/users/getRouteByTime',
+        url: ip+'/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'POST',
         data:da,
@@ -438,7 +438,7 @@ function saveRoute() {
     var da = JSON.stringify({time:document.getElementById("selectroutetime").value,routeinfo:postDatas});
     $.ajax({
         type: 'POST',
-        url: 'http://192.168.1.7:3000/users/changeRouteByTime',
+        url: ip+'/users/changeRouteByTime',
         data: da,
         contentType: "application/json",
         async : true,
@@ -488,7 +488,7 @@ function routePlanning(arg_0){
     console.log("generate path");
     console.log(parseSimplePointArr(stationArr));
     $.ajax({
-        url: "http://192.168.1.9:3000/RoutePlanning/generatePath",
+        url: ip+"/RoutePlanning/generatePath",
         type: 'post',
         dataType: "json",
         data: {
