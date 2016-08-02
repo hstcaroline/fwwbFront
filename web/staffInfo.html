@@ -682,10 +682,9 @@
             data: null,
             dataType: 'json',
             success: function(staffList){
-                console.log(staffList.length);
+
                 for(var i=0;i<staffList.length;i++){
                     var temRate = parseInt((i+1)/staffList.length*100);
-                    console.log(temRate);
                     $("#waitBar").css('width', temRate+'%');
                     //$('#waitProgress').val(temRate);
                     //$("#waitProgress").progressbar({value: temRate});
@@ -705,12 +704,13 @@
                     infoTable.fnAddData(temArr);
 
                 }
+                $("#waitBar").css('width', '100%');
                 $("#waiting").modal('hide');
             }
         });
     });
     $("#btnAddStaffByFile").click(function(){
-       window.location.href = "StaffInfoAdd";
+       window.location.href = "staffAddFile.html";
     });
 
     var map = new BMap.Map("allMap", {enableMapClick: false});

@@ -162,7 +162,7 @@
                         <i class="icon-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="extra_profile.html"><i class="icon-user"></i> 个人资料</a></li>
+                        <li><a href="userProfile.html"><i class="icon-user"></i> 个人资料</a></li>
                         <li><a href="page_calendar.html"><i class="icon-calendar"></i> 我的日程</a></li>
                         <li><a href="inbox.html"><i class="icon-envelope"></i> 我的消息 (12)</a></li>
                         <li><a href="#"><i class="icon-tasks"></i> 待办事项 (3)</a></li>
@@ -422,47 +422,56 @@
                 <div class="portlet-body">
                     <div class="row-fluid">
                         <div class="span10">
-                            <form id='fileUp' method='post' role="form" enctype='multipart/form-data' style="width: 80%">
-                                <div class=" fileupload-new" data-provides="fileupload">
-                                    <div class="input-append" style="width: 100%">
-                                        <div class="uneditable-input" style="width: 80%">
-                                            <i class="icon-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
+
+                            <div class="row-fluid">
+                                <div class="span8">
+                                    <form id='fileUp' method='post' role="form" enctype='multipart/form-data' style="width: 80%">
+                                        <div class=" fileupload-new" data-provides="fileupload">
+                                            <div class="input-append" style="width: 100%">
+                                                <div class="uneditable-input" style="width: 95%">
+                                                    <i class="icon-file fileupload-exists"></i>
+                                                    <span class="fileupload-preview"></span>
+                                                </div>
+                                                <span class="btn btn-file">
+                                                    <span class="fileupload-new">浏览</span>
+                                                    <span class="fileupload-exists">更换</span>
+                                                    <input id="fulAvatar" name="fulAvatar" type="file" class="form-control" placeholder="请上传文件"/>
+                                                </span>
+                                                <a class="btn " data-dismiss="fileupload">移除</a>
+
+                                            </div>
                                         </div>
-                                        <span class="btn btn-file">
-                                            <span class="fileupload-new">浏览</span>
-                                            <span class="fileupload-exists">更换</span>
-                                            <input id="fulAvatar" name="fulAvatar" type="file" class="form-control" placeholder="请上传文件"/>
-                                        </span>
-                                        <a class="btn " data-dismiss="fileupload">移除</a>
-                                        <button id="btnSub" class="btn green">
-                                            上传 <i class="icon-upload-alt"></i>
-                                        </button>
-                                    </div>
+
+                                    </form>
                                 </div>
-                            </form>
+                                <div class="span2">
+                                    <button id="btnSub" class="btn green">
+                                        上传 <i class="icon-upload-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="span2" style="margin-top: -5px">
-                            <button id="btnBack" class="btn pull-right mini tooltips" data-placement="bottom" data-original-title="返回">
+                            <button id="btnBack" class="btn pull-right red tooltips" data-placement="bottom" data-original-title="返回">
                                 <i class="icon-signout"></i>
                             </button>
                         </div>
                     </div>
                     <div id="previewTable">
                         <input style="display: none" id="attri_value" value="12">
-                        <table class="table table-striped table-hover table-condensed" id="sample_editable_1" width="100%">
+                        <table class="table table-striped table-hover table-condensed" id="infoTable" width="100%">
                             <thead>
                             <tr>
-                                <th width="10%">ID</th>
-                                <th width="10%">姓名</th>
-                                <th width="5%">性别</th>
-                                <th width="5%">年龄</th>
+                                <th width="10%">工号</th>
+                                <th width="6%">姓名</th>
+                                <th width="4%">性别</th>
+                                <th width="4%">年龄</th>
+                                <th width="10%">电话号码</th>
                                 <th width="10%">部门</th>
-                                <th width="25%">住址</th>
                                 <th width="5%">组别</th>
-                                <th>编辑</th>
-                                <th>删除</th>
+                                <th width="8%">上班时间</th>
+                                <th width="25%">住址</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -498,29 +507,49 @@
 <!--导出为csv文件-->
 <script src="media/js/toExcel.js"></script>
 
-<script src="/javascripts/jquery.form.js" type="text/javascript"></script>
+<script src="javascripts/jquery.form.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
     //$.fn.fileinput.defaults.showPreview = false;
     $(function(){
+        $("#btnBack").on('click', function(){
+            window.location.href = 'staffInfo.html';
+        });
         $('#btnSub').on('click',function(){
             console.log('here');
             var fulAvatarVal = $('#fulAvatar').val();
 
             var ajax_option = {
-                url: ip + "/upLoadFile",
-                success: function (data) {
-                    console.log(data);
+                url: ip+'/StaffInfoAdd' + "/upLoadFile",
+                success: function (staffList) {
+                    var infoTable = $("#infoTable").DataTable();
+                    console.log(staffList.length);
+                    for(var i=0;i<staffList.length;i++){
+                        var temArr = new Array();
+                        temArr[0] = staffList[i].job_number;
+                        temArr[1] = staffList[i].name;
+                        temArr[2] = staffList[i].sex;
+                        temArr[3] = staffList[i].age;
+                        //temArr[4] = staffList[i].phone;
+                        temArr[4] = 0;
+                        temArr[5] = staffList[i].department;
+                        temArr[6] = staffList[i].classes;
+                        temArr[7] = staffList[i].work_time;
+                        temArr[8] = staffList[i].address;
+                        infoTable.fnAddData(temArr);
+
+                    }
                 }
             };
-            //$("#fileUp").ajaxSubmit(ajax_option);
-
+            $("#fileUp").ajaxSubmit(ajax_option);
         });
     });
     jQuery(document).ready(function () {
         App.init();
         TableEditable.init();
     });
+
 </script>
 </body>
 </html>
