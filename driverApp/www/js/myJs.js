@@ -1,8 +1,8 @@
 /**
  * Created by hst on 16/7/7.
  */
-//var ip = 'http://115.159.218.128:3000/';
-var ip = 'http://192.168.1.7:3000/';
+var ip = 'http://115.159.218.128:3000/';
+//var ip = 'http://192.168.1.7:3000/';
 function footerClick(id) {
     if (id == "footer_a1") {
         location.href = "index.html";

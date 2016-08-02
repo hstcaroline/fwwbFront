@@ -139,3 +139,15 @@ p.description {
 .table-bordered th, .table-bordered td{
     text-align: center;
 }
+/*timeSchedule*/
+.checkbox-inline{
+    display: inline-block;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 8px !important;
+    margin-right: 15px !important;
+}
+.centerDiv{
+    width:100%;
+    display: table;
+}

@@ -51,16 +51,16 @@
                 <li class="dropdown" id="header_task_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon-tasks"></i>
-                        <span class="badge">3</span>
+                        <span class="badge">4</span>
                     </a>
                     <ul class="dropdown-menu extended tasks">
                         <li>
-                            <p>您有 3 个待办事项</p>
+                            <p>您有 4 个更新状态</p>
                         </li>
                         <li>
                             <a href="#">
                                         <span class="task">
-                                        <span class="desc">更新车辆信息</span>
+                                        <span class="desc">车辆信息更新</span>
                                         <span class="percent">40%</span>
                                         </span>
                                         <span class="progress progress-success ">
@@ -71,7 +71,7 @@
                         <li>
                             <a href="#">
                                     <span class="task">
-                                    <span class="desc">审核班车乘坐申请</span>
+                                    <span class="desc">员工信息更新</span>
                                     <span class="percent">65%</span>
                                     </span>
                                     <span class="progress progress-danger progress-striped active">
@@ -82,7 +82,7 @@
                         <li>
                             <a href="#">
                                     <span class="task">
-                                    <span class="desc">更新下周排班信息</span>
+                                    <span class="desc">排班信息更新</span>
                                     <span class="percent">10%</span>
                                     </span>
                                     <span class="progress progress-warning progress-striped">
@@ -90,8 +90,19 @@
                                     </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#">
+                                    <span class="task">
+                                    <span class="desc">站点信息更新</span>
+                                    <span class="percent">30%</span>
+                                    </span>
+                                    <span class="progress progress-info progress-striped">
+                                    <span style="width: 30%;" class="bar"></span>
+                                    </span>
+                            </a>
+                        </li>
                         <li class="external">
-                            <a href="#">查看所有待办事项 <i class="m-icon-swapright"></i></a>
+                            <a href="timeSchedule.html">修改更新计划 <i class="m-icon-swapright"></i></a>
                         </li>
                     </ul>
                 </li>
@@ -111,12 +122,11 @@
                             <a href="inbox.html?a=view">
                                 <span class="photo"><img src="media/image/avatar2.jpg" alt=""/></span>
                                         <span class="subject">
-                                        <span class="from">xxx</span>
+                                        <span class="from">刘婷</span>
                                         <span class="time">刚刚</span>
                                         </span>
                                         <span class="message">
-                                        Vivamus sed auctor nibh congue nibh. auctor nibh
-                                        auctor nibh...
+                                       排班信息更改请求...
                                         </span>
                             </a>
                         </li>
@@ -124,12 +134,11 @@
                             <a href="inbox.html?a=view">
                                 <span class="photo"><img src="./media/image/avatar3.jpg" alt=""/></span>
                                     <span class="subject">
-                                    <span class="from">xxx</span>
+                                    <span class="from">李宁</span>
                                     <span class="time">16 分钟以前</span>
                                     </span>
                                     <span class="message">
-                                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-                                    auctor nibh...
+                                    站点变更请求...
                                     </span>
                             </a>
                         </li>
@@ -137,17 +146,16 @@
                             <a href="inbox.html?a=view">
                                 <span class="photo"><img src="./media/image/avatar1.jpg" alt=""/></span>
                                     <span class="subject">
-                                    <span class="from">xxx</span>
+                                    <span class="from">黄雷</span>
                                     <span class="time">2 小时以前</span>
                                     </span>
                                     <span class="message">
-                                    Vivamus sed nibh auctor nibh congue nibh. auctor nibh
-                                    auctor nibh...
+                                    数据更新请求...
                                     </span>
                             </a>
                         </li>
                         <li class="external">
-                            <a href="inbox.html">查看所有消息 <i class="m-icon-swapright"></i></a>
+                            <a href="#">查看所有消息 <i class="m-icon-swapright"></i></a>
                         </li>
                     </ul>
                 </li>
@@ -157,7 +165,7 @@
                 <li class="dropdown user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img alt="" src="media/image/avatar1_small.jpg"/>
-                        <span class="username">某某某（管理员）</span>
+                        <span class="username">曾林（Pyxister管理员）</span>
                         <i class="icon-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
@@ -266,7 +274,7 @@
                     <li class="">
                         <a href="authorityMng.html">
                             权限管理</a></li>
-                    <li >
+                    <li>
                         <a href="register.html">
                             创建用户</a>
                     </li>
@@ -427,7 +435,7 @@
                                 <div class="control-group">
                                     <label class="control-label">角色名称<span class="required">*</span></label>
                                     <div class="controls">
-                                        <input type="text" placeholder="名称" class="m-wrap medium" name="name" />
+                                        <input type="text" placeholder="名称" class="m-wrap medium" name="name"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -475,8 +483,10 @@
                             </div>
                         </div>
                         <div class="form-actions" style="text-align: center">
-                            <button type="button" class="btn  pull-right" style="margin-right: 150px">取消</button>
-                            <button type="submit" class="btn red pull-right" style="margin-right: 10px"><i class="icon-ok"></i> 保存</button
+                            <button type="button" class="btn red pull-right" style="margin-right: 150px"><i class=" icon-remove"></i> 取消</button>
+                            <button type="submit" class="btn green pull-right" style="margin-right: 10px"><i
+                                    class="icon-ok"></i> 保存
+                            </button>
                         </div>
                     </form>
                 </div>
