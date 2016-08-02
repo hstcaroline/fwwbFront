@@ -124,10 +124,7 @@ map.addEventListener('zoomend', function(type,target){
     var overlays=map.getOverlays();
     var zoom=map.getZoom();
     for(var i=0;i<overlays.length;i++){
-        console.log(overlays[i].V.className);
-        console.log(overlays[i].type);
-        console.log(overlays[i].routeId);
-        if(overlays[i].V.className=="BMap_Marker BMap_noprint"){
+        if(overlays[i].type==1){
             var icon=createIcon({w:(zoom-8)*5,h:(zoom-8)*5,l:0,t:0,x:6,lb:5},1);
             overlays[i].setIcon(icon);
         }
@@ -219,6 +216,7 @@ function getData(){
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
+        //url: ip+'/users/getRouteByTime',
         url: ip+'/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'POST',
