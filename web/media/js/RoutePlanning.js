@@ -120,6 +120,7 @@ function addMarker(Arr) {
         });
 
         var label = new BMap.Label(json.title, { "offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20) });
+        label.hide();
         marker.setLabel(label);
         map.addOverlay(marker);
         label.setStyle({
@@ -136,10 +137,10 @@ function addMarker(Arr) {
                 this.openInfoWindow(_iw);
             });
             _iw.addEventListener("open", function() {
-                _marker.getLabel().hide();
+                //_marker.getLabel().hide();
             });
             _iw.addEventListener("close", function() {
-                _marker.getLabel().show();
+                //_marker.getLabel().show();
             });
             if (!!json.isOpen) {
                 label.hide();
@@ -194,9 +195,9 @@ function createRoute(markers, routeID) { //markers是一个Point数组
     var da = JSON.stringify({id:routeId,date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()});
     var aroundRoute=0;
     var realRide=0;
-    $.ajax({
+    /*$.ajax({
         type: 'POST',
-        url: ip+'/users/getRideRateByRoute',
+        url: 'http://192.168.1.7:3000/users/getRideRateByRoute',
         data: da,
         contentType: "application/json",
         async : false,
@@ -207,11 +208,13 @@ function createRoute(markers, routeID) { //markers是一个Point数组
         error: function () {
             alert("wrong");
         }
-    });
+    });*/
+    var infowindow=new BMap.InfoWindow();
+    infowindow.setContent(string);
     for(var j=0;j<routes.length;j++){
         if(routes[j].route.id==routeId){
             console.log(routes[j].route);
-            var string="id: "+routes[j].route.id+"  name: "+routes[j].route.name+"  路线总人数："+aroundRoute+"  昨日乘坐人数："+realRide;
+            var string="id: "+routes[j].route.id+"  name: "+routes[j].route.name;
             label=new BMap.Label(string,{ "offset": new BMap.Size(0, -20) });
             label.hide();
             map.addOverlay(label);
@@ -240,7 +243,6 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                     polyline.label=label;
                     //polyline.label= new BMap.Label(routes[routeId].route);
                     polyline.addEventListener("mouseover", function(e){
-                        console.log(e);
                         polyline.label.setPosition(e.point);
                         polyline.label.show();
                         var allOverlay = map.getOverlays();
@@ -259,6 +261,19 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                             if(allOverlay[i].type==2){
                                 if(allOverlay[i].routeId==polyline.routeId){
                                     allOverlay[i].setStrokeWeight(6);
+                                }
+                            }
+                        }
+                    })
+                    polyline.addEventListener("click", function(e){
+                        console.log(e);
+                        polyline.label.setPosition(e.point);
+                        polyline.label.show();
+                        var allOverlay = map.getOverlays();
+                        for(var i=0;i<allOverlay.length;i++){
+                            if(allOverlay[i].type==2){
+                                if(allOverlay[i].routeId==polyline.routeId){
+                                    allOverlay[i].setStrokeWeight(10);
                                 }
                             }
                         }
