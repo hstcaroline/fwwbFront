@@ -188,6 +188,36 @@ function addPolyline(plPoints) {
 
 function createRoute(markers, routeID) { //markers是一个Point数组
     var routeId = parseInt(routeID);
+    var label;
+    var d=new Date();
+    d.setDate(d.getDate()-1);
+    var da = JSON.stringify({id:routeId,date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()});
+    var aroundRoute=0;
+    var realRide=0;
+    $.ajax({
+        type: 'POST',
+        url: ip+'/users/getRideRateByRoute',
+        data: da,
+        contentType: "application/json",
+        async : false,
+        success: function (data) {
+            aroundRoute=data.aroundRoute;
+            realRide=data.realRideNum;
+        },
+        error: function () {
+            alert("wrong");
+        }
+    });
+    for(var j=0;j<routes.length;j++){
+        if(routes[j].route.id==routeId){
+            console.log(routes[j].route);
+            var string="id: "+routes[j].route.id+"  name: "+routes[j].route.name+"  路线总人数："+aroundRoute+"  昨日乘坐人数："+realRide;
+            label=new BMap.Label(string,{ "offset": new BMap.Size(0, -20) });
+            label.hide();
+            map.addOverlay(label);
+        }
+    }
+    var infowindow=new BMap.InfoWindow()
     var driving = new BMap.DrivingRoute(map, {
         renderOptions: { //绘制结果
             map: map,
@@ -207,7 +237,12 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                     var polyline = new BMap.Polyline(pts, { strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9 });
                     polyline.type = 2;
                     polyline.routeId = routeId;
+                    polyline.label=label;
+                    //polyline.label= new BMap.Label(routes[routeId].route);
                     polyline.addEventListener("mouseover", function(e){
+                        console.log(e);
+                        polyline.label.setPosition(e.point);
+                        polyline.label.show();
                         var allOverlay = map.getOverlays();
                         for(var i=0;i<allOverlay.length;i++){
                             if(allOverlay[i].type==2){
@@ -219,6 +254,7 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                     })
                     polyline.addEventListener("mouseout", function(e){
                         var allOverlay = map.getOverlays();
+                        polyline.label.hide();
                         for(var i=0;i<allOverlay.length;i++){
                             if(allOverlay[i].type==2){
                                 if(allOverlay[i].routeId==polyline.routeId){
