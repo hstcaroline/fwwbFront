@@ -193,34 +193,15 @@ function createRoute(markers, routeID) { //markers是一个Point数组
     var d=new Date();
     d.setDate(d.getDate()-1);
     var da = JSON.stringify({id:routeId,date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()});
-    var aroundRoute=0;
-    var realRide=0;
-    /*$.ajax({
-        type: 'POST',
-        url: 'http://192.168.1.7:3000/users/getRideRateByRoute',
-        data: da,
-        contentType: "application/json",
-        async : false,
-        success: function (data) {
-            aroundRoute=data.aroundRoute;
-            realRide=data.realRideNum;
-        },
-        error: function () {
-            alert("wrong");
-        }
-    });*/
-    var infowindow=new BMap.InfoWindow();
-    infowindow.setContent(string);
     for(var j=0;j<routes.length;j++){
         if(routes[j].route.id==routeId){
             console.log(routes[j].route);
-            var string="id: "+routes[j].route.id+"  name: "+routes[j].route.name;
+            var string="id: "+routes[j].route.id+"<br>  name: "+routes[j].route.name;
             label=new BMap.Label(string,{ "offset": new BMap.Size(0, -20) });
             label.hide();
             map.addOverlay(label);
         }
     }
-    var infowindow=new BMap.InfoWindow()
     var driving = new BMap.DrivingRoute(map, {
         renderOptions: { //绘制结果
             map: map,
@@ -241,10 +222,15 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                     polyline.type = 2;
                     polyline.routeId = routeId;
                     polyline.label=label;
+                    polyline.mark=new BMap.Marker(pts[0]);
+                    var icon=polyline.mark.getIcon();
+                    icon.setImageSize(new BMap.Size(0,0))
+                    //polyline.mark.hide();
+                    map.addOverlay(polyline.mark);
                     //polyline.label= new BMap.Label(routes[routeId].route);
                     polyline.addEventListener("mouseover", function(e){
                         polyline.label.setPosition(e.point);
-                        polyline.label.show();
+                        //polyline.label.show();
                         var allOverlay = map.getOverlays();
                         for(var i=0;i<allOverlay.length;i++){
                             if(allOverlay[i].type==2){
@@ -256,7 +242,7 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                     })
                     polyline.addEventListener("mouseout", function(e){
                         var allOverlay = map.getOverlays();
-                        polyline.label.hide();
+                        //polyline.label.hide();
                         for(var i=0;i<allOverlay.length;i++){
                             if(allOverlay[i].type==2){
                                 if(allOverlay[i].routeId==polyline.routeId){
@@ -266,16 +252,39 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                         }
                     })
                     polyline.addEventListener("click", function(e){
-                        console.log(e);
-                        polyline.label.setPosition(e.point);
-                        polyline.label.show();
-                        var allOverlay = map.getOverlays();
-                        for(var i=0;i<allOverlay.length;i++){
-                            if(allOverlay[i].type==2){
-                                if(allOverlay[i].routeId==polyline.routeId){
-                                    allOverlay[i].setStrokeWeight(10);
+                        if(polyline.infowindow==null){
+                            console.log("here");
+                            polyline.infowindow=new BMap.InfoWindow();
+                            $.ajax({
+                                type: 'POST',
+                                url: ip+'/users/getRideRateByRoute',
+                                data: da,
+                                contentType: "application/json",
+                                async : false,
+                                success: function (data) {
+                                    var tstring="";
+                                    tstring=polyline.label.getContent()+"<br> 路线总人数： "+data.aroundRoute+"<br> 昨日乘车人数： "+data.realRideNum;
+                                    console.log(tstring);
+                                    polyline.infowindow.setContent(tstring);
+                                    polyline.infowindow.redraw();
+                                    //aroundRoute=data.aroundRoute;
+                                    //realRide=data.realRideNum;
+                                },
+                                error: function () {
+                                    alert("wrong");
                                 }
-                            }
+                            });
+                            polyline.infowindow.enableCloseOnClick();
+                            polyline.infowindow.setPosition(e.point);
+                            polyline.mark.setPosition(e.point);
+                            map.addOverlay(polyline.infowindow);
+                            polyline.mark.openInfoWindow(polyline.infowindow);
+                        }
+                        else{                            
+                            console.log("here2");
+                            polyline.infowindow.setPosition(e.point);
+                            polyline.mark.setPosition(e.point);
+                            polyline.mark.openInfoWindow(polyline.infowindow);
                         }
                     })
                     map.addOverlay(polyline);
