@@ -1158,7 +1158,7 @@ var ifSubmit;
                                 alert("不能创建当前时间以前的排班信息");
                                 return;
                             }
-                            var routeIndex = top / options.timeslotHeight;
+                            var routeIndex = top / options.timeslotHeight + 1;
                             ifSubmit = false;
                             //弹出选择框
                             $('#showModalBtn').click();
@@ -3226,7 +3226,6 @@ function saveSchedule() {
         }
     });
 }
-
 
 function checkSubmit() {
     ifSubmit = true;

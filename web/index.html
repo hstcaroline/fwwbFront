@@ -384,6 +384,42 @@
                 </div>
             </div>
 
+            <div id="portlet-setting" class="modal fade hide">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button"></button>
+                    <h3>设置</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">站点个数上限</label>
+                            <div class="controls">
+                                <input class="m-wrap" id="setting_max" type="text"/>
+                                <span class="help-inline">正整数:0~99999</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">站点覆盖半径(米)</label>
+                            <div class="controls">
+                                <input class="m-wrap" id="setting_r" type="text" placeholder="默认：500米"/>
+                                <span class="help-inline">一位小数:0.0~9.9</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">站点覆盖人数下限</label>
+                            <div class="controls">
+                                <input class="m-wrap" id="setting_p" type="text" placeholder="默认：1人"/>
+                                <span class="help-inline">正整数:0~99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn">取 消</button>
+                    <button id="portlet-setting-ok" class="btn green">确 定</button>
+                </div>
+            </div>
+
             <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <div class="container-fluid">
                 <div class="row-fluid">
@@ -523,7 +559,7 @@
                                 </li>
 
                             <li id="resetStations"><p>
-                                <div class="btn red tooltips" data-placement="left" data-original-title="删除所有更改">
+                                <div class="btn red tooltips" data-placement="left" data-original-title="智能生成站点">
                                     <i class="icon-edit"></i> 生成站点
                                 </div>
                             </li>
@@ -790,7 +826,7 @@
     </div>
     <!-- END PAGE -->
     <!-- END CONTAINER -->
-
+    </div>
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
@@ -799,8 +835,8 @@
     <script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
     <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
     <!--[if lt IE 9]>
-<script src="media/js/excanvas.min.js"></script>
-<script src="media/js/respond.min.js"></script>
+    <script src="media/js/excanvas.min.js"></script>
+    <script src="media/js/respond.min.js"></script>
 <![endif]-->
     <script src="media/js/app.js"></script>
     <!-- PAGE LEVEL -->
@@ -808,6 +844,7 @@
     <script type="text/javascript" src="media/js/select2.min.js"></script>
     <script type="text/javascript" src="media/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="media/js/jquery.form.js"></script>
+    <script type="text/javascript" src="media/js/jquery.inputmask.bundle.min.js"></script>
     <script type="text/javascript" src="media/js/RoutePlanning.js"></script>
     <script type="text/javascript" src="media/js/routeEdit.js"></script>
     <script>
