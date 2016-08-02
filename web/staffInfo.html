@@ -68,7 +68,11 @@
                         <li>
                             <a href="#">
                                         <span class="task">
+<<<<<<< HEAD:web/StaffInfoManage.html
                                         <span class="desc">车辆信息更新</span>
+=======
+                                        <span class="desc">更新车辆信息</span>
+>>>>>>> 394b119a005cb0fa7acccc6abefeebe03fb2e702:web/staffInfo.html
                                         <span class="percent">40%</span>
                                         </span>
                                         <span class="progress progress-success ">
@@ -206,87 +210,85 @@
                 <div class="sidebar-toggler hidden-phone"></div>
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
             </li>
-            <li>
-                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-                <form class="sidebar-search">
-                    <div class="input-box">
-                        <a href="javascript:;" class="remove"></a>
-                        <input type="text" placeholder="搜索..."/>
-                        <input type="button" class="submit" value=" "/>
-                    </div>
-                </form>
-                <!-- END RESPONSIVE QUICK SEARCH FORM -->
-            </li>
-            <li class="start">
+            <li class="start ">
                 <a href="index.html">
                     <i class="icon-home"></i>
-                    <span class="title">首页</span>
+                    <span class="title">线路规划</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li class="start ">
+                <a href="realTime.html">
+                    <i class="icon-truck"></i>
+                    <span class="title">运行状态</span>
                     <span class="selected"></span>
                 </a>
             </li>
             <li class="">
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
-                    <span class="title">快速查询</span>
+                    <span class="title">数据查询</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="layout_horizontal_sidebar_menu.html">
-                            站点</a>
+                        <a href="stationInfo.html">
+                            所有站点</a>
                     </li>
                     <li>
-                        <a href="layout_horizontal_menu1.html">
-                            路线</a>
+                        <a href="rideList.html">
+                            乘车名单</a>
                     </li>
                     <li>
-                        <a href="layout_horizontal_menu1.html">
-                            乘坐情况</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            司机排班
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#"><i class="icon-table"></i> 排班大表</a></li>
-                            <li><a href="#"><i class="icon-list-alt"></i> 我的排班</a></li>
-                        </ul>
+                        <a href="reportForm.html">
+                            报表</a>
                     </li>
                 </ul>
             </li>
-            <li class="active">
+            <li class="">
                 <a href="javascript:;">
                     <i class="icon-cogs"></i>
-                    <span class="title">信息管理</span>
+                    <span class="title active">信息管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu active">
+                    <li>
+                        <a href="staffInfo.html" class='active'>
+                            员工</a>
+                    </li>
+                    <li>
+                        <a href="carInfo.html">
+                            车辆</a></li>
+                    <li>
+                        <a href="driverSchedule.html">
+                            司机排班</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class=" icon-star"></i>
+                    <span class="title">系统管理</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="ui_general.html">
-                            站点</a>
-                    </li>
-                    <li>
-                        <a href="ui_buttons.html">
-                            路线</a>
-                    </li>
-                    <li>
-                        <a href="StaffManage">
-                            员工</a>
-                    </li>
-                    <li>
-                        <a href="ui_modals.html">
-                            车辆</a>
-                    </li>
-                    <li>
                         <a href="javascript:;">
-                            用户权限
+                            角色管理
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#"><i class="icon-user"></i> 新增用户</a></li>
-                            <li><a href="#"><i class="icon-group"></i> 所有用户</a></li>
+                            <li><a href="role_create.html"><i class="icon-file-text-alt"></i> 创建角色</a></li>
+                            <li><a href="role_edit.html"><i class="icon-key"></i> 更改角色</a></li>
                         </ul>
+                    </li>
+
+                    <li class="">
+                        <a href="authorityMng.html">
+                            权限管理</a></li>
+                    <li>
+                        <a href="register.html">
+                            创建用户</a>
                     </li>
                 </ul>
             </li>
@@ -303,9 +305,8 @@
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#"><i class="icon-file-text-alt"></i> 个人资料</a></li>
-                            <li><a href="#"><i class="icon-key"></i> 更换密码</a></li>
-                            <li><a href="#"><i class="icon-off"></i> 切换账号</a></li>
+                            <li><a href="userProfile.html"><i class="icon-file-text-alt"></i> 个人资料</a></li>
+                            <li><a href="changePsw.html"><i class="icon-key"></i> 更换密码</a></li>
                         </ul>
                     </li>
                     <li>
@@ -345,14 +346,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="">
-                <a href="javascript:;">
-                    <i class="icon-pencil"></i>
-                    <span class="title">注册</span>
-                </a>
-            </li>
-            <li class="last ">
-                <a href="charts.html">
+            <li class="last">
+                <a href="news.html">
                     <i class="icon-bar-chart"></i>
                     <span class="title">公司动态</span>
                 </a>
@@ -699,10 +694,9 @@
             data: null,
             dataType: 'json',
             success: function(staffList){
-                console.log(staffList.length);
+
                 for(var i=0;i<staffList.length;i++){
                     var temRate = parseInt((i+1)/staffList.length*100);
-                    console.log(temRate);
                     $("#waitBar").css('width', temRate+'%');
                     //$('#waitProgress').val(temRate);
                     //$("#waitProgress").progressbar({value: temRate});
@@ -722,12 +716,13 @@
                     infoTable.fnAddData(temArr);
 
                 }
+                $("#waitBar").css('width', '100%');
                 $("#waiting").modal('hide');
             }
         });
     });
     $("#btnAddStaffByFile").click(function(){
-       window.location.href = "StaffInfoAdd.html";
+       window.location.href = "staffAddFile.html";
     });
 
     var map = new BMap.Map("allMap", {enableMapClick: false});
@@ -780,6 +775,26 @@
             }
         });
     });
+    function staffRemove(staffId){
+        console.log('remove '+staffId);
+        var index = 0;
+        $("#infoTable").find("td").each(function(){
+            console.log($(this));
+        });
+        var infoTable = $("#infoTable").DataTable();
+        infoTable.fnDeleteRow(index);
+        $.ajax({
+            url: ip+'/StaffInfoManage'+'/removeStaff',
+            type: 'post',
+            data: {
+                staffId: staffId
+            },
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+            }
+        });
+    }
     $("#btnStaffInfoAdd").click(function(){
         var temStaff = {};
         console.log('ready to add');
