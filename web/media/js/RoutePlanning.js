@@ -55,7 +55,7 @@ function initMap() {
     setMapEvent(); //设置地图事件
     addMapControl(); //向地图添加控件
     var home = new BMap.Marker(COMPANYADDR);
-    var icon = new BMap.Icon("media/image/logo.png", new BMap.Size(86, 14));
+    var icon = new BMap.Icon("media/image/company.png", new BMap.Size(64, 64));
     home.setIcon(icon);
     home.disableMassClear();
     map.addOverlay(home);
