@@ -915,50 +915,50 @@
             }
         ],
         allRoute: [
-            {
-                "id": 29,
-                "name": "route1",
-                "time": 5
-            },
-            {
-                "id": 31,
-                "name": "route2",
-                "time": 7
-            },
-            {
-                "id": 34,
-                "name": "route3",
-                "time": 10
-            },
-            {
-                "id": 35,
-                "name": "route4",
-                "time": 5
-            },
-            {
-                "id": 36,
-                "name": "route5",
-                "time": 8
-            },
-            {
-                "id": 37,
-                "name": "route6",
-                "time": 8
-            }, {
-                "id": 38,
-                "name": "route7",
-                "time": 8
-            }, {
-                "id": 39,
-                "name": "route8",
-                "time": 8
-            }
+//            {
+//                "id": 29,
+//                "name": "route1",
+//                "time": 5
+//            },
+//            {
+//                "id": 31,
+//                "name": "route2",
+//                "time": 7
+//            },
+//            {
+//                "id": 34,
+//                "name": "route3",
+//                "time": 10
+//            },
+//            {
+//                "id": 35,
+//                "name": "route4",
+//                "time": 5
+//            },
+//            {
+//                "id": 36,
+//                "name": "route5",
+//                "time": 8
+//            },
+//            {
+//                "id": 37,
+//                "name": "route6",
+//                "time": 8
+//            }, {
+//                "id": 38,
+//                "name": "route7",
+//                "time": 8
+//            }, {
+//                "id": 39,
+//                "name": "route8",
+//                "time": 8
+//            }
         ]
     }
 
     $(document).ready(function () {
 //        getData();
-        //  showCalendar();
+          showCalendar();
         //  loadTable();
     });
     function getData() {
@@ -997,9 +997,10 @@
             },
             eventRender: function (calEvent, $event) {
                 if (calEvent.date.getTime() < new Date().getTime()) {
-                    $event.css('backgroundColor', '#aaa');
-                    $event.find('.time').css({
-                        backgroundColor: '#999',
+                    $event.css('background', 'none');
+                    $event.css('backgroundColor', '#a29ec1');
+                    $event.find('wc-time').css({
+                        background:  'none',
                         border: '1px solid #888'
                     });
                 }

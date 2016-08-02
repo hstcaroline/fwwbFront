@@ -295,6 +295,10 @@ var ifSubmit;
                  * Initialise calendar *
                  ***********************/
                 _create: function () {
+                    //获取所有线路
+                    $.get(ip + '/users/getRoutename', function (data) {
+                        allRoute = data;
+                    });
                     var self = this;
                     self._computeOptions();
                     self._setupEventDelegation();
@@ -406,9 +410,9 @@ var ifSubmit;
                     self.element.find('.wc-cal-event').each(function () {
                         if ($(this).data('calEvent').id === eventId) {
                             $(this).remove();
-                            for(var i in newEvents){
-                                if(eventId == newEvents[i].id){
-                                    newEvents.splice(i,1);
+                            for (var i in newEvents) {
+                                if (eventId == newEvents[i].id) {
+                                    newEvents.splice(i, 1);
                                 }
                             }
                             return false;
@@ -564,11 +568,11 @@ var ifSubmit;
                     var options = this.options;
                     if (options.businessHours.limitDisplay) {
                         //options.timeslotsPerDay = options.timeslotsPerHour * (options.businessHours.end - options.businessHours.start);
-                        options.timeslotsPerDay = options.timeslotsPerHour * (options.data.allRoute.length);
+                        options.timeslotsPerDay = options.timeslotsPerHour * (allRoute.length);
                         options.millisToDisplay = (options.businessHours.end - options.businessHours.start) * 3600000; // 60 * 60 * 1000
                         options.millisPerTimeslot = options.millisToDisplay / options.timeslotsPerDay;
                     } else {
-                        options.timeslotsPerDay = options.timeslotsPerHour * options.data.allRoute.length;
+                        options.timeslotsPerDay = options.timeslotsPerHour * allRoute.length;
                         options.millisToDisplay = MILLIS_IN_DAY;
                         options.millisPerTimeslot = MILLIS_IN_DAY / options.timeslotsPerDay;
                     }
@@ -903,11 +907,12 @@ var ifSubmit;
                  * render the timeslots separation
                  */
                 _renderCalendarBodyTimeSlots: function ($calendarTableTbody) {
+
                     var options = this.options,
                         renderRow, i, j,
                         showAsSeparatedUser = options.showAsSeparateUsers && options.users && options.users.length,
-                        start = (options.businessHours.limitDisplay ? options.businessHours.start : 0),
-                        end = (options.businessHours.limitDisplay ? options.businessHours.end : 24),
+                        start = 0,
+                        end = allRoute.length,
                         rowspan = 1;
 
                     //calculate the rowspan
@@ -1036,20 +1041,17 @@ var ifSubmit;
                     //start = (options.businessHours.limitDisplay ? options.businessHours.start : 0),
                     //end = (options.businessHours.limitDisplay ? options.businessHours.end : 24);
                         start = 0;
-                    end = options.data.allRoute.length;
+                    end = allRoute.length;
                     renderRow = '<tr class=\"wc-grid-row-events\">';
                     renderRow += '<td class=\"wc-grid-timeslot-header\">';
                     for (var i = start; i < end; i++) {
                         var bhClass = (options.businessHours.start <= i && options.businessHours.end > i) ? 'ui-state-active wc-business-hours' : 'ui-state-default';
                         renderRow += '<div class=\"wc-hour-header ' + bhClass + '\">';
-                        if (options.use24Hour) {
-                            renderRow += '<div class=\"wc-time-header-cell\">' + self._24HourForIndex(i) + '</div>';
-                        }
-                        else {
-                            //renderRow += '<div class=\"wc-time-header-cell\">' + self._hourForIndex(i) + '<span class=\"wc-am-pm\">' + self._amOrPm(i) + '</span></div>';
-                            renderRow += '<div class=\"wc-time-header-cell\">' + '<span class=\"wc-am-pm\">'
-                                + options.data.allRoute[i].name + '</span></div>';
-                        }
+
+                        //renderRow += '<div class=\"wc-time-header-cell\">' + self._hourForIndex(i) + '<span class=\"wc-am-pm\">' + self._amOrPm(i) + '</span></div>';
+                        renderRow += '<div class=\"wc-time-header-cell\">' + '<span class=\"wc-am-pm\">'
+                            + allRoute[i].name + allRoute[i].id + '</span></div>';
+
                         renderRow += '</div>';
                     }
                     renderRow += '</td>';
@@ -1154,7 +1156,10 @@ var ifSubmit;
                             var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $newEvent, top);
 
                             $newEvent.remove();
-                            if (eventDuration.start.toLocaleString() <= new Date().toLocaleString()) {
+                            var s =eventDuration.start;
+                            var e = new Date();
+                            if (eventDuration.start <= new Date()) {
+
                                 alert("不能创建当前时间以前的排班信息");
                                 return;
                             }
@@ -1166,7 +1171,7 @@ var ifSubmit;
                             var chooseBusId;
 //提交所选数据
                             $("#submitBtn").click(function () {
-                                if(firstIn==true){
+                                if (firstIn == true) {
                                     chooseDriverId = $("#driver").val();
                                     chooseBusId = $("#bus").val();
                                     var chooseDriver;
@@ -1808,9 +1813,9 @@ var ifSubmit;
                     var options = this.options;
                     var calEvent = $calEvent.data('calEvent');
                     var num = 1;
-                    var routeNum = options.data.allRoute.length;
+                    var routeNum = allRoute.length;
                     for (var i = 0; i < routeNum; i++) {
-                        if (calEvent.route.id == options.data.allRoute[i].id) {
+                        if (calEvent.route.id == allRoute[i].id) {
                             num = i;
                         }
                     }
@@ -1944,14 +1949,14 @@ var ifSubmit;
                             var top = Math.round(parseInt(ui.position.top));
                             var eventDuration = self._getEventDurationFromPositionedEventElement($weekDay, $calEvent, top);
                             var calEvent = $calEvent.data('calEvent');
-                            var routeNum = options.data.allRoute.length;
+                            var routeNum = allRoute.length;
                             var heightPerSolt = $weekDay.height() / routeNum;
                             var index = top / heightPerSolt;
                             var currentDate = new Date();
-                            var c = currentDate.toLocaleDateString();
+                            var c = currentDate;
                             var $weekDayColumns = self.element.find('.wc-day-column-inner');
                             //如果比当前时间早,不允许修改
-                            if (eventDuration.start.toLocaleDateString() <= currentDate.toLocaleDateString()) {
+                            if (calEvent.date.toLocaleDateString()==currentDate.toLocaleDateString()||eventDuration.start < currentDate) {
                                 alert("不能修改今天以及过去的排班信息");
                                 //self._adjustForEventCollisions($weekDay, $calEvent, calEvent, calEvent);
                                 var $renderedOldEvent = self._renderEvent(calEvent, self._findWeekDayForEvent(calEvent, $weekDayColumns));
@@ -1960,13 +1965,13 @@ var ifSubmit;
                             }
 
                             var newCalEvent = $.extend(true, {}, calEvent, {
-                                route: options.data.allRoute[index],
+                                route: allRoute[index],
                                 date: eventDuration.start
                             });
                             var length = newEvents.length;
                             for (var i = 0; i < length; i++) {
                                 if (calEvent.id == newEvents[i].id) {
-                                    newEvents[i].route = options.data.allRoute[index];
+                                    newEvents[i].route = allRoute[index];
                                     newEvents[i].date = eventDuration.start;
                                 }
                             }

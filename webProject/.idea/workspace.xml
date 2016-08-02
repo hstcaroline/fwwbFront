@@ -20,27 +20,7 @@
     <favorites_list name="webProject" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="formComponent.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/formComponent.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.4557521">
-              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-              <folding>
-                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,39 +33,40 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/media/index.html" />
-        <option value="$PROJECT_DIR$/head.html" />
-        <option value="$PROJECT_DIR$/mediaFile.html" />
-        <option value="$PROJECT_DIR$/frame.html" />
-        <option value="$PROJECT_DIR$/this.js" />
-        <option value="$PROJECT_DIR$/header.html" />
-        <option value="$PROJECT_DIR$/content.html" />
-        <option value="$PROJECT_DIR$/left.html" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/ui_tabs_accordions.html" />
-        <option value="$PROJECT_DIR$/ui_buttons.html" />
-        <option value="$PROJECT_DIR$/editable.html" />
-        <option value="$PROJECT_DIR$/stuffInfo.html" />
-        <option value="$PROJECT_DIR$/media/js/jquery.dataTables.js" />
-        <option value="$PROJECT_DIR$/test.html" />
-        <option value="$PROJECT_DIR$/media/js/DT_bootstrap.js" />
-        <option value="$PROJECT_DIR$/media/js/table-editable.js" />
-        <option value="$PROJECT_DIR$/form_layout.html" />
-        <option value="$PROJECT_DIR$/mapTest.html" />
-        <option value="$PROJECT_DIR$/baiduMap.js" />
-        <option value="$PROJECT_DIR$/RoutePlanning.ejs" />
-        <option value="$PROJECT_DIR$/map.html" />
-        <option value="$PROJECT_DIR$/RoutePlanning_2.js" />
-        <option value="$PROJECT_DIR$/RoutePlanning.js" />
-        <option value="$PROJECT_DIR$/media/js/jquery.validate.min.js" />
-        <option value="$PROJECT_DIR$/media/css/style.css" />
-        <option value="$PROJECT_DIR$/carInfo.html" />
-        <option value="$PROJECT_DIR$/RoutePlanning.html" />
-        <option value="$PROJECT_DIR$/media/js/jQuery.js" />
-        <option value="$PROJECT_DIR$/media/js/toExcel.js" />
-        <option value="$PROJECT_DIR$/toExcel.html" />
-        <option value="$PROJECT_DIR$/quickSearch.html" />
-        <option value="$PROJECT_DIR$/formComponent.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/index.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/head.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/mediaFile.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/frame.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/this.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/header.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/content.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/left.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/index.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/ui_tabs_accordions.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/ui_buttons.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/editable.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/stuffInfo.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.dataTables.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/test.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/DT_bootstrap.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/table-editable.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/form_layout.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/mapTest.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/baiduMap.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/RoutePlanning.ejs" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/map.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/RoutePlanning_2.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/RoutePlanning.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.validate.min.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/css/style.css" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/carInfo.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/RoutePlanning.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jQuery.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toExcel.js" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/toExcel.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/quickSearch.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/formComponent.html" />
+        <option value="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/carRun.html" />
       </list>
     </option>
   </component>
@@ -126,23 +107,16 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches">
+        <subPane />
+      </pane>
       <pane id="Scope">
         <subPane subId="Problems" />
         <subPane subId="Project Files" />
         <subPane subId="Tests" />
       </pane>
-      <pane id="Scratches">
-        <subPane />
-      </pane>
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -151,18 +125,18 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/animated-jquery-progressbar" />
     <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/media" />
-      <recent name="$PROJECT_DIR$/media/js/toExcel" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media" />
+      <recent name="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toExcel" />
+      <recent name="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject" />
       <recent name="C:\Users\zouwenyun\Desktop\fwwb\fwwbFront\webProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject" />
     </key>
   </component>
   <component name="RunManager">
@@ -204,7 +178,7 @@
     </configuration>
     <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
       <node-options />
-      <working-directory>$PROJECT_DIR$</working-directory>
+      <working-directory>$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject</working-directory>
       <pass-parent-env>true</pass-parent-env>
       <envs />
       <ui>bdd</ui>
@@ -239,9 +213,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1437649" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1437649" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -277,295 +251,272 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/media/css/jquery.fileupload-ui.css">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.iframe-transport.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.iframe-transport.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.inputmask.bundle.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.inputmask.bundle.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.nestable.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.nestable.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery-1.10.1.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery-1.10.1.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery-ui-1.10.1.custom.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery-ui-1.10.1.custom.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.dataTables.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.dataTables.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="133" column="445" selection-start-line="133" selection-start-column="438" selection-end-line="133" selection-end-column="445" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.bootpag.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.bootpag.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="49" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.dataTables.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.dataTables.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1625" column="36" selection-start-line="1625" selection-start-column="32" selection-end-line="1625" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/select2.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/select2.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="13609" selection-start-line="20" selection-start-column="13608" selection-end-line="20" selection-end-column="13609" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/table-editable.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/table-editable.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="75" column="18" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/DT_bootstrap.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/DT_bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/baiduMap.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/baiduMap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/bootstrap-fileupload.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/bootstrap-fileupload.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/toPdf/jspdf/jspdf.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toPdf/jspdf/jspdf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery-1.8.3.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery-1.8.3.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/toPdf/jspdf/libs/base64.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toPdf/jspdf/libs/base64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jquery.validate.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jquery.validate.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5555553">
           <caret line="158" column="35" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/css/blue.css">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/css/blue.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-148.75">
           <caret line="266" column="6" selection-start-line="266" selection-start-column="6" selection-end-line="266" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/carRun.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.125">
-          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frame.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/frame.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.254902">
           <caret line="857" column="35" selection-start-line="857" selection-start-column="35" selection-end-line="857" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/css/style.css">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.25">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/carInfo.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/carInfo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.4705882">
           <caret line="869" column="0" selection-start-line="869" selection-start-column="0" selection-end-line="869" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/image/logo.png">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/image/logo.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoutePlanning.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/RoutePlanning.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="6.217949">
           <caret line="291" column="19" selection-start-line="291" selection-start-column="19" selection-end-line="291" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/image/instagram.png">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/image/instagram.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoutePlanning.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/RoutePlanning.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.625">
           <caret line="1222" column="0" selection-start-line="1222" selection-start-column="0" selection-end-line="1222" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/toPdf/html2canvas.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toPdf/html2canvas.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2991453">
           <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/toPdf/jquery.base64.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jqplot/jquery.jqplot.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toPdf/jquery.base64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jqplot/plugins/jqplot.mobile.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jqplot/jquery.jqplot.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jqplot/examples/syntaxhighlighter/scripts/shCore.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jqplot/plugins/jqplot.mobile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jqplot/examples/syntaxhighlighter/styles/shCore.css">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jqplot/examples/syntaxhighlighter/scripts/shCore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/app.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jqplot/examples/syntaxhighlighter/styles/shCore.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/chosen.jquery.min.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/chosen.jquery.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34188035">
           <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jQuery.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jQuery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13333334">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/jqplot.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/jqplot.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.021367522">
           <caret line="1" column="112" selection-start-line="1" selection-start-column="109" selection-end-line="1" selection-end-column="112" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reportForm.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/reportForm.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.2083335">
           <caret line="852" column="48" selection-start-line="852" selection-start-column="48" selection-end-line="852" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapTest.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/mapTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5">
           <caret line="703" column="0" selection-start-line="703" selection-start-column="0" selection-end-line="703" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/staffInfo.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/staffInfo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="13.013274">
           <caret line="1359" column="0" selection-start-line="1359" selection-start-column="0" selection-end-line="1359" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pointRout.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/pointRout.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -583,86 +534,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/toPdf/tableExport.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toPdf/tableExport.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="334" column="4" selection-start-line="334" selection-start-column="4" selection-end-line="334" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/toExcel.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/toExcel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="208" column="32" selection-start-line="208" selection-start-column="32" selection-end-line="208" selection-end-column="32" />
-          <folding>
-            <element signature="n#!!doc;n#isIE#0" expanded="false" />
-            <element signature="e#471#793#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/statisticTable.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/statisticTable.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/excelIE.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/excelIE.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39823008">
           <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toExcel.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/toExcel.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.291667">
           <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/media/js/bootstrap-timepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/quickSearch.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="15.625">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/animated-jquery-progressbar/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/js/bootstrap-timepicker.js">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/carRun.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <marker date="1467365666000" expanded="true" signature="28556:28615" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="1.5707965">
+          <caret line="71" column="41" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickSearch.html">
+    <entry file="file://$USER_HOME$/Desktop/服务外包前端/fwwbFront/webProject/formComponent.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="15.625">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/formComponent.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4557521">
+        <state vertical-scroll-proportion="0.022123894">
           <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-          <folding>
-            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>

@@ -61,23 +61,31 @@ p.description {
 }
 
 .wc-cal-event {
-    background: -webkit-gradient(linear, left top, left bottom, from(#22ac38), to(#14932f));
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#22ac38), to(#14932f));*/
+    background: -webkit-gradient(linear, left top, left bottom, from(#50a0e4), to(#79cbf1));
+    border: 1px solid #50a0e4;
 }
 
 .wc-cal-event .wc-title {
 
     padding: 5%;
     font-size: 17px;
-    color: white;
     line-height: 20px;
 }
 
 .wc-cal-event .wc-time {
-    background: -webkit-gradient(linear, left top, left bottom, from(#22ac38), to(#14932f));
+    background: white;
+    color: black;
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#22ac38), to(#14932f));*/
     border: 1px solid #0888e6;
     border-bottom: 2px solid white;
 }
-
+.wc-cal-event.wc-new-cal-event .wc-time {
+    background: -webkit-gradient(linear, left top, left bottom, from(#5dca38), to(#3abd29));
+}
+.wc-cal-event.wc-new-cal-event{
+    background: -webkit-gradient(linear, left top, left bottom, from(#5dca38), to(#3abd29));
+}
 .wc-time-header-cell {
     background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
 }
