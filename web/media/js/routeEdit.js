@@ -1,4 +1,4 @@
-var COMPANYADDR = new BMap.Point(121.47373,31.217665);
+var COMPANYADDR = new BMap.Point(121.438328,31.023632);
 var routes = [];
 var UNSAVEDCOLOR = "#333333";
 var COLOR = ["#537082", "#FF9900", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
@@ -62,6 +62,7 @@ resetStations.onclick = function () {
             var da = JSON.stringify(temp);
             $.ajax({
                 url: ip+"/RoutePlanning/getnewStationByTime",
+                //url:"http://192.168.1.7:3000/RoutePlanning/getnewStationByTime",
                 type: 'post',
                 data:da,
                 contentType: "application/json",
@@ -216,8 +217,8 @@ function getData(){
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
-        //url: ip+'/users/getRouteByTime',
         url: ip+'/users/getRouteByTime',
+        //url: 'http://192.168.1.7:3000/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'POST',
         data:da,
@@ -488,6 +489,7 @@ function routePlanning(arg_0){
     console.log(parseSimplePointArr(stationArr));
     $.ajax({
         url: ip+"/RoutePlanning/generatePath",
+        //url:"http:192.168.1.7:3000/RoutePlanning/generatePath",
         type: 'post',
         dataType: "json",
         data: {
