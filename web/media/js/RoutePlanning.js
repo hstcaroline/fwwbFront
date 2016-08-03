@@ -43,7 +43,7 @@ function checkhHtml5() {
     if (style == true) {
         var mapStyle = {
             features: ["road", "building", "water", "land"], //隐藏地图上的poi
-            style: "light"
+            style: "normal"
         }
         window.map.setMapStyle(mapStyle);
     }
@@ -190,9 +190,6 @@ function addPolyline(plPoints) {
 function createRoute(markers, routeID) { //markers是一个Point数组
     var routeId = parseInt(routeID);
     var label;
-    var d=new Date();
-    d.setDate(d.getDate()-1);
-    var da = JSON.stringify({id:routeId,date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()});
     for(var j=0;j<routes.length;j++){
         if(routes[j].route.id==routeId){
             console.log(routes[j].route);
@@ -202,17 +199,24 @@ function createRoute(markers, routeID) { //markers是一个Point数组
             map.addOverlay(label);
         }
     }
+    var group = Math.floor(markers.length / 5);
+    var mode = markers.length % 5;
+    var tgnum=group;
+    if(mode!=0) tgnum+=1;
     var driving = new BMap.DrivingRoute(map, {
         renderOptions: { //绘制结果
             map: map,
-            autoViewport: true,
+            autoViewport: false,
             enableDragging: true
         },
         onSearchComplete: function(results) {
+            waitBarFinish(1/tgnum);
             if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
                 var color = COLOR[(routeId % COLOR.length)];
                 //console.log(driving.getResults());
                 //console.log(driving.getResults().getPlan(0));
+                if(driving.getResults()==null)   return;
+                if(driving.getResults().getNumPlans()==0)   return;
                 var plan = driving.getResults().getPlan(0);
                 var num = plan.getNumRoutes();
                 for (var i = 0; i < num; i++) {
@@ -255,9 +259,13 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                         if(polyline.infowindow==null){
                             console.log("here");
                             polyline.infowindow=new BMap.InfoWindow();
+                            var d=new Date();
+                            d.setDate(d.getDate()-1);
+                            var da = JSON.stringify({id:polyline.routeId,date:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()});
                             $.ajax({
                                 type: 'POST',
                                 url: ip+'/users/getRideRateByRoute',
+                                //url:"http://127.0.0.1:3000/users/getRideRateByRoute",
                                 data: da,
                                 contentType: "application/json",
                                 async : false,
@@ -295,15 +303,13 @@ function createRoute(markers, routeID) { //markers是一个Point数组
         }
     });
     driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
-    var group = Math.floor(markers.length / 11);
-    var mode = markers.length % 11;
     for (var i = 0; i < group; i++) {
-        var waypoints = markers.slice(i * 11 + 1, (i + 1) * 11);
-        driving.search(markers[i * 11], markers[(i + 1) * 11], { waypoints: waypoints }); //waypoints表示途经点
+        var waypoints = markers.slice(i * 5 + 1, (i + 1) * 5);
+        driving.search(markers[i * 5], markers[(i + 1) * 5], { waypoints: waypoints }); //waypoints表示途经点
     }
     if (mode != 0) {
-        var waypoints = markers.slice(group * 11, markers.length - 1); //多出的一段单独进行search
-        driving.search(markers[group * 11], markers[markers.length - 1], { waypoints: waypoints });
+        var waypoints = markers.slice(group * 5, markers.length - 1); //多出的一段单独进行search
+        driving.search(markers[group * 5], markers[markers.length - 1], { waypoints: waypoints });
     }
 }
 

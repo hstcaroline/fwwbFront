@@ -45,8 +45,13 @@ var handleMask=function () {
     $("#mask_r").inputmask({ "mask": "9.9"});
     $("#mask_p").inputmask({ "mask": "9", "repeat": 2, "greedy": false });
 };
+document.getElementById("route-setting-ok").onclick=function(){
+    routePlanning(0);
+    $("#route-setting").modal('hide');
+}
 resetStations.onclick = function () {
         $("#portlet-setting").modal('show');
+        $("#waitBar").css('width', '0%');
         setting_ok.onclick = function () {
             routes = [];
             newRouteIndex=0;
@@ -62,17 +67,19 @@ resetStations.onclick = function () {
             var da = JSON.stringify(temp);
             $.ajax({
                 url: ip+"/RoutePlanning/getnewStationByTime",
-                //url:"http://192.168.1.7:3000/RoutePlanning/getnewStationByTime",
+                //url:"http://127.0.0.1:3000/RoutePlanning/getnewStationByTime",
                 type: 'post',
                 data:da,
                 contentType: "application/json",
                 dataType: "json",
                 async : false,
                 success: function (data) {
+                    $("#waitBar").css('width', '20%');
                     var num=data.length;
                     console.log(data.length);
                     //stationArr。push&addmarker
                     for(var i=0;i<num;i++){
+                        var sum=0;
                         getNearstValid(data[i], function(res,res2){
                             console.log("finsish");
                             console.log(res);
@@ -83,18 +90,23 @@ resetStations.onclick = function () {
                             stationCount++;
                             //console.log("finish"+i+"__1");
                             addMarker(marker);
+                            sum++;
+                            var temRate = parseInt((sum)/num*80)+20;
+                            console.log(sum);
+                            $("#waitBar").css('width', temRate+'%');
+                            if(sum==num)    $("#portlet-setting").modal('hide');
                         });
 
                         //var len = gridster.get_widgets_at_col("1").len + 1;
                         //var html = "<li id='"+point.id+"'data-row='" + i+1 + "' data-col='" + 1 + "' data-sizex='1' data-sizey='1' style='background:" + UNSAVEDCOLOR + " '> " + "<span style='display: none' class='id'>" + point.id + "</span>" + point.name + "</li>";
                         //gridster.add_widget(html,1,1,1,i+1);
                         //console.log("finish"+i+"__2");
-                    }
+                    }                    
                 },
                 error: function () {
                     alert("重置失败");
                 }
-            });
+            });            
         };
     //map.setZoom(13);
 };
@@ -124,6 +136,8 @@ loadData(routes);
 map.addEventListener('zoomend', function(type,target){
     var overlays=map.getOverlays();
     var zoom=map.getZoom();
+    if(zoom<11) map.setZoom(11);
+    if(zoom>15) map.setZoom(15);
     for(var i=0;i<overlays.length;i++){
         if(overlays[i].type==1){
             var icon=createIcon({w:(zoom-8)*5,h:(zoom-8)*5,l:0,t:0,x:6,lb:5},1);
@@ -212,13 +226,14 @@ function MarkerRightClickHandler(marker,iw){
 }
 
 function getData(){
+    console.log(1);
     var temp={};
     temp.time=document.getElementById("selectroutetime").value;
     console.log(temp);
     var da = JSON.stringify(temp);
     $.ajax({
         url: ip+'/users/getRouteByTime',
-        //url: 'http://192.168.1.7:3000/users/getRouteByTime',
+        //url: 'http://127.0.0.1:3000/users/getRouteByTime',
         //data: {username:$("#username").val(), content:$("#content").val()},
         type:'POST',
         data:da,
@@ -229,6 +244,7 @@ function getData(){
             routes = data.routes;
             startId=data.next_id;
             newRouteIndex=routes.length;
+            console.log(2);
         },
         error: function () {
             alert("链接失败");
@@ -487,6 +503,7 @@ function routePlanning(arg_0){
     btn_addMarker.innerHTML='<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
     console.log("generate path");
     console.log(parseSimplePointArr(stationArr));
+    console.log(ip+"/RoutePlanning/generatePath");
     $.ajax({
         url: ip+"/RoutePlanning/generatePath",
         //url:"http:192.168.1.7:3000/RoutePlanning/generatePath",
@@ -497,6 +514,16 @@ function routePlanning(arg_0){
             // policy:arg_0 路线生成策略
         },
         success: function(data){
+            $("#routewaitBar").css('width', '0%');
+            var routeId = startId;
+            routes=[];
+            for(var i=0;i<data.length;i++){
+                routes[i]={route:{id:routeId},stations:data[i]};
+                routeId++;
+            }
+            newRouteIndex=routes.length;
+            $("#route-generate").modal('show');/*
+            $("#routewaitBar").css('width', '10%');
             console.log(data);
             var routeId = startId;
             routes=[];
@@ -505,7 +532,25 @@ function routePlanning(arg_0){
                 routeId++;
             }
             newRouteIndex=routes.length;
-            refreshMap(true);
+            var route = [];
+            map.clearOverlays();
+            stationArr=[];
+            for(var i=0;i<routes.length;i++){
+                route[i]=[];
+                route[i].push(COMPANYADDR);
+                for(var j=0;j<routes[i].stations.length;j++){
+                    var station = routes[i].stations[j];
+                    var pos = station.posx + "|" + station.posy;
+                    var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
+                    route[i].push(point.pos);
+                    var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+                    stationArr.push(point);
+                    addMarker(marker);
+                }
+                createRoute(route[i],routes[i].route.id);
+                var temRate = parseInt((i+1)/routes.length*70)+10;
+                $("#routewaitBar").css('width', temRate+'%');
+            }
             if(gridster){
                 gridster.remove_all_widgets(null);
                 for (var i = 0; i < routes.length; i++) {
@@ -520,19 +565,74 @@ function routePlanning(arg_0){
                         }
                         gridster.add_widget(html,1,1,col,row);
                     }
+                    var temRate = parseInt((i+1)/routes.length*20)+80;
+                    $("#routewaitBar").css('width', temRate+'%');
                 }
             }
+            */
         }
     });
+    //$("#route-generate").modal('hide');
 }
-function reload() {
-    routes = [];
-    startId=0;
-    newRouteIndex=0;
-    stationCount = 1;
 
-    getData();
-    refreshMap(true);
+var routewaitBartotal=0;
+var routewaitBarnum=0;
+
+function waitBarFinish(num)
+{    
+    routewaitBarnum+=num;
+    console.log(routewaitBarnum);    
+    var temRate = parseInt(routewaitBarnum/routewaitBartotal*100);
+    $("#routewaitBar").css('width', temRate+'%');
+    alert("haha");
+    if(temRate>=99) $("#route-generate").modal('hide');
+}
+
+$('#route-generate').on('shown.bs.modal', function () {
+    $("#routewaitBar").css('width', '0%');
+    //$("#routewaitBar").css('width', '10%');
+    //refreshMap(true);
+    var route = [];
+    map.clearOverlays();
+    stationArr=[];
+    var sum=0;
+    var num=routes.length;
+    if(num==0){
+        $("#route-generate").modal('hide');
+        return;
+    }
+    routewaitBarnum=0;
+    routewaitBartotal=num;
+    routes.map(function(troute){
+        route=[];
+        route.push(COMPANYADDR);
+        for(var j=0;j<troute.stations.length;j++){
+            var station = troute.stations[j];
+            var pos = station.posx + "|" + station.posy;
+            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
+            route.push(point.pos);
+            var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+            stationArr.push(point);
+            addMarker(marker);
+        }
+        createRoute(route,troute.route.id);
+    })
+    /*for(var i=0;i<routes.length;i++){
+        route[i]=[];
+        route[i].push(COMPANYADDR);
+        for(var j=0;j<routes[i].stations.length;j++){
+            var station = routes[i].stations[j];
+            var pos = station.posx + "|" + station.posy;
+            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
+            route[i].push(point.pos);
+            var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+            stationArr.push(point);
+            addMarker(marker);
+        }
+        createRoute(route[i],routes[i].route.id);
+        var temRate = parseInt((i+1)/routes.length*70)+10;
+        $("#routewaitBar").css('width', temRate+'%');
+    }*/
     if(gridster){
         gridster.remove_all_widgets(null);
         for (var i = 0; i < routes.length; i++) {
@@ -544,6 +644,61 @@ function reload() {
             }
         }
     }
+    //$("#route-generate").modal('hide');
+})
+
+function reload() {    
+    console.log("reload");
+    routes = [];
+    startId=0;
+    newRouteIndex=0;
+    stationCount = 1;
+    getData();
+    $("#routewaitBar").css('width', '0%');
+    $("#route-generate").modal('show');/*
+    $("#routewaitBar").css('width', '0%');
+    console.log("reload");
+    routes = [];
+    startId=0;
+    newRouteIndex=0;
+    stationCount = 1;
+
+    getData();
+    $("#routewaitBar").css('width', '10%');
+    //refreshMap(true);
+    var route = [];
+    map.clearOverlays();
+    stationArr=[];
+    for(var i=0;i<routes.length;i++){
+        route[i]=[];
+        route[i].push(COMPANYADDR);
+        for(var j=0;j<routes[i].stations.length;j++){
+            var station = routes[i].stations[j];
+            var pos = station.posx + "|" + station.posy;
+            var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
+            route[i].push(point.pos);
+            var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+            stationArr.push(point);
+            addMarker(marker);
+        }
+        createRoute(route[i],routes[i].route.id);
+        var temRate = parseInt((i+1)/routes.length*70)+10;
+        $("#routewaitBar").css('width', temRate+'%');
+    }
+    if(gridster){
+        gridster.remove_all_widgets(null);
+        for (var i = 0; i < routes.length; i++) {
+            var col = i + 2;
+            for (var j = 0; j < routes[i].stations.length; j++) {
+                var row = j + 1;
+                var html = "<li id='"+routes[i].stations[j].id+"'data-row='" + row + "' data-col='" + col + "' data-sizex='1' data-sizey='1' style='background:" + COLOR[routes[i].route.id % COLOR.length] + " '> " + "<span style='display: none' class='id'>" + routes[i].stations[j].id + "</span>" + routes[i].stations[j].name + "</li>";
+                gridster.add_widget(html,1,1,col,row);
+            }
+            var temRate = parseInt((i+1)/routes.length*20)+80;
+            $("#routewaitBar").css('width', temRate+'%');
+        }
+    }
+    $("#route-generate").modal('hide');*/
 }
 function cleanRoute(routeId) {
     var allOverlay = map.getOverlays();

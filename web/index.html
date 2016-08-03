@@ -384,7 +384,18 @@
                     <button id="portlet-update-ok" class="btn green">确 定</button>
                 </div>
             </div>
-
+            <div id="route-generate" class="modal hide fade" style="width: 800px;" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">
+                        路线绘制中...
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div id='route waitProgress' class="progress progress-striped progress-success active">
+                        <div id='routewaitBar' class="bar" style="width: 0;"></div>
+                    </div>
+                </div>
+            </div>
             <div id="portlet-setting" class="modal fade hide">
                 <div class="modal-header">
                     <button data-dismiss="modal" class="close" type="button"></button>
@@ -414,13 +425,44 @@
                             </div>
                         </div>
                     </div>
+                    <div id='waitProgress' class="progress progress-striped progress-success active">
+                        <div id='waitBar' class="bar" style="width: 0;"></div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn">取 消</button>
                     <button id="portlet-setting-ok" class="btn green">确 定</button>
                 </div>
             </div>
+            <div id="route-setting" class="modal fade hide">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button"></button>
+                    <h3>选择方案</h3>
+                </div>
+                <div class="modal-body">
+                        <div class="controls" style="margin-left: 30px;">
+                            <label class="radio line">
 
+                                <input type="radio" name="optionsRadios1" value="option1"/>
+                                时间最短
+                            </label>
+
+                                    <label class="radio line">
+                                <input type="radio" name="optionsRadios1" value="option2" checked/>
+                                成本最低
+                            </label>
+
+                                    <label class="radio line">
+                                <input type="radio" name="optionsRadios1" value="option3"/>
+                                乘坐率最高
+                            </label>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn">取 消</button>
+                    <button id="route-setting-ok" class="btn green">确 定</button>
+                </div>
+            </div>
             <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <div class="container-fluid">
                 <div class="row-fluid">
@@ -522,33 +564,33 @@
                                             <i class="icon-edit"></i> 添加站点
                                         </div>
                                 </li>
-                                <li>
+                                <li id="set-route">
                                     <p>
                                         <div class="btn-group">
                                             <a id="createRoute" class="btn red" href="#" data-toggle="dropdown">
                                         &nbsp;<i class="icon-edit"></i> 生成路线&nbsp;</a>
-                                            <ul class="dropdown-menu control-group hold-on-click">
+                                            <!--<ul class="dropdown-menu control-group hold-on-click">
                                                 <div class="controls" style="margin-left: 30px;">
                                                     <label class="radio line">
 
-                                                <input type="radio" name="optionsRadios1" value="option1"
-                                                       onclick="routePlanning(0)"/>
-                                                时间最短
-                                            </label>
+                                                        <input type="radio" name="optionsRadios1" value="option1"
+                                                               onclick="routePlanning(0)"/>
+                                                        时间最短
+                                                    </label>
 
-                                                    <label class="radio line">
-                                                <input type="radio" name="optionsRadios1" value="option2"
-                                                       onclick="routePlanning(1)" checked/>
-                                                成本最低
-                                            </label>
+                                                            <label class="radio line">
+                                                        <input type="radio" name="optionsRadios1" value="option2"
+                                                               onclick="routePlanning(1)" checked/>
+                                                        成本最低
+                                                    </label>
 
-                                                    <label class="radio line">
-                                                <input type="radio" name="optionsRadios1" value="option3"
-                                                       onclick="routePlanning(2)"/>
-                                                乘坐率最高
-                                            </label>
+                                                            <label class="radio line">
+                                                        <input type="radio" name="optionsRadios1" value="option3"
+                                                               onclick="routePlanning(2)"/>
+                                                        乘坐率最高
+                                                    </label>
                                                 </div>
-                                            </ul>
+                                            </ul>-->
                                         </div>
                                 </li>
 
@@ -851,6 +893,10 @@
     <script>
         jQuery(document).ready(function() {
             App.init();
+            $("#route-generate").modal('hide');
+            document.getElementById("set-route").onclick=function(){
+                $("#route-setting").modal('show');
+            };
         });
     </script>
 </body>
