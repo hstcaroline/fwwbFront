@@ -19,7 +19,6 @@
  * If you're after a monthly calendar plugin, check out this one :
  * http://arshaw.com/fullcalendar/
  */
-var ip = 'http://192.168.1.7:3000';
 var currentEvent;
 var newEvents;
 var startDate;
