@@ -12,11 +12,12 @@ var IP = ip + "/RoutePlanning/";
 var COLOR = ["#FF9900", "#333333", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
 var ifAddMarker = false;
 var stationCount = 1;
+
 //var geoCoder=null;
 btn_addMarker.onclick = function () {
     if (ifAddMarker == true) {
         ifAddMarker = false;
-        btn_addMarker.innerHTML = '<p><div class="btn red"><i  class="icon-edit"></i> 添加站点</div></p>';
+        btn_addMarker.innerHTML = '<p><div class="btn green"><i  class="icon-plus"></i> 添加站点</div></p>';
     } else {
         ifAddMarker = true;
         btn_addMarker.innerHTML = '<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
@@ -96,7 +97,6 @@ function addMarker(Arr) {
         var point = new BMap.Point(p0, p1);
         var iconImg = createIcon(json.icon, json.type);
         var marker = new BMap.Marker(point, {icon: iconImg});
-
         marker.id = json.id;
         marker.type = json.type;
         marker.enableDragging();
@@ -121,17 +121,17 @@ function addMarker(Arr) {
 
         var label = new BMap.Label(json.title, {"offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20)});
         label.hide();
-        marker.setLabel(label);
         map.addOverlay(marker);
+        marker.setLabel(label);
         label.setStyle({
             borderColor: "#808080",
             color: "#333",
             cursor: "pointer"
         });
-
+        stationMarkerArr.push(marker);
         var iw = (function () {
             var index = i;
-            var _iw = createInfoWindow(Arr, i);
+            var _iw = createInfoWindow(json);
             var _marker = marker;
             _marker.addEventListener("click", function () {
                 this.openInfoWindow(_iw);
@@ -154,13 +154,13 @@ function addMarker(Arr) {
 }
 
 //创建InfoWindow
-function createInfoWindow(Arr, i) {
-    var json = Arr[i];
+function createInfoWindow(json) {
     var title = {title: '<span style="font-size:14px;color:#0A8021">' + json.title + '</span>'};
-    var iw = new BMap.InfoWindow('<b>站名:</b>' + json.title + '</br><b>站点人数:</b>' + json.num
-        + '</br><b>地址:</b>' + json.content + '</br>' + '<div style="line-height:1.8em;font-size:12px;"><b>经纬度坐标:</b>'+json.point+'</br>'
-        + '</br><b><a class="btn blue" style="float:left;margin-left:15px;" href="#" /><i class="icon-edit"></i> 编辑</a>'
-        + '</span><a href="#" class="btn red" style="float:left;margin-left:35px;" ><i class="icon-trash"> 删除</i></a>', title)
+    console.log(json);
+    var iw = new BMap.InfoWindow('<b>站名: </b>' + json.title + '</br><b>站点人数: </b>' + json.num
+        + '</br><b>地址:</b>' + json.content + '</br>' + '<div style="line-height:1.8em;font-size:12px;"><b>经纬度坐标: </b>'+json.point+'</br>'
+        + '</br><b><a class="btn blue" style="float:left;margin-left:15px;" href="#" onclick="editStation('+json.id+')" /><i class="icon-edit"></i> 编辑</a>'
+        + '</span><a href="#" onclick="deleteStation('+json.id+')" class="btn red" style="float:left;margin-left:35px;" ><i class="icon-trash"> 删除</i></a>', title)
     ;
     //var iw = new BMap.InfoWindow(); //("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
     //iw.setTitle(json.title);
@@ -370,9 +370,10 @@ function PolylineRightClickHandler(polyline) {
     polyline.addContextMenu(polylineMenu); //给标记添加右键菜单
 }
 
-function indexOf(marker, Arr) {
-    for (var i = 0; i < Arr.length; i++) {
-        if (marker == Arr[i].id || marker.id == Arr[i].id)
+function indexOf(marker, arr) {
+    var arrLength = arr.length;
+    for (var i = 0; i < arrLength; i++) {
+        if (marker == arr[i].id || marker.id == arr[i].id)
             return i;
     }
     return -1;
@@ -430,6 +431,25 @@ $(document).ready(function () {
         setPlace(id);
     });
 });
+//根据经纬度解析出地址
+/*
+function getAddByPos(point){
+    var geoc = new BMap.Geocoder();
+    geoc.getLocation(point, function(rs){
+        var addComp = rs.addressComponents;
+        var address =  addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+       return address;
+    });
+}*/
+function getAddByPos(point,point2,marker,cb){
+    var geoc = new BMap.Geocoder();
+    geoc.getLocation(point, function(rs){
+        var addComp = rs.addressComponents;
+        var address =  addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+        console.log(address);
+        cb(point2,marker,address);
+    });
+}
 
 //搜索功能：线路查询
 $(document).ready(function () {

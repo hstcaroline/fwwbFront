@@ -297,9 +297,10 @@ function PolylineRightClickHandler(polyline){
     polyline.addContextMenu(polylineMenu);//给标记添加右键菜单
 }
 
-function indexOf(marker,Arr) {
-    for(var i=0;i<Arr.length;i++){
-        if(marker.id == Arr[i][0])
+function indexOf(marker,arr) {
+    var arrLength = arr.length;
+    for(var i=0;i<arrLength;i++){
+        if(marker.id == arr[i][0])
             return i;
     }
     return -1;

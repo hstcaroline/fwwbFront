@@ -27,8 +27,6 @@
     <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
 
-
-
     <!-- END PAGE LEVEL STYLES -->
 
 </head>
@@ -427,7 +425,7 @@
             <!--开始内容-->
             <div id="waiting" class="modal hide fade" style="width: 800px;" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
-                    <h3 id="myModalLabel">
+                    <h3 id="modalLabel">
                         数据导入中...
                     </h3>
                 </div>
@@ -592,10 +590,10 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn red" data-dismiss="modal">
-                                                取消<i class="icon-remove"></i>
+                                                <i class="icon-remove"></i> 取消
                                             </button>
                                             <button id="btnStaffInfoAdd" class="btn green" data-dismiss="modal" id="order_submit">
-                                                提交<i class="icon-ok"></i>
+                                                 <i class="icon-ok"></i>提交
                                             </button>
                                         </div>
                                 </div>
@@ -844,7 +842,7 @@
                 temArr[7] = temStaff.classes;
                 temArr[8] = workTimeRefer[parseInt(temStaff.work_time)];
                 temArr[9] = temStaff.address;
-                temArr[10] = "<a onclick=\"staffEdit(1)\">编辑</a>";
+                temArr[10] = "<a class='edit' onclick=\"staffEdit(1)\">编辑</a>";
                 temArr[11] = "<a onclick=\"staffRemove(1)\">删除</a>";
                 infoTable.fnAddData(temArr);
             }

@@ -40,6 +40,7 @@
 <!-- BEGIN BODY -->
 
 <body class="page-header-fixed page-sidebar-closed">
+
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
 
@@ -376,7 +377,7 @@
                 <div class="modal-body">
                     <div id="portlet-content">
                         <h4>站点名称： <input id="title" type="text" class="m-wrap medium" placeholder="..."/></h4>
-                        <h4>站点描述： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
+                        <h4>站点地址： <input id="content" type="text" class="m-wrap medium" placeholder="..."/></h4>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -560,15 +561,15 @@
                                 </li>
                                 <li id="addMarker">
                                     <p>
-                                        <div class="btn red">
-                                            <i class="icon-edit"></i> 添加站点
+                                        <div class="btn green">
+                                            <i class="icon-plus"></i> 添加站点
                                         </div>
                                 </li>
                                 <li id="set-route">
                                     <p>
                                         <div class="btn-group">
                                             <a id="createRoute" class="btn red" href="#" data-toggle="dropdown">
-                                        &nbsp;<i class="icon-edit"></i> 生成路线&nbsp;</a>
+                                        &nbsp;<i class="icon-flag"></i> 生成路线&nbsp;</a>
                                             <!--<ul class="dropdown-menu control-group hold-on-click">
                                                 <div class="controls" style="margin-left: 30px;">
                                                     <label class="radio line">
@@ -596,14 +597,14 @@
 
                                 <li id="reloadMap">
                                     <p>
-                                        <div class="btn red tooltips" data-placement="left" data-original-title="恢复最新保存的方案">
-                                            <i class="icon-edit"></i> 撤销更改
+                                        <div class="btn " data-placement="left" data-original-title="恢复最新保存的方案">
+                                            <i class="icon-hand-left"></i> 撤销更改
                                         </div>
                                 </li>
 
                             <li id="resetStations"><p>
-                                <div class="btn red tooltips" data-placement="left" data-original-title="智能生成站点">
-                                    <i class="icon-edit"></i> 生成站点
+                                <div class="btn purple tooltips" data-placement="left" data-original-title="智能生成站点">
+                                    <i class="icon-edit"></i> 重置站点
                                 </div>
                             </li>
                         </ul>
@@ -629,10 +630,10 @@
                                         <div style="width:100%;height:580px;border:#ccc solid 0px;" id="dituContent"></div>
                                     </div>
                                     <div id="routeEdit" style="min-height: 400px;overflow: auto">
-                                        <a class="btn mini red tooltips" onclick="saveRoute()" data-placement="top" data-original-title="保存">
-                                            <i class="icon-save"></i></a>
-                                        <a class="btn mini green tooltips" id="gritter-help" data-placement="top" data-original-title="帮助">
-                                            <i class="icon-bookmark"></i></a>
+                                        <a class="btn  red " onclick="saveRoute()" data-placement="top" data-original-title="保存">
+                                            <i class="icon-save"></i> 保存</a>
+                                        <a class="btn  green " id="gritter-help" data-placement="top" data-original-title="帮助">
+                                            <i class="icon-bookmark"></i> 帮助</a>
                                         <section style="width: 100%; height: 100%">
                                             <div class="gridster" id="grid">
                                                 <ul id="blocks"></ul>
@@ -870,6 +871,7 @@
     <!-- END PAGE -->
     <!-- END CONTAINER -->
     </div>
+
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
