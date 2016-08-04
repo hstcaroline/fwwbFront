@@ -68,3 +68,6 @@ function formatStatus(status){
     return "不可用";
 
 }
+//function setHeader(xhr){
+//    xhr.setRequestHeader('Set-Cookie', window.localStorage.getItem("userId"));
+//}

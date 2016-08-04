@@ -150,8 +150,8 @@
 <script>
     var startTime;
     window.onload = function () {
-        var driverId = $.cookie('userId');
-        alert(driverId);
+        var driverId = localStorage.getItem("userId");//获取b的值
+//        var driverId = $.cookie('userId');
         $('#menu_header').show();
         $('#menu_section').show();
         getWeekNum(1, 7, 'weekStartTime', 'weekEndTime');
@@ -168,6 +168,7 @@
             data: postData,
             dataType: 'json',
             contentType: "application/json",
+//            beforeSend:setHeader(xhr),
             success: function (driver) {
                 if (driver != null) {
                     // alert(driver);

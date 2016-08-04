@@ -41,7 +41,7 @@
             <div class="controls">
                 <div class="input-icon left">
                     <i class="icon-user"></i>
-                    <input class="m-wrap" type="text" placeholder="用户名" id="username" value="SH02256">
+                    <input class="m-wrap" type="text" placeholder="用户名" id="username" value="SH02929">
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="controls">
                 <div class="input-icon left">
                     <i class="icon-lock"></i>
-                    <input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" id="password">
+                    <input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" id="password" value="000000">
                 </div>
             </div>
         </div>
@@ -119,7 +119,9 @@
                 contentType: "application/json",
                 success: function (user) {
                     if (user != "") {
-                        $.cookie('userId',user.id,{expires: 7, path: '/'});
+//                        $.cookie('userId',user.id,{expires: 7, path: '/'});
+//                        localStorage.removeItem("userId");//清除userId的值
+                        window.localStorage.setItem("userId", user.id);
                         location.href='index.html';
                     }
                     else {

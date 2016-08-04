@@ -37,6 +37,7 @@
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" href="css/mocha.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/test.css">
     <link rel="stylesheet" href="css/slideout.css">
     <link rel="stylesheet" href="css/myStyle.css">
@@ -89,16 +90,16 @@
     </div>
     <div class="content">
         <div class="headImg">
-            <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
+            <a id="editImg" class="edit"><i class="icon-edit"></i> 编辑</a>
             <div id="editText" style="display: none;">
 
-                <a class="btn cancel" href="javascript:location.reload();">
-                    <i class="cancelImg"></i>
-                    <span style="color: red;font-size: 22px;">取消</span>
+                <a class=" cancel" href="javascript:location.reload();">
+                    <i class="icon-remove-sign"></i>
+                     取消
                 </a>
-                <a class="btn save" href="javascript:location.reload();">
-                    <i class="saveImg"></i>
-                    <span style="color: #3498db;font-size: 22px;">保存</span>
+                <a class=" save" href="javascript:location.reload();">
+                    <i class=" icon-ok-circle"></i>
+                     保存
                 </a>
 
 
@@ -188,7 +189,7 @@
 <script src="js/test.js"></script>
 <script>
     window.onload = function () {
-        var userId = $.cookie('userId');
+        var userId = localStorage.getItem("userId");//获取b的值
         $('#menu_header').show();
         $('#menu_section').show();
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
