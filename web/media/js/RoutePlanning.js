@@ -157,8 +157,8 @@ function addMarker(Arr) {
 function createInfoWindow(Arr, i) {
     var json = Arr[i];
     var title = {title: '<span style="font-size:14px;color:#0A8021">' + json.title + '</span>'};
-    var iw = new BMap.InfoWindow('<b>姓名:</b>' + '**' + '</br><b>电话:</b>' + '**'
-        + '</br><b>诚信值:</b>' + '**' + '</br>' + '<div style="line-height:1.8em;font-size:12px;"><b>描述:</b>***</br>'
+    var iw = new BMap.InfoWindow('<b>站名:</b>' + json.title + '</br><b>站点人数:</b>' + json.num
+        + '</br><b>地址:</b>' + json.content + '</br>' + '<div style="line-height:1.8em;font-size:12px;"><b>经纬度坐标:</b>'+json.point+'</br>'
         + '</br><b><a class="btn blue" style="float:left;margin-left:15px;" href="#" /><i class="icon-edit"></i> 编辑</a>'
         + '</span><a href="#" class="btn red" style="float:left;margin-left:35px;" ><i class="icon-trash"> 删除</i></a>', title)
     ;

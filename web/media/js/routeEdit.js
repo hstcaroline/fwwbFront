@@ -137,7 +137,7 @@ map.addEventListener('zoomend', function(type,target){
     var overlays=map.getOverlays();
     var zoom=map.getZoom();
     if(zoom<11) map.setZoom(11);
-    if(zoom>15) map.setZoom(15);
+    if(zoom>16) map.setZoom(16);
     for(var i=0;i<overlays.length;i++){
         if(overlays[i].type==1){
             var icon=createIcon({w:(zoom-8)*5,h:(zoom-8)*5,l:0,t:0,x:6,lb:5},1);
@@ -454,10 +454,12 @@ function saveRoute() {
     $.ajax({
         type: 'POST',
         url: ip+'/users/changeRouteByTime',
+        //url: 'http://127.0.0.1:3000/users/changeRouteByTime',
         data: da,
         contentType: "application/json",
         async : true,
         success: function (data) {
+            console.log(data);
             $.gritter.add({
                 title: '<b style="color: #cf4749;">保存成功！</b>',
                 text:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路线数据已成功同步到数据库。正在刷新地图...可点击<b style="color: #cf4749;">生成站点</b>按钮撤销全部更改，重新生成站点'
@@ -490,7 +492,8 @@ function refreshMap(ifRefreshMarker){
             var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
             route[i].push(point.pos);
             if(ifRefreshMarker){
-                var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+                //var string="地址: "+station.address+"<br> 站点人数: "+station.num;
+                var marker = [{title:station.name,content:station.address,num:station.num,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
                 stationArr.push(point);
                 addMarker(marker);
             }
@@ -577,14 +580,16 @@ function routePlanning(arg_0){
 
 var routewaitBartotal=0;
 var routewaitBarnum=0;
+var routewaitJoke=0;
 
 function waitBarFinish(num)
 {    
     routewaitBarnum+=num;
-    console.log(routewaitBarnum);    
-    var temRate = parseInt(routewaitBarnum/routewaitBartotal*100);
+    console.log(routewaitBarnum);
+    var temRate = parseInt(routewaitBarnum/(routewaitBartotal+routewaitJoke)*100);
+    //console.log(document.createElement("routewaitBar").style.getPropertyValue());
+    //document.createElement("routewaitBar").style.width=temRate+'%';
     $("#routewaitBar").css('width', temRate+'%');
-    alert("haha");
     if(temRate>=99) $("#route-generate").modal('hide');
 }
 
@@ -602,7 +607,7 @@ $('#route-generate').on('shown.bs.modal', function () {
         return;
     }
     routewaitBarnum=0;
-    routewaitBartotal=num;
+    routewaitBartotal=1.5*num;
     routes.map(function(troute){
         route=[];
         route.push(COMPANYADDR);
@@ -611,10 +616,16 @@ $('#route-generate').on('shown.bs.modal', function () {
             var pos = station.posx + "|" + station.posy;
             var point = {id:station.id,pos:new BMap.Point(station.posx,station.posy),name:station.name,address:station.address,num:station.num,time:station.time};
             route.push(point.pos);
-            var marker = [{title:station.name,content:station.address,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
+            //var string="地址: "+station.address+"<br> 站点人数: "+station.num;
+            var marker = [{title:station.name,content:station.address,num:station.num,point:pos,isOpen:0,icon:{w:(map.getZoom()-8)*5,h:(map.getZoom()-8)*5,l:0,t:0,x:6,lb:5},id:station.id,type:1}];
             stationArr.push(point);
             addMarker(marker);
         }
+        routewaitBarnum+=0.5;
+        console.log(routewaitBarnum);
+        //var temRate = parseInt(routewaitBarnum/(routewaitBartotal)*100);
+        //document.createElement("routewaitBar").style.width=temRate+'%';
+        $("#routewaitBar").css('width', temRate+'%');
         createRoute(route,troute.route.id);
     })
     /*for(var i=0;i<routes.length;i++){
@@ -644,7 +655,7 @@ $('#route-generate').on('shown.bs.modal', function () {
             }
         }
     }
-    //$("#route-generate").modal('hide');
+    $("#route-generate").modal('hide');
 })
 
 function reload() {    
