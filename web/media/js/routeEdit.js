@@ -219,6 +219,7 @@ function MarkerRightClickHandler(marker,iw){
             }
         };
     };
+    //button_2.onclick=removeMarker;
     var markerMenu=new BMap.ContextMenu();
     markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
     markerMenu.addItem(new BMap.MenuItem('修改站点信息',updateMarker.bind(marker)));
@@ -623,7 +624,7 @@ $('#route-generate').on('shown.bs.modal', function () {
         }
         routewaitBarnum+=0.5;
         console.log(routewaitBarnum);
-        //var temRate = parseInt(routewaitBarnum/(routewaitBartotal)*100);
+        var temRate = parseInt(routewaitBarnum/(routewaitBartotal)*100);
         //document.createElement("routewaitBar").style.width=temRate+'%';
         $("#routewaitBar").css('width', temRate+'%');
         createRoute(route,troute.route.id);
