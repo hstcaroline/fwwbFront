@@ -671,15 +671,19 @@
 
 <!--导出为csv文件-->
 <script src="media/js/toExcel.js"></script>
+<script src="javascripts/jquery.callback.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
 
 
 <script type="text/javascript">
 
+    $("#waiting").modal();
+
     $(document).ready(function () {
+
+
         App.init();
-        $("#waiting").modal();
-        $("waitBar").css('width', '23%');
+
         var workTimeRefer = new Array();
         var infoTable = $("#infoTable").DataTable();
         infoTable.init();
@@ -705,29 +709,46 @@
             data: null,
             dataType: 'json',
             success: function(staffList){
-
-                for(var i=0;i<staffList.length;i++){
-                    var temRate = parseInt((i+1)/staffList.length*100);
+                function addElement(element, temRate){
                     $("#waitBar").css('width', temRate+'%');
-                    alert('haha');
                     var temArr = new Array();
-                    temArr[0] = staffList[i].id;
-                    temArr[1] = staffList[i].job_number;
-                    temArr[2] = staffList[i].name;
-                    temArr[3] = staffList[i].sex;
-                    temArr[4] = staffList[i].age;
-                    temArr[5] = staffList[i].phone;
-                    temArr[6] = staffList[i].department;
-                    temArr[8] = workTimeRefer[parseInt(staffList[i].work_time)];
-                    temArr[7] = staffList[i].classes;
-                    temArr[9] = staffList[i].address;
-                    temArr[10] = "<a onclick=\"staffEdit("+staffList[i].id+")\">编辑</a>";
+                    temArr[0] = element.id;
+                    temArr[1] = element.job_number;
+                    temArr[2] = element.name;
+                    temArr[3] = element.sex;
+                    temArr[4] = element.age;
+                    temArr[5] = element.phone;
+                    temArr[6] = element.department;
+                    temArr[8] = workTimeRefer[parseInt(element.work_time)];
+                    temArr[7] = element.classes;
+                    temArr[9] = element.address;
+                    temArr[10] = "<a onclick=\"staffEdit("+element.id+")\">编辑</a>";
                     temArr[11] = "<a class=\"remove\">删除</a>";
                     infoTable.fnAddData(temArr);
-
-
-                }
-                //$("#waitBar").css('width', '100%');
+                };
+                $.addCallback('css', function(para1, para2, element){
+                    alert();
+                    var temArr = new Array();
+                    temArr[0] = element.id;
+                    temArr[1] = element.job_number;
+                    temArr[2] = element.name;
+                    temArr[3] = element.sex;
+                    temArr[4] = element.age;
+                    temArr[5] = element.phone;
+                    temArr[6] = element.department;
+                    temArr[8] = workTimeRefer[parseInt(element.work_time)];
+                    temArr[7] = element.classes;
+                    temArr[9] = element.address;
+                    temArr[10] = "<a onclick=\"staffEdit("+element.id+")\">编辑</a>";
+                    temArr[11] = "<a class=\"remove\">删除</a>";
+                    infoTable.fnAddData(temArr);
+                });
+                staffList.map(function(element, index){
+                    var temRate = parseInt((index+1)/staffList.length*100);
+                    console.log(temRate);
+                    $("#waitBar").css('width', temRate+'%', element);
+                    //addElement(element, temRate);
+                });
                 $("#waiting").modal('hide');
             }
         });
@@ -834,7 +855,7 @@
                 var infoTable = $("#infoTable").DataTable();
                 temArr[0] = data.id;
                 temArr[1] = temStaff.job_number;
-                temArr[2] = temStaff.name
+                temArr[2] = temStaff.name;
                 temArr[3] = temStaff.sex;
                 temArr[4] = temStaff.age;
                 temArr[5] = temStaff.phone;
