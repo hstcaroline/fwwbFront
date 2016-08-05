@@ -237,13 +237,14 @@ function editStation(stationId) {
     var index = indexOf(stationId, stationMarkerArr);
     var stationIndex = indexOf(stationId, stationArr);
     if (stationIndex == -1 || index == -1) {
+        alert("没有当前站点或者marker");
         return;
     }
     var currMarker = stationMarkerArr[index];
     var currStation = stationArr[stationIndex];
 
     var label = currMarker.getLabel();
-    txt_title.value = label.getContent();
+    txt_title.value = currStation.name;
     txt_content.value = currStation.address;
     $("#portlet-update").modal('show');
     ok_2.onclick = function () {

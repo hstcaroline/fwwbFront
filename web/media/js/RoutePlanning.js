@@ -60,6 +60,8 @@ function initMap() {
     home.setIcon(icon);
     home.disableMassClear();
     map.addOverlay(home);
+    map.setMapStyle({style:'grayscale'});
+
 }
 
 //创建地图函数
