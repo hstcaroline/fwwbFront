@@ -60,6 +60,8 @@ function initMap() {
     home.setIcon(icon);
     home.disableMassClear();
     map.addOverlay(home);
+    var label = new BMap.Label("公司",{offset:new BMap.Size(40,-5)});
+    home.setLabel(label);
     map.setMapStyle({style:'grayscale'});
 
 }
