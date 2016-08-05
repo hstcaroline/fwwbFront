@@ -228,6 +228,7 @@ function createRoute(markers,routeID) {//markers是一个Point数组
             enableDragging: true
         },
         onSearchComplete: function(results){
+            console.log(1);
             if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
                 var color = COLOR[(routeId%COLOR.length)];
                 var plan = driving.getResults().getPlan(0);
@@ -374,7 +375,7 @@ function parseSimplePointArr(points) {
 //    }]
 //}];
 //var block_data = [14, 13, 13, 3, 3, 13, 3, 15, 6, 7, 8, 9, 14, 17];
-var COMPANYADDR = new BMap.Point(121.47373,31.217665);
+var COMPANYADDR = new BMap.Point(121.438328,31.023632);
 var routes = [];
 var UNSAVEDCOLOR = "#333333";
 var COLOR = ["#537082", "#FF9900", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];

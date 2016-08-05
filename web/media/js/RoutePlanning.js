@@ -225,12 +225,20 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                 for (var i = 0; i < num; i++) {
                     var pts = plan.getRoute(i).getPath(); //通过驾车实例，获得一系列点的数组
                     //console.log(pts);
+                    var polyline1=new BMap.Polyline(pts, {strokeColor: "#000000", strokeWeight: 10, strokeOpacity: 0.9});
+                    polyline1.type = 2;
+                    polyline1.routeId = routeId;
+                    map.addOverlay(polyline1);
+                    var polyline2=new BMap.Polyline(pts, {strokeColor: "#FFFFFF", strokeWeight: 8, strokeOpacity: 0.9});
+                    polyline2.type = 2;
+                    polyline2.routeId = routeId;
+                    map.addOverlay(polyline2);
                     var polyline = new BMap.Polyline(pts, {strokeColor: color, strokeWeight: 6, strokeOpacity: 0.9});
                     polyline.type = 2;
                     polyline.routeId = routeId;
                     polyline.label = label;
                     polyline.mark = new BMap.Marker(pts[0]);
-                    var icon = polyline.mark.getIcon();
+                    var icon = polyline.mark.getIcon(); 
                     icon.setImageSize(new BMap.Size(0, 0))
                     //polyline.mark.hide();
                     map.addOverlay(polyline.mark);
@@ -242,7 +250,7 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                         for (var i = 0; i < allOverlay.length; i++) {
                             if (allOverlay[i].type == 2) {
                                 if (allOverlay[i].routeId == polyline.routeId) {
-                                    allOverlay[i].setStrokeWeight(10);
+                                    allOverlay[i].setStrokeWeight(allOverlay[i].getStrokeWeight()*1.5);
                                 }
                             }
                         }
@@ -253,7 +261,7 @@ function createRoute(markers, routeID) { //markers是一个Point数组
                         for (var i = 0; i < allOverlay.length; i++) {
                             if (allOverlay[i].type == 2) {
                                 if (allOverlay[i].routeId == polyline.routeId) {
-                                    allOverlay[i].setStrokeWeight(6);
+                                    allOverlay[i].setStrokeWeight(allOverlay[i].getStrokeWeight()/1.5);
                                 }
                             }
                         }
