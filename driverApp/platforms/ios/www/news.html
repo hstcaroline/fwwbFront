@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <title>Hello World</title>
+</head>
+<body>
+
+
+<div class="header">
+    <div class="back">
+        <i class="icon-angle-left" id="backBtn"><span>&nbsp;返回</span></i>
+    </div>
+    <div style="height: 100%;width:70%;float: right">
+        <span class="text-center">公司动态</span>
+    </div>
+</div>
+<div class="mainContainer">
+    <div class="news">
+        <ul class="list" id="thelist">
+            <li>
+                <div class="f_c">
+                    <div class="date"><span class="month">07月</span><span class="day">20</span></div>
+                    <a class="title">中国CEO项目融资实战路演（第十七届）顺利举办</a></div>
+                <div class="f_c"><a class="f_l"><img
+                        src="img/news/news5.jpg"></a>
+                    <p>2016年7月17日下午，上海交通大学安泰经济与管理学院（以下简称交大安泰）中国CEO项目融资实战路...</p></div>
+            </li>
+            <li>
+                <div class="f_c">
+                    <div class="date"><span class="month">07月</span><span class="day">20</span></div>
+                    <a  class="title">中国CEO高级研修班（CEO39期&amp;私募17期）顺利结业</a></div>
+                <div class="f_c"><a class="f_l"><img
+                        src="img/news/news1.jpg"></a>
+                    <p>2016年7月17日，上海交通大学安泰经济与管理学院中国CEO创新管理高级研修班（第39期）和中国CEO...</p></div>
+            </li>
+            <li>
+                <div class="f_c">
+                    <div class="date"><span class="month">07月</span><span class="day">15</span></div>
+                    <a  class="title">嘉华国际集团有限公司“新经济环境下房地产趋势分析与...</a></div>
+                <div class="f_c"><a  class="f_l"><img
+                        src="img/news/news2.jpg"></a>
+                    <p>2016年7月13日，嘉华国际集团有限公司“新经济环境下房地产趋势分析与战略思考” 专题研修班开学...</p></div>
+            </li>
+            <li>
+                <div class="f_c">
+                    <div class="date"><span class="month">07月</span><span class="day">06</span></div>
+                    <a class="title">校友活动：走进七牛云和沪江，探寻企业创新经营之道</a></div>
+                <div class="f_c"><a class="f_l"><img
+                        src="img/news/news3.jpg"></a>
+                    <p>无论是在互联网领域还是传统行业，都已经进入到一个云和大数据的时代，在互联网大数据时代，企业...</p></div>
+            </li>
+            <li>
+                <div class="f_c">
+                    <div class="date"><span class="month">07月</span><span class="day">05</span></div>
+                    <a class="title">聆听智者，醇享人生</a></div>
+                <div class="f_c"><a  class="f_l"><img
+                        src="img/news/news4.jpeg"></a>
+                    <p>6月28日下午，尽管大雨磅礴，尽管路途拥堵，A300报告厅内仍座无虚席。交大安泰携手约珥传媒、钜...</p></div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script>
+    window.onload = function () {
+//        $.ajax({
+//            url: 'http://192.168.1.4:3000/users/getDriver',
+//            type: 'POST',
+//            async: false,
+//            data: {'id': userId},
+//            dataType: 'json',
+//            success: function (driver) {
+//                if (driver != null) {
+//                    $("#inputName").val(driver.name);
+//                    $("#inputPhone").val(driver.phone);
+//                    $("#inputAddr").val(driver.address);
+//                    $("#inputClasses").val(driver.classes);
+//                    $("#inputJobNum").val(driver.job_number);
+//                    $("#inputDepart").val(driver.department);
+//                    $("#inputTeam").val(driver.team);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
+    };
+</script>
+<script type="text/javascript">
+    $("#backBtn").click(function () {
+        javascript:history.back(-1);
+    });
+
+</script>

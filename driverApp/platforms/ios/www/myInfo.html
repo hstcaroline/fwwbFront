@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--<meta http-equiv="Content-Security-Policy"-->
+    <!--content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/mocha.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/slideout.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <title>Hello World</title>
+</head>
+<body>
+
+<nav id="menu" class="menu">
+    <div class="menu_header" id="menu_header" style="display: none;">
+        <div class="imgDiv">
+            <img src="img/head.png" class="img-circle" style="width: 25%">
+            <span class="nameText">常旅客</span>
+        </div>
+    </div>
+    <section class="menu-section" id="menu_section" style="display: none;">
+        <ul class="menu-section-list">
+            <li id="myInfo" onclick="menuClick(this.id)">
+                <img src="img/icon-info.png" class="menu-icon">
+                <span class="menu-span">我的资料</span>
+            </li>
+            <li id="myCar" onclick="menuClick(this.id)">
+                <img src="img/icon-drive.png" class="menu-icon">
+                <span class="menu-span">我的车辆</span>
+            </li>
+            <li id="myCash" onclick="menuClick(this.id)">
+                <img src="img/icon-cash.png" class="menu-icon">
+                <span class="menu-span">我的工资</span>
+            </li>
+            <li id="myMsg" onclick="menuClick(this.id)">
+                <img src="img/icon-message.png" class="menu-icon">
+                <span class="menu-span">我的消息</span>
+            </li>
+            <li id="news" onclick="menuClick(this.id)">
+                <img src="img/icon-news.png" class="menu-icon">
+                <span class="menu-span">公司动态</span>
+            </li>
+        </ul>
+    </section>
+</nav>
+
+<main id="panel" style="height: 100%">
+
+    <div class="header">
+        <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+            <img src="img/head.png" class="img-circle img-head js-slideout-toggle">
+        </div>
+        <div style="height: 100%;width:70%;float: right">
+            <span class="text-center">我的资料</span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="headImg">
+            <a id="editImg" class="edit"><i class="icon-edit"></i> 编辑</a>
+            <div id="editText" style="display: none;">
+
+                <a class=" cancel" href="javascript:location.reload();">
+                    <i class="icon-remove-sign"></i>
+                     取消
+                </a>
+                <a class=" save" href="javascript:location.reload();">
+                    <i class=" icon-ok-circle"></i>
+                     保存
+                </a>
+
+
+                <!--<a class="saveText" href="#">保存</a>-->
+            </div>
+        </div>
+        <div class="table-responsive" style="border: 0px">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td><span>姓名:</span></td>
+                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
+                </tr>
+                <tr>
+                    <td><span>电话:</span></td>
+                    <td><input id="inputPhone" type="text" class="form-control" value="18200302934"></td>
+                </tr>
+                <tr>
+                    <td><span>住址:</span></td>
+                    <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
+                </tr>
+                <tr>
+                    <td><span>班次:</span></td>
+                    <td><input id="inputClasses" type="text" class="form-control" value="班次A"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="space">
+        </div>
+        <div class="table-responsive" style="border: 0px">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td><span>工号:</span></td>
+                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="G233">
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>部门:</span></td>
+                    <td><input id="inputDepart" type="text" class="form-control" value="维修部"></td>
+                </tr>
+                <tr>
+                    <td><span>组别:</span></td>
+                    <td><input id="inputTeam" type="text" class="form-control" value="A组"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="space">
+        </div>
+    </div>
+    <div class="footer">
+        <ul class="nav nav-tabs" style="height: 100%">
+            <li>
+                <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                       src="img/icon_location_normal.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon_user_checked.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon-readCard-normal.png"/></a>
+            </li>
+
+        </ul>
+    </div>
+</main>
+
+<!--<div class="app">-->
+<!--<h1>Apache Cordova</h1>-->
+<!--<div id="deviceready" class="blink">-->
+<!--<p class="event listening">Connecting to Device</p>-->
+<!--<p class="event received">Device is Ready</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--<script type="text/javascript" src="cordova.js"></script>-->
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="js/slideout.js"></script>
+<script src="js/myJs.js"></script>
+<script src="js/test.js"></script>
+<script>
+    window.onload = function () {
+        var userId = localStorage.getItem("userId");//获取b的值
+        $('#menu_header').show();
+        $('#menu_section').show();
+        document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
+            slideout.toggle();
+        });
+        $.ajax({
+            url: ip+'users/getDriver',
+            type: 'POST',
+            async: false,
+            data: {'id': userId},
+            dataType: 'json',
+            success: function (driver) {
+                if (driver != null) {
+                    $("#inputName").val(driver.name);
+                    $("#inputPhone").val(driver.phone);
+                    $("#inputAddr").val(driver.address);
+                    $("#inputClasses").val(driver.classes);
+                    $("#inputJobNum").val(driver.job_number);
+                    $("#inputDepart").val(driver.department);
+                    $("#inputTeam").val(driver.team);
+                }
+                else {
+                    alert('链接失败');
+                }
+            },
+            error: function (xhr, type, exception) {
+                alert(type);
+            }
+        });
+    };
+</script>
+<script type="text/javascript">
+    $("#editImg").click(function () {
+        $("#editImg").hide();
+        $("#editText").show();
+        $("#inputName").focus();
+    });
+</script>

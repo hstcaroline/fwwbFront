@@ -1,0 +1,28 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "com.chariotsolutions.nfc.plugin": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        }
+    },
+    "dependent_plugins": {
+        "com.blackberry.invoke": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        },
+        "org.apache.cordova.vibration": {
+            "PACKAGE_NAME": "com.megster.nfc.reader"
+        }
+    }
+}

@@ -40,12 +40,6 @@
 </head>
 <body>
 
-
-<!-- <div>
-    <button>haha</button>
-    <button>hehe</button>
-</div> -->
-
 <div id="dituContent"></div>
 <div class="buttom-button " id="startDiv">
     <div class="center-block" >
@@ -82,6 +76,8 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+
+
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/buttons.js"></script>
 </body>
@@ -99,7 +95,12 @@
         if (r != null) return unescape(r[2]);
         return null; //返回参数值
     }
-    var routeId = getUrlParam("routeId");
+    var resRoutes = null;
+    var stationLen = null;
+    var curPolyline = null;
+    //var routeId = getUrlParam('routeId');
+    var routeId = window.localStorage.getItem('routeId');
+
     var map = new BMap.Map("dituContent", {enableMapClick: false});    // 创建Map实例
     map.centerAndZoom(new BMap.Point(121.48187, 31.240698), 14);  // 初始化地图,设置中心点坐标和地图级别
 
@@ -117,6 +118,7 @@
             success: function (data) {
                 console.log(data);
                 var len = data.stations.length;
+                stationLen = len;
                 var transit = new BMap.DrivingRoute(map, {
                     renderOptions: {
                         map: null,
@@ -126,6 +128,7 @@
 
                         if (transit.getStatus() == BMAP_STATUS_SUCCESS) {
                             console.log('search ok');
+                            resRoutes = results.getPlan(0);
                             var pts = new Array();
                             for (var i = 0; i < len - 1; i++) {
                                 var temPts = results.getPlan(0).getRoute(i).getPath();
@@ -133,29 +136,47 @@
                                     pts = pts.concat(temPts);
                                 }
                             }
-                            //var pts = results.getPlan(0).getRoute(1).getPath();
-                            var temColor = "#000000";
-                            console.log(pts.length);
-                            for (var i = 0; i < pts.length; i++) {
-                                var temPts = new Array();
-                                for (var j = 0; j < 15 && i < pts.length; j++) {
-                                    temPts.push(pts[i]);
-                                    i++;
-                                }
-                                if (temColor == "#0088FF") {
-                                    temColor = "#000000";
-                                } else {
-                                    temColor = "#0088FF";
-                                }
-                                var temPolyline = new BMap.Polyline(temPts, {
-                                    strokeColor: temColor,
-                                    strokeWeight: 8,
-                                    strokeOpacity: 0.9
-                                });
-                                map.addOverlay(temPolyline);
-                            }
+                            var temPolyline0 = new BMap.Polyline(pts, {
+                                strokeColor: "#000000",
+                                strokeWeight: 10,
+                                strokeOpacity: 0.9
+                            });
+                            var temPolyline = new BMap.Polyline(pts, {
+                                strokeColor: "#FFFFFF",
+                                strokeWeight: 8,
+                                strokeOpacity: 0.9
+                            });
+                            curPolyline = new BMap.Polyline(pts, {
+                                strokeColor: "#67AB86",
+                                strokeWeight: 6,
+                                strokeOpacity: 1.0
+                            });
+                            map.addOverlay(temPolyline0);
+                            map.addOverlay(temPolyline);
+                            map.addOverlay(curPolyline);
                             var centerPoint = new BMap.Point(data.stations[len / 2].posx, data.stations[len / 2].posy);
                             map.centerAndZoom(centerPoint, 12);
+                        }
+                        if(window.localStorage.getItem('onRoute')=='true'){
+                            console.log('on run');
+                            $("#startDiv").hide();
+                            $("#goDiv").fadeIn();
+                            map.removeOverlay(curPolyline);
+                            curStationIndex = window.localStorage.getItem('curStation');
+                            console.log(curStationIndex);
+                            var pts = new Array();
+                            for(var i=0;i<=curStationIndex-1;i++){
+                                var temPts = resRoutes.getRoute(i).getPath();
+                                if (temPts != null) {
+                                    pts = pts.concat(temPts);
+                                }
+                            }
+                            curPolyline = new BMap.Polyline(pts, {
+                                strokeColor: "#67AB86",
+                                strokeWeight: 6,
+                                strokeOpacity: 1.0
+                            });
+                            map.addOverlay(curPolyline);
                         }
                     }
                 });
@@ -166,27 +187,49 @@
                 endIcon.setSize(new BMap.Size(170, 246));
                 endIcon.setImageSize(new BMap.Size(40, 60));
                 var startPoint = new BMap.Point(data.stations[0].posx, data.stations[0].posy);
-                map.addOverlay(new BMap.Marker(startPoint, {icon: startIcon}));
+                var startMarker = new BMap.Marker(startPoint, {icon: startIcon});
+                //map.addOverlay(new BMap.Marker(startPoint, {icon: startIcon}));
+
+                map.addOverlay(startMarker);
                 var endPoint = new BMap.Point(data.stations[len - 1].posx, data.stations[len - 1].posy);
                 map.addOverlay(new BMap.Marker(endPoint, {icon: endIcon}));
                 var wayStations = new Array();
                 for (var i = 1; i < len - 1; i++) {
                     var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
-                    map.addOverlay(new BMap.Marker(temPoint));
+                    var temMarker = new BMap.Marker(temPoint);
+                    map.addOverlay(temMarker);
                     wayStations.push(temPoint);
                 }
                 transit.search(startPoint, endPoint, {waypoints: wayStations});
-                //transit.search(startPoint, endPoint);
             }
         });
     }
     $("#nextStation").click(function () {
         console.log("to next station");
-        if (stations.length > curStationIndex + 1) {
+        if (stationLen > curStationIndex + 1) {
+            map.removeOverlay(curPolyline);
             curStationIndex++;
+            window.localStorage.setItem('curStation', curStationIndex);
+            console.log(curStationIndex);
+            var pts = new Array();
+            for(var i=0;i<=curStationIndex-1;i++){
+                var temPts = resRoutes.getRoute(i).getPath();
+                if (temPts != null) {
+                    pts = pts.concat(temPts);
+                }
+            }
+            curPolyline = new BMap.Polyline(pts, {
+                strokeColor: "#67AB86",
+                strokeWeight: 6,
+                strokeOpacity: 1.0
+            });
+            map.addOverlay(curPolyline);
+            window.location.href = 'nfcScan.html';
         }
     });
     $("#startRoute").click(function () {
+        map.removeOverlay(curPolyline);
+
         $.ajax({
             url: IP + '/startDrive',
             type: 'post',
@@ -199,8 +242,10 @@
                 $("#goDiv").fadeIn();
             }
         });
-        if (stations.length != 0) {
+        if (stationLen != 0) {
             curStationIndex = 0;
+            window.localStorage.setItem('curStation', curStationIndex);
+            window.localStorage.setItem('onRoute', true);
             posPushTimer = window.setInterval(pushPosition, 1000);
         }
         posPushTimer = window.setInterval(pushPosition, 10000);
@@ -219,6 +264,8 @@
             }
         });
         window.clearInterval(posPushTimer);
+        window.localStorage.setItem('onRoute', false);
+        window.location.href = 'mySchedule.html';
     });
     function pushPosition() {
         var geolocation = new BMap.Geolocation();

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--<meta http-equiv="Content-Security-Policy"-->
+    <!--content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+    <link rel="stylesheet" type="text/css" href="css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    <!--引用百度地图API-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A6kDPfPmpBybz3hNXK0SVXo4U2PApye4"></script>
+    <script type="text/javascript" src="js/myJs.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+    <title>Hello World</title>
+    <style type="text/css">
+        body, html, #dituContent {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+</head>
+<body>
+
+<div id="dituContent"></div>
+<div class="buttom-button " id="startDiv">
+    <div class="center-block" >
+        <button class="button button-glow button-circle button-action button-jumbo" id="startRoute"
+                style="margin-top: 25px">开始</button>
+    </div>
+</div>
+<div class="buttom-button" id="goDiv">
+
+    <div class="center-block">
+        <button class="button button-glow button-circle button-action button-jumbo nextBtn" id="nextStation"
+                style="margin-right: 10px; margin-top: 25px">下一站
+        </button>
+        <button class="button  button-glow button-circle button-action button-jumbo endBtn" id="stopRoute"
+                style="margin-left:10px; margin-top: 25px">结束
+        </button>
+    </div>
+</div>
+<div class="footer">
+
+    <ul class="nav nav-tabs" style="height: 100%">
+        <li>
+            <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                   src="img/icon_location_checked.png"/></a>
+        </li>
+
+        <li id="footer_a2" onclick="footerClick(this.id)"><a> <img class="footer-img"
+                                                                   src="img/icon_user_normal.png"/></a></li>
+
+        <li id="footer_a3" onclick="footerClick(this.id)"><a> <img class="footer-img"
+                                                                   src="img/icon-readCard-normal.png"/></a></li>
+
+    </ul>
+</div>
+
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+
+
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/buttons.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+    $("#goDiv").hide();
+    // 百度地图API功能
+    var IP = ip+"drivingManager";
+    var curStationIndex = null;
+    var stations = new Array();
+    var posPushTimer = null;
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    var resRoutes = null;
+    var stationLen = null;
+    var curPolyline = null;
+    var routeId = getUrlParam('routeId');
+    //var routeId = window.localStorage.getItem('routeId');
+
+    var map = new BMap.Map("dituContent", {enableMapClick: false});    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(121.48187, 31.240698), 14);  // 初始化地图,设置中心点坐标和地图级别
+
+    map.enableScrollWheelZoom();     //开启鼠标滚轮缩放
+
+    if (routeId != null) {
+        console.log('ready');
+        $.ajax({
+            url: IP + '/getRouteById',
+            type: 'post',
+            data: {
+                id: routeId
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var len = data.stations.length;
+                stationLen = len;
+                var transit = new BMap.DrivingRoute(map, {
+                    renderOptions: {
+                        map: null,
+                        autoViewPort: true
+                    },
+                    onSearchComplete: function (results) {
+
+                        if (transit.getStatus() == BMAP_STATUS_SUCCESS) {
+                            console.log('search ok');
+                            resRoutes = results.getPlan(0);
+                            var pts = new Array();
+                            for (var i = 0; i < len - 1; i++) {
+                                var temPts = results.getPlan(0).getRoute(i).getPath();
+                                if (temPts != null) {
+                                    pts = pts.concat(temPts);
+                                }
+                            }
+                            var temPolyline0 = new BMap.Polyline(pts, {
+                                strokeColor: "#000000",
+                                strokeWeight: 10,
+                                strokeOpacity: 0.9
+                            });
+                            var temPolyline = new BMap.Polyline(pts, {
+                                strokeColor: "#FFFFFF",
+                                strokeWeight: 8,
+                                strokeOpacity: 0.9
+                            });
+                            curPolyline = new BMap.Polyline(pts, {
+                                strokeColor: "#67AB86",
+                                strokeWeight: 6,
+                                strokeOpacity: 1.0
+                            });
+                            map.addOverlay(temPolyline0);
+                            map.addOverlay(temPolyline);
+                            map.addOverlay(curPolyline);
+                            var centerPoint = new BMap.Point(data.stations[len / 2].posx, data.stations[len / 2].posy);
+                            map.centerAndZoom(centerPoint, 12);
+                        }
+                    }
+                });
+                var startIcon = new BMap.Icon('img/start.png', new BMap.Size(40, 120));
+                startIcon.setSize(new BMap.Size(170, 246));
+                startIcon.setImageSize(new BMap.Size(40, 60));
+                var endIcon = new BMap.Icon('img/end.png', new BMap.Size(40, 120));
+                endIcon.setSize(new BMap.Size(170, 246));
+                endIcon.setImageSize(new BMap.Size(40, 60));
+                var startPoint = new BMap.Point(data.stations[0].posx, data.stations[0].posy);
+                var startMarker = new BMap.Marker(startPoint, {icon: startIcon});
+                //map.addOverlay(new BMap.Marker(startPoint, {icon: startIcon}));
+
+                map.addOverlay(startMarker);
+                var endPoint = new BMap.Point(data.stations[len - 1].posx, data.stations[len - 1].posy);
+                map.addOverlay(new BMap.Marker(endPoint, {icon: endIcon}));
+                var wayStations = new Array();
+                for (var i = 1; i < len - 1; i++) {
+                    var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
+                    var temMarker = new BMap.Marker(temPoint);
+
+                    map.addOverlay(temMarker);
+                    wayStations.push(temPoint);
+                }
+                transit.search(startPoint, endPoint, {waypoints: wayStations});
+            }
+        });
+        if(window.localStorage.getItem('onRoute')==true){
+            map.removeOverlay(curPolyline);
+            curStationIndex = window.localStorage.getItem('curStation');
+            var pts = new Array();
+            for(var i=0;i<=curStationIndex-1;i++){
+                var temPts = resRoutes.getRoute(i).getPath();
+                if (temPts != null) {
+                    pts = pts.concat(temPts);
+                }
+            }
+            curPolyline = new BMap.Polyline(pts, {
+                strokeColor: "#67AB86",
+                strokeWeight: 6,
+                strokeOpacity: 1.0
+            });
+            map.addOverlay(curPolyline);
+        }
+    }
+    $("#nextStation").click(function () {
+        console.log("to next station");
+        if (stationLen > curStationIndex + 1) {
+            map.removeOverlay(curPolyline);
+            curStationIndex++;
+            window.localStorage.setItem('curStation', curStationIndex);
+            console.log(curStationIndex);
+            var pts = new Array();
+            for(var i=0;i<=curStationIndex-1;i++){
+                var temPts = resRoutes.getRoute(i).getPath();
+                if (temPts != null) {
+                    pts = pts.concat(temPts);
+                }
+            }
+            curPolyline = new BMap.Polyline(pts, {
+                strokeColor: "#67AB86",
+                strokeWeight: 6,
+                strokeOpacity: 1.0
+            });
+            map.addOverlay(curPolyline);
+        }
+    });
+    $("#startRoute").click(function () {
+        map.removeOverlay(curPolyline);
+
+        $.ajax({
+            url: IP + '/startDrive',
+            type: 'post',
+            data: {
+                routeId: routeId
+            },
+            success: function (data) {
+                console.log(data);
+                $("#startDiv").hide();
+                $("#goDiv").fadeIn();
+            }
+        });
+        if (stationLen != 0) {
+            curStationIndex = 0;
+            window.localStorage.setItem('curStation', curStationIndex);
+            window.localStorage.setItem('onRoute', true);
+            posPushTimer = window.setInterval(pushPosition, 1000);
+        }
+        posPushTimer = window.setInterval(pushPosition, 10000);
+    });
+
+    $("#stopRoute").click(function () {
+        console.log("stop route");
+        $.ajax({
+            url: IP + '/stopDrive',
+            type: 'post',
+            data: {
+                routeId: routeId
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+        window.clearInterval(posPushTimer);
+        window.localStorage.setItem('onRoute', false);
+        window.location.href = 'mySchedule.html';
+    });
+    function pushPosition() {
+        var geolocation = new BMap.Geolocation();
+        console.log('ready to push');
+        geolocation.getCurrentPosition(function (r) {
+            console.log(r);
+            $.ajax({
+                url: IP + '/pushPosition',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    routeId: routeId,
+                    point: {
+                        lng: r.point.lng,
+                        lat: r.point.lat
+                    }
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    }
+
+</script>

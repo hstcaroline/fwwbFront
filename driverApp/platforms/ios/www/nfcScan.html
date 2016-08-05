@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--<meta http-equiv="Content-Security-Policy"-->
+    <!--content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/mocha.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="css/slideout.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+
+</head>
+<body>
+
+<nav id="menu" class="menu" >
+    <div class="menu_header" id="menu_header" style="display: none;">
+        <div class="imgDiv">
+            <img src="img/head.png" class="img-circle" style="width: 25%">
+            <span class="nameText">常旅客</span>
+        </div>
+    </div>
+
+    <section class="menu-section" id="menu_section" style="display: none;">
+        <ul class="menu-section-list">
+            <li id="myInfo" onclick="menuClick(this.id)">
+                <img src="img/icon-info.png" class="menu-icon">
+                <span class="menu-span">我的资料</span>
+            </li>
+            <li id="myCar" onclick="menuClick(this.id)">
+                <img src="img/icon-drive.png" class="menu-icon">
+                <span class="menu-span">我的车辆</span>
+            </li>
+            <li id="myCash" onclick="menuClick(this.id)">
+                <img src="img/icon-cash.png" class="menu-icon">
+                <span class="menu-span">我的工资</span>
+            </li>
+            <li id="myMsg" onclick="menuClick(this.id)">
+                <img src="img/icon-message.png" class="menu-icon">
+                <span class="menu-span">我的消息</span>
+            </li>
+            <li id="news" onclick="menuClick(this.id)">
+                <img src="img/icon-news.png" class="menu-icon">
+                <span class="menu-span">公司动态</span>
+            </li>
+        </ul>
+    </section>
+</nav>
+<main id="panel" style="height: 100%;background-color: white">
+
+    <div class="header">
+        <div style="height: 100%;width:30%;margin-top: 2%;float: left">
+            <img src="img/head.png" class="img-circle img-head js-slideout-toggle">
+        </div>
+        <div style="height: 100%;width:70%;float: right">
+            <span class="text-center">上车刷卡</span>
+        </div>
+    </div>
+    <div class="content">
+        <div align="center" class="readCard" id="readCard">
+            <div style="width:80%;height:200px;border: 2px solid black">
+                <img src="img/swiping_card.png" style="padding-top: 5%">
+            </div>
+            <h2 class="text-danger" style="font-size: 40px">请刷卡!</h2>
+
+        </div>
+    </div>
+    <!-- <a class="btn btn-info" id="readCardBtn" onclick="showStaffInfo()">刷了</a> -->
+    <div class="dashboard-stat blue" id="staffInfo">
+        <div>
+            <img class="staff_headImg" src="img/staff_head.png">
+        </div>
+        <div class="details">
+            <div class="number">
+
+                工号:1349
+
+            </div>
+            <div class="desc">
+
+                <h4>姓名:李云</h4>
+                <h4>电话:18300293442</h4>
+                <h4>部门:维修部</h4>
+
+            </div>
+
+        </div>
+    </div>
+    <input id="scan_info" type="text" value="hello" style="width:500px">
+    <!-- <input id="map_info" type="text" value="hello" style="width:500px"> -->
+    </div>
+    <div class="footer">
+        <ul class="nav nav-tabs" style="height: 100%">
+            <li>
+                <a id="footer_a1" onclick="footerClick(this.id)"> <img id="footer_img1" class="footer-img"
+                                                                       src="img/icon_location_normal.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a2" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon_user_normal.png"/></a>
+            </li>
+
+            <li class=""><a id="footer_a3" onclick="footerClick(this.id)"> <img class="footer-img"
+                                                                                src="img/icon-readCard-checked.png"/></a>
+            </li>
+
+        </ul>
+    </div>
+</main>
+</body>
+</html>
+<script>
+
+</script>
+<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/handlebars.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/slideout.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/myJs.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/test.js"></script>
+<script>
+    window.onload = function () {
+        $('#menu_header').show();
+        $('#menu_section').show();
+
+        document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
+            slideout.toggle();
+        });
+    };
+</script>
+<script type="text/javascript">
+    //    $("#staffInfo").hide();
+    app.initialize();
+    //    var map = new BMap.Map("allmap");
+    //    var point = new BMap.Point(116.331398, 39.897445);
+    //    map.centerAndZoom(point, 12);
+    //    var geolocation = new BMap.Geolocation();
+    //    geolocation.getCurrentPosition(function (r) {
+    //        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+    //            var mk = new BMap.Marker(r.point);
+    //            map.addOverlay(mk);
+    //            map.panTo(r.point);
+    //            $("#map_info").val('您的位置：' + r.point.lng + ',' + r.point.lat);
+    //        }
+    //        else {
+    //            $("#map_info").val('failed' + this.getStatus());
+    //        }
+    //    }, {enableHighAccuracy: true});
+     $.ajax({
+         url: ip+"DriverApp/getStaffInfo",
+         type: 'post',
+         data: {
+             TagID: 123
+         },
+         dataType: 'json',
+         success: function (data) {
+             // $("#map_info").val(data);
+             $("#map_info").val(data.end);
+             console.log(data);
+         },
+         error: function (err) {
+             $("#map_info").val("error");
+         }
+     });
+</script>

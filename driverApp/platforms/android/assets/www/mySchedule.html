@@ -209,8 +209,11 @@
         }
     }
     function showInMap(routeId) {
-        $.cookie('routeId',routeId,{expires: 7, path: '/'});
-        window.location.href = 'index.html?routeId=' + routeId;
+        //$.cookie('routeId',routeId,{expires: 7, path: '/'});
+        window.localStorage.setItem('onRoute', false);
+        window.localStorage.setItem('routeId', routeId);
+        //window.location.href = 'index.html?routeId=' + routeId;
+        window.location.href = 'index.html';
     }
 </script>
 </body>
