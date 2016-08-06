@@ -190,26 +190,6 @@ function createIcon(json, type) {
     return icon;
 }
 
-//向地图中添加线函数
-function addPolyline(plPoints) {
-    for (var i = 0; i < plPoints.length; i++) {
-        var json = plPoints[i];
-        var points = [];
-        for (var j = 0; j < json.points.length; j++) {
-            var p1 = json.points[j].split("|")[0];
-            var p2 = json.points[j].split("|")[1];
-            points.push(new BMap.Point(p1, p2));
-        }
-        var line = new BMap.Polyline(points, {
-            strokeStyle: json.style,
-            strokeWeight: json.weight,
-            strokeColor: json.color,
-            strokeOpacity: json.opacity
-        });
-        map.addOverlay(line);
-    }
-}
-
 function createRoute(markers, routeID) { //markers是一个Point数组
     var routeId = parseInt(routeID);
     var label;
@@ -383,46 +363,6 @@ function indexOf(marker, arr) {
     return -1;
 }
 
-//点的转换 PA:PointsArray[{x,y}]
-//BMPA:BaiduMapPointsArray [{id,BMap.Point:{lng,lat}}]
-function PA2BMPA(points, ifNew) {
-    var pointsArr = [];
-    if (ifNew) {
-        for (var i = 0; i < points.length; i++) {
-            pointsArr[i] = [stationCount, new BMap.Point(points[i].x, points[i].y)];
-            stationCount++;
-        }
-    } else {
-        for (var i = 0; i < points.length; i++) {
-            pointsArr[i] = [i, new BMap.Point(points[i].x, points[i].y)];
-        }
-    }
-    return pointsArr;
-}
-
-function BMPA2PA(points) {
-    pointsArr = [];
-    for (var i = 0; i < points.length; i++) {
-        pointsArr[i] = {
-            "x": points[i][1].lng,
-            "y": points[i][1].lat
-        };
-    }
-    return pointsArr;
-}
-
-//清理某类覆盖物
-function clearOverlays(type) {
-    var allOverlay = map.getOverlays();
-    //console.log("overlay:"+allOverlay.length);
-    for (var i = 0; i < allOverlay.length; i++) {
-        //console.log(i+":"+allOverlay[i].type);
-        if (allOverlay[i].type == type) {
-            map.removeOverlay(allOverlay[i]);
-        }
-    }
-}
-
 //搜索功能：站点查询
 $(document).ready(function () {
     //Sample 2
@@ -436,15 +376,7 @@ $(document).ready(function () {
     });
 });
 //根据经纬度解析出地址
-/*
-function getAddByPos(point){
-    var geoc = new BMap.Geocoder();
-    geoc.getLocation(point, function(rs){
-        var addComp = rs.addressComponents;
-        var address =  addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
-       return address;
-    });
-}*/
+
 function getAddByPos(point,point2,marker,cb){
     var geoc = new BMap.Geocoder();
     geoc.getLocation(point, function(rs){
@@ -509,18 +441,6 @@ function changeHints() {
     for (var i = 0; i < routes.length; i++) {
         $('#routes_select2').append('<option><span style="font-size: 20px">' + routes[i].route.name + '</span></option>');
     }
-}
-
-function parseStationArr(points) {
-    var pointsArr = [];
-    for (var i = 0; i < points.length; i++) {
-        pointsArr[i].pos = new BMap.Point(points[i].x, points[i].y);
-        pointsArr[i].id = points[i].id;
-        pointsArr[i].name = points[i].name;
-        pointsArr[i].address = points[i].address;
-        pointsArr[i].num = points[i].num;
-    }
-    return pointsArr;
 }
 
 function parseSimplePointArr(points) {
