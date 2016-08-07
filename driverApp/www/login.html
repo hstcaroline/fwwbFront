@@ -121,6 +121,8 @@
                     if (user != "") {
 //                        $.cookie('userId',user.id,{expires: 7, path: '/'});
 //                        localStorage.removeItem("userId");//清除userId的值
+                        window.localStorage.setItem('onRoute', false);
+                        
                         window.localStorage.setItem("userId", user.id);
                         location.href='index.html';
                     }
