@@ -1,5 +1,5 @@
-var COLUMN = parseInt(document.getElementById("attri_value").value);
-
+var COLUMN = parseInt(document.getElementById("attri_column_value").value);
+var IGNORE =  parseInt(document.getElementById("attri_ignore_value").value);
 var TableEditable = function () {
 
     return {
@@ -20,40 +20,29 @@ var TableEditable = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                for( var i=0;i<COLUMN;i++){
+                for( var i=0;i<COLUMN-IGNORE;i++){
                     jqTds[i].innerHTML = '<input type="text" style="width:96%;" value="' + aData[i] + '">';
                 }
-                /*jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[3] + '">';*/
                 jqTds[COLUMN].innerHTML = '<a class="edit" href="">保存</a>';
                 jqTds[COLUMN+1].innerHTML = '<a class="cancel" href="">取消</a>';
             }
 
             function saveRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
-                for( var i=0;i<COLUMN;i++){
+                for( var i=0;i<COLUMN-IGNORE;i++){
                     oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
                 }
-                /*oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);*/
                 oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, COLUMN, false);
                 oTable.fnUpdate('<a class="delete" href="">删除</a>', nRow, COLUMN+1, false);
                 oTable.fnDraw();
+                //ajax 保存
             }
 
             function cancelEditRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
-                for( var i=0;i<COLUMN;i++){
+                for( var i=0;i<COLUMN-IGNORE;i++){
                     oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
                 }
-                /*oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);*/
                 oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, COLUMN, false);
                 oTable.fnDraw();
             }
@@ -115,7 +104,7 @@ var TableEditable = function () {
 
                 var nRow = $(this).parents('tr')[0];
                 oTable.fnDeleteRow(nRow);
-                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+                //alert("Deleted! Do not forget to do some ajax to sync with backend :)");
             });
 
             $('#sample_editable_1 a.cancel').live('click', function (e) {
@@ -144,7 +133,7 @@ var TableEditable = function () {
                     /* Editing this row and want to save it */
                     saveRow(oTable, nEditing);
                     nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
+                    //alert("Updated! Do not forget to do some ajax to sync with backend :)");
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);

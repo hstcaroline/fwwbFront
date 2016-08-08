@@ -207,25 +207,25 @@
                 <div class="sidebar-toggler hidden-phone"></div>
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
             </li>
-            <li class="start ">
+            <li class="start">
                 <a href="index.html">
                     <i class="icon-home"></i>
                     <span class="title">线路规划</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="start ">
+            <li class="start">
                 <a href="realTime.html">
                     <i class="icon-truck"></i>
                     <span class="title">运行状态</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="">
+            <li>
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
                     <span class="title">数据查询</span>
-                    <span class="arrow "></span>
+                    <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
@@ -237,8 +237,14 @@
                             乘车名单</a>
                     </li>
                     <li>
-                        <a href="reportForm.html">
-                            报表</a>
+                        <a href="javascript:;">
+                            报表
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="reportChart.html"><i class="icon-bar-chart"></i> 所有站点</a></li>
+                            <li><a href="stationReportChart.html"><i class="icon-truck"></i> 站点详情</a></li>
+                        </ul>
                     </li>
                 </ul>
             </li>
@@ -269,23 +275,25 @@
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="open">
+                    <li>
                         <a href="javascript:;">
                             角色管理
                             <span class="arrow"></span>
                         </a>
-                        <ul class="sub-menu" style="display: block">
+                        <ul class="sub-menu">
                             <li ><a href="role_create.html"><i class="icon-file-text-alt"></i> 创建角色</a></li>
-                            <li><a href="role_edit.html"><i class="icon-key"></i> 更改角色</a></li>
+                            <li><a href="authorityMng.html"><i class="icon-key"></i> 角色权限</a></li>
                         </ul>
                     </li>
-
-                    <li class="">
-                        <a href="authorityMng.html">
-                            权限管理</a></li>
-                    <li >
-                        <a href="register.html">
-                            创建用户</a>
+                    <li>
+                        <a href="javascript:;">
+                            用户管理
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li ><a href="register.html"><i class="icon-user"></i> 创建用户</a></li>
+                            <li ><a href="role_edit.html"><i class="icon-heart"></i> 用户角色</a></li>
+                        </ul>
                     </li>
                 </ul>
             </li>
@@ -343,7 +351,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="last ">
+            <li class="last">
                 <a href="news.html">
                     <i class="icon-bar-chart"></i>
                     <span class="title">公司动态</span>
@@ -473,7 +481,7 @@
                                                         <label>注册日期</label>
                                                         <div class="input-append date date-picker" data-date="2016-07-29" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
 
-                                                            <input id="register_date" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+                                                            <input id="register_date" class="m-wrap m-ctrl-medium date-picker" readonly size="16" type="text" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
 
                                                         </div>
                                                     </div>
@@ -481,7 +489,7 @@
                                                         <label>保险日期</label>
                                                         <div class="input-append date date-picker" data-date="2016-07-29" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
 
-                                                            <input id="insurance_date" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+                                                            <input id="insurance_date" class="m-wrap m-ctrl-medium date-picker" readonly size="16" type="text" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
 
                                                         </div>
                                                     </div>
@@ -503,73 +511,6 @@
                                                 提交<i class="icon-ok"></i>
                                             </button>
                                         </div>
-
-
-                                        <div id="create_order" class="modal hide fade" style="width: 800px;" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div class="modal-header">
-                                            <button type="button" class='close' data-dismiss="modal" aria-hidden="true"></button>
-                                            <h3 id="myModalLabel">
-                                                添加车辆
-                                            </h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row-fluid">
-                                                <div class="span7 ">
-                                                    <div>
-                                                        <label>车牌号</label>
-                                                        <div>
-                                                        <input id="plate_number" type="text" pattern="[1-9][0-9]*" />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <label >型号</label>
-                                                        <div>
-                                                            <input id="brand" type="text" pattern="[1-9][0-9]*" />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <label>车座数</label>
-                                                        <div>
-                                                            <input id="seating" type="text" pattern="[1-9][0-9]*" />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <label>注册日期</label>
-                                                        <div class="input-append date date-picker" data-date="2016-07-29" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-
-                                                            <input id="register_date" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
-
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <label>保险日期</label>
-                                                        <div class="input-append date date-picker" data-date="2016-07-29" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-
-                                                            <input id="insurance_date" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
-
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <label>行驶证号</label>
-                                                        <div>
-                                                            <input id="driving_license" type="text" style="width:100%;"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn red" data-dismiss="modal">
-                                                取消<i class="icon-remove"></i>
-                                            </button>
-                                            <button id="btnCarInfoAdd" class="btn green" data-dismiss="modal" id="order_submit">
-                                                提交<i class="icon-ok"></i>
-                                            </button>
-                                        </div>
-
-                                    </div>
-
                                     </div>
                                 </div>
                                 <div class="btn-group pull-right">
@@ -602,7 +543,8 @@
                                     
                                 </tbody>
                             </table>
-                            <input style="display:none" id="attri_value" value="12">
+                            <input style="display:none" id="attri_column_value" value="7">
+                            <input style="display:none" id="attri_ignore_value" value="0">
                         </div>
                     </div>
                 </div>
