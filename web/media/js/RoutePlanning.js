@@ -202,8 +202,8 @@ function createRoute(markers, routeID) { //markers是一个Point数组
             map.addOverlay(label);
         }
     }
-    var group = Math.floor(markers.length / 5);
-    var mode = markers.length % 5;
+    var group = Math.floor(markers.length / 10);
+    var mode = markers.length % 10;
     var tgnum = group;
     if (mode != 0) tgnum += 1;
     var driving = new BMap.DrivingRoute(map, {
@@ -318,12 +318,12 @@ function createRoute(markers, routeID) { //markers是一个Point数组
     });
     driving.setPolicy(BMAP_DRIVING_POLICY_LEAST_DISTANCE);
     for (var i = 0; i < group; i++) {
-        var waypoints = markers.slice(i * 5 + 1, (i + 1) * 5);
-        driving.search(markers[i * 5], markers[(i + 1) * 5], {waypoints: waypoints}); //waypoints表示途经点
+        var waypoints = markers.slice(i * 10 + 1, (i + 1) * 10);
+        driving.search(markers[i * 10], markers[(i + 1) * 10], {waypoints: waypoints}); //waypoints表示途经点
     }
     if (mode != 0) {
-        var waypoints = markers.slice(group * 5, markers.length - 1); //多出的一段单独进行search
-        driving.search(markers[group * 5], markers[markers.length - 1], {waypoints: waypoints});
+        var waypoints = markers.slice(group * 10, markers.length - 1); //多出的一段单独进行search
+        driving.search(markers[group * 10], markers[markers.length - 1], {waypoints: waypoints});
     }
 }
 
