@@ -741,8 +741,8 @@
                     temArr[8] = workTimeRefer[parseInt(element.work_time)];
                     temArr[7] = element.classes;
                     temArr[9] = element.address;
-                    temArr[10] = '<a class="edit" href=""><i class = "icon-edit" > </i> 编辑 </a> ';
-                    temArr[11] = '<a class=\"remove\" href=""><i class = "icon-trash" > </i> 删除</a>';
+                    temArr[10] = '<a class="edit"><i class = "icon-edit" > </i> 编辑 </a> ';
+                    temArr[11] = '<a class=\"remove\"><i class = "icon-trash" > </i> 删除</a>';
                     infoTable.fnAddData(temArr);
                 });
                 staffList.map(function(element, index){
@@ -854,6 +854,21 @@
             dataType: 'json',
             success: function(data){
                 var temArr = new Array();
+                var workTimeRefer = [
+                    'none',
+                    '00:00--02:00',
+                    '02:00--04:00',
+                    '04:00--06:00',
+                    '06:00--08:00',
+                    '08:00--10:00',
+                    '10:00--12:00',
+                    '12:00--14:00',
+                    '14:00--16:00',
+                    '16:00--18:00',
+                    '18:00--20:00',
+                    '20:00--22:00',
+                    '22:00--24:00'
+                ];
                 var infoTable = $("#infoTable").DataTable();
                 temArr[0] = data.id;
                 temArr[1] = temStaff.job_number;

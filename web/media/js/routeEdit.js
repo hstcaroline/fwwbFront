@@ -517,16 +517,21 @@ function refreshMap(ifRefreshMarker) {
                 if (station.address == '') {
                     var p = new BMap.Point(station.posx, station.posy);
                     getAddByPos(p, point, marker, function (point, marker, s) {
-                        point.address = s;
+                        //point.address = s;
                         marker[0].content = s;
+                        for(var i=0;i<stationArr.length;i++){
+                            if(stationArr[i].id==point.id){
+                                stationArr[i].address=s;
+                            }
+                        }
                         stationArr.push(point);
                         addMarker(marker);
                     });
                 }
                 else {
-                    stationArr.push(point);
                     addMarker(marker);
                 }
+                stationArr.push(point);
             }
         }
         createRoute(route[i], routes[i].route.id);
@@ -555,6 +560,7 @@ function routePlanning(arg_0) {
                 routeId++;
             }
             newRouteIndex = routes.length;
+            console.log(data);
             $("#route-generate").modal('show');
         }
     });
@@ -620,16 +626,20 @@ $('#route-generate').on('shown.bs.modal', function () {
             if (station.address == '') {
                 var p = new BMap.Point(station.posx, station.posy);
                 getAddByPos(p, point, marker, function (point, marker, s) {
-                    point.address = s;
+                    //point.address = s;
                     marker[0].content = s;
-                    stationArr.push(point);
+                    for(var i=0;i<stationArr.length;i++){
+                            if(stationArr[i].id==point.id){
+                                stationArr[i].address=s;
+                            }
+                        }
                     addMarker(marker);
                 });
             }
             else {
-                stationArr.push(point);
                 addMarker(marker);
             }
+            stationArr.push(point);
         }
         routewaitBarnum += 0.5;
         console.log(routewaitBarnum);
@@ -718,7 +728,7 @@ $('#grid .gs_w').live('mouseover', function (e) {
     for (var i = 0; i < allOverlay.length; i++) {
         if (allOverlay[i].type == 2) {
             if (allOverlay[i].routeId == routeId) {
-                allOverlay[i].setStrokeWeight(10);
+                allOverlay[i].setStrokeWeight(allOverlay[i].getStrokeWeight()*1.5);
             }
         }
     }
@@ -735,7 +745,7 @@ $('#grid .gs_w').live('mouseout', function (e) {
     for (var i = 0; i < allOverlay.length; i++) {
         if (allOverlay[i].type == 2) {
             if (allOverlay[i].routeId == routeId) {
-                allOverlay[i].setStrokeWeight(6);
+                allOverlay[i].setStrokeWeight(allOverlay[i].getStrokeWeight()/1.5);
             }
         }
     }

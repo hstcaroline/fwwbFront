@@ -37,7 +37,7 @@ function initMap(){
     setMapEvent();//设置地图事件
     addMapControl();//向地图添加控件
     var home=new BMap.Marker(COMPANYADDR);
-    var icon=new BMap.Icon("media/image/logo.png", new BMap.Size(86,14));
+    var icon=new BMap.Icon("media/image/company.png", new BMap.Size(80,80));
     home.setIcon(icon);
     home.disableMassClear();
     map.addOverlay(home);
@@ -84,7 +84,7 @@ function addMarker(Arr){
         marker.routeId=json.route_id;
         
         var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
-        marker.setLabel(label);
+        //marker.setLabel(label);
         map.addOverlay(marker);
         label.setStyle({
             borderColor:"#808080",
