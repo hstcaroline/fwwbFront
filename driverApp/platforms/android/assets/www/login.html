@@ -22,14 +22,15 @@
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
     <title>登录</title>
 </head>
-<body class="login">
+<body class="login" style="background-color: #33a2e7">
 <!--begin logo-->
-<div class="logo">
-    <img src="img/logo.png" alt="" style="width:40%">
-</div>
 <!--end logo-->
 <!--begin login -->
 <div class="content">
+    <div class="logo">
+        <img src="img/logo.png" alt="" style="width:40%">
+    </div>
+
     <form class="form-vertical login-form" action="javascript:void(0);" id="loginForm">
         <h3 class="form-title">登录您的帐号</h3>
         <div class="alert alert-error" id="alertDiv" style="display: none;">
@@ -121,6 +122,8 @@
                     if (user != "") {
 //                        $.cookie('userId',user.id,{expires: 7, path: '/'});
 //                        localStorage.removeItem("userId");//清除userId的值
+                        window.localStorage.setItem('onRoute', false);
+                        
                         window.localStorage.setItem("userId", user.id);
                         location.href='index.html';
                     }

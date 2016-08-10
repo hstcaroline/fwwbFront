@@ -9,7 +9,7 @@ var markerArr = [];
 //站点数组
 var stationArr = [];
 var IP = ip + "/RoutePlanning/";
-var COLOR = ["#FF9900", "#333333", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
+var COLOR = ["#ed423e", "#19f819", "#136de7", "#f5e20c", "#CC0066", "#009999", "#4c4c93", "#FF6600", "#06a8aa"];
 var ifAddMarker = false;
 var stationCount = 1;
 
@@ -161,6 +161,10 @@ function addMarker(Arr) {
 function createInfoWindow(json) {
     var title = {title: '<span style="font-size:14px;color:#0A8021">' + json.title + '</span>'};
     console.log(json);
+    if(typeof(json.num) == "undefined"){
+        json.num = 0;
+    }
+
     var iw = new BMap.InfoWindow('<b>站名: </b>' + json.title + '</br><b>站点人数: </b>' + json.num
         + '</br><b>地址:</b>' + json.content + '</br>' + '<div style="line-height:1.8em;font-size:12px;"><b>经纬度坐标: </b>'+json.point+'</br>'
         + '</br><b><a class="btn blue" style="float:left;margin-left:15px;" href="#" onclick="editStation('+json.id+')" /><i class="icon-edit"></i> 编辑</a>'

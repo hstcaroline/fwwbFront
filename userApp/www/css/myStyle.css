@@ -118,37 +118,37 @@ body {
     background-color: #f2f4f4;
 }
 
-.cancelImg {
-    background: url("../img/Cancel.png") no-repeat left center;
-    color: #ff4a62;
-    float: left;
-    display: block;
-    width: 26px;
-    height: 30px;
+.edit{
+    float: right;
+    background-color: #f2f4f4;
+    color: #0362fd;
 }
-
-.saveImg {
-    background: url("../img/ok.png") no-repeat left center;
-    color: #ff4a62;
-    float: left;
-    display: block;
-    width: 26px;
-    height: 30px;
+.edit:hover{
+    opacity: 0.7;
 }
-
 .cancel {
     float: left;
     display: block;
     height: 100%;
     margin-left: 2%;
     background-color: white;
+    color:#d84a38;
 }
-
 .save {
     float: right;
     display: block;
     height: 100%;
     background-color: white;
+    color: #35aa47;
+}
+.cancel:hover{
+    color: #bb2413;
+}
+a:hover{
+    text-decoration: none;
+}
+.save:hover{
+    color: #1d943b;
 }
 
 .mapContainer {
@@ -329,6 +329,7 @@ body, html, #allmap, #dituContent {
     margin-left: 10%;
     padding: 30px;
     width: 80%;
+    margin-top: 30px;
 }
 
 .login .content .form-title {

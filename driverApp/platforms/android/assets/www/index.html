@@ -97,8 +97,6 @@
     }
     var resRoutes = null;
     var stationLen = null;
-    var temPolyline0 = null;
-    var temPolyline = null;
     var curPolyline = null;
     //var routeId = getUrlParam('routeId');
     var routeId = window.localStorage.getItem('routeId');
@@ -138,12 +136,12 @@
                                     pts = pts.concat(temPts);
                                 }
                             }
-                            temPolyline0 = new BMap.Polyline(pts, {
+                            var temPolyline0 = new BMap.Polyline(pts, {
                                 strokeColor: "#000000",
                                 strokeWeight: 10,
                                 strokeOpacity: 0.9
                             });
-                            temPolyline = new BMap.Polyline(pts, {
+                            var temPolyline = new BMap.Polyline(pts, {
                                 strokeColor: "#FFFFFF",
                                 strokeWeight: 8,
                                 strokeOpacity: 0.9
@@ -158,6 +156,27 @@
                             map.addOverlay(curPolyline);
                             var centerPoint = new BMap.Point(data.stations[len / 2].posx, data.stations[len / 2].posy);
                             map.centerAndZoom(centerPoint, 12);
+                        }
+                        if(window.localStorage.getItem('onRoute')=='true'){
+                            console.log('on run');
+                            $("#startDiv").hide();
+                            $("#goDiv").fadeIn();
+                            map.removeOverlay(curPolyline);
+                            curStationIndex = window.localStorage.getItem('curStation');
+                            console.log(curStationIndex);
+                            var pts = new Array();
+                            for(var i=0;i<=curStationIndex-1;i++){
+                                var temPts = resRoutes.getRoute(i).getPath();
+                                if (temPts != null) {
+                                    pts = pts.concat(temPts);
+                                }
+                            }
+                            curPolyline = new BMap.Polyline(pts, {
+                                strokeColor: "#67AB86",
+                                strokeWeight: 6,
+                                strokeOpacity: 1.0
+                            });
+                            map.addOverlay(curPolyline);
                         }
                     }
                 });
@@ -178,9 +197,7 @@
                 for (var i = 1; i < len - 1; i++) {
                     var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
                     var temMarker = new BMap.Marker(temPoint);
-
                     map.addOverlay(temMarker);
-                    temMarker.setAnimation(BMAP_ANIMATION_BOUNCE);
                     wayStations.push(temPoint);
                 }
                 transit.search(startPoint, endPoint, {waypoints: wayStations});
@@ -188,13 +205,36 @@
         });
     }
     $("#nextStation").click(function () {
-        console.log("to next station");
-        if (stations.length > curStationIndex + 1) {
+        if (stationLen*1 > curStationIndex*1 + 1) {
+            map.removeOverlay(curPolyline);
             curStationIndex++;
+            window.localStorage.setItem('curStation', curStationIndex);
+            console.log(curStationIndex);
+            var pts = new Array();
+            for(var i=0;i<=curStationIndex-1;i++){
+                var temPts = resRoutes.getRoute(i).getPath();
+                if (temPts != null) {
+                    pts = pts.concat(temPts);
+                }
+            }
+            curPolyline = new BMap.Polyline(pts, {
+                strokeColor: "#67AB86",
+                strokeWeight: 6,
+                strokeOpacity: 1.0
+            });
+            map.addOverlay(curPolyline);
+            if(stationLen*1==curStationIndex*1+2){
+                window.localStorage.setItem('onRoute', false);
+                window.location.href = 'mySchedule.html';
+            }else{
+                window.location.href = 'nfcScan.html';
+            }
         }
+
     });
     $("#startRoute").click(function () {
         map.removeOverlay(curPolyline);
+
         $.ajax({
             url: IP + '/startDrive',
             type: 'post',
@@ -207,8 +247,10 @@
                 $("#goDiv").fadeIn();
             }
         });
-        if (stations.length != 0) {
+        if (stationLen != 0) {
             curStationIndex = 0;
+            window.localStorage.setItem('curStation', curStationIndex);
+            window.localStorage.setItem('onRoute', true);
             posPushTimer = window.setInterval(pushPosition, 1000);
         }
         posPushTimer = window.setInterval(pushPosition, 10000);
@@ -227,6 +269,7 @@
             }
         });
         window.clearInterval(posPushTimer);
+        window.localStorage.setItem('onRoute', false);
         window.location.href = 'mySchedule.html';
     });
     function pushPosition() {

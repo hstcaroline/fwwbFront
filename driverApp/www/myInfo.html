@@ -111,7 +111,7 @@
                 <tbody>
                 <tr>
                     <td><span>姓名:</span></td>
-                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
+                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="曾婷"></td>
                 </tr>
                 <tr>
                     <td><span>电话:</span></td>
@@ -119,11 +119,11 @@
                 </tr>
                 <tr>
                     <td><span>住址:</span></td>
-                    <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
+                    <td><input id="inputAddr" type="text" class="form-control" value="上海闵行东川路200号"></td>
                 </tr>
                 <tr>
                     <td><span>班次:</span></td>
-                    <td><input id="inputClasses" type="text" class="form-control" value="班次A"></td>
+                    <td><input id="inputClasses" type="text" class="form-control" value="班次A134"></td>
                 </tr>
                 </tbody>
             </table>
@@ -135,12 +135,12 @@
                 <tbody>
                 <tr>
                     <td><span>工号:</span></td>
-                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="G233">
+                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="SH02929">
                     </td>
                 </tr>
                 <tr>
                     <td><span>部门:</span></td>
-                    <td><input id="inputDepart" type="text" class="form-control" value="维修部"></td>
+                    <td><input id="inputDepart" type="text" class="form-control" value="司机"></td>
                 </tr>
                 <tr>
                     <td><span>组别:</span></td>
@@ -195,34 +195,37 @@
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
             slideout.toggle();
         });
-        $.ajax({
-            url: ip+'users/getDriver',
-            type: 'POST',
-            async: false,
-            data: {'id': userId},
-            dataType: 'json',
-            success: function (driver) {
-                if (driver != null) {
-                    $("#inputName").val(driver.name);
-                    $("#inputPhone").val(driver.phone);
-                    $("#inputAddr").val(driver.address);
-                    $("#inputClasses").val(driver.classes);
-                    $("#inputJobNum").val(driver.job_number);
-                    $("#inputDepart").val(driver.department);
-                    $("#inputTeam").val(driver.team);
-                }
-                else {
-                    alert('链接失败');
-                }
-            },
-            error: function (xhr, type, exception) {
-                alert(type);
-            }
-        });
+//        $.ajax({
+//            url: ip+'users/getDriver',
+//            type: 'POST',
+//            async: false,
+//            data: {'id': userId},
+//            dataType: 'json',
+//            success: function (driver) {
+//                if (driver != null) {
+//                    $("#inputName").val(driver.name);
+//                    $("#inputPhone").val(driver.phone);
+//                    $("#inputAddr").val(driver.address);
+//                    $("#inputClasses").val(driver.classes);
+//                    $("#inputJobNum").val(driver.job_number);
+//                    $("#inputDepart").val(driver.department);
+//                    $("#inputTeam").val(driver.team);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
     };
 </script>
 <script type="text/javascript">
+    $("input").attr("disabled",true);
+    $("input").css("background-color",'white');
     $("#editImg").click(function () {
+        $("input").attr("disabled",false);
         $("#editImg").hide();
         $("#editText").show();
         $("#inputName").focus();

@@ -23,4 +23,7 @@ function menuClick(id) {
     if(id=='news'){
         location.href = 'news.html';
     }
+    if(id=='myCash'){
+        location.href = 'myCash.html';
+    }
 }

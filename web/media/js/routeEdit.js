@@ -1,7 +1,9 @@
 var COMPANYADDR = new BMap.Point(121.438328, 31.023632);
 var routes = [];
 var UNSAVEDCOLOR = "#333333";
-var COLOR = ["#537082", "#FF9900", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
+//var COLOR = ["#537082", "#FF9900", "#548C00", "##009933", "#CC0066", "#009999", "#666699", "#FF6600", "#8F4586"];
+var COLOR = ["#ed423e", "#19f819", "#136de7", "#f5e20c", "#CC0066", "#009999", "#4c4c93", "#FF6600", "#06a8aa"];
+
 var startId = 0;
 var newRouteIndex = 0;
 var gridster = null;
@@ -65,7 +67,7 @@ resetStations.onclick = function () {
                         console.log(res);
                         var pos = res.lng + "|" + res.lat;
                         var marker = [{
-                            title: "未命名_" + stationCount,
+                            title: "新生成站点_" + stationCount,
                             content: "",
                             point: pos,
                             isOpen: 0,
@@ -76,15 +78,23 @@ resetStations.onclick = function () {
                         var point = {
                             id: -stationCount,
                             pos: new BMap.Point(res.lng, res.lat),
-                            name: "未命名_" + stationCount,
+                            name: "新生成站点_" + stationCount,
                             address: "",
-                            num: res2.num,
+                            num: '0',
                             time: res2.time
                         };//??num
-                        stationArr.push(point);
-                        stationCount++;
+
                         //console.log("finish"+i+"__1");
-                        addMarker(marker);
+
+                        var p = new BMap.Point(res.lng, res.lat);
+                        getAddByPos(p, point, marker, function (point, marker, s) {
+                            point.address = s;
+                            marker[0].content = s;
+                            stationArr.push(point);
+                            addMarker(marker);
+                            stationArr.push(point);
+                            stationCount++;
+                        });
                         sum++;
                         var temRate = parseInt((sum) / num * 80) + 20;
                         console.log(sum);
@@ -140,21 +150,21 @@ function setEvent() {
         var pos = e.point.lng + "|" + e.point.lat;
         if (ifAddMarker == true) {//添加站点
             var marker = [{
-                title: "未命名_" + stationCount,
+                title: "站点_" + stationCount,
                 content: "",
                 point: pos,
                 isOpen: 0,
                 icon: {w: (map.getZoom() - 8) * 5, h: (map.getZoom() - 8) * 5, l: 0, t: 0, x: 6, lb: 5},
                 id: -stationCount,
                 type: 1,
-                num:0
+                num: 0
             }];
             var p = new BMap.Point(e.point.lng, e.point.lat);
             var address = $("#getAddByPointResult").val();
             var point = {
                 id: -stationCount,
                 pos: p,
-                name: "未命名_" + stationCount,
+                name: "站点_" + stationCount,
                 address: address,
                 num: 0,
                 time: document.getElementById("selectroutetime").value
@@ -225,7 +235,7 @@ function editStation(stationId) {
                 icon: {w: 15, h: 20, l: 0, t: 0, x: 6, lb: 5},
                 id: currStation.id,
                 type: 1,
-                num:currStation.num
+                num: currStation.num
             };
             var _iw = createInfoWindow(newJson);
             currMarker.openInfoWindow(_iw);

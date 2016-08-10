@@ -97,14 +97,114 @@
         <div class="wc-container">
             <table class="gridTable">
                 <tbody id="scheduleTbody">
-                <tr id="">
-                    <td>00:00-02:00</td>
-                    <td><a href="index.html">
-                        <div class="work">线路1</div>
-                    </a></td>
+                <!--<tr id="">-->
+                <!--<td>00:00-02:00</td>-->
+                <!--<td><a href="index.html">-->
+                <!--<div class="work">线路1</div>-->
+                <!--</a></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--</tr>-->
+                <tr>
+                    <td>06:00-08:00</td>
+                    <td>
+                        <div class="work">1号线</div>
+                    </td>
+                    <td>
+                        <div class="work">1号线</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="work">1号线</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>08:00-10:00</td>
+
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="work">2号线</div>
+                    </td>
+                    <td>
+                        <div class="work">2号线</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10:00-12:00</td>
+                    <td>
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td>
+                        <div class="work">3号线</div>
+                    </td>
+                    <td>
+                        <div class="work">3号线</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:00-14:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>14:00-16:00</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="work">2号线</div>
+                    </td>
+                    <td>
+                        <div class="work">2号线</div>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>16:00-18:00</td>
+                    <td>
+                        <div class="work">1号线</div>
+                    </td>
+                    <td>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
+                    <td>
+                        <div class="work">1号线</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>18:00-20:00</td>
+                    <td></td>
+                    <td>
+                        <div class="work">1号线</div>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -150,7 +250,8 @@
 <script>
     var startTime;
     window.onload = function () {
-        var driverId = localStorage.getItem("userId");//获取b的值
+//        var driverId = localStorage.getItem("userId");//获取b的值
+        var driverId = '2';
 //        var driverId = $.cookie('userId');
         $('#menu_header').show();
         $('#menu_section').show();
@@ -161,27 +262,27 @@
         startTime = $("#weekStartTime").text();
         var endTime = $("#weekEndTime").text();
         var postData = JSON.stringify({id: driverId, startdate: startTime, enddate: endTime});
-        $.ajax({
-            url: ip + 'users/getRouteDriver',
-            type: 'POST',
-            async: false,
-            data: postData,
-            dataType: 'json',
-            contentType: "application/json",
-//            beforeSend:setHeader(xhr),
-            success: function (driver) {
-                if (driver != null) {
-                    // alert(driver);
-                    loadTable(driver);
-                }
-                else {
-                    alert('链接失败');
-                }
-            },
-            error: function (xhr, type, exception) {
-                alert(type);
-            }
-        });
+//        $.ajax({
+//            url: ip + 'users/getRouteDriver',
+//            type: 'POST',
+//            async: false,
+//            data: postData,
+//            dataType: 'json',
+//            contentType: "application/json",
+////            beforeSend:setHeader(xhr),
+//            success: function (driver) {
+//                if (driver != null) {
+//                    // alert(driver);
+//                    loadTable(driver);
+//                }
+//                else {
+//                    alert('链接失败');
+//                }
+//            },
+//            error: function (xhr, type, exception) {
+//                alert(type);
+//            }
+//        });
     };
     function loadTable(data) {
         var html = '';

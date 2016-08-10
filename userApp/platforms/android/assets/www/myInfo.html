@@ -37,6 +37,7 @@
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" href="css/mocha.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/test.css">
     <link rel="stylesheet" href="css/slideout.css">
     <link rel="stylesheet" href="css/myStyle.css">
@@ -86,16 +87,16 @@
     </div>
     <div class="content">
         <div class="headImg">
-            <img id="editImg" style="width: 10%;float: right" src="img/edit_200px_1189459_easyicon.net.png">
+            <a id="editImg" class="edit"><i class="icon-edit"></i> 编辑</a>
             <div id="editText" style="display: none;">
 
-                <a class="btn cancel" href="javascript:location.reload();">
-                    <i class="cancelImg"></i>
-                    <span style="color: red;font-size: 22px;">取消</span>
+                <a class=" cancel" href="javascript:location.reload();">
+                    <i class="icon-remove-sign"></i>
+                    取消
                 </a>
-                <a class="btn save" href="javascript:location.reload();">
-                    <i class="saveImg"></i>
-                    <span style="color: #3498db;font-size: 22px;">保存</span>
+                <a class=" save" href="javascript:location.reload();">
+                    <i class=" icon-ok-circle"></i>
+                    保存
                 </a>
 
 
@@ -107,19 +108,19 @@
                 <tbody>
                 <tr>
                     <td><span>姓名:</span></td>
-                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="黄顺婷"></td>
+                    <td><input id="inputName" type="text" class="form-control" style="border: none" value="李云"></td>
                 </tr>
                 <tr>
                     <td><span>电话:</span></td>
-                    <td><input id="inputPhone" type="text" class="form-control" value="18200302934"></td>
+                    <td><input id="inputPhone" type="text" class="form-control" value="18300293442"></td>
                 </tr>
                 <tr>
                     <td><span>住址:</span></td>
-                    <td><input id="inputAddr" type="text" class="form-control" value="上海闵行"></td>
+                    <td><input id="inputAddr" type="text" class="form-control" value="上海市徐汇区"></td>
                 </tr>
                 <tr>
                     <td><span>班次:</span></td>
-                    <td><input id="inputClasses" type="text" class="form-control" value="班次A"></td>
+                    <td><input id="inputClasses" type="text" class="form-control" value="班次A345"></td>
                 </tr>
                 </tbody>
             </table>
@@ -131,7 +132,7 @@
                 <tbody>
                 <tr>
                     <td><span>工号:</span></td>
-                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="G233">
+                    <td><input id="inputJobNum" type="text" class="form-control" style="border: none" value="SH1349">
                     </td>
                 </tr>
                 <tr>
@@ -140,7 +141,7 @@
                 </tr>
                 <tr>
                     <td><span>组别:</span></td>
-                    <td><input id="inputTeam" type="text" class="form-control" value="A组"></td>
+                    <td><input id="inputTeam" type="text" class="form-control" value="B组"></td>
                 </tr>
                 </tbody>
             </table>
@@ -214,7 +215,10 @@
     };
 </script>
 <script type="text/javascript">
+    $("input").attr("disabled",true);
+    $("input").css("background-color",'white');
     $("#editImg").click(function () {
+        $("input").attr("disabled",false);
         $("#editImg").hide();
         $("#editText").show();
         $("#inputName").focus();
