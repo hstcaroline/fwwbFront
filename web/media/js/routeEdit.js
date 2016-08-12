@@ -91,9 +91,8 @@ resetStations.onclick = function () {
                             point.address = s;
                             marker[0].content = s;
                             stationArr.push(point);
-                            addMarker(marker);
-                            stationArr.push(point);
                             stationCount++;
+                            addMarker(marker);
                         });
                         sum++;
                         var temRate = parseInt((sum) / num * 80) + 20;
