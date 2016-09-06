@@ -85,7 +85,11 @@ function setMapEvent() {
 //地图控件添加函数：
 function addMapControl() {
     //向地图中添加缩放控件
-    var ctrl_nav = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE});
+    var ctrl_nav = new BMap.NavigationControl({
+        anchor: BMAP_ANCHOR_TOP_LEFT,
+        type: BMAP_NAVIGATION_CONTROL_LARGE,
+        enableGeolocation: true
+    });
     map.addControl(ctrl_nav);
     //向地图中添加比例尺控件
     var ctrl_sca = new BMap.ScaleControl({anchor: BMAP_ANCHOR_BOTTOM_LEFT});
@@ -383,7 +387,8 @@ $(document).ready(function () {
         allowClear: true
     });
     $('#stations_select2').change(function () {
-        var id = stationArr[parseInt($("#stations_select2").get(0).selectedIndex) - 1].id;
+        var index = parseInt($("#stations_select2").get(0).selectedIndex) - 1;
+        var id = stationArr[index].id;
         setPlace(id);
     });
 });
