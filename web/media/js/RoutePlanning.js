@@ -3,7 +3,6 @@
  */
 
 var btn_addMarker = document.getElementById("addMarker");
-var btn_upload = document.getElementById("upload");
 //住址数组
 var markerArr = [];
 //站点数组
@@ -22,16 +21,6 @@ btn_addMarker.onclick = function () {
         ifAddMarker = true;
         btn_addMarker.innerHTML = '<p><div class="btn green"><i class="icon-stop"></i> 停止添加</div></p>';
     }
-};
-btn_upload.onclick = function () {
-    console.log("upload click");
-    var ajax_option = {
-        url: IP + "upLoadFile",
-        success: function (data) {
-            console.log(data);
-        }
-    };
-    $("#fileForm").ajaxSubmit(ajax_option);
 };
 
 function checkhHtml5() {
