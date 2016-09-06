@@ -80,12 +80,15 @@ p.description {
     border: 1px solid #0888e6;
     border-bottom: 2px solid white;
 }
+
 .wc-cal-event.wc-new-cal-event .wc-time {
     background: -webkit-gradient(linear, left top, left bottom, from(#5dca38), to(#3abd29));
 }
-.wc-cal-event.wc-new-cal-event{
+
+.wc-cal-event.wc-new-cal-event {
     background: -webkit-gradient(linear, left top, left bottom, from(#5dca38), to(#3abd29));
 }
+
 .wc-time-header-cell {
     background: -webkit-gradient(linear, left top, left bottom, from(#42abf8), to(#0888e6));
 }
@@ -118,36 +121,82 @@ p.description {
     margin-left: auto;
     margin-right: auto
 }
-.modal-footer .btn{
+
+.modal-footer .btn {
     margin-right: 20px;
     width: 80px;
 }
+
 /*driverMonthSchedule*/
 .dataTable .details td, .dataTable .details th {
     border: 1px solid #ddd;
-    text-align:center;
+    text-align: center;
 }
+
 .dataTable .details tr :hover {
     opacity: 0.4;
 }
-.yearSelect{
+
+.yearSelect {
     padding: 0px;
     margin: 0;
     width: 120px;
     margin-left: 10px;
 }
-.table-bordered th, .table-bordered td{
+
+.table-bordered th, .table-bordered td {
     text-align: center;
 }
+
 /*timeSchedule*/
-.checkbox-inline{
+.checkbox-inline {
     display: inline-block;
     padding: 0 !important;
     margin: 0 !important;
     margin-top: 8px !important;
     margin-right: 15px !important;
 }
-.centerDiv{
-    width:100%;
+
+.centerDiv {
+    width: 100%;
     display: table;
+}
+
+/*todo*/
+.profile-settings {
+    background: #fafafa;
+    padding: 15px 8px 0;
+    margin-bottom: 5px;
+}
+
+.portfolio-block {
+    background: #f7f7f7;
+    margin-bottom: 15px;
+}
+
+.portfolio-text .portfolio-text-info {
+    overflow: hidden;
+}
+
+.portfolio-text-info p {
+    margin-top: 10px;
+    margin-left: 20px;
+    color: #636363;
+    font-size: 15px;
+}
+.portfolio-text-info i{
+    color: #e02222;
+    font-size: 17px;
+}
+
+
+.portfolio-btn a {
+    display: block;
+    padding: 20px 0;
+    background: #5bdd74 !important;
+}
+.portfolio-btn span {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 200;
 }
