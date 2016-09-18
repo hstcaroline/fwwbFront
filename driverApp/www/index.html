@@ -89,6 +89,7 @@
     var curStationIndex = null;
     var stations = new Array();
     var posPushTimer = null;
+    var wayStations = new Array();
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg);  //匹配目标参数
@@ -193,7 +194,7 @@
                 map.addOverlay(startMarker);
                 var endPoint = new BMap.Point(data.stations[len - 1].posx, data.stations[len - 1].posy);
                 map.addOverlay(new BMap.Marker(endPoint, {icon: endIcon}));
-                var wayStations = new Array();
+                wayStations = new Array();
                 for (var i = 1; i < len - 1; i++) {
                     var temPoint = new BMap.Point(data.stations[i].posx, data.stations[i].posy);
                     var temMarker = new BMap.Marker(temPoint);
@@ -223,11 +224,26 @@
                 strokeOpacity: 1.0
             });
             map.addOverlay(curPolyline);
-            if(stationLen*1==curStationIndex*1+2){
+            if(stationLen*1==curStationIndex*1+1){
                 window.localStorage.setItem('onRoute', false);
                 window.location.href = 'mySchedule.html';
             }else{
-                window.location.href = 'nfcScan.html';
+                $.ajax({
+                    url: IP + '/pushPosition',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        routeId: routeId,
+                        point: {
+                            lng: wayStations[curStationIndex-1].lng,
+                            lat: wayStations[curStationIndex-1].lat
+                        }
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+                //window.location.href = 'nfcScan.html';
             }
         }
 
@@ -273,26 +289,26 @@
         window.location.href = 'mySchedule.html';
     });
     function pushPosition() {
-        var geolocation = new BMap.Geolocation();
-        console.log('ready to push');
-        geolocation.getCurrentPosition(function (r) {
-            console.log(r);
-            $.ajax({
-                url: IP + '/pushPosition',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    routeId: routeId,
-                    point: {
-                        lng: r.point.lng,
-                        lat: r.point.lat
-                    }
-                },
-                success: function (data) {
-                    console.log(data);
-                }
-            });
-        });
+        // var geolocation = new BMap.Geolocation();
+        // console.log('ready to push');
+        // geolocation.getCurrentPosition(function (r) {
+        //     console.log(r);
+        //     $.ajax({
+        //         url: IP + '/pushPosition',
+        //         type: 'post',
+        //         dataType: 'json',
+        //         data: {
+        //             routeId: routeId,
+        //             point: {
+        //                 lng: r.point.lng,
+        //                 lat: r.point.lat
+        //             }
+        //         },
+        //         success: function (data) {
+        //             console.log(data);
+        //         }
+        //     });
+        // });
     }
 
 </script>

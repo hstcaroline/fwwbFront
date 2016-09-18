@@ -85,7 +85,7 @@ function addMarker(Arr){
         marker.routeId=json.route_id;
         
         var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
-        marker.setLabel(label);
+        //marker.setLabel(label);
         map.addOverlay(marker);
         label.setStyle({
             borderColor:"#808080",
@@ -152,7 +152,7 @@ function addroute(routeid)
         async : false,
         success: function (data) {
             var troute=[];
-            troute.push(COMPANYADDR);
+            //troute.push(COMPANYADDR);
             for(var j=0;j<data.stations.length;j++){
                 var station = data.stations[j];
                 var pos = station.posx + "|" + station.posy;
@@ -200,8 +200,12 @@ function createIcon(json,type){
         icon = new BMap.Icon("media/image/map/star.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
     }else if(type==3){
         icon = new BMap.Icon("media/image/map/bus.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        icon.setSize(new BMap.Size(410, 196));
+        icon.setImageSize(new BMap.Size(json.w,json.h));
     }else{
-        icon = new BMap.Icon("media/image/map/station.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        icon = new BMap.Icon("media/image/map/station.png", new BMap.Size(json.w,json.h))
+        icon.setSize(new BMap.Size(100, 100));
+        icon.setImageSize(new BMap.Size(json.w,json.h));
     }return icon;
 }
 

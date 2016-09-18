@@ -221,6 +221,8 @@ function addPolyline(plPoints){
 
 function createRoute(markers,routeID) {//markers是一个Point数组
     var routeId=parseInt(routeID);
+    markers.shift();
+    console.log(markers);
     var driving = new BMap.DrivingRoute(map, {
         renderOptions: {//绘制结果
             map: map,
@@ -230,6 +232,7 @@ function createRoute(markers,routeID) {//markers是一个Point数组
         onSearchComplete: function(results){
             console.log(1);
             if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
+                console.log(2);
                 var color = COLOR[(routeId%COLOR.length)];
                 var plan = driving.getResults().getPlan(0);
                 var num = plan.getNumRoutes();

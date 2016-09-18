@@ -251,38 +251,38 @@
     var startTime;
     window.onload = function () {
 //        var driverId = localStorage.getItem("userId");//获取b的值
-        var driverId = '2';
+        var driverId = '20';
 //        var driverId = $.cookie('userId');
         $('#menu_header').show();
         $('#menu_section').show();
-        getWeekNum(1, 7, 'weekStartTime', 'weekEndTime');
+        getWeekNum(-27, -21, 'weekStartTime', 'weekEndTime');
         document.querySelector('.js-slideout-toggle').addEventListener('click', function () {
             slideout.toggle();
         });
         startTime = $("#weekStartTime").text();
         var endTime = $("#weekEndTime").text();
         var postData = JSON.stringify({id: driverId, startdate: startTime, enddate: endTime});
-//        $.ajax({
-//            url: ip + 'users/getRouteDriver',
-//            type: 'POST',
-//            async: false,
-//            data: postData,
-//            dataType: 'json',
-//            contentType: "application/json",
-////            beforeSend:setHeader(xhr),
-//            success: function (driver) {
-//                if (driver != null) {
-//                    // alert(driver);
-//                    loadTable(driver);
-//                }
-//                else {
-//                    alert('链接失败');
-//                }
-//            },
-//            error: function (xhr, type, exception) {
-//                alert(type);
-//            }
-//        });
+        $.ajax({
+            url: ip + 'users/getRouteDriver',
+            type: 'POST',
+            async: false,
+            data: postData,
+            dataType: 'json',
+            contentType: "application/json",
+//            beforeSend:setHeader(xhr),
+            success: function (driver) {
+                if (driver != null) {
+                    // alert(driver);
+                    loadTable(driver);
+                }
+                else {
+                    alert('链接失败');
+                }
+            },
+            error: function (xhr, type, exception) {
+                alert(type);
+            }
+        });
     };
     function loadTable(data) {
         var html = '';

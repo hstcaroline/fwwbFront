@@ -83,6 +83,7 @@ resetStations.onclick = function () {
                             num: '0',
                             time: res2.time
                         };//??num
+                        stationCount++;
 
                         //console.log("finish"+i+"__1");
 
@@ -91,7 +92,6 @@ resetStations.onclick = function () {
                             point.address = s;
                             marker[0].content = s;
                             stationArr.push(point);
-                            stationCount++;
                             addMarker(marker);
                         });
                         sum++;
